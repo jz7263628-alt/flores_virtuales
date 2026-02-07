@@ -1,0 +1,18 @@
+body {
+    background-color: #4b0082; /* Un fondo morado oscuro para el cielo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+}
+
+.flower-love {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
