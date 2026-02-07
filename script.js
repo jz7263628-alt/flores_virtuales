@@ -1,27 +1,22 @@
-const flowerContainer = document.querySelector('.flower-love');
+const messages = document.querySelectorAll('.message');
+let index = 0;
 
-function createFlower() {
-    const flower = document.createElement('div');
-    flower.classList.add('flower');
-    flower.style.left = Math.random() * 100 + "vw";
-    flower.style.position = "absolute";
-    flower.style.fontSize = (Math.random() * 20 + 40) + "px";
-    flower.style.top = "-50px";
-    flower.innerText = "🌸"; 
-
-    flowerContainer.appendChild(flower);
-
-    flower.animate([
-        { transform: 'translateY(0vh) rotate(0deg)' },
-        { transform: 'translateY(110vh) rotate(360deg)' }
-    ], {
-        duration: Math.random() * 3000 + 3000,
-        easing: 'linear'
-    });
-
-    setTimeout(() => {
-        flower.remove();
-    }, 6000);
+function showNextMessage() {
+    if (index > 0) {
+        messages[index - 1].style.display = 'none';
+    }
+    if (index < messages.length) {
+        messages[index].style.display = 'block';
+        index++;
+    } else {
+        index = 0; // Reinicia el ciclo si quieres que se repita
+    }
 }
 
-setInterval(createFlower, 300);
+// Muestra un nuevo mensaje cada 3 segundos
+setInterval(showNextMessage, 3000); 
+
+// Muestra el primer mensaje al cargar
+showNextMessage();
+
+// Nota: El ramo de girasoles de la imagen es una imagen estática o un SVG complejo, no es simple CSS/JS como las flores cayendo.
