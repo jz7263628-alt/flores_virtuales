@@ -13,10 +13,6 @@ function showNextMessage() {
     }
 }
 
-// Muestra un nuevo mensaje cada 3 segundos
 setInterval(showNextMessage, 3000); 
 
-// Muestra el primer mensaje al cargar
 showNextMessage();
-
-// Nota: El ramo de girasoles de la imagen es una imagen estática o un SVG complejo, no es simple CSS/JS como las flores cayendo.
