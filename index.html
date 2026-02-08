@@ -2,216 +2,283 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Para Marlen 💖</title>
+<title>Marlen 💖 Universo</title>
 
 <style>
 html,body{
-  margin:0;
-  overflow:hidden;
-  background:#000;
-  font-family:Segoe UI, sans-serif;
+ margin:0;
+ overflow:hidden;
+ background:#000;
+ font-family:Segoe UI,sans-serif;
 }
 
-/* canvas estrellas */
-#space{
-  position:fixed;
-  inset:0;
+/* canvas */
+#space{position:fixed;inset:0;}
+
+/* fade intro */
+.fadeIn{
+ position:fixed;
+ inset:0;
+ background:black;
+ animation:fade 2s forwards;
+ z-index:20;
 }
+@keyframes fade{to{opacity:0;pointer-events:none;}}
 
 /* centro */
 .center{
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  text-align:center;
-  color:#ff77cc;
-  font-size:42px;
-  z-index:5;
-  animation:glow 2s infinite alternate;
-  cursor:pointer;
+ position:absolute;
+ top:50%;left:50%;
+ transform:translate(-50%,-50%);
+ color:#ff7acb;
+ font-size:48px;
+ text-align:center;
+ z-index:5;
+ animation:glow 2s infinite alternate,pulse 3s infinite;
+ cursor:pointer;
+}
+@keyframes glow{
+ from{text-shadow:0 0 12px #ff4da6}
+ to{text-shadow:0 0 50px #ff99dd}
+}
+@keyframes pulse{
+ 50%{transform:translate(-50%,-50%) scale(1.12)}
 }
 
-@keyframes glow{
-  from { text-shadow:0 0 10px #ff4da6; }
-  to { text-shadow:0 0 30px #ff99cc; }
+/* órbita nombres */
+.orbitWrap{
+ position:absolute;
+ top:50%;left:50%;
+ width:0;height:0;
 }
+.nameOrbit{
+ position:absolute;
+ font-size:18px;
+ color:#ffd6f5;
+ animation:orbit 14s linear infinite;
+}
+@keyframes orbit{
+ from{transform:rotate(0) translateX(170px) rotate(0);}
+ to{transform:rotate(360deg) translateX(170px) rotate(-360deg);}
+}
+
+/* foto reveal */
+.photo{
+ position:fixed;
+ top:12%;
+ left:50%;
+ transform:translateX(-50%) scale(.6);
+ width:120px;
+ border-radius:18px;
+ box-shadow:0 0 30px #ff4da6;
+ opacity:0;
+ transition:1s;
+ z-index:6;
+}
+.photo.show{
+ opacity:1;
+ transform:translateX(-50%) scale(1);
+}
+
+/* caja regalo */
+.gift{
+ position:fixed;
+ bottom:90px;
+ left:50%;
+ transform:translateX(-50%);
+ font-size:46px;
+ cursor:pointer;
+ z-index:7;
+ animation:bounce 2s infinite;
+}
+@keyframes bounce{
+ 50%{transform:translateX(-50%) translateY(-12px);}
+}
+
+/* carta */
+.letter{
+ position:fixed;
+ bottom:-320px;
+ left:50%;
+ transform:translateX(-50%);
+ width:280px;
+ background:white;
+ color:#333;
+ padding:20px;
+ border-radius:18px;
+ transition:1s;
+ z-index:8;
+ text-align:center;
+}
+.letter.show{bottom:70px;}
 
 /* frases */
 .phrase{
-  position:absolute;
-  color:#ffb3e6;
-  font-size:18px;
-  opacity:0;
-  animation:floatUp linear forwards;
+ position:absolute;
+ color:#ffc9f3;
+ font-size:20px;
+ animation:float 6s linear forwards;
+}
+@keyframes float{
+ to{transform:translateY(-240px) scale(1.3);opacity:0;}
 }
 
-@keyframes floatUp{
-  0%{transform:translateY(40px);opacity:0;}
-  20%{opacity:1;}
-  100%{transform:translateY(-140px);opacity:0;}
-}
-
-/* stickers */
-.sticker{
-  position:absolute;
-  font-size:22px;
-  animation:drift linear forwards;
-}
-
-@keyframes drift{
-  to{
-    transform:translateY(-160px) rotate(180deg);
-    opacity:0;
-  }
-}
-
-/* botón música */
-.musicBtn{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  z-index:10;
-  background:#ff4da6;
-  border:none;
-  color:white;
-  padding:10px 14px;
-  border-radius:20px;
-  cursor:pointer;
-}
-
-.secret{
-  position:fixed;
-  bottom:18%;
-  width:100%;
-  text-align:center;
-  color:#ffd6f0;
-  font-size:20px;
-  opacity:0;
-  transition:1s;
+/* botón */
+.btn{
+ position:fixed;
+ bottom:20px;
+ right:20px;
+ background:#ff4da6;
+ color:white;
+ border:none;
+ padding:12px 16px;
+ border-radius:22px;
+ font-size:16px;
+ z-index:9;
 }
 </style>
 </head>
 
 <body>
 
+<div class="fadeIn"></div>
 <canvas id="space"></canvas>
 
 <div class="center" id="center">
 💖 Marlen 💖
-<div style="font-size:16px">Tócame</div>
+<div style="font-size:16px">toca el universo</div>
 </div>
 
-<div class="secret" id="secret">
-Eres lo más bonito que existe en mi universo ✨
+<div class="orbitWrap">
+ <div class="nameOrbit">Tú + Yo 💞</div>
 </div>
 
-<button class="musicBtn" onclick="toggleMusic()">🎹 Piano</button>
+<!-- cambia por foto real -->
+<img class="photo" id="photo"
+src="https://i.imgur.com/8Km9tLL.png">
+
+<div class="gift" id="gift">🎁</div>
+
+<div class="letter" id="letter">
+Eres mi coincidencia favorita del universo ✨<br>
+Elegirte sería mi decisión en todas las vidas 💖
+</div>
+
+<button class="btn" onclick="toggleMusic()">🎹</button>
 
 <audio id="music" loop>
 <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_c8b05c7b6c.mp3">
 </audio>
 
 <script>
-/* ===== estrellas ===== */
-const c = space;
-const ctx = c.getContext("2d");
-c.width = innerWidth;
-c.height = innerHeight;
+/* ===== galaxia capas ===== */
+const c=space,ctx=c.getContext("2d");
+c.width=innerWidth;c.height=innerHeight;
+
+let layers=[
+ {count:300,speed:.2,size:1},
+ {count:220,speed:.5,size:1.4},
+ {count:140,speed:1,size:2}
+];
 
 let stars=[];
-for(let i=0;i<400;i++){
+layers.forEach(L=>{
+ for(let i=0;i<L.count;i++){
   stars.push({
-    x:Math.random()*c.width,
-    y:Math.random()*c.height,
-    r:Math.random()*1.5+0.2,
-    v:Math.random()*0.4+0.1
+   x:Math.random()*c.width,
+   y:Math.random()*c.height,
+   s:L.size,
+   v:L.speed
   });
-}
+ }
+});
 
 function draw(){
-  ctx.clearRect(0,0,c.width,c.height);
+ ctx.clearRect(0,0,c.width,c.height);
+ stars.forEach(s=>{
   ctx.fillStyle="white";
-  stars.forEach(s=>{
-    ctx.beginPath();
-    ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
-    ctx.fill();
-    s.y+=s.v;
-    if(s.y>c.height){s.y=0;s.x=Math.random()*c.width;}
-  });
-  requestAnimationFrame(draw);
+  ctx.fillRect(s.x,s.y,s.s,s.s);
+  s.y+=s.v;
+  if(s.y>c.height){s.y=0;s.x=Math.random()*c.width;}
+ });
+ requestAnimationFrame(draw);
 }
 draw();
 
 /* ===== frases ===== */
 const frases=[
-"Te amo 💖","Eres mi universo","Mi corazón es tuyo",
-"Contigo todo","Siempre tú","Mi estrella favorita",
-"Amor infinito","Eres magia","Solo tú",
-"Mi lugar es contigo"
+"Destino bonito",
+"Magia real",
+"Amor infinito",
+"Coincidencia perfecta",
+"Siempre tú"
 ];
 
-function lanzarFrase(){
-  const f=document.createElement("div");
-  f.className="phrase";
-  f.innerText=frases[Math.floor(Math.random()*frases.length)];
-  f.style.left=Math.random()*90+"%";
-  f.style.top=Math.random()*90+"%";
-  f.style.animationDuration=(4+Math.random()*3)+"s";
-  document.body.appendChild(f);
-  setTimeout(()=>f.remove(),7000);
+setInterval(()=>{
+ const f=document.createElement("div");
+ f.className="phrase";
+ f.innerText=frases[Math.floor(Math.random()*frases.length)];
+ f.style.left=Math.random()*90+"%";
+ f.style.top="78%";
+ document.body.appendChild(f);
+ setTimeout(()=>f.remove(),6000);
+},1200);
+
+/* ===== explosión pro ===== */
+function boom(x,y){
+ const icons=["💖","✨","💫","💕"];
+ for(let i=0;i<26;i++){
+  const e=document.createElement("div");
+  e.innerText=icons[Math.floor(Math.random()*icons.length)];
+  e.style.position="absolute";
+  e.style.left=x+"px";
+  e.style.top=y+"px";
+  e.style.fontSize="26px";
+  e.style.transition="1.6s";
+  document.body.appendChild(e);
+  setTimeout(()=>{
+   e.style.transform=`translate(${Math.random()*500-250}px,${Math.random()*-360}px)`;
+   e.style.opacity=0;
+  },20);
+  setTimeout(()=>e.remove(),1700);
+ }
 }
-setInterval(lanzarFrase,1800);
+document.onclick=e=>boom(e.clientX,e.clientY);
 
-/* ===== stickers ===== */
-const stickers=["💖","💕","💘","💝","🌹","✨"];
+/* ===== estrella fugaz cine ===== */
+setInterval(()=>{
+ const s=document.createElement("div");
+ s.style.position="absolute";
+ s.style.width="3px";
+ s.style.height="3px";
+ s.style.background="white";
+ s.style.boxShadow="0 0 18px white";
+ s.style.left=Math.random()*innerWidth+"px";
+ s.style.top="0";
+ s.style.transition="1.4s";
+ document.body.appendChild(s);
+ setTimeout(()=>{
+  s.style.transform="translate(700px,360px)";
+  s.style.opacity=0;
+ },30);
+ setTimeout(()=>s.remove(),1500);
+},1600);
 
-function lanzarSticker(x,y){
-  const s=document.createElement("div");
-  s.className="sticker";
-  s.innerText=stickers[Math.floor(Math.random()*stickers.length)];
-  s.style.left=x+"px";
-  s.style.top=y+"px";
-  s.style.animationDuration=(3+Math.random()*2)+"s";
-  document.body.appendChild(s);
-  setTimeout(()=>s.remove(),5000);
-}
-
-document.onclick=e=>{
-  for(let i=0;i<6;i++){
-    lanzarSticker(e.clientX,e.clientY);
-  }
+/* ===== reveal eventos ===== */
+center.onclick=()=>{
+ photo.classList.add("show");
+ boom(innerWidth/2,innerHeight/2);
 };
 
-/* ===== estrella fugaz ===== */
-setInterval(()=>{
-  const s=document.createElement("div");
-  s.style.position="absolute";
-  s.style.width="2px";
-  s.style.height="2px";
-  s.style.background="white";
-  s.style.boxShadow="0 0 8px white";
-  s.style.left=Math.random()*innerWidth+"px";
-  s.style.top=Math.random()*innerHeight/2+"px";
-  s.style.transition="1s";
-  document.body.appendChild(s);
-  setTimeout(()=>{
-    s.style.transform="translate(300px,160px)";
-    s.style.opacity=0;
-  },50);
-  setTimeout(()=>s.remove(),1200);
-},3000);
-
-/* ===== mensaje secreto ===== */
-center.onclick=()=>{
-  secret.style.opacity=1;
+gift.onclick=()=>{
+ letter.classList.add("show");
+ boom(innerWidth/2,innerHeight-120);
 };
 
 /* ===== música ===== */
 function toggleMusic(){
-  const m=document.getElementById("music");
-  if(m.paused){ m.play(); }
-  else{ m.pause(); }
+ const m=document.getElementById("music");
+ m.paused?m.play():m.pause();
 }
 </script>
 
