@@ -1,57 +1,17 @@
-.* {
-  box-sizing: border-box;
-}
-
 body {
   margin: 0;
-  width: 100vw;
   height: 100vh;
-  background: #5b0fa1;
+  background: purple;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-family: Arial, sans-serif;
-  overflow: hidden;
-}
-
-#mensaje {
   color: white;
-  font-size: 26px;
-  margin-bottom: 30px;
 }
 
-/* FLOR */
 .flower {
-  position: relative;
-  width: 200px;
-  height: 200px;
-  animation: spin 25s linear infinite;
-}
-
-.petal {
-  position: absolute;
-  width: 40px;
+  width: 100px;
   height: 100px;
-  background: gold;
+  background: yellow;
   border-radius: 50%;
-  top: 40px;
-  left: 80px;
-  transform-origin: bottom center;
-  transform: rotate(calc(var(--i) * 45deg));
-}
-
-.center {
-  position: absolute;
-  width: 60px;
-  height: 60px;
-  background: #5a3a00;
-  border-radius: 50%;
-  top: 70px;
-  left: 70px;
-}
-
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
 }
