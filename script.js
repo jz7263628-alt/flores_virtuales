@@ -1,18 +1,15 @@
-const messages = document.querySelectorAll('.message');
-let index = 0;
+const mensajes = [
+  "Te Amo ❤️",
+  "Mi reina 👑",
+  "Amor de mi vida",
+  "Eres preciosa ✨",
+  "My love 💕"
+];
 
-function showNextMessage() {
-    if (index > 0) {
-        messages[index - 1].style.display = 'none';
-    }
-    if (index < messages.length) {
-        messages[index].style.display = 'block';
-        index++;
-    } else {
-        index = 0; // Reinicia el ciclo si quieres que se repita
-    }
-}
+let i = 0;
+const text = document.getElementById("message");
 
-setInterval(showNextMessage, 3000); 
-
-showNextMessage();
+setInterval(() => {
+  text.textContent = mensajes[i];
+  i = (i + 1) % mensajes.length;
+}, 2500);
