@@ -1,86 +1,33 @@
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  width: 100vw;
-  height: 100vh;
-  background: #5b0fa1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  font-family: Arial, sans-serif;
-  overflow: hidden;
-}
-
-/* TEXTO */
-#mensaje {
-  color: white;
-  font-size: 26px;
-  margin-bottom: 30px;
-  animation: fade 3s infinite;
-}
-
-/* GIRASOL */
-.girasol {
+.flower {
   position: relative;
-  width: 160px;
-  height: 160px;
+  width: 200px;
+  height: 200px;
+  animation: spin 20s linear infinite;
 }
 
-.petalos {
+.petal {
   position: absolute;
-  width: 160px;
-  height: 160px;
-  background: radial-gradient(circle, yellow 60%, gold 100%);
+  width: 40px;
+  height: 100px;
+  background: gold;
   border-radius: 50%;
-  box-shadow:
-    60px 0 yellow,
-    -60px 0 yellow,
-    0 60px yellow,
-    0 -60px yellow,
-    45px 45px yellow,
-    -45px -45px yellow,
-    -45px 45px yellow,
-    45px -45px yellow;
+  top: 50px;
+  left: 80px;
+  transform-origin: bottom center;
+  transform: rotate(calc(var(--i) * 45deg));
 }
 
-.centro {
+.center {
   position: absolute;
-  top: 50px;
-  left: 50px;
   width: 60px;
   height: 60px;
   background: #5a3a00;
   border-radius: 50%;
+  top: 70px;
+  left: 70px;
 }
 
-.tallo {
-  position: absolute;
-  top: 160px;
-  left: 78px;
-  width: 5px;
-  height: 200px;
-  background: green;
-}
-
-/* BOTÓN */
-#musicBtn {
-  margin-top: 40px;
-  padding: 10px 20px;
-  font-size: 16px;
-  border: none;
-  border-radius: 20px;
-  background: white;
-  color: #5b0fa1;
-}
-
-/* ANIMACIÓN */
-@keyframes fade {
-  0% { opacity: 0; }
-  30% { opacity: 1; }
-  70% { opacity: 1; }
-  100% { opacity: 0; }
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
