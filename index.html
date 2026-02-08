@@ -3,29 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Flor Animada 🌻</title>
+  <title>Flor Mágica 💜</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <h1 id="titulo">🌼 Mi Flor Virtual 🌼</h1>
-  <p id="mensaje">Hecha con amor 💜</p>
+  <h1>✨ Flor Mágica ✨</h1>
+  <p id="mensaje">Tócala 💖</p>
 
-  <div class="escena">
+  <div class="escena" onclick="magia()">
     <div class="flor">
-      <div class="petalo p1"></div>
-      <div class="petalo p2"></div>
-      <div class="petalo p3"></div>
-      <div class="petalo p4"></div>
-      <div class="petalo p5"></div>
-      <div class="petalo p6"></div>
-
+      <div class="petalo" style="--i:0"></div>
+      <div class="petalo" style="--i:1"></div>
+      <div class="petalo" style="--i:2"></div>
+      <div class="petalo" style="--i:3"></div>
+      <div class="petalo" style="--i:4"></div>
+      <div class="petalo" style="--i:5"></div>
       <div class="centro"></div>
     </div>
 
     <div class="tallo"></div>
     <div class="hoja"></div>
   </div>
+
+  <div id="corazones"></div>
 
   <script src="script.js"></script>
 </body>
