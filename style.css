@@ -7,6 +7,18 @@ body {
     overflow: hidden;
 }
 
+.background-hearts {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* SVG de corazón simple para el fondo */
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org" width="100" height="100" viewBox="0 0 100 100"><text y="35" font-size="25" fill="rgba(255,255,255,0.2)">♥</text></svg>');
+    background-size: 50px 50px;
+    opacity: 0.5;
+}
+
 .flower-container {
     position: relative;
     width: 100%;
@@ -16,42 +28,51 @@ body {
     align-items: center;
 }
 
-/* Estilo para una flor de ejemplo */
 .flower {
     position: absolute;
-    bottom: 0; /* Posición inicial en la parte inferior */
+    bottom: -100px; /* Inicia desde abajo */
     transform: scale(0.5);
-    /* Puedes añadir animación de crecimiento aquí */
+    animation: grow 5s forwards; /* Animación de crecimiento */
+}
+
+@keyframes grow {
+    to { bottom: 30%; transform: scale(1); } /* Posición final */
 }
 
 .petal {
     position: absolute;
     width: 20px;
     height: 50px;
-    background-color: yellow;
+    background-color: #ffeb3b; /* Amarillo vibrante */
     border-radius: 50% 50% 0 0;
     transform-origin: bottom center;
 }
 
-.p1 { transform: rotate(0deg); }
-.p2 { transform: rotate(45deg); }
-.p3 { transform: rotate(90deg); }
-/* Se necesitarían más pétalos y más reglas CSS para un ramo completo */
+.petal.p1 { transform: rotate(0deg); }
+.petal.p2 { transform: rotate(45deg); }
+.petal.p3 { transform: rotate(90deg); }
+.petal.p4 { transform: rotate(135deg); }
+.petal.p5 { transform: rotate(180deg); }
+.petal.p6 { transform: rotate(225deg); }
+.petal.p7 { transform: rotate(270deg); }
+.petal.p8 { transform: rotate(315deg); }
 
 .center {
     position: absolute;
     width: 15px;
     height: 15px;
-    background-color: brown;
+    background-color: #8d6e63; /* Marrón */
     border-radius: 50%;
+    top: 17px;
+    left: 2.5px;
 }
 
 .stem {
     position: absolute;
     width: 2px;
-    height: 150px;
-    background-color: green;
-    bottom: -150px;
+    height: 200px;
+    background-color: #4caf50; /* Verde */
+    bottom: -200px;
     left: 50%;
     transform: translateX(-50%);
 }
