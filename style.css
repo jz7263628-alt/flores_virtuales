@@ -15,52 +15,72 @@ body {
   overflow: hidden;
 }
 
-#message {
+/* TEXTO */
+#mensaje {
   color: white;
-  font-size: 24px;
-  margin-bottom: 40px;
-  text-align: center;
+  font-size: 26px;
+  margin-bottom: 30px;
+  animation: fade 3s infinite;
 }
 
-/* FLOR */
-.flower {
+/* GIRASOL */
+.girasol {
   position: relative;
-  width: 120px;
-  height: 120px;
+  width: 160px;
+  height: 160px;
 }
 
-.petals {
+.petalos {
   position: absolute;
-  width: 120px;
-  height: 120px;
-  background: yellow;
+  width: 160px;
+  height: 160px;
+  background: radial-gradient(circle, yellow 60%, gold 100%);
   border-radius: 50%;
   box-shadow:
-    40px 0 yellow,
-    -40px 0 yellow,
-    0 40px yellow,
-    0 -40px yellow,
-    28px 28px yellow,
-    -28px -28px yellow,
-    -28px 28px yellow,
-    28px -28px yellow;
+    60px 0 yellow,
+    -60px 0 yellow,
+    0 60px yellow,
+    0 -60px yellow,
+    45px 45px yellow,
+    -45px -45px yellow,
+    -45px 45px yellow,
+    45px -45px yellow;
 }
 
-.center {
+.centro {
   position: absolute;
-  top: 35px;
-  left: 35px;
-  width: 50px;
-  height: 50px;
+  top: 50px;
+  left: 50px;
+  width: 60px;
+  height: 60px;
   background: #5a3a00;
   border-radius: 50%;
 }
 
-.stem {
+.tallo {
   position: absolute;
-  top: 120px;
-  left: 58px;
-  width: 4px;
-  height: 160px;
+  top: 160px;
+  left: 78px;
+  width: 5px;
+  height: 200px;
   background: green;
+}
+
+/* BOTÓN */
+#musicBtn {
+  margin-top: 40px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 20px;
+  background: white;
+  color: #5b0fa1;
+}
+
+/* ANIMACIÓN */
+@keyframes fade {
+  0% { opacity: 0; }
+  30% { opacity: 1; }
+  70% { opacity: 1; }
+  100% { opacity: 0; }
 }
