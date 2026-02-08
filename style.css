@@ -6,111 +6,107 @@
 
 body {
   height: 100vh;
-  background: radial-gradient(circle at top, #9d4edd, #3c096c);
-  font-family: 'Arial', sans-serif;
-  color: white;
-  text-align: center;
+  background: linear-gradient(180deg, #6a0dad, #9d4edd);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Segoe UI", sans-serif;
   overflow: hidden;
+  color: white;
 }
 
-h1 {
-  margin-top: 20px;
-  font-size: 38px;
-}
-
-#mensaje {
-  margin: 10px 0 20px;
-  font-size: 18px;
-}
-
-/* 🌸 ESCENA */
+/* ESCENA */
 .escena {
   position: relative;
-  width: 260px;
-  height: 420px;
-  margin: auto;
-  cursor: pointer;
+  text-align: center;
 }
 
-/* 🌼 FLOR */
+/* TEXTO */
+#mensaje {
+  font-size: 26px;
+  margin-bottom: 25px;
+  animation: latidoTexto 3s infinite;
+}
+
+@keyframes latidoTexto {
+  0%,100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+/* FLOR */
 .flor {
   position: relative;
-  width: 180px;
-  height: 180px;
+  width: 200px;
+  height: 200px;
   margin: auto;
-  animation: flotar 4s ease-in-out infinite;
-  transform-style: preserve-3d;
+  animation: flotar 5s ease-in-out infinite;
 }
 
 @keyframes flotar {
-  0%, 100% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-10px) scale(1.03); }
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
 }
 
 .petalo {
   position: absolute;
   width: 90px;
   height: 90px;
-  background: radial-gradient(circle, #fff3b0, #ffd60a);
+  background: radial-gradient(circle, #fff3b0, #ffd000);
   border-radius: 50%;
-  top: 45px;
-  left: 45px;
+  top: 50%;
+  left: 50%;
   transform:
     rotate(calc(var(--i) * 60deg))
-    translateY(-65px);
-  animation: girar 8s linear infinite;
-}
-
-@keyframes girar {
-  from { transform: rotate(calc(var(--i) * 60deg)) translateY(-65px); }
-  to { transform: rotate(calc(var(--i) * 60deg + 360deg)) translateY(-65px); }
+    translateY(-75px)
+    translate(-50%, -50%);
 }
 
 .centro {
   position: absolute;
-  top: 50%;
-  left: 50%;
   width: 55px;
   height: 55px;
-  background: radial-gradient(circle, #6a040f, #370617);
+  background: radial-gradient(circle, #7f1d1d, #3f0d0d);
   border-radius: 50%;
+  top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
 }
 
-/* 🌿 TALLO */
+/* TALLO */
 .tallo {
   width: 12px;
-  height: 160px;
+  height: 170px;
   background: linear-gradient(#2d6a4f, #1b4332);
   margin: auto;
+  border-radius: 6px;
 }
 
-/* 🍃 HOJA */
+/* HOJA */
 .hoja {
   position: absolute;
-  width: 80px;
-  height: 40px;
-  background: #2d6a4f;
-  border-radius: 50px;
-  top: 300px;
+  width: 90px;
+  height: 45px;
+  background: linear-gradient(#52b788, #2d6a4f);
+  border-radius: 50%;
+  top: 340px;
   left: 140px;
-  transform: rotate(-30deg);
+  transform: rotate(-25deg);
 }
 
-/* 💖 CORAZONES */
-.corazon {
+/* PARTÍCULAS */
+.particula {
   position: absolute;
-  font-size: 22px;
-  animation: subir 4s linear forwards;
+  font-size: 18px;
+  animation: subir 6s linear forwards;
 }
 
 @keyframes subir {
   from {
+    transform: translateY(0);
     opacity: 1;
-    transform: translateY(0) scale(1);
   }
   to {
+    transform: translateY(-250px);
     opacity: 0;
-    transform: translateY(-150px) scale(1.5);
   }
 }
