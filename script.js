@@ -1,54 +1,59 @@
-const campo = document.getElementById("campo");
+/* estrellas */
+const fondo = document.getElementById("estrellas");
+for (let i = 0; i < 140; i++) {
+  const s = document.createElement("div");
+  s.className = "estrella";
+  s.style.left = Math.random()*100+"%";
+  s.style.top = Math.random()*100+"%";
+  fondo.appendChild(s);
+}
 
-const colores = [
-  "#ff6b6b",
-  "#ff9ff3",
-  "#feca57",
-  "#1dd1a1",
-  "#48dbfb",
-  "#54a0ff",
-  "#5f27cd"
-];
+/* textos orbitando */
+function llenarOrbita(id, textos, radio) {
+  const orb = document.getElementById(id);
+  textos.forEach((t,i) => {
+    const el = document.createElement("div");
+    el.className = "objeto-orbita";
+    el.innerText = t;
 
+    const ang = (i/textos.length)*Math.PI*2;
+    el.style.left = Math.cos(ang)*radio + radio + "px";
+    el.style.top = Math.sin(ang)*radio + radio + "px";
+
+    orb.appendChild(el);
+  });
+}
+
+llenarOrbita("orbita1",
+  ["Para ti","Mi amor","Siempre","Juntos","Te adoro","💖"], 180);
+
+llenarOrbita("orbita2",
+  ["Eres especial","Contigo","Mi vida","Te pienso","💗"], 250);
+
+/* lluvia de corazones */
+function lluvia() {
+  const c = document.createElement("div");
+  c.className = "corazon";
+  c.innerText = ["💖","💗","💕","💘"][Math.floor(Math.random()*4)];
+  c.style.left = Math.random()*window.innerWidth+"px";
+  c.style.top = "-20px";
+  c.style.animationDuration = 4+Math.random()*4+"s";
+  document.body.appendChild(c);
+  setTimeout(()=>c.remove(),8000);
+}
+setInterval(lluvia, 350);
+
+/* explosión al clic */
 document.addEventListener("click", e => {
-  crearFlor(e.clientX, e.clientY);
-});
-
-// flores iniciales
-for (let i = 0; i < 12; i++) {
-  crearFlor(
-    Math.random() * window.innerWidth,
-    Math.random() * window.innerHeight
-  );
-}
-
-function crearFlor(x, y) {
-  const flor = document.createElement("div");
-  flor.className = "flor";
-  flor.style.left = x + "px";
-  flor.style.top = y + "px";
-
-  const total = 8;
-  const radio = 18;
-
-  for (let i = 0; i < total; i++) {
+  for (let i=0;i<18;i++){
     const p = document.createElement("div");
-    p.className = "petalo";
-    p.style.background = colores[Math.floor(Math.random() * colores.length)];
-
-    const ang = (i * 360 / total) * Math.PI / 180;
-    p.style.left = Math.cos(ang) * radio + "px";
-    p.style.top = Math.sin(ang) * radio + "px";
-
-    flor.appendChild(p);
+    p.className = "particula";
+    p.innerText = "💖";
+    p.style.left = e.clientX+"px";
+    p.style.top = e.clientY+"px";
+    p.style.setProperty("--dx",(Math.random()*200-100)+"px");
+    p.style.setProperty("--dy",(Math.random()*200-100)+"px");
+    document.body.appendChild(p);
+    setTimeout(()=>p.remove(),1000);
   }
-
-  const centro = document.createElement("div");
-  centro.className = "petalo";
-  centro.style.background = "#ffd93d";
-  centro.style.left = "0px";
-  centro.style.top = "0px";
-
-  flor.appendChild(centro);
-  campo.appendChild(flor);
-}
+});
