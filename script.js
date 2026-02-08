@@ -1,30 +1,44 @@
-const mensajes = [
-  "Eres mi todo 💖",
-  "Esta flor no se marchita 🌸",
-  "Porque lo bonito se cuida ✨",
-  "Siempre en mi corazón 💜"
+const jardin = document.getElementById("jardin");
+
+const colores = [
+    "#ff6b6b",
+    "#ff9ff3",
+    "#feca57",
+    "#48dbfb",
+    "#1dd1a1",
+    "#ff9f43",
+    "#ee5253"
 ];
 
-let indice = 0;
-const texto = document.getElementById("mensaje");
-const particulas = document.getElementById("particulas");
+document.addEventListener("click", (e) => {
+    crearFlor(e.clientX, e.clientY);
+});
 
-setInterval(() => {
-  texto.textContent = mensajes[indice];
-  indice = (indice + 1) % mensajes.length;
+function crearFlor(x, y) {
+    const flor = document.createElement("div");
+    flor.className = "flor";
+    flor.style.left = x + "px";
+    flor.style.top = y + "px";
 
-  crearParticula();
-}, 3500);
+    for (let i = 0; i < 6; i++) {
+        const petalo = document.createElement("div");
+        petalo.className = "petalo";
 
-function crearParticula() {
-  const p = document.createElement("div");
-  p.className = "particula";
-  p.textContent = Math.random() > 0.5 ? "💖" : "✨";
-  p.style.left = Math.random() * 100 + "%";
-  p.style.bottom = "0px";
-  particulas.appendChild(p);
+        const color = colores[Math.floor(Math.random() * colores.length)];
+        petalo.style.background = color;
 
-  setTimeout(() => {
-    p.remove();
-  }, 6000);
+        const angulo = (i * 60) * Math.PI / 180;
+        const radio = 18;
+
+        petalo.style.left = 10 + Math.cos(angulo) * radio + "px";
+        petalo.style.top = 10 + Math.sin(angulo) * radio + "px";
+
+        flor.appendChild(petalo);
+    }
+
+    const centro = document.createElement("div");
+    centro.className = "centro";
+    flor.appendChild(centro);
+
+    jardin.appendChild(flor);
 }
