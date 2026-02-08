@@ -1,26 +1,30 @@
 const mensajes = [
   "Eres mi todo 💖",
-  "La flor siente tu amor 🌸",
-  "La magia está viva ✨",
-  "Gracias por tocarla 💜"
+  "Esta flor no se marchita 🌸",
+  "Porque lo bonito se cuida ✨",
+  "Siempre en mi corazón 💜"
 ];
 
-let i = 0;
+let indice = 0;
 const texto = document.getElementById("mensaje");
-const corazones = document.getElementById("corazones");
+const particulas = document.getElementById("particulas");
 
-function magia() {
-  texto.textContent = mensajes[i];
-  i = (i + 1) % mensajes.length;
+setInterval(() => {
+  texto.textContent = mensajes[indice];
+  indice = (indice + 1) % mensajes.length;
 
-  for (let j = 0; j < 5; j++) {
-    const c = document.createElement("div");
-    c.className = "corazon";
-    c.textContent = "💖";
-    c.style.left = Math.random() * 100 + "%";
-    c.style.bottom = "120px";
-    corazones.appendChild(c);
+  crearParticula();
+}, 3500);
 
-    setTimeout(() => c.remove(), 4000);
-  }
+function crearParticula() {
+  const p = document.createElement("div");
+  p.className = "particula";
+  p.textContent = Math.random() > 0.5 ? "💖" : "✨";
+  p.style.left = Math.random() * 100 + "%";
+  p.style.bottom = "0px";
+  particulas.appendChild(p);
+
+  setTimeout(() => {
+    p.remove();
+  }, 6000);
 }
