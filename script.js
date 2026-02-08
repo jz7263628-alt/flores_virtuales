@@ -1,44 +1,54 @@
-const jardin = document.getElementById("jardin");
+const campo = document.getElementById("campo");
 
 const colores = [
-    "#ff6b6b",
-    "#ff9ff3",
-    "#feca57",
-    "#48dbfb",
-    "#1dd1a1",
-    "#ff9f43",
-    "#ee5253"
+  "#ff6b6b",
+  "#ff9ff3",
+  "#feca57",
+  "#1dd1a1",
+  "#48dbfb",
+  "#54a0ff",
+  "#5f27cd"
 ];
 
-document.addEventListener("click", (e) => {
-    crearFlor(e.clientX, e.clientY);
+document.addEventListener("click", e => {
+  crearFlor(e.clientX, e.clientY);
 });
 
+// flores iniciales
+for (let i = 0; i < 12; i++) {
+  crearFlor(
+    Math.random() * window.innerWidth,
+    Math.random() * window.innerHeight
+  );
+}
+
 function crearFlor(x, y) {
-    const flor = document.createElement("div");
-    flor.className = "flor";
-    flor.style.left = x + "px";
-    flor.style.top = y + "px";
+  const flor = document.createElement("div");
+  flor.className = "flor";
+  flor.style.left = x + "px";
+  flor.style.top = y + "px";
 
-    for (let i = 0; i < 6; i++) {
-        const petalo = document.createElement("div");
-        petalo.className = "petalo";
+  const total = 8;
+  const radio = 18;
 
-        const color = colores[Math.floor(Math.random() * colores.length)];
-        petalo.style.background = color;
+  for (let i = 0; i < total; i++) {
+    const p = document.createElement("div");
+    p.className = "petalo";
+    p.style.background = colores[Math.floor(Math.random() * colores.length)];
 
-        const angulo = (i * 60) * Math.PI / 180;
-        const radio = 18;
+    const ang = (i * 360 / total) * Math.PI / 180;
+    p.style.left = Math.cos(ang) * radio + "px";
+    p.style.top = Math.sin(ang) * radio + "px";
 
-        petalo.style.left = 10 + Math.cos(angulo) * radio + "px";
-        petalo.style.top = 10 + Math.sin(angulo) * radio + "px";
+    flor.appendChild(p);
+  }
 
-        flor.appendChild(petalo);
-    }
+  const centro = document.createElement("div");
+  centro.className = "petalo";
+  centro.style.background = "#ffd93d";
+  centro.style.left = "0px";
+  centro.style.top = "0px";
 
-    const centro = document.createElement("div");
-    centro.className = "centro";
-    flor.appendChild(centro);
-
-    jardin.appendChild(flor);
+  flor.appendChild(centro);
+  campo.appendChild(flor);
 }
