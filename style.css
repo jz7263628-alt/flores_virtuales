@@ -1,14 +1,9 @@
 body {
   margin: 0;
   overflow: hidden;
-  font-family: Arial, sans-serif;
-  text-align: center;
-  background: linear-gradient(to bottom, #dff6ff, #87ceeb);
-}
-
-h1, p {
-  position: relative;
-  z-index: 10;
+  background: black;
+  font-family: Segoe UI, sans-serif;
+  color: white;
 }
 
 #campo {
@@ -16,32 +11,57 @@ h1, p {
   inset: 0;
 }
 
-.flor {
+/* estrellas */
+.estrella {
   position: absolute;
-  animation: pop .4s ease-out forwards;
-  transform: scale(0) rotate(0deg);
-}
-
-.petalo {
-  width: 14px;
-  height: 14px;
+  width: 2px;
+  height: 2px;
+  background: white;
   border-radius: 50%;
-  position: absolute;
-  filter: brightness(1.1);
+  opacity: .8;
+  animation: parpadeo 2s infinite alternate;
 }
 
-.centro {
-  width: 10px;
-  height: 10px;
-  background: #ffd93d;
-  border-radius: 50%;
-  position: absolute;
-  left: 9px;
-  top: 9px;
+@keyframes parpadeo {
+  from { opacity:.3 }
+  to { opacity:1 }
 }
 
-@keyframes pop {
+/* frases */
+.frase {
+  position: absolute;
+  color: #ff9bd6;
+  font-size: 18px;
+  animation: subir linear forwards;
+}
+
+@keyframes subir {
+  from { transform: translateY(40px); opacity:0 }
+  20% { opacity:1 }
+  to { transform: translateY(-140px); opacity:0 }
+}
+
+/* stickers */
+.sticker {
+  position: absolute;
+  font-size: 22px;
+  animation: flotar 4s linear forwards;
+}
+
+@keyframes flotar {
   to {
-    transform: scale(1) rotate(360deg);
+    transform: translateY(-180px) rotate(180deg);
+    opacity: 0;
   }
+}
+
+/* centro */
+#titulo {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  font-size: 42px;
+  color: #ff77cc;
+  text-shadow: 0 0 20px #ff4da6;
 }
