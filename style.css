@@ -1,38 +1,134 @@
 body {
-    margin: 0;
-    overflow: hidden;
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background: linear-gradient(#cfe9ff, #7ec8e3);
+  margin: 0;
+  overflow: hidden;
+  background: radial-gradient(circle at center, #0a0f2a, #000);
+  font-family: Arial, sans-serif;
+  color: white;
 }
 
-h1 {
-    margin-top: 12px;
+/* estrellas */
+#estrellas {
+  position: fixed;
+  width: 100%;
+  height: 100%;
 }
 
-#campo {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
+.estrella {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  opacity: .8;
 }
 
-.flor {
-    position: absolute;
-    transform: scale(0);
-    animation: aparecer .4s ease-out forwards;
+/* escena */
+.escena {
+  position: absolute;
+  width: 100%;
+  height: 100%;
 }
 
-.petalo {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    position: absolute;
+/* planeta */
+.planeta {
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background:
+    radial-gradient(circle at 30% 30%, #ffb3d9, #ff2f7a);
+  box-shadow: 0 0 50px #ff4fa3;
+  animation: girar 30s linear infinite;
 }
 
-@keyframes aparecer {
-    to {
-        transform: scale(1);
-    }
+.planeta::after {
+  content: "❤️ 💖 💗 💕 💘";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  font-size: 22px;
+  opacity: .35;
+}
+
+@keyframes girar {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* órbitas */
+.orbita {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 50%;
+}
+
+.orbita1 {
+  width: 360px;
+  height: 360px;
+  transform: translate(-50%, -50%);
+  animation: rotar 22s linear infinite;
+}
+
+.orbita2 {
+  width: 500px;
+  height: 500px;
+  transform: translate(-50%, -50%);
+  animation: rotar 36s linear infinite reverse;
+}
+
+@keyframes rotar {
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.objeto-orbita {
+  position: absolute;
+  font-size: 14px;
+  color: #ff7ac3;
+  white-space: nowrap;
+}
+
+/* mensaje */
+.mensaje {
+  position: absolute;
+  top: 15%;
+  width: 100%;
+  text-align: center;
+  font-size: 26px;
+  color: #ff9bd4;
+  text-shadow: 0 0 10px #ff4fa3;
+}
+
+/* corazones */
+.corazon {
+  position: absolute;
+  font-size: 18px;
+  animation: caer linear forwards;
+}
+
+@keyframes caer {
+  to {
+    transform: translateY(110vh);
+    opacity: 0;
+  }
+}
+
+/* explosión */
+.particula {
+  position: absolute;
+  font-size: 16px;
+  animation: explotar 1s forwards;
+}
+
+@keyframes explotar {
+  to {
+    transform: translate(var(--dx), var(--dy));
+    opacity: 0;
+  }
 }
