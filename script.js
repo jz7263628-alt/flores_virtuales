@@ -1,24 +1,14 @@
 const mensajes = [
-  "Te Amo ❤️",
-  "Mi Reina 👑",
-  "Amor de mi vida 💕",
-  "Eres preciosa ✨",
-  "My Love 💖"
+  "Te Amo",
+  "Mi Reina",
+  "My Love",
+  "Amor de mi vida",
+  "❤️"
 ];
 
-let i = 0;
-const texto = document.getElementById("mensaje");
+const msg = document.getElementById("mensaje");
 
 setInterval(() => {
-  texto.textContent = mensajes[i];
-  i = (i + 1) % mensajes.length;
-}, 3000);
-
-// Música
-const music = document.getElementById("music");
-const btn = document.getElementById("musicBtn");
-
-btn.addEventListener("click", () => {
-  music.play();
-  btn.textContent = "🎵 Sonando";
-});
+  msg.textContent = mensajes[Math.floor(Math.random()*mensajes.length)];
+  msg.style.transform = `translate(${Math.random()*40-20}px, ${Math.random()*40-20}px)`;
+}, 2000);
