@@ -6,62 +6,73 @@
 
 body {
   height: 100vh;
-  background: linear-gradient(#7b2cbf, #c77dff);
-  font-family: Arial, sans-serif;
-  text-align: center;
+  background: radial-gradient(circle at top, #9d4edd, #3c096c);
+  font-family: 'Arial', sans-serif;
   color: white;
+  text-align: center;
+  overflow: hidden;
 }
 
-#titulo {
+h1 {
   margin-top: 20px;
-  font-size: 32px;
+  font-size: 38px;
 }
 
 #mensaje {
-  margin-bottom: 20px;
+  margin: 10px 0 20px;
   font-size: 18px;
 }
 
+/* 🌸 ESCENA */
 .escena {
   position: relative;
-  width: 200px;
-  height: 350px;
+  width: 260px;
+  height: 420px;
   margin: auto;
+  cursor: pointer;
 }
 
-/* 🌻 FLOR */
+/* 🌼 FLOR */
 .flor {
   position: relative;
-  width: 160px;
-  height: 160px;
+  width: 180px;
+  height: 180px;
   margin: auto;
-  animation: girar 10s linear infinite;
+  animation: flotar 4s ease-in-out infinite;
+  transform-style: preserve-3d;
 }
 
-/* 🌼 PÉTALOS */
+@keyframes flotar {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-10px) scale(1.03); }
+}
+
 .petalo {
   position: absolute;
-  width: 80px;
-  height: 80px;
-  background: gold;
+  width: 90px;
+  height: 90px;
+  background: radial-gradient(circle, #fff3b0, #ffd60a);
   border-radius: 50%;
+  top: 45px;
+  left: 45px;
+  transform:
+    rotate(calc(var(--i) * 60deg))
+    translateY(-65px);
+  animation: girar 8s linear infinite;
 }
 
-.p1 { top: 0; left: 40px; }
-.p2 { top: 40px; left: 0; }
-.p3 { top: 40px; right: 0; }
-.p4 { bottom: 0; left: 40px; }
-.p5 { top: 10px; left: 10px; }
-.p6 { top: 10px; right: 10px; }
+@keyframes girar {
+  from { transform: rotate(calc(var(--i) * 60deg)) translateY(-65px); }
+  to { transform: rotate(calc(var(--i) * 60deg + 360deg)) translateY(-65px); }
+}
 
-/* 🌼 CENTRO */
 .centro {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 50px;
-  height: 50px;
-  background: brown;
+  width: 55px;
+  height: 55px;
+  background: radial-gradient(circle, #6a040f, #370617);
   border-radius: 50%;
   transform: translate(-50%, -50%);
 }
@@ -69,25 +80,37 @@ body {
 /* 🌿 TALLO */
 .tallo {
   width: 12px;
-  height: 140px;
-  background: green;
+  height: 160px;
+  background: linear-gradient(#2d6a4f, #1b4332);
   margin: auto;
 }
 
 /* 🍃 HOJA */
 .hoja {
   position: absolute;
-  width: 70px;
-  height: 30px;
-  background: green;
-  border-radius: 30px;
-  top: 240px;
-  left: 110px;
-  transform: rotate(-25deg);
+  width: 80px;
+  height: 40px;
+  background: #2d6a4f;
+  border-radius: 50px;
+  top: 300px;
+  left: 140px;
+  transform: rotate(-30deg);
 }
 
-/* ✨ ANIMACIONES */
-@keyframes girar {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+/* 💖 CORAZONES */
+.corazon {
+  position: absolute;
+  font-size: 22px;
+  animation: subir 4s linear forwards;
+}
+
+@keyframes subir {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-150px) scale(1.5);
+  }
 }
