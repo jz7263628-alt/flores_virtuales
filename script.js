@@ -1,14 +1,14 @@
 const mensajes = [
-  "Te Amo",
-  "Mi Reina",
-  "My Love",
-  "Amor de mi vida",
-  "❤️"
+  "Te Amo ❤️",
+  "Mi Reina 👑",
+  "Amor de mi vida 💕",
+  "My Love 💖"
 ];
 
-const msg = document.getElementById("mensaje");
+let i = 0;
+const texto = document.getElementById("mensaje");
 
 setInterval(() => {
-  msg.textContent = mensajes[Math.floor(Math.random()*mensajes.length)];
-  msg.style.transform = `translate(${Math.random()*40-20}px, ${Math.random()*40-20}px)`;
-}, 2000);
+  texto.textContent = mensajes[i];
+  i = (i + 1) % mensajes.length;
+}, 2500);
