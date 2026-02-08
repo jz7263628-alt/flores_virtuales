@@ -2,7 +2,7 @@ const mensajes = [
   "Te Amo ❤️",
   "Mi Reina 👑",
   "Amor de mi vida 💕",
-  "My Love 💖"
+  "Siempre tú 💖"
 ];
 
 let i = 0;
