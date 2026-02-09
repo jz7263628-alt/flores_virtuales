@@ -12,241 +12,173 @@ html,body{
   font-family:Segoe UI, sans-serif;
 }
 
-/* canvas */
-#space{
+/* canvas fondo */
+#bg{
   position:fixed;
   inset:0;
 }
 
-/* centro */
-.center{
+/* tarjeta central */
+.card{
   position:absolute;
   top:50%;
   left:50%;
   transform:translate(-50%,-50%);
+  width:90%;
+  max-width:420px;
+  padding:26px;
+  border-radius:28px;
+  background:rgba(255,255,255,.12);
+  backdrop-filter:blur(14px);
+  color:white;
   text-align:center;
-  color:#ff77cc;
-  font-size:42px;
   z-index:5;
-  animation:glow 2s infinite alternate;
-  cursor:pointer;
+  box-shadow:0 0 40px rgba(255,0,120,.35);
+  animation:fadeIn 1.4s ease;
 }
 
-@keyframes glow{
-  from { text-shadow:0 0 10px #ff4da6; }
-  to { text-shadow:0 0 35px #ff99cc; }
+@keyframes fadeIn{
+  from{opacity:0;transform:translate(-50%,-40%);}
+  to{opacity:1;transform:translate(-50%,-50%);}
 }
 
-/* frases */
-.phrase{
+.card h1{
+  color:#ff99cc;
+  margin:0 0 12px;
+  font-size:26px;
+}
+
+.card p{
+  line-height:1.5;
+  font-size:16px;
+  opacity:.95;
+}
+
+/* imagen */
+.photo{
+  margin-top:16px;
+  border-radius:18px;
+  width:100%;
+  box-shadow:0 0 20px rgba(255,255,255,.3);
+  animation:pulse 3s infinite;
+}
+
+@keyframes pulse{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.03)}
+  100%{transform:scale(1)}
+}
+
+/* corazones flotantes */
+.heart{
   position:absolute;
-  color:#ffb3e6;
+  color:#ff4da6;
   font-size:18px;
-  opacity:0;
-  animation:floatUp linear forwards;
+  animation:float linear forwards;
 }
 
-@keyframes floatUp{
-  0%{transform:translateY(40px);opacity:0;}
-  20%{opacity:1;}
-  100%{transform:translateY(-160px);opacity:0;}
-}
-
-/* stickers */
-.sticker{
-  position:absolute;
-  font-size:24px;
-  animation:drift linear forwards;
-}
-
-@keyframes drift{
+@keyframes float{
   to{
-    transform:translateY(-180px) rotate(180deg);
+    transform:translateY(-140px);
     opacity:0;
   }
 }
 
-/* botón música */
-.musicBtn{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  z-index:10;
+/* botón */
+.btn{
+  margin-top:16px;
   background:#ff4da6;
   border:none;
   color:white;
-  padding:10px 14px;
+  padding:10px 16px;
   border-radius:20px;
   cursor:pointer;
-  box-shadow:0 0 15px #ff4da6;
-}
-
-.secret{
-  position:fixed;
-  bottom:18%;
-  width:100%;
-  text-align:center;
-  color:#ffd6f0;
-  font-size:20px;
-  opacity:0;
-  transition:1s;
 }
 </style>
 </head>
 
 <body>
 
-<canvas id="space"></canvas>
+<canvas id="bg"></canvas>
 
-<div class="center" id="center">
-💖 Marlen 💖
-<div style="font-size:16px">Tócame</div>
+<div class="card">
+<h1>Para mi San Valentín ❤️</h1>
+
+<p id="frase">
+Gracias por llenar mis días de alegría y hacer que mi corazón lata más fuerte.
+No hay nadie con quien prefiera estar más que contigo.
+Te quiero muchísimo ✨
+</p>
+
+<img class="photo" src="https://i.imgur.com/RqvWXbV.jpg">
+
+<button class="btn" onclick="cambiarFrase()">💌 Otra frase</button>
 </div>
-
-<div class="secret" id="secret">
-Eres lo más bonito que existe en mi universo ✨
-</div>
-
-<button class="musicBtn" onclick="toggleMusic()">🎹 Piano</button>
 
 <audio id="music" loop>
 <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_c8b05c7b6c.mp3">
 </audio>
 
 <script>
-/* ===== estrellas universo ===== */
-const c = space;
+/* ===== fondo corazones ===== */
+const c = bg;
 const ctx = c.getContext("2d");
-function resize(){
-  c.width = innerWidth;
-  c.height = innerHeight;
-}
-resize();
-onresize = resize;
+c.width = innerWidth;
+c.height = innerHeight;
 
-let stars=[];
-for(let i=0;i<450;i++){
-  stars.push({
-    x:Math.random()*c.width,
-    y:Math.random()*c.height,
-    r:Math.random()*1.6+0.2,
-    v:Math.random()*0.5+0.05
-  });
+let hearts=[];
+for(let i=0;i<120;i++){
+ hearts.push({
+  x:Math.random()*c.width,
+  y:Math.random()*c.height,
+  s:Math.random()*2+1,
+  v:Math.random()*0.5+0.2
+ });
 }
 
 function draw(){
-  ctx.clearRect(0,0,c.width,c.height);
-  ctx.fillStyle="white";
-  stars.forEach(s=>{
-    ctx.beginPath();
-    ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
-    ctx.fill();
-    s.y+=s.v;
-    if(s.y>c.height){
-      s.y=0;
-      s.x=Math.random()*c.width;
-    }
-  });
-  requestAnimationFrame(draw);
+ ctx.clearRect(0,0,c.width,c.height);
+ ctx.fillStyle="rgba(255,80,150,.9)";
+ hearts.forEach(h=>{
+  ctx.font = (h.s*10)+"px serif";
+  ctx.fillText("❤",h.x,h.y);
+  h.y+=h.v;
+  if(h.y>c.height){
+    h.y=0;
+    h.x=Math.random()*c.width;
+  }
+ });
+ requestAnimationFrame(draw);
 }
 draw();
 
+/* ===== corazones al tocar ===== */
+document.onclick=e=>{
+ for(let i=0;i<8;i++){
+  const d=document.createElement("div");
+  d.className="heart";
+  d.innerText="💖";
+  d.style.left=e.clientX+"px";
+  d.style.top=e.clientY+"px";
+  d.style.animationDuration=(2+Math.random()*2)+"s";
+  document.body.appendChild(d);
+  setTimeout(()=>d.remove(),4000);
+ }
+};
+
 /* ===== frases ===== */
 const frases=[
-"Te amo 💖","Eres mi universo","Mi corazón es tuyo",
-"Siempre tú","Contigo todo","Mi estrella favorita",
-"Amor infinito","Eres magia","Solo tú",
-"Mi lugar es contigo","Eres mi paz"
+"Eres mi lugar favorito ❤️",
+"Contigo todo es más bonito ✨",
+"Mi corazón te eligió a ti 💞",
+"Eres mi casualidad favorita 💖",
+"Siempre tú, siempre nosotros 🌙",
+"Mi mundo es mejor contigo 💘"
 ];
 
-function lanzarFrase(){
-  const f=document.createElement("div");
-  f.className="phrase";
-  f.innerText=frases[Math.floor(Math.random()*frases.length)];
-  f.style.left=Math.random()*90+"%";
-  f.style.top=Math.random()*90+"%";
-  f.style.animationDuration=(4+Math.random()*3)+"s";
-  document.body.appendChild(f);
-  setTimeout(()=>f.remove(),7000);
-}
-setInterval(lanzarFrase,1600);
-
-/* ===== stickers ===== */
-const stickers=["💖","💕","💘","💝","🌹","✨","💗"];
-
-function lanzarSticker(x,y){
-  const s=document.createElement("div");
-  s.className="sticker";
-  s.innerText=stickers[Math.floor(Math.random()*stickers.length)];
-  s.style.left=x+"px";
-  s.style.top=y+"px";
-  s.style.animationDuration=(3+Math.random()*2)+"s";
-  document.body.appendChild(s);
-  setTimeout(()=>s.remove(),5000);
-}
-
-document.onclick=e=>{
-  for(let i=0;i<7;i++){
-    lanzarSticker(e.clientX,e.clientY);
-  }
-};
-
-/* ===== estrella fugaz ===== */
-setInterval(()=>{
-  const s=document.createElement("div");
-  s.style.position="absolute";
-  s.style.width="2px";
-  s.style.height="2px";
-  s.style.background="white";
-  s.style.boxShadow="0 0 10px white";
-  s.style.left=Math.random()*innerWidth+"px";
-  s.style.top=Math.random()*innerHeight/2+"px";
-  s.style.transition="1s";
-  document.body.appendChild(s);
-  setTimeout(()=>{
-    s.style.transform="translate(320px,180px)";
-    s.style.opacity=0;
-  },50);
-  setTimeout(()=>s.remove(),1200);
-},2800);
-
-/* ===== fotos reales flotando ===== */
-const fotos=[
-"https://i.imgur.com/RqvWXbV.jpg"
-];
-
-function lanzarFoto(){
-  const img=document.createElement("img");
-  img.src=fotos[Math.floor(Math.random()*fotos.length)];
-  img.style.position="absolute";
-  img.style.width="100px";
-  img.style.borderRadius="22px";
-  img.style.boxShadow="0 0 25px #ff99cc";
-  img.style.left=Math.random()*90+"%";
-  img.style.top="110%";
-  img.style.opacity="0";
-  img.style.transition="9s linear, opacity 1s";
-  document.body.appendChild(img);
-
-  setTimeout(()=>{
-    img.style.opacity="1";
-    img.style.transform="translateY(-140vh) rotate("+(Math.random()*20-10)+"deg)";
-  },50);
-
-  setTimeout(()=>img.remove(),9500);
-}
-setInterval(lanzarFoto,3200);
-
-/* ===== mensaje secreto ===== */
-center.onclick=()=>{
-  secret.style.opacity=1;
-};
-
-/* ===== música ===== */
-function toggleMusic(){
-  const m=document.getElementById("music");
-  if(m.paused){ m.play(); }
-  else{ m.pause(); }
+function cambiarFrase(){
+ frase.innerText = frases[Math.floor(Math.random()*frases.length)];
+ document.getElementById("music").play();
 }
 </script>
 
