@@ -2,68 +2,86 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Para Marlen 💖</title>
+<title>Para Marlen ❤️</title>
 
 <style>
 html,body{
-  margin:0;
-  overflow:hidden;
-  background:#000;
-  font-family:Segoe UI, sans-serif;
+margin:0;
+overflow:hidden;
+background:#000;
+font-family:Segoe UI,sans-serif;
 }
 
-/* fondo */
+/* ===== canvas fondo ===== */
 #bg{
-  position:fixed;
-  inset:0;
-  filter: blur(1px) brightness(1.2);
+position:fixed;
+inset:0;
 }
 
-/* tarjeta */
+/* ===== tarjeta ===== */
 .card{
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  width:92%;
-  max-width:430px;
-  padding:24px;
-  border-radius:28px;
-  background:rgba(255,255,255,.15);
-  backdrop-filter:blur(18px);
-  color:white;
-  text-align:center;
-  z-index:5;
-  box-shadow:0 0 60px rgba(255,0,120,.45);
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:340px;
+padding:22px;
+border-radius:24px;
+background:rgba(255,255,255,0.12);
+backdrop-filter:blur(18px);
+color:white;
+text-align:center;
+z-index:5;
+box-shadow:0 0 40px rgba(255,0,120,.4);
+animation:fadeIn 1s ease;
 }
 
-.title{
-  color:#ffb3e6;
-  font-size:22px;
-  margin-bottom:10px;
+@keyframes fadeIn{
+from{opacity:0;transform:translate(-50%,-45%) scale(.9);}
+to{opacity:1;transform:translate(-50%,-50%) scale(1);}
 }
 
-.texto{
-  font-size:16px;
-  line-height:1.4;
-  margin-bottom:12px;
+.card h2{
+margin:0 0 10px;
+color:#ff9edb;
 }
 
-.photo{
-  width:100%;
-  border-radius:18px;
-  box-shadow:0 0 25px rgba(255,120,180,.6);
+.card p{
+font-size:15px;
+line-height:1.4;
 }
 
-.btn{
-  margin-top:14px;
-  background:#ff4da6;
-  border:none;
-  color:white;
-  padding:10px 16px;
-  border-radius:20px;
-  cursor:pointer;
-  font-size:15px;
+.card img{
+width:210px;
+border-radius:18px;
+margin-top:12px;
+box-shadow:0 0 20px rgba(255,100,160,.6);
+transition:.4s;
+}
+
+/* ===== botón ===== */
+.next{
+margin-top:14px;
+background:#ff4da6;
+border:none;
+padding:10px 18px;
+border-radius:20px;
+color:white;
+cursor:pointer;
+font-size:14px;
+}
+
+.music{
+position:fixed;
+bottom:20px;
+right:20px;
+z-index:10;
+background:#ff4da6;
+border:none;
+color:white;
+padding:10px 14px;
+border-radius:20px;
+cursor:pointer;
 }
 </style>
 </head>
@@ -73,99 +91,143 @@ html,body{
 <canvas id="bg"></canvas>
 
 <div class="card">
-<div class="title">Para mi San Valentín ❤️</div>
+<h2>Para mi San Valentín ❤️</h2>
 
-<div class="texto" id="texto"></div>
+<p id="texto"></p>
 
-<img class="photo" id="foto">
+<img id="foto">
 
-<button class="btn" onclick="siguiente()">💌 Siguiente</button>
+<button class="next" onclick="siguiente()">Tocar ✨</button>
 </div>
+
+<button class="music" onclick="toggleMusic()">🎹 Piano</button>
 
 <audio id="music" loop>
 <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_c8b05c7b6c.mp3">
 </audio>
 
 <script>
-/* ========= FONDO CORAZONES LUZ ========= */
-const c = bg;
-const ctx = c.getContext("2d");
-c.width = innerWidth;
-c.height = innerHeight;
+/* =========================
+FONDO — estrellas + corazones
+========================= */
 
-let parts=[];
+const c=document.getElementById("bg");
+const ctx=c.getContext("2d");
+c.width=innerWidth;
+c.height=innerHeight;
 
-function burst(){
- let x=Math.random()*c.width;
- let y=Math.random()*c.height*0.7;
-
- for(let i=0;i<70;i++){
-  parts.push({
-    x,y,
-    dx:(Math.random()-0.5)*4,
-    dy:(Math.random()-0.5)*4,
-    life:60,
-    color:`hsl(${320+Math.random()*40},100%,70%)`
-  });
- }
+let stars=[];
+for(let i=0;i<260;i++){
+stars.push({
+x:Math.random()*c.width,
+y:Math.random()*c.height,
+r:Math.random()*1.4,
+v:Math.random()*0.5
+});
 }
-setInterval(burst,1200);
+
+let hearts=[];
+function crearCorazon(){
+hearts.push({
+x:Math.random()*c.width,
+y:c.height+20,
+s:Math.random()*18+12,
+v:Math.random()*1.2+.6
+});
+}
+setInterval(crearCorazon,600);
 
 function draw(){
- ctx.fillStyle="rgba(0,0,0,.25)";
- ctx.fillRect(0,0,c.width,c.height);
 
- parts.forEach(p=>{
-  ctx.fillStyle=p.color;
-  ctx.beginPath();
-  ctx.arc(p.x,p.y,2,0,Math.PI*2);
-  ctx.fill();
-  p.x+=p.dx;
-  p.y+=p.dy;
-  p.life--;
- });
+ctx.clearRect(0,0,c.width,c.height);
 
- parts = parts.filter(p=>p.life>0);
- requestAnimationFrame(draw);
+/* estrellas */
+ctx.fillStyle="white";
+stars.forEach(s=>{
+ctx.beginPath();
+ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+ctx.fill();
+s.y+=s.v;
+if(s.y>c.height){s.y=0;s.x=Math.random()*c.width;}
+});
+
+/* corazones */
+ctx.fillStyle="rgba(255,60,140,.9)";
+hearts.forEach(h=>{
+ctx.font=h.s+"px serif";
+ctx.fillText("❤",h.x,h.y);
+h.y-=h.v;
+});
+
+hearts=hearts.filter(h=>h.y>-40);
+
+requestAnimationFrame(draw);
 }
 draw();
 
-/* ========= GALERÍA ========= */
-/* 🔻 PON AQUÍ TUS IMÁGENES + TEXTO */
-const slides = [
+/* =========================
+GALERÍA — imagen + frase
+========================= */
+
+const slides=[
 
 {
- img:"https://i.imgur.com/RqvWXbV.jpg",
- text:"Gracias por llenar mis días de alegría y hacer que mi corazón lata más fuerte ❤️"
+img:"https://i.imgur.com/RqvWXbV.jpg",
+text:"Gracias por llenar mis días de alegría y hacer latir fuerte mi corazón ❤️"
 },
 
 {
- img:"https://i.imgur.com/oQQwDZJ.jpg",
- text:"No hay nadie en el mundo con quien prefiera estar más que contigo ✨"
+img:"https://i.imgur.com/oQQwDZJ.jpg",
+text:"No hay nadie en el mundo con quien prefiera estar más que contigo ✨"
 },
 
 {
- img:"https://i.imgur.com/jbylzFT.jpg",
- text:"Quiero seguir creando recuerdos contigo toda la vida 💞"
+img:"https://i.imgur.com/jbylzFT.jpg",
+text:"Quiero estar contigo así pegaditos siempre 💞"
+},
+
+{
+img:"https://i.imgur.com/m2rqpiu.jpg",
+text:"Eres mi lugar favorito en el universo 🌌"
+},
+
+{
+img:"https://i.imgur.com/tpH81jp.jpg",
+text:"Te quiero muchísimo 💖"
 }
 
 ];
 
 let i=0;
 
+const fotoEl=document.getElementById("foto");
+const textoEl=document.getElementById("texto");
+const musicEl=document.getElementById("music");
+
 function mostrar(){
- foto.src = slides[i].img;
- texto.innerText = slides[i].text;
+fotoEl.style.opacity=0;
+setTimeout(()=>{
+fotoEl.src=slides[i].img;
+textoEl.innerText=slides[i].text;
+fotoEl.style.opacity=1;
+},200);
 }
 
 function siguiente(){
- i++;
- if(i>=slides.length) i=0;
- mostrar();
- document.getElementById("music").play();
+i++;
+if(i>=slides.length) i=0;
+mostrar();
+musicEl.play();
 }
 
 mostrar();
+
+/* ========================= */
+
+function toggleMusic(){
+if(musicEl.paused) musicEl.play();
+else musicEl.pause();
+}
 </script>
 
 </body>
