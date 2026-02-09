@@ -1,67 +1,50 @@
-body {
-  margin: 0;
-  overflow: hidden;
-  background: black;
-  font-family: Segoe UI, sans-serif;
-  color: white;
+body{
+  margin:0;
+  padding:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(180deg,#ffd6e0,#ff9bb0);
 }
 
-#campo {
-  position: fixed;
-  inset: 0;
+.tarjeta{
+  width:360px;
+  max-width:95%;
+  background:#fff;
+  border-radius:20px;
+  padding:22px;
+  box-shadow:0 10px 25px rgba(0,0,0,.15);
+  border:3px dashed #ff6f91;
+  position:relative;
 }
 
-/* estrellas */
-.estrella {
-  position: absolute;
-  width: 2px;
-  height: 2px;
-  background: white;
-  border-radius: 50%;
-  opacity: .8;
-  animation: parpadeo 2s infinite alternate;
+.titulo{
+  text-align:center;
+  font-size:22px;
+  color:#ff4d6d;
+  margin-bottom:18px;
+  font-weight:bold;
 }
 
-@keyframes parpadeo {
-  from { opacity:.3 }
-  to { opacity:1 }
+.texto{
+  font-size:16px;
+  line-height:1.6;
+  color:#444;
+  text-align:justify;
 }
 
-/* frases */
-.frase {
-  position: absolute;
-  color: #ff9bd6;
-  font-size: 18px;
-  animation: subir linear forwards;
+.corazon{
+  text-align:center;
+  font-size:26px;
+  margin-top:10px;
 }
 
-@keyframes subir {
-  from { transform: translateY(40px); opacity:0 }
-  20% { opacity:1 }
-  to { transform: translateY(-140px); opacity:0 }
-}
-
-/* stickers */
-.sticker {
-  position: absolute;
-  font-size: 22px;
-  animation: flotar 4s linear forwards;
-}
-
-@keyframes flotar {
-  to {
-    transform: translateY(-180px) rotate(180deg);
-    opacity: 0;
-  }
-}
-
-/* centro */
-#titulo {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-  font-size: 42px;
-  color: #ff77cc;
-  text-shadow: 0 0 20px #ff4da6;
+.decoracion{
+  position:absolute;
+  inset:8px;
+  border-radius:16px;
+  border:2px solid #ffc2d1;
+  pointer-events:none;
 }
