@@ -2,232 +2,135 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Para Marlen ❤️</title>
+<title>Amor 💖</title>
 
 <style>
 html,body{
-margin:0;
-overflow:hidden;
-background:#000;
-font-family:Segoe UI,sans-serif;
+  margin:0;
+  height:100%;
+  overflow:hidden;
+  font-family:Segoe UI, sans-serif;
+  background:#111;
 }
 
-/* ===== canvas fondo ===== */
-#bg{
-position:fixed;
-inset:0;
+/* fondo corazones */
+.hearts{
+  position:fixed;
+  inset:0;
+  overflow:hidden;
+  z-index:0;
 }
 
-/* ===== tarjeta ===== */
+.heart{
+  position:absolute;
+  color:#ff4da6;
+  animation:float linear forwards;
+  opacity:.7;
+}
+
+@keyframes float{
+  from{ transform:translateY(100vh) scale(.6); opacity:.8;}
+  to{ transform:translateY(-10vh) scale(1.2); opacity:0;}
+}
+
+/* contenedor */
+.wrap{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  text-align:center;
+  z-index:5;
+}
+
+/* tarjeta */
 .card{
-position:absolute;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-width:340px;
-padding:22px;
-border-radius:24px;
-background:rgba(255,255,255,0.12);
-backdrop-filter:blur(18px);
-color:white;
-text-align:center;
-z-index:5;
-box-shadow:0 0 40px rgba(255,0,120,.4);
-animation:fadeIn 1s ease;
-}
-
-@keyframes fadeIn{
-from{opacity:0;transform:translate(-50%,-45%) scale(.9);}
-to{opacity:1;transform:translate(-50%,-50%) scale(1);}
-}
-
-.card h2{
-margin:0 0 10px;
-color:#ff9edb;
-}
-
-.card p{
-font-size:15px;
-line-height:1.4;
+  position:relative;
+  width:300px;
+  height:360px;
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 0 30px rgba(255,77,166,.5);
+  background:#000;
 }
 
 .card img{
-width:210px;
-border-radius:18px;
-margin-top:12px;
-box-shadow:0 0 20px rgba(255,100,160,.6);
-transition:.4s;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  animation:zoom 6s linear infinite alternate;
 }
 
-/* ===== botón ===== */
-.next{
-margin-top:14px;
-background:#ff4da6;
-border:none;
-padding:10px 18px;
-border-radius:20px;
-color:white;
-cursor:pointer;
-font-size:14px;
+@keyframes zoom{
+  from{ transform:scale(1);}
+  to{ transform:scale(1.12);}
 }
 
-.music{
-position:fixed;
-bottom:20px;
-right:20px;
-z-index:10;
-background:#ff4da6;
-border:none;
-color:white;
-padding:10px 14px;
-border-radius:20px;
-cursor:pointer;
+/* texto */
+.text{
+  position:absolute;
+  bottom:0;
+  width:100%;
+  padding:16px;
+  color:white;
+  font-size:18px;
+  font-weight:600;
+  background:linear-gradient(transparent, rgba(0,0,0,.7));
+  text-shadow:0 0 10px black;
 }
 </style>
 </head>
 
 <body>
 
-<canvas id="bg"></canvas>
+<div class="hearts" id="hearts"></div>
 
-<div class="card">
-<h2>Para mi San Valentín ❤️</h2>
-
-<p id="texto"></p>
-
-<img id="foto">
-
-<button class="next" onclick="siguiente()">Tocar ✨</button>
+<div class="wrap">
+  <div class="card">
+    <img id="foto">
+    <div class="text" id="frase"></div>
+  </div>
 </div>
 
-<button class="music" onclick="toggleMusic()">🎹 Piano</button>
-
-<audio id="music" loop>
-<source src="https://cdn.pixabay.com/audio/2022/03/15/audio_c8b05c7b6c.mp3">
-</audio>
-
 <script>
-/* =========================
-FONDO — estrellas + corazones
-========================= */
-
-const c=document.getElementById("bg");
-const ctx=c.getContext("2d");
-c.width=innerWidth;
-c.height=innerHeight;
-
-let stars=[];
-for(let i=0;i<260;i++){
-stars.push({
-x:Math.random()*c.width,
-y:Math.random()*c.height,
-r:Math.random()*1.4,
-v:Math.random()*0.5
-});
-}
-
-let hearts=[];
-function crearCorazon(){
-hearts.push({
-x:Math.random()*c.width,
-y:c.height+20,
-s:Math.random()*18+12,
-v:Math.random()*1.2+.6
-});
-}
-setInterval(crearCorazon,600);
-
-function draw(){
-
-ctx.clearRect(0,0,c.width,c.height);
-
-/* estrellas */
-ctx.fillStyle="white";
-stars.forEach(s=>{
-ctx.beginPath();
-ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
-ctx.fill();
-s.y+=s.v;
-if(s.y>c.height){s.y=0;s.x=Math.random()*c.width;}
-});
-
-/* corazones */
-ctx.fillStyle="rgba(255,60,140,.9)";
-hearts.forEach(h=>{
-ctx.font=h.s+"px serif";
-ctx.fillText("❤",h.x,h.y);
-h.y-=h.v;
-});
-
-hearts=hearts.filter(h=>h.y>-40);
-
-requestAnimationFrame(draw);
-}
-draw();
-
-/* =========================
-GALERÍA — imagen + frase
-========================= */
-
-const slides=[
-
-{
-img:"https://i.imgur.com/RqvWXbV.jpg",
-text:"Gracias por llenar mis días de alegría y hacer latir fuerte mi corazón ❤️"
-},
-
-{
-img:"https://i.imgur.com/oQQwDZJ.jpg",
-text:"No hay nadie en el mundo con quien prefiera estar más que contigo ✨"
-},
-
-{
-img:"https://i.imgur.com/jbylzFT.jpg",
-text:"Quiero estar contigo así pegaditos siempre 💞"
-},
-
-{
-img:"https://i.imgur.com/m2rqpiu.jpg",
-text:"Eres mi lugar favorito en el universo 🌌"
-},
-
-{
-img:"https://i.imgur.com/tpH81jp.jpg",
-text:"Te quiero muchísimo 💖"
-}
-
+/* ===== IMÁGENES ===== */
+const fotos = [
+"https://i.imgur.com/RqvWXbV.jpg",
+"https://i.imgur.com/oQQwDZJ.jpeg",
+"https://i.imgur.com/jbylzFT.jpeg"
 ];
 
-let i=0;
+/* ===== FRASES ===== */
+const frases = [
+"Eres mi lugar favorito 💖",
+"Contigo todo es mejor ✨",
+"Mi corazón te eligió 💘",
+"Siempre tú 🌹",
+"Amor infinito 💕"
+];
 
-const fotoEl=document.getElementById("foto");
-const textoEl=document.getElementById("texto");
-const musicEl=document.getElementById("music");
+let i = 0;
 
-function mostrar(){
-fotoEl.style.opacity=0;
-setTimeout(()=>{
-fotoEl.src=slides[i].img;
-textoEl.innerText=slides[i].text;
-fotoEl.style.opacity=1;
-},200);
+function cambiar(){
+  document.getElementById("foto").src = fotos[i % fotos.length];
+  document.getElementById("frase").innerText = frases[i % frases.length];
+  i++;
 }
+cambiar();
+setInterval(cambiar, 4000);
 
-function siguiente(){
-i++;
-if(i>=slides.length) i=0;
-mostrar();
-musicEl.play();
+/* ===== corazones animados ===== */
+function heart(){
+  const h=document.createElement("div");
+  h.className="heart";
+  h.innerText="💖";
+  h.style.left=Math.random()*100+"vw";
+  h.style.fontSize=(16+Math.random()*24)+"px";
+  h.style.animationDuration=(4+Math.random()*4)+"s";
+  hearts.appendChild(h);
+  setTimeout(()=>h.remove(),8000);
 }
-
-mostrar();
-
-/* ========================= */
-
-function toggleMusic(){
-if(musicEl.paused) musicEl.play();
-else musicEl.pause();
-}
+setInterval(heart, 300);
 </script>
 
 </body>
