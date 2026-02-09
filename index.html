@@ -12,87 +12,58 @@ html,body{
   font-family:Segoe UI, sans-serif;
 }
 
-/* canvas fondo */
+/* fondo */
 #bg{
   position:fixed;
   inset:0;
+  filter: blur(1px) brightness(1.2);
 }
 
-/* tarjeta central */
+/* tarjeta */
 .card{
   position:absolute;
   top:50%;
   left:50%;
   transform:translate(-50%,-50%);
-  width:90%;
-  max-width:420px;
-  padding:26px;
+  width:92%;
+  max-width:430px;
+  padding:24px;
   border-radius:28px;
-  background:rgba(255,255,255,.12);
-  backdrop-filter:blur(14px);
+  background:rgba(255,255,255,.15);
+  backdrop-filter:blur(18px);
   color:white;
   text-align:center;
   z-index:5;
-  box-shadow:0 0 40px rgba(255,0,120,.35);
-  animation:fadeIn 1.4s ease;
+  box-shadow:0 0 60px rgba(255,0,120,.45);
 }
 
-@keyframes fadeIn{
-  from{opacity:0;transform:translate(-50%,-40%);}
-  to{opacity:1;transform:translate(-50%,-50%);}
+.title{
+  color:#ffb3e6;
+  font-size:22px;
+  margin-bottom:10px;
 }
 
-.card h1{
-  color:#ff99cc;
-  margin:0 0 12px;
-  font-size:26px;
-}
-
-.card p{
-  line-height:1.5;
+.texto{
   font-size:16px;
-  opacity:.95;
+  line-height:1.4;
+  margin-bottom:12px;
 }
 
-/* imagen */
 .photo{
-  margin-top:16px;
-  border-radius:18px;
   width:100%;
-  box-shadow:0 0 20px rgba(255,255,255,.3);
-  animation:pulse 3s infinite;
+  border-radius:18px;
+  box-shadow:0 0 25px rgba(255,120,180,.6);
 }
 
-@keyframes pulse{
-  0%{transform:scale(1)}
-  50%{transform:scale(1.03)}
-  100%{transform:scale(1)}
-}
-
-/* corazones flotantes */
-.heart{
-  position:absolute;
-  color:#ff4da6;
-  font-size:18px;
-  animation:float linear forwards;
-}
-
-@keyframes float{
-  to{
-    transform:translateY(-140px);
-    opacity:0;
-  }
-}
-
-/* botón */
 .btn{
-  margin-top:16px;
+  margin-top:14px;
   background:#ff4da6;
   border:none;
   color:white;
   padding:10px 16px;
   border-radius:20px;
   cursor:pointer;
+  font-size:15px;
 }
 </style>
 </head>
@@ -102,17 +73,13 @@ html,body{
 <canvas id="bg"></canvas>
 
 <div class="card">
-<h1>Para mi San Valentín ❤️</h1>
+<div class="title">Para mi San Valentín ❤️</div>
 
-<p id="frase">
-Gracias por llenar mis días de alegría y hacer que mi corazón lata más fuerte.
-No hay nadie con quien prefiera estar más que contigo.
-Te quiero muchísimo ✨
-</p>
+<div class="texto" id="texto"></div>
 
-<img class="photo" src="https://i.imgur.com/RqvWXbV.jpg">
+<img class="photo" id="foto">
 
-<button class="btn" onclick="cambiarFrase()">💌 Otra frase</button>
+<button class="btn" onclick="siguiente()">💌 Siguiente</button>
 </div>
 
 <audio id="music" loop>
@@ -120,66 +87,85 @@ Te quiero muchísimo ✨
 </audio>
 
 <script>
-/* ===== fondo corazones ===== */
+/* ========= FONDO CORAZONES LUZ ========= */
 const c = bg;
 const ctx = c.getContext("2d");
 c.width = innerWidth;
 c.height = innerHeight;
 
-let hearts=[];
-for(let i=0;i<120;i++){
- hearts.push({
-  x:Math.random()*c.width,
-  y:Math.random()*c.height,
-  s:Math.random()*2+1,
-  v:Math.random()*0.5+0.2
- });
+let parts=[];
+
+function burst(){
+ let x=Math.random()*c.width;
+ let y=Math.random()*c.height*0.7;
+
+ for(let i=0;i<70;i++){
+  parts.push({
+    x,y,
+    dx:(Math.random()-0.5)*4,
+    dy:(Math.random()-0.5)*4,
+    life:60,
+    color:`hsl(${320+Math.random()*40},100%,70%)`
+  });
+ }
 }
+setInterval(burst,1200);
 
 function draw(){
- ctx.clearRect(0,0,c.width,c.height);
- ctx.fillStyle="rgba(255,80,150,.9)";
- hearts.forEach(h=>{
-  ctx.font = (h.s*10)+"px serif";
-  ctx.fillText("❤",h.x,h.y);
-  h.y+=h.v;
-  if(h.y>c.height){
-    h.y=0;
-    h.x=Math.random()*c.width;
-  }
+ ctx.fillStyle="rgba(0,0,0,.25)";
+ ctx.fillRect(0,0,c.width,c.height);
+
+ parts.forEach(p=>{
+  ctx.fillStyle=p.color;
+  ctx.beginPath();
+  ctx.arc(p.x,p.y,2,0,Math.PI*2);
+  ctx.fill();
+  p.x+=p.dx;
+  p.y+=p.dy;
+  p.life--;
  });
+
+ parts = parts.filter(p=>p.life>0);
  requestAnimationFrame(draw);
 }
 draw();
 
-/* ===== corazones al tocar ===== */
-document.onclick=e=>{
- for(let i=0;i<8;i++){
-  const d=document.createElement("div");
-  d.className="heart";
-  d.innerText="💖";
-  d.style.left=e.clientX+"px";
-  d.style.top=e.clientY+"px";
-  d.style.animationDuration=(2+Math.random()*2)+"s";
-  document.body.appendChild(d);
-  setTimeout(()=>d.remove(),4000);
- }
-};
+/* ========= GALERÍA ========= */
+/* 🔻 PON AQUÍ TUS IMÁGENES + TEXTO */
+const slides = [
 
-/* ===== frases ===== */
-const frases=[
-"Eres mi lugar favorito ❤️",
-"Contigo todo es más bonito ✨",
-"Mi corazón te eligió a ti 💞",
-"Eres mi casualidad favorita 💖",
-"Siempre tú, siempre nosotros 🌙",
-"Mi mundo es mejor contigo 💘"
+{
+ img:"https://i.imgur.com/RqvWXbV.jpg",
+ text:"Gracias por llenar mis días de alegría y hacer que mi corazón lata más fuerte ❤️"
+},
+
+{
+ img:"https://i.imgur.com/oQQwDZJ.jpg",
+ text:"No hay nadie en el mundo con quien prefiera estar más que contigo ✨"
+},
+
+{
+ img:"https://i.imgur.com/jbylzFT.jpg",
+ text:"Quiero seguir creando recuerdos contigo toda la vida 💞"
+}
+
 ];
 
-function cambiarFrase(){
- frase.innerText = frases[Math.floor(Math.random()*frases.length)];
+let i=0;
+
+function mostrar(){
+ foto.src = slides[i].img;
+ texto.innerText = slides[i].text;
+}
+
+function siguiente(){
+ i++;
+ if(i>=slides.length) i=0;
+ mostrar();
  document.getElementById("music").play();
 }
+
+mostrar();
 </script>
 
 </body>
