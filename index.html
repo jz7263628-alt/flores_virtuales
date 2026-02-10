@@ -4,61 +4,146 @@
 <meta charset="UTF-8">
 <title>Para Marlen 💖</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- Esta línea ayuda a que Imgur no bloquee las fotos localmente -->
+<!-- Esto evita que los servidores bloqueen las fotos -->
 <meta name="referrer" content="no-referrer">
 
 <style>
-:root { --pink: #ff4da6; --bg: #050005; }
-body { margin: 0; font-family: 'Segoe UI', sans-serif; background: var(--bg); color: #fff; overflow-x: hidden; }
+:root { --pink: #ff4da6; --gold: #ffd700; }
 
-/* FONDO GALAXIA */
-#galaxy { position: fixed; inset: 0; z-index: -1; background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%); }
-.star { position: absolute; background: white; border-radius: 50%; opacity: 0.5; animation: move 100s linear infinite; }
-@keyframes move { from { transform: translateY(0); } to { transform: translateY(-1000px); } }
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: #0a000a;
+    color: #fff;
+    overflow-x: hidden;
+}
 
-/* LOGIN */
-#login { position: fixed; inset: 0; display: flex; justify-content: center; align-items: center; background: #000; z-index: 10000; }
-.loginCard { background: rgba(255,255,255,0.1); backdrop-filter: blur(15px); padding: 40px; border-radius: 30px; border: 1px solid var(--pink); text-align: center; }
+/* FONDO DE GALAXIA ANIMADO */
+#canvas-stars {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: radial-gradient(circle at center, #1b001b 0%, #050005 100%);
+}
 
-/* CILINDRO 3D */
-.container3D { height: 350px; display: flex; justify-content: center; align-items: center; perspective: 1200px; margin: 40px 0; }
-.cylinder { width: 200px; height: 200px; position: relative; transform-style: preserve-3d; animation: rotateCyl 25s infinite linear; }
-.cylinder img { position: absolute; width: 200px; height: 200px; object-fit: cover; border: 4px solid var(--pink); border-radius: 15px; box-shadow: 0 0 25px var(--pink); background: #222; }
-.cylinder img:nth-child(1) { transform: rotateY(0deg) translateZ(220px); }
-.cylinder img:nth-child(2) { transform: rotateY(90deg) translateZ(220px); }
-.cylinder img:nth-child(3) { transform: rotateY(180deg) translateZ(220px); }
-.cylinder img:nth-child(4) { transform: rotateY(270deg) translateZ(220px); }
-@keyframes rotateCyl { from { transform: rotateY(0deg); } to { transform: rotateY(360deg); } }
+/* LOGIN ELEGANTE */
+#login {
+    position: fixed; inset: 0;
+    display: flex; justify-content: center; align-items: center;
+    background: #000; z-index: 10000;
+}
+.loginCard {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    padding: 50px; border-radius: 40px;
+    border: 1px solid var(--pink);
+    text-align: center;
+    box-shadow: 0 0 30px rgba(255, 77, 166, 0.3);
+}
 
-/* TARJETAS */
-.card { background: rgba(30, 0, 30, 0.9); margin: 20px auto; padding: 25px; width: 85%; max-width: 500px; border-radius: 25px; border: 1px solid var(--pink); }
-#typewriter { font-size: 18px; line-height: 1.8; text-align: center; min-height: 150px; }
+/* CILINDRO 3D FLOTANTE */
+.container3D {
+    height: 400px;
+    display: flex; justify-content: center; align-items: center;
+    perspective: 1500px;
+    margin: 20px 0;
+}
+.cylinder {
+    width: 200px; height: 250px;
+    position: relative;
+    transform-style: preserve-3d;
+    animation: rotateCyl 20s infinite linear;
+}
+.cylinder img {
+    position: absolute;
+    width: 200px; height: 250px;
+    object-fit: cover;
+    border: 3px solid var(--pink);
+    border-radius: 20px;
+    box-shadow: 0 0 20px var(--pink);
+    /* Color de respaldo por si el link falla */
+    background: #222;
+}
 
-/* CORAZONES */
-.heart-rain { position: fixed; top: -10%; font-size: 20px; color: var(--pink); user-select: none; pointer-events: none; animation: fall linear infinite; z-index: 1; }
-@keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
+/* Posiciones 3D */
+.cylinder img:nth-child(1) { transform: rotateY(0deg) translateZ(250px); }
+.cylinder img:nth-child(2) { transform: rotateY(90deg) translateZ(250px); }
+.cylinder img:nth-child(3) { transform: rotateY(180deg) translateZ(250px); }
+.cylinder img:nth-child(4) { transform: rotateY(270deg) translateZ(250px); }
 
-button { background: var(--pink); border: none; padding: 15px 30px; border-radius: 50px; color: #fff; cursor: pointer; }
+@keyframes rotateCyl {
+    from { transform: rotateY(0deg); }
+    to { transform: rotateY(360deg); }
+}
+
+/* TARJETAS DE CRISTAL */
+.card {
+    background: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(12px);
+    margin: 30px auto;
+    padding: 30px;
+    width: 85%;
+    max-width: 500px;
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    text-align: center;
+}
+
+#typewriter {
+    font-size: 19px;
+    line-height: 1.8;
+    color: #ffd9ec;
+    min-height: 120px;
+}
+
+/* EFECTOS VISUALES AL CLICK */
+.love-spark {
+    position: fixed;
+    pointer-events: none;
+    color: var(--pink);
+    font-size: 24px;
+    animation: sparkAnim 1.5s forwards;
+    z-index: 9999;
+}
+@keyframes sparkAnim {
+    0% { transform: scale(0) rotate(0deg); opacity: 1; }
+    100% { transform: scale(2) rotate(180deg) translateY(-100px); opacity: 0; }
+}
+
+button {
+    background: var(--pink);
+    border: none; padding: 15px 35px;
+    border-radius: 30px; color: white;
+    font-weight: bold; cursor: pointer;
+    box-shadow: 0 5px 15px rgba(255, 77, 166, 0.4);
+}
 </style>
 </head>
 
-<body onclick="spawnText(event)">
+<body onclick="createSpark(event)">
 
+<canvas id="canvas-stars"></canvas>
+
+<!-- LOGIN -->
 <div id="login">
     <div class="loginCard">
-        <h2>Clave de Amor 💖</h2>
-        <input id="pass" type="password" style="padding:10px; border-radius:10px; text-align:center;">
-        <br><br><button onclick="enter()">Entrar</button>
+        <h2 style="color: var(--pink)">Bienvenida, Marlen 💖</h2>
+        <input id="pass" type="password" placeholder="Contraseña" style="padding:12px; border-radius:15px; border:none; text-align:center; width: 80%;">
+        <br><br>
+        <button onclick="enter()">Entrar al Universo</button>
     </div>
 </div>
 
-<div id="galaxy"></div>
+<!-- AUDIOS (Usando links directos con Referrer Policy) -->
+<audio id="bgMusic" loop preload="auto">
+    <source src="https://files.catbox.moe" type="audio/mpeg">
+</audio>
+<audio id="ourSong" preload="auto">
+    <source src="https://files.catbox.moe" type="audio/mpeg">
+</audio>
 
-<!-- AUDIOS CON LINKS DIRECTOS -->
-<audio id="bgMusic" loop preload="auto"><source src="https://files.catbox.moe" type="audio/mpeg"></audio>
-<audio id="ourSong" preload="auto"><source src="https://files.catbox.moe" type="audio/mpeg"></audio>
-
-<!-- CILINDRO 3D -->
+<!-- CONTENIDO -->
 <div class="container3D">
     <div class="cylinder">
         <img src="https://i.imgur.com" referrerpolicy="no-referrer">
@@ -68,83 +153,116 @@ button { background: var(--pink); border: none; padding: 15px 30px; border-radiu
     </div>
 </div>
 
-<div class="card" style="text-align:center;">
-    <div id="counter" style="font-size: 24px; color: var(--pink);"></div>
-</div>
-
-<div class="card" style="text-align:center;">
-    <img src="https://i.imgur.com" style="width:120px; border-radius:50%; border:3px solid var(--pink);" referrerpolicy="no-referrer">
-    <br><br><button id="btnPlay" onclick="toggleSong()">▶️ Reproducir Especial</button>
+<div class="card">
+    <h2 style="color: var(--pink)">💖 Juntos hace...</h2>
+    <div id="counter" style="font-size: 26px; font-weight: bold; color: var(--gold);"></div>
 </div>
 
 <div class="card">
+    <h2 style="color: var(--pink)">🎵 Nuestra Melodía</h2>
+    <img src="https://i.imgur.com" style="width:130px; height:130px; border-radius:50%; border:3px solid var(--gold); animation: rotateCyl 10s infinite linear;" referrerpolicy="no-referrer">
+    <br><br>
+    <button id="btnPlay" onclick="toggleSong()">▶️ Reproducir Especial</button>
+</div>
+
+<div class="card">
+    <h2 style="color: var(--pink)">💌 De mi corazón...</h2>
     <div id="typewriter"></div>
 </div>
 
 <script>
-const frases = ["Te amo Marlen 💖", "Eres mi universo 🌌", "Jerry & Marlen", "Me encantas", "Eres mi vida 🤎"];
+// FRASES PARA EL CLICK
+const frases = ["Te amo 🤎", "Marlen x Jerry", "Eres mi vida", "Mi niña", "Para siempre", "Eres hermosa"];
 
 function enter(){
-    const p = document.getElementById('pass').value;
-    if(p === "Jerry"){
+    if(document.getElementById('pass').value === "Jerry"){
         document.getElementById('login').style.display="none";
-        // FORZAR AUDIO TRAS CLIC
+        
+        // ACTIVAR AUDIO (Esto desbloquea el sonido en el navegador)
         const bg = document.getElementById('bgMusic');
-        bg.play().catch(e => console.log("Audio bloqueado:", e));
+        bg.volume = 0.5;
+        bg.play().catch(err => console.log("Audio waiting for interaction"));
+        
         startTypewriter();
-        makeStars();
-        setInterval(createHeart, 300);
-    } else { alert("Clave incorrecta 💔"); }
+        initGalaxy();
+    } else {
+        alert("Clave incorrecta 💔");
+    }
+}
+
+function createSpark(e) {
+    const spark = document.createElement('div');
+    spark.className = 'love-spark';
+    spark.innerHTML = "✨"; // Puedes cambiar por ❤️ o 💖
+    spark.style.left = e.clientX + 'px';
+    spark.style.top = e.clientY + 'px';
+    document.body.appendChild(spark);
+    setTimeout(() => spark.remove(), 1500);
 }
 
 function toggleSong(){
-    const s = document.getElementById('ourSong');
+    const special = document.getElementById('ourSong');
     const bg = document.getElementById('bgMusic');
-    const b = document.getElementById('btnPlay');
-    if(s.paused){ bg.pause(); s.play(); b.innerHTML = "⏸️ Pausar Especial"; }
-    else { s.pause(); bg.play(); b.innerHTML = "▶️ Reproducir Especial"; }
-}
-
-// EFECTO GALAXIA
-function makeStars() {
-    const g = document.getElementById('galaxy');
-    for(let i=0; i<150; i++) {
-        const s = document.createElement('div');
-        s.className = 'star';
-        const size = Math.random() * 3 + 'px';
-        s.style.width = size; s.style.height = size;
-        s.style.left = Math.random() * 100 + 'vw';
-        s.style.top = Math.random() * 100 + 'vh';
-        s.style.animationDuration = (Math.random() * 50 + 50) + 's';
-        g.appendChild(s);
+    const btn = document.getElementById('btnPlay');
+    
+    if(special.paused){
+        bg.pause();
+        special.play();
+        btn.innerHTML = "⏸️ Pausar Canción";
+    } else {
+        special.pause();
+        bg.play();
+        btn.innerHTML = "▶️ Reproducir Especial";
     }
 }
 
-// CORAZONES CAYENDO
-function createHeart() {
-    const h = document.createElement('div');
-    h.className = 'heart-rain';
-    h.innerHTML = '❤️';
-    h.style.left = Math.random() * 100 + 'vw';
-    h.style.animationDuration = Math.random() * 3 + 2 + 's';
-    document.body.appendChild(h);
-    setTimeout(() => h.remove(), 5000);
-}
-
-// TEXTO ESCRITURA
-const t = "¡Feliz San Valentín, mi amor! 🤎 Eres esa pieza que encaja perfectamente en mi vida, llenándola de colores y risas. No necesito un día especial para saber cuánto te amo, pero hoy aprovecho para celebrarte. Gracias por ser mi compañera de aventuras hoy y siempre 💞";
-let idx = 0;
+// EFECTO ESCRITURA
+const msg = "¡Feliz San Valentín, mi amor! 🤎 Eres la pieza que encaja perfectamente en mi vida, llenándola de colores y risas. No necesito un día especial para saber cuánto te amo, pero hoy te celebro. Gracias por ser mi compañera de aventuras hoy y siempre. 💞";
+let charIdx = 0;
 function startTypewriter() {
-    if (idx < t.length) {
-        document.getElementById("typewriter").innerHTML += t.charAt(idx);
-        idx++; setTimeout(startTypewriter, 50);
+    if (charIdx < msg.length) {
+        document.getElementById("typewriter").innerHTML += msg.charAt(charIdx);
+        charIdx++;
+        setTimeout(startTypewriter, 50);
     }
+}
+
+// FONDO GALAXIA CANVAS (MÁS ESTABLE)
+function initGalaxy() {
+    const canvas = document.getElementById('canvas-stars');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    
+    let stars = [];
+    for(let i=0; i<200; i++) {
+        stars.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            size: Math.random() * 2,
+            speed: Math.random() * 0.5
+        });
+    }
+    
+    function draw() {
+        ctx.clearRect(0,0,canvas.width, canvas.height);
+        ctx.fillStyle = "white";
+        stars.forEach(s => {
+            ctx.beginPath();
+            ctx.arc(s.x, s.y, s.size, 0, Math.PI*2);
+            ctx.fill();
+            s.y -= s.speed;
+            if(s.y < 0) s.y = canvas.height;
+        });
+        requestAnimationFrame(draw);
+    }
+    draw();
 }
 
 // CONTADOR
-const start = new Date("2024-02-14");
+const startDay = new Date("2024-02-14");
 setInterval(() => {
-    const diff = new Date() - start;
+    const diff = new Date() - startDay;
     const d = Math.floor(diff/86400000);
     const h = Math.floor(diff/3600000)%24;
     const m = Math.floor(diff/60000)%60;
@@ -152,5 +270,6 @@ setInterval(() => {
     document.getElementById('counter').innerHTML = `${d}d ${h}h ${m}m ${s}s`;
 }, 1000);
 </script>
+
 </body>
 </html>
