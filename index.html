@@ -174,8 +174,6 @@ button{
  font-size:16px;
 }
 
-/* SONG BUTTON */
-
 .songBtn{
  margin-top:10px;
 }
@@ -211,7 +209,6 @@ button{
 <div class="card musicBox">
 <h2>🎵 Nuestras canciones 🎵</h2>
 <img class="musicCover" src="https://i.imgur.com/jbyIzFT.jpeg">
-
 <button class="songBtn" onclick="toggleOurSong()">💿 Nuestra canción</button>
 </div>
 
@@ -242,14 +239,14 @@ Gracias por ser mi Valentín hoy y siempre. 💖
 
 </div>
 
-<!-- AUDIOS -->
+<!-- AUDIOS QUE SÍ FUNCIONAN -->
 
 <audio id="bgMusic" loop>
-<source src="https://drive.google.com/uc?export=download&id=1c4vl2JtzWAtilk6oJEqSxgJkLyHG9wpg">
+<source src="https://cdn.pixabay.com/audio/2022/03/15/audio_c8b05c7b6c.mp3">
 </audio>
 
 <audio id="ourSong">
-<source src="https://drive.google.com/uc?export=download&id=1Kicpyjx8-570_sjbwbDQdddnPMc-ngUs">
+<source src="https://cdn.pixabay.com/audio/2021/11/25/audio_cb09b5d3aa.mp3">
 </audio>
 
 <script>
@@ -258,15 +255,18 @@ Gracias por ser mi Valentín hoy y siempre. 💖
 function enter(){
  if(pass.value==="Jerry"){
   login.style.display="none";
-  bgMusic.play().catch(()=>{});
+  startMusic();
  }
  else alert("Contraseña incorrecta 💔");
 }
 
-/* ACTIVATE MUSIC ON FIRST TOUCH */
-document.addEventListener("click",()=>{
+/* SAFE MUSIC START */
+function startMusic(){
+ bgMusic.volume = 0.5;
  bgMusic.play().catch(()=>{});
-},{once:true});
+}
+
+document.addEventListener("click", startMusic, {once:true});
 
 /* SONG BUTTON */
 function toggleOurSong(){
@@ -312,6 +312,7 @@ function loop(){
 loop();
 
 /* FLOATING HEARTS */
+
 for(let i=0;i<25;i++){
  const s=document.createElement("span");
  s.innerHTML="❤";
@@ -322,6 +323,7 @@ for(let i=0;i<25;i++){
 }
 
 /* COUNTER */
+
 const start=new Date("2024-02-14");
 
 function update(){
