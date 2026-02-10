@@ -15,7 +15,6 @@ body{
 }
 
 /* LOGIN */
-
 #login{
  position:fixed;
  inset:0;
@@ -67,7 +66,6 @@ button{
 }
 
 /* HEART BG */
-
 .bgHearts span{
  position:fixed;
  color:#ff4da6;
@@ -80,23 +78,23 @@ button{
  to{transform:translateY(-10vh) scale(1.2)}
 }
 
-/* CARDS */
-
+/* CARDS - MEJORADAS SIN TRANSPARENCIA FALLIDA */
 .card{
- background:#ffe6f2;
- color:#5a0033;
+ background:#2d0025; /* Fondo sólido oscuro para que no falle nada */
+ color:#fff;
  margin:24px auto;
  padding:22px;
  width:92%;
  max-width:520px;
  border-radius:22px;
- box-shadow:0 8px 30px rgba(0,0,0,.25);
- border:3px dashed #ff99cc;
+ box-shadow:0 8px 30px rgba(0,0,0,.5);
+ border:2px solid #ff99cc;
 }
 
 .card h2{
  text-align:center;
  margin-top:0;
+ color: #ffb3d9;
 }
 
 .circleImg{
@@ -123,7 +121,10 @@ button{
  margin:10px auto;
  display:block;
  border:6px solid #ffb3d9;
+ animation: spin 15s linear infinite; /* Añadí el giro que tenías antes */
 }
+
+@keyframes spin { from {transform:rotate(0deg)} to {transform:rotate(360deg)} }
 
 .grid{
  display:grid;
@@ -136,11 +137,13 @@ button{
  border-radius:14px;
  height:140px;
  object-fit:cover;
+ border: 2px solid #ffb3d9;
 }
 
 .finalText{
  line-height:1.6;
  font-size:16px;
+ text-align: center;
 }
 </style>
 </head>
@@ -150,7 +153,6 @@ button{
 <!-- LOGIN -->
 <div id="login">
 <canvas id="heartsCanvas"></canvas>
-
 <div class="loginCard">
 <h2>Ingresa la contraseña 💖</h2>
 <input id="pass">
@@ -159,7 +161,7 @@ button{
 </div>
 </div>
 
-<!-- AUDIO -->
+<!-- AUDIO (TUS LINKS QUE SÍ FUNCIONAN) -->
 <audio id="bgMusic" loop>
 <source src="https://files.catbox.moe/egr68n.mp3">
 </audio>
@@ -168,7 +170,6 @@ button{
 <source src="https://files.catbox.moe/4nrc17.mp3">
 </audio>
 
-<!-- HEART BACKGROUND -->
 <div class="bgHearts" id="bgHearts"></div>
 
 <!-- SECCION 1 -->
@@ -183,7 +184,7 @@ button{
 <h2>🎵 Nuestra canción 🎵</h2>
 <img class="musicCover" src="https://i.imgur.com/jbyIzFT.jpeg">
 <div style="text-align:center">
-<button onclick="toggleSong()">▶️ Reproducir</button>
+<button id="btnPlay" onclick="toggleSong()">▶️ Reproducir</button>
 </div>
 </div>
 
@@ -198,55 +199,55 @@ button{
 </div>
 </div>
 
-<!-- FINAL -->
+<!-- FINAL (TEXTO COMPLETO) -->
 <div class="card finalText">
 <h2>💌 Mensaje de amor 💌</h2>
-
 ¡Feliz San Valentín, mi amor! 🤎<br><br>
-
 Hoy, en el día del amor, quiero recordarte lo increíblemente afortunado que soy de tenerte.  
 Eres esa pieza que encaja perfectamente en mi vida, llenándola de colores, risas y momentos inolvidables.<br><br>
-
 No necesito un día especial para saber cuánto te amo, pero hoy aprovecho para celebrarte, agradecerte por tu paciencia, tu ternura y por ser mi compañera de aventuras.<br><br>
-
 Prometo seguir construyendo este camino contigo, cuidando nuestro amor como el tesoro más preciado.  
 Gracias por ser mi Valentín hoy y siempre 💞
 </div>
 
 <script>
-
-/* PASSWORD + START BG MUSIC */
+/* PASSWORD + INICIO MÚSICA */
 function enter(){
- if(pass.value==="Jerry"){
-  login.style.display="none";
-  bgMusic.play().catch(()=>{});
+ if(document.getElementById('pass').value==="Jerry"){
+  document.getElementById('login').style.display="none";
+  document.getElementById('bgMusic').play().catch(()=>{});
  } else alert("Contraseña incorrecta 💔");
 }
 
-/* SONG BUTTON */
+/* FUNCIÓN DE AUDIO MEJORADA */
 function toggleSong(){
+ const ourSong = document.getElementById('ourSong');
+ const bgMusic = document.getElementById('bgMusic');
+ const btn = document.getElementById('btnPlay');
+
  if(ourSong.paused){
-  ourSong.play();
+  bgMusic.pause(); // Pasa la de fondo
+  ourSong.play();  // Inicia la especial
+  btn.innerHTML = "⏸️ Pausar";
  } else {
-  ourSong.pause();
+  ourSong.pause(); // Pausa la especial
+  bgMusic.play();  // Regresa la de fondo
+  btn.innerHTML = "▶️ Reproducir";
  }
 }
 
 /* HEART CANVAS LOGIN */
-const c=heartsCanvas;
+const c=document.getElementById('heartsCanvas');
 const ctx=c.getContext("2d");
-c.width=innerWidth;
-c.height=innerHeight;
-
+c.width=window.innerWidth;
+c.height=window.innerHeight;
 let hearts=[];
-
 function heart(){
  this.x=Math.random()*c.width;
  this.y=c.height+20;
  this.s=10+Math.random()*18;
  this.v=1+Math.random()*2;
 }
-
 function drawHeart(x,y,s){
  ctx.beginPath();
  ctx.moveTo(x,y);
@@ -255,7 +256,6 @@ function drawHeart(x,y,s){
  ctx.fillStyle="rgba(255,80,150,.8)";
  ctx.fill();
 }
-
 function loop(){
  ctx.clearRect(0,0,c.width,c.height);
  if(Math.random()<.2) hearts.push(new heart());
@@ -275,7 +275,7 @@ for(let i=0;i<25;i++){
  s.style.left=Math.random()*100+"vw";
  s.style.fontSize=(16+Math.random()*30)+"px";
  s.style.animationDuration=(8+Math.random()*10)+"s";
- bgHearts.appendChild(s);
+ document.getElementById('bgHearts').appendChild(s);
 }
 
 /* COUNTER */
@@ -287,13 +287,11 @@ function update(){
  const h=Math.floor(diff/3600000)%24;
  const m=Math.floor(diff/60000)%60;
  const s=Math.floor(diff/1000)%60;
-
- counter.innerHTML=
+ document.getElementById('counter').innerHTML=
  d+" días<br>"+h+" horas<br>"+m+" minutos<br>"+s+" segundos 💗";
 }
 setInterval(update,1000);
 update();
-
 </script>
 
 </body>
