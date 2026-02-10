@@ -16,7 +16,7 @@ body{
   color:#fff;
 }
 
-/* ===== FONDO ESTRELLAS FIJO ===== */
+/* ESTRELLAS FIJAS */
 #stars{
   position:fixed;
   top:0;
@@ -24,10 +24,9 @@ body{
   width:100%;
   height:100%;
   z-index:0;
-  pointer-events: none;
 }
 
-/* ===== CORAZONES ===== */
+/* CORAZONES */
 .heart{
   position:fixed;
   bottom:-20px;
@@ -41,7 +40,7 @@ body{
   to{transform:translateY(-110vh) scale(1.2);opacity:0}
 }
 
-/* ===== ENTRADA (CUBRE TODO) ===== */
+/* PANTALLA INICIO */
 #intro{
   position:fixed;
   inset:0;
@@ -55,79 +54,75 @@ body{
 }
 #intro h1{margin-bottom:20px}
 #intro button{
-  padding:14px 36px;
+  padding:15px 40px;
   border:none;
   border-radius:40px;
   background:#fff;
   color:#ff2f92;
   font-size:18px;
   cursor:pointer;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  font-weight:bold;
 }
 
-/* ===== CONTENEDOR EFECTO CRISTAL ===== */
+/* CONTENEDOR TRANSPARENTE */
 .container{
   position:relative;
   z-index:10;
   width:92%;
   max-width:430px;
-  margin:40px auto;
-  background: rgba(255, 255, 255, 0.1); /* Transparencia */
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  margin:30px auto;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius:25px;
   padding:25px;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.4);
 }
 
-h2{text-align:center;color:#ff8ac2; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); margin-top:30px;}
+h2{text-align:center;color:#ffb3d9; text-shadow: 1px 1px 3px #000;}
 
-/* ===== CARTA ===== */
+/* CARTA */
 .carta{
   background: rgba(255, 255, 255, 0.9);
-  color:#333;
+  color:#444;
   padding:20px;
   border-radius:15px;
   border:3px dashed #ff8ac2;
-  min-height:260px;
+  min-height:250px;
   font-size:15px;
   line-height:1.6;
   cursor:pointer;
   position: relative;
-  overflow: hidden;
 }
-#texto{white-space:pre-line}
 
-/* ===== MUSICA ===== */
+/* PLAYER MUSICA */
 .player{text-align:center;margin-top:20px}
 .player img{
-  width:160px;
-  height:160px;
+  width:150px;
+  height:150px;
   border-radius:50%;
-  border:6px solid #ff6fb5;
-  animation:spin 20s linear infinite;
+  border:5px solid #ff6fb5;
+  animation:spin 15s linear infinite;
   object-fit: cover;
 }
 @keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
 
-button.music{
+.musicBtn{
   margin-top:15px;
   background:#ff4fa1;
   color:#fff;
   border:none;
-  padding:12px 35px;
+  padding:12px 30px;
   border-radius:30px;
-  font-size:16px;
-  cursor: pointer;
-  box-shadow: 0 4px 10px rgba(255, 79, 161, 0.4);
+  cursor:pointer;
 }
 
-/* ===== GALERIA 3D ===== */
+/* CILINDRO FOTOS */
 .galeria{
-  margin: 50px 0;
+  margin: 60px 0;
   perspective:1000px;
-  height:260px;
+  height:220px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -143,36 +138,29 @@ button.music{
   width:120px;
   height:160px;
   object-fit:cover;
-  border-radius:15px;
-  border: 2px solid rgba(255,255,255,0.8);
-  cursor: pointer;
+  border-radius:12px;
+  border: 2px solid #fff;
 }
 
-/* MODAL DE FOTO */
+/* MODAL FOTO */
 #modal {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.95);
+  background: rgba(0,0,0,0.9);
   z-index: 2000;
   justify-content: center;
   align-items: center;
 }
-#modal img {
-  max-width: 90%;
-  max-height: 80%;
-  border-radius: 15px;
-  box-shadow: 0 0 30px rgba(255,255,255,0.2);
-}
+#modal img { max-width: 90%; max-height: 80%; border-radius: 10px; }
 
 .frase{
   position:absolute;
   color:#ff4fa1;
   font-weight: bold;
-  pointer-events: none;
-  animation:fadeUp 2.5s ease forwards;
+  animation:fadeUp 2s ease forwards;
 }
-@keyframes fadeUp{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(-60px)}}
+@keyframes fadeUp{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(-50px)}}
 </style>
 </head>
 <body>
@@ -189,7 +177,7 @@ button.music{
 </div>
 
 <!-- AUDIOS -->
-<audio id="fondo" src="https://files.catbox.moe" loop></audio> 
+<audio id="fondo" loop src="https://files.catbox.moe"></audio> 
 <audio id="cancion" src="https://files.catbox.moe"></audio>
 
 <div class="container">
@@ -202,7 +190,7 @@ button.music{
   <div class="player">
     <img src="https://i.imgur.com">
     <br>
-    <button class="music" onclick="toggleCancion()">Reproducir / Pausar</button>
+    <button class="musicBtn" onclick="toggleCancion()">Reproducir / Pausar</button>
   </div>
 
   <h2>📸 Nuestros recuerdos 📸</h2>
@@ -212,128 +200,102 @@ button.music{
 </div>
 
 <script>
-const fondo=document.getElementById('fondo');
-const cancion=document.getElementById('cancion');
-const cilindro=document.getElementById('cilindro');
-const modal = document.getElementById('modal');
-const imgModal = document.getElementById('imgModal');
+const fondo = document.getElementById('fondo');
+const cancion = document.getElementById('cancion');
+const textoDiv = document.getElementById('texto');
+const cilindro = document.getElementById('cilindro');
 
 function enter(){
   document.getElementById('intro').style.display='none';
-  fondo.volume=0.3;
-  fondo.play().catch(e => console.log("Error audio:", e));
+  fondo.volume = 0.3;
+  fondo.play();
   escribir();
 }
 
-/* MENSAJE */
-const mensaje=`¡Feliz San Valentín, mi amor!
+const mensaje = `¡Feliz San Valentín, mi amor!
 
 Hoy, en el día del amor, quiero recordarte lo increíblemente afortunado que soy de tenerte. Eres esa pieza que encaja perfectamente en mi vida, llenándola de colores, risas y momentos inolvidables.
 
-No necesito un día especial para saber cuánto te amo, pero hoy aprovecho cada segundo para celebrarte, para agradecerte por tu paciencia, tu ternura y por ser mi compañera de aventuras.
-
-Prometo seguir construyendo este camino contigo, cuidando nuestro amor como el tesoro más preciado. Gracias por ser mi Valentín hoy y siempre.
-
 Te amo con todo mi corazón, cebollín 🤎`;
 
-let charIdx=0;
+let idx = 0;
 function escribir(){
-  if(charIdx < mensaje.length){
-    document.getElementById('texto').innerHTML += mensaje.charAt(charIdx++);
-    setTimeout(escribir, 30);
+  if(idx < mensaje.length){
+    textoDiv.innerHTML += mensaje.charAt(idx++);
+    setTimeout(escribir, 40);
   }
 }
 
 function toggleCancion(){
-  if(cancion.paused){
-    fondo.pause();
-    cancion.play();
-  } else {
-    cancion.pause();
-    fondo.play();
-  }
+  if(cancion.paused){ fondo.pause(); cancion.play(); }
+  else { cancion.pause(); fondo.play(); }
 }
 
-/* CORAZONES */
-setInterval(()=>{
-  const h=document.createElement('div');
-  h.className='heart';
-  h.innerHTML='❤';
-  h.style.left=Math.random()*100+'vw';
-  h.style.fontSize=14+Math.random()*22+'px';
-  h.style.animationDuration=5+Math.random()*4+'s';
-  document.body.appendChild(h);
-  setTimeout(()=>h.remove(),8000);
-},400);
-
-/* FRASES */
-const frases=['Te amo 💖','Para siempre 🫶','Mi hogar 🏡','Mi persona favorita 💕','Solo tú 💘'];
-function fraseRandom(e){
-  const f=document.createElement('div');
-  f.className='frase';
-  f.innerText=frases[Math.floor(Math.random()*frases.length)];
-  f.style.left=e.offsetX+'px';
-  f.style.top=e.offsetY+'px';
-  e.currentTarget.appendChild(f);
-  setTimeout(()=>f.remove(),2500);
-}
-
-/* CILINDRO */
-const imagenes=[
- 'https://i.imgur.com',
- 'https://i.imgur.com',
- 'https://i.imgur.com',
- 'https://i.imgur.com',
- 'https://i.imgur.com',
- 'https://i.imgur.com',
- 'https://i.imgur.com'
+/* GENERAR CILINDRO */
+const imgs = [
+  'https://i.imgur.com', 'https://i.imgur.com',
+  'https://i.imgur.com', 'https://i.imgur.com',
+  'https://i.imgur.com', 'https://i.imgur.com',
+  'https://i.imgur.com'
 ];
 
-let rot=0, auto=true;
-imagenes.forEach((src,i)=>{
-  const img=document.createElement('img');
-  img.src=src;
-  img.style.transform=`rotateY(${(360/imagenes.length)*i}deg) translateZ(180px)`;
-  img.onclick = (e) => {
-    e.stopPropagation();
-    imgModal.src = src;
-    modal.style.display = 'flex';
+let rotation = 0;
+imgs.forEach((src, i) => {
+  const img = document.createElement('img');
+  img.src = src;
+  img.style.transform = `rotateY(${(360/imgs.length)*i}deg) translateZ(160px)`;
+  img.onclick = () => {
+    document.getElementById('imgModal').src = src;
+    document.getElementById('modal').style.display = 'flex';
   };
   cilindro.appendChild(img);
 });
 
 function animate(){
-  if(auto){
-    rot -= 0.5;
-    cilindro.style.transform=`rotateY(${rot}deg)`;
-  }
+  rotation -= 0.5;
+  cilindro.style.transform = `rotateY(${rotation}deg)`;
   requestAnimationFrame(animate);
 }
 animate();
 
+/* FRASES AL CLIC */
+function fraseRandom(e){
+  const f = document.createElement('div');
+  f.className = 'frase';
+  f.innerText = 'Te amo 💖';
+  f.style.left = e.offsetX + 'px';
+  f.style.top = e.offsetY + 'px';
+  e.currentTarget.appendChild(f);
+  setTimeout(() => f.remove(), 2000);
+}
+
 /* ESTRELLAS */
-const canvas=document.getElementById('stars');
-const ctx=canvas.getContext('2d');
-function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight}
-window.addEventListener('resize', resize);
-resize();
-
-let stars=[];
-for(let i=0;i<150;i++) stars.push({x:Math.random()*canvas.width, y:Math.random()*canvas.height, r:Math.random()*1.2, v:0.1+Math.random()*0.2});
-
-function drawStars(){
+const canvas = document.getElementById('stars');
+const ctx = canvas.getContext('2d');
+function res(){ canvas.width=innerWidth; canvas.height=innerHeight; }
+res(); window.onresize = res;
+let s = [];
+for(let i=0; i<100; i++) s.push({x:Math.random()*canvas.width, y:Math.random()*canvas.height, r:Math.random()*1.5});
+function draw(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
   ctx.fillStyle='white';
-  stars.forEach(s=>{
-    ctx.beginPath();
-    ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
-    ctx.fill();
-    s.y += s.v;
-    if(s.y > canvas.height) s.y = 0;
+  s.forEach(p => {
+    ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2); ctx.fill();
+    p.y += 0.2; if(p.y > canvas.height) p.y = 0;
   });
-  requestAnimationFrame(drawStars);
+  requestAnimationFrame(draw);
 }
-drawStars();
+draw();
+
+/* CORAZONES FLOTANTES */
+setInterval(() => {
+  const h = document.createElement('div');
+  h.className = 'heart'; h.innerHTML = '❤';
+  h.style.left = Math.random()*100+'vw';
+  h.style.fontSize = 15+Math.random()*20+'px';
+  document.body.appendChild(h);
+  setTimeout(() => h.remove(), 7000);
+}, 500);
 </script>
 </body>
 </html>
