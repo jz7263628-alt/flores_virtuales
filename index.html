@@ -3,280 +3,260 @@
 <head>
 <meta charset="UTF-8">
 <title>Para Marlen 💖</title>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 :root {
-    --primary: #ff4da6;
-    --glass: rgba(255, 255, 255, 0.12);
+    --pink: #ff4da6;
+    --glass: rgba(255, 255, 255, 0.1);
 }
 
 body {
     margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: radial-gradient(circle at center, #2d0025, #0a0008);
+    font-family: 'Segoe UI', sans-serif;
+    background: #050005;
     color: #fff;
     overflow-x: hidden;
-    touch-action: manipulation;
+    /* Fondo Galaxia */
+    background-image: 
+        radial-gradient(2px 2px at 20px 30px, #eee, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 40px 70px, #fff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 50px 160px, #ddd, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 90px 40px, #fff, rgba(0,0,0,0));
+    background-repeat: repeat;
+    background-size: 200px 200px;
+    animation: galaxyMove 60s linear infinite;
 }
 
-/* LOGIN MEJORADO */
+@keyframes galaxyMove {
+    from { background-position: 0 0; }
+    to { background-position: 1000px 1000px; }
+}
+
+/* LOGIN */
 #login {
     position: fixed; inset: 0;
     display: flex; justify-content: center; align-items: center;
-    background: #000; z-index: 9999;
+    background: #000; z-index: 10000;
 }
 
 .loginCard {
-    background: var(--glass);
-    backdrop-filter: blur(20px);
-    padding: 40px;
-    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    padding: 40px; border-radius: 30px;
+    border: 1px solid var(--pink);
     text-align: center;
-    border: 1px solid rgba(255, 77, 166, 0.3);
-    box-shadow: 0 0 50px rgba(255, 77, 166, 0.2);
 }
 
-/* CILINDRO 3D DE FOTOS */
-.scene {
-    width: 200px; height: 200px;
+/* LLUVIA DE CORAZONES FONDO */
+.bgHearts {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; z-index: 1;
+}
+.bgHearts span {
+    position: absolute; color: var(--pink);
+    animation: fall linear infinite;
+    opacity: 0.5;
+}
+@keyframes fall {
+    to { transform: translateY(105vh) rotate(360deg); }
+}
+
+/* CONTENEDOR CILINDRO 3D */
+.container3D {
+    height: 300px;
+    display: flex; justify-content: center; align-items: center;
     perspective: 1000px;
-    margin: 60px auto;
+    margin: 40px 0;
+    z-index: 10;
 }
 
-.carousel {
-    width: 100%; height: 100%;
-    position: absolute;
+.cylinder {
+    width: 180px; height: 180px;
+    position: relative;
     transform-style: preserve-3d;
-    transition: transform 1s;
-    animation: rotateCarousel 15s infinite linear;
+    animation: rotateCyl 20s infinite linear;
 }
 
-.carousel:active { animation-play-state: paused; }
-
-.carousel__item {
+.cylinder img {
     position: absolute;
-    width: 190px; height: 190px;
-    left: 10px; top: 10px;
-    border: 4px solid var(--primary);
+    width: 180px; height: 180px;
+    object-fit: cover;
+    border: 3px solid var(--pink);
     border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 0 20px rgba(255,77,166,0.5);
+    box-shadow: 0 0 20px var(--pink);
 }
 
-.carousel__item img { width: 100%; height: 100%; object-fit: cover; }
+/* Posicionamiento de las 4 fotos en el cilindro */
+.cylinder img:nth-child(1) { transform: rotateY(0deg) translateZ(160px); }
+.cylinder img:nth-child(2) { transform: rotateY(90deg) translateZ(160px); }
+.cylinder img:nth-child(3) { transform: rotateY(180deg) translateZ(160px); }
+.cylinder img:nth-child(4) { transform: rotateY(270deg) translateZ(160px); }
 
-/* Posiciones del cilindro */
-.carousel__item:nth-child(1) { transform: rotateY(0deg) translateZ(250px); }
-.carousel__item:nth-child(2) { transform: rotateY(90deg) translateZ(250px); }
-.carousel__item:nth-child(3) { transform: rotateY(180deg) translateZ(250px); }
-.carousel__item:nth-child(4) { transform: rotateY(270deg) translateZ(250px); }
-
-@keyframes rotateCarousel {
+@keyframes rotateCyl {
     from { transform: rotateY(0deg); }
     to { transform: rotateY(360deg); }
 }
 
-/* CARDS */
+/* TARJETAS */
 .card {
-    background: rgba(20, 0, 15, 0.8);
-    margin: 25px auto;
-    padding: 25px;
-    width: 85%;
-    max-width: 500px;
+    background: rgba(20, 0, 20, 0.7);
+    backdrop-filter: blur(10px);
+    margin: 20px auto; padding: 25px;
+    width: 85%; max-width: 500px;
     border-radius: 25px;
-    border: 1px solid var(--primary);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    border: 1px solid rgba(255, 77, 166, 0.4);
+    position: relative; z-index: 20;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
-/* FRASES FLOTANTES */
-.floating-text {
-    position: fixed;
-    pointer-events: none;
-    color: #ffb3d9;
-    font-weight: bold;
-    text-shadow: 0 0 10px #ff4da6;
-    z-index: 1000;
-    animation: fadeUp 2s forwards;
-    white-space: nowrap;
+.musicCover {
+    width: 140px; height: 140px; border-radius: 50%;
+    border: 4px solid var(--pink);
+    display: block; margin: 15px auto;
+    animation: spin 12s linear infinite;
 }
+@keyframes spin { to { transform: rotate(360deg); } }
 
+/* TEXTO ESCRITURA */
+#typewriter { font-size: 17px; line-height: 1.6; text-align: center; color: #ffe6f2; }
+
+/* FRASES FLOTANTES AL CLICK */
+.float-msg {
+    position: fixed; pointer-events: none;
+    color: #ffb3d9; font-weight: bold;
+    text-shadow: 0 0 8px var(--pink);
+    animation: fadeUp 2s forwards; z-index: 999;
+}
 @keyframes fadeUp {
-    0% { opacity: 0; transform: translateY(0) scale(0.5); }
-    20% { opacity: 1; }
-    100% { opacity: 0; transform: translateY(-100px) scale(1.2); }
-}
-
-/* CORAZONES AL CLICK */
-.click-heart {
-    position: fixed;
-    pointer-events: none;
-    z-index: 1001;
-    animation: heartPop 1s forwards;
-}
-
-@keyframes heartPop {
-    0% { transform: scale(0); opacity: 1; }
-    100% { transform: scale(3) rotate(20deg); opacity: 0; }
-}
-
-#typewriter {
-    min-height: 100px;
-    font-size: 1.1rem;
-    line-height: 1.6;
+    0% { opacity: 0; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-100px); }
 }
 
 button {
-    background: var(--primary);
-    border: none; padding: 15px 30px;
-    border-radius: 50px; color: white;
-    font-weight: bold; cursor: pointer;
-    transition: 0.3s;
+    background: var(--pink); border: none; padding: 12px 25px;
+    border-radius: 20px; color: #fff; cursor: pointer; font-size: 16px;
 }
-button:active { transform: scale(0.9); }
-
-.musicCover {
-    width: 150px; height: 150px;
-    border-radius: 50%;
-    border: 5px solid var(--primary);
-    margin: 20px auto; display: block;
-    animation: spin 10s linear infinite;
-}
-@keyframes spin { to { transform: rotate(360deg); } }
 </style>
 </head>
 
-<body onclick="createMagic(event)">
+<body onclick="spawnHeart(event)">
 
 <div id="login">
     <div class="loginCard">
-        <h2>Contraseña 💖</h2>
+        <h2>Ingresa la clave 💖</h2>
         <input id="pass" type="password" style="padding:10px; border-radius:10px; border:none; text-align:center;">
         <br>
         <button onclick="enter()">Entrar</button>
     </div>
 </div>
 
+<!-- AUDIOS -->
 <audio id="bgMusic" loop>
-    <source src="https://files.catbox.moe/lm504y.mp3">
+    <source src="https://files.catbox.moe">
 </audio>
 <audio id="ourSong">
-    <source src="https://files.catbox.moe/egr68n.mp3">
+    <source src="https://files.catbox.moe">
 </audio>
 
-<!-- CILINDRO 3D -->
-<div class="scene">
-    <div class="carousel" id="carousel">
-        <div class="carousel__item"><img src="https://i.imgur.com"></div>
-        <div class="carousel__item"><img src="https://i.imgur.com"></div>
-        <div class="carousel__item"><img src="https://i.imgur.com"></div>
-        <div class="carousel__item"><img src="https://i.imgur.com"></div>
+<div class="bgHearts" id="bgHearts"></div>
+
+<!-- CILINDRO 3D DE IMÁGENES -->
+<div class="container3D">
+    <div class="cylinder" id="cyl">
+        <img src="https://i.imgur.com">
+        <img src="https://i.imgur.com">
+        <img src="https://i.imgur.com">
+        <img src="https://i.imgur.com">
     </div>
 </div>
 
 <div class="card" style="text-align:center;">
-    <h2>💞 Tiempo Juntos 💞</h2>
-    <div id="counter" style="font-size: 24px; color: #ffb3d9;"></div>
+    <h2 style="color:var(--pink)">💞 Tiempo Juntos 💞</h2>
+    <div id="counter" style="font-size: 22px;"></div>
 </div>
 
 <div class="card" style="text-align:center;">
-    <h2>🎵 Nuestra Canción 🎵</h2>
+    <h2 style="color:var(--pink)">🎵 Nuestra Canción 🎵</h2>
     <img src="https://i.imgur.com" class="musicCover">
     <button id="btnPlay" onclick="toggleSong()">▶️ Reproducir Especial</button>
 </div>
 
 <div class="card">
-    <h2 style="text-align:center">💌 Mensaje Eterno 💌</h2>
+    <h2 style="text-align:center; color:var(--pink);">💌 Mensaje Eterno 💌</h2>
     <div id="typewriter"></div>
 </div>
 
 <script>
-const frases = [
-    "Eres mi sol ☀️", "Te amo infinito ♾️", "Mi lugar favorito es contigo", 
-    "Eres lo mejor de mi vida 🤎", "Siempre juntos 💞", "Mi niña hermosa",
-    "Gracias por existir", "Te robaste mi corazón 💓", "Eres mi sueño hecho realidad",
-    "Tu sonrisa me da vida", "Marlen y Jerry x siempre", "Eres mi destino",
-    "Me encantas cada día más", "Tú y yo, el mejor equipo", "Amor de mi vida"
-];
+const frases = ["Te amo Marlen 💖", "Eres mi universo 🌌", "Siempre juntos", "Mi niña linda", "Eres perfección", "Jerry & Marlen", "Te extraño", "Eres mi vida 🤎"];
 
 function enter(){
     if(document.getElementById('pass').value === "Jerry"){
         document.getElementById('login').style.display="none";
         document.getElementById('bgMusic').play();
         startTypewriter();
-    } else { alert("Error 💔"); }
+        initHearts();
+    } else { alert("Clave incorrecta 💔"); }
 }
 
-function createMagic(e) {
-    // Vibración (solo en Android/Móvil)
-    if (navigator.vibrate) navigator.vibrate(20);
+function spawnHeart(e) {
+    const msg = document.createElement('div');
+    msg.className = 'float-msg';
+    msg.innerHTML = frases[Math.floor(Math.random()*frases.length)];
+    msg.style.left = e.clientX + 'px';
+    msg.style.top = e.clientY + 'px';
+    document.body.appendChild(msg);
+    setTimeout(() => msg.remove(), 2000);
+}
 
-    // Crear Frase
-    const txt = document.createElement('div');
-    txt.className = 'floating-text';
-    txt.innerHTML = frases[Math.floor(Math.random()*frases.length)];
-    txt.style.left = e.clientX + 'px';
-    txt.style.top = e.clientY + 'px';
-    document.body.appendChild(txt);
-    setTimeout(() => txt.remove(), 2000);
-
-    // Crear Corazón
-    const h = document.createElement('div');
-    h.className = 'click-heart';
-    h.innerHTML = "❤️";
-    h.style.left = (e.clientX - 10) + 'px';
-    h.style.top = (e.clientY - 10) + 'px';
-    document.body.appendChild(h);
-    setTimeout(() => h.remove(), 1000);
+function initHearts() {
+    const container = document.getElementById('bgHearts');
+    for(let i=0; i<30; i++) {
+        const s = document.createElement('span');
+        s.innerHTML = "❤️";
+        s.style.left = Math.random() * 100 + "vw";
+        s.style.top = "-20px";
+        s.style.fontSize = (Math.random() * 20 + 10) + "px";
+        s.style.animationDuration = (Math.random() * 5 + 5) + "s";
+        s.style.animationDelay = (Math.random() * 5) + "s";
+        container.appendChild(s);
+    }
 }
 
 function toggleSong(){
     const special = document.getElementById('ourSong');
-    const background = document.getElementById('bgMusic');
+    const bg = document.getElementById('bgMusic');
     const btn = document.getElementById('btnPlay');
-
     if(special.paused){
-        background.pause();
-        special.play();
+        bg.pause(); special.play();
         btn.innerHTML = "⏸️ Pausar Especial";
     } else {
-        special.pause();
-        background.play();
+        special.pause(); bg.play();
         btn.innerHTML = "▶️ Reproducir Especial";
     }
 }
 
-// Efecto de escritura
-const textoOriginal = "¡Feliz San Valentín, mi amor! 🤎 Hoy quiero recordarte lo increíblemente afortunado que soy de tenerte. Eres esa pieza que encaja perfectamente en mi vida, llenándola de colores y risas. No necesito un día especial para saber cuánto te amo, pero hoy te celebro. Gracias por ser mi compañera de aventuras. Te amo hoy y siempre 💞";
-let i = 0;
+const texto = "¡Feliz San Valentín, mi amor! 🤎 Eres esa pieza que encaja perfectamente en mi vida, llenándola de colores y momentos inolvidables. No necesito un día especial para saber cuánto te amo, pero hoy aprovecho para celebrarte. Gracias por ser mi compañera de aventuras hoy y siempre 💞";
+let charIndex = 0;
 function startTypewriter() {
-    if (i < textoOriginal.length) {
-        document.getElementById("typewriter").innerHTML += textoOriginal.charAt(i);
-        i++;
-        setTimeout(startTypewriter, 50); // Velocidad de escritura
+    if (charIndex < texto.length) {
+        document.getElementById("typewriter").innerHTML += texto.charAt(charIndex);
+        charIndex++;
+        setTimeout(startTypewriter, 60);
     }
 }
 
 // Contador
 const start = new Date("2024-02-14");
 setInterval(() => {
-    const diff = new Date() - start;
+    const now = new Date();
+    const diff = now - start;
     const d = Math.floor(diff/86400000);
     const h = Math.floor(diff/3600000)%24;
     const m = Math.floor(diff/60000)%60;
     const s = Math.floor(diff/1000)%60;
     document.getElementById('counter').innerHTML = `${d}d ${h}h ${m}m ${s}s`;
 }, 1000);
-
-// Control manual del cilindro (giro al arrastrar)
-let startX;
-let currAngle = 0;
-document.addEventListener('touchstart', e => startX = e.touches[0].pageX);
-document.addEventListener('touchmove', e => {
-    let diff = e.touches[0].pageX - startX;
-    document.getElementById('carousel').style.animation = "none";
-    document.getElementById('carousel').style.transform = `rotateY(${currAngle + diff/2}deg)`;
-});
 </script>
 </body>
 </html>
