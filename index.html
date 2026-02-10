@@ -76,8 +76,8 @@ button{
 }
 
 @keyframes rise{
- from{transform:translateY(100vh)}
- to{transform:translateY(-10vh)}
+ from{transform:translateY(100vh) scale(.6)}
+ to{transform:translateY(-10vh) scale(1.2)}
 }
 
 /* CARDS */
@@ -99,11 +99,9 @@ button{
  margin-top:0;
 }
 
-/* PROFILE IMAGE */
-
 .circleImg{
- width:180px;
- height:180px;
+ width:160px;
+ height:160px;
  border-radius:50%;
  object-fit:cover;
  display:block;
@@ -111,27 +109,21 @@ button{
  border:6px solid #ffb3d9;
 }
 
-/* COUNTER */
-
 .counter{
  text-align:center;
  font-size:18px;
  line-height:1.6;
 }
 
-/* MUSIC */
-
 .musicCover{
- width:180px;
- height:180px;
+ width:160px;
+ height:160px;
  border-radius:50%;
  object-fit:cover;
  margin:10px auto;
  display:block;
  border:6px solid #ffb3d9;
 }
-
-/* COLLAGE */
 
 .grid{
  display:grid;
@@ -142,17 +134,14 @@ button{
 .grid img{
  width:100%;
  border-radius:14px;
- height:150px;
+ height:140px;
  object-fit:cover;
 }
-
-/* FINAL */
 
 .finalText{
  line-height:1.6;
  font-size:16px;
 }
-
 </style>
 </head>
 
@@ -170,7 +159,16 @@ button{
 </div>
 </div>
 
-<!-- BG HEARTS -->
+<!-- AUDIO -->
+<audio id="bgMusic" loop>
+<source src="https://files.catbox.moe/egr68n.mp3">
+</audio>
+
+<audio id="ourSong">
+<source src="https://files.catbox.moe/4nrc17.mp3">
+</audio>
+
+<!-- HEART BACKGROUND -->
 <div class="bgHearts" id="bgHearts"></div>
 
 <!-- SECCION 1 -->
@@ -184,7 +182,9 @@ button{
 <div class="card">
 <h2>🎵 Nuestra canción 🎵</h2>
 <img class="musicCover" src="https://i.imgur.com/jbyIzFT.jpeg">
-<button onclick="toggleSong()">💿 Reproducir / Pausar</button>
+<div style="text-align:center">
+<button onclick="toggleSong()">▶️ Reproducir</button>
+</div>
 </div>
 
 <!-- SECCION 3 -->
@@ -201,39 +201,39 @@ button{
 <!-- FINAL -->
 <div class="card finalText">
 <h2>💌 Mensaje de amor 💌</h2>
-Feliz San Valentín mi cebollín 🤎
+
+¡Feliz San Valentín, mi amor! 🤎<br><br>
+
+Hoy, en el día del amor, quiero recordarte lo increíblemente afortunado que soy de tenerte.  
+Eres esa pieza que encaja perfectamente en mi vida, llenándola de colores, risas y momentos inolvidables.<br><br>
+
+No necesito un día especial para saber cuánto te amo, pero hoy aprovecho para celebrarte, agradecerte por tu paciencia, tu ternura y por ser mi compañera de aventuras.<br><br>
+
+Prometo seguir construyendo este camino contigo, cuidando nuestro amor como el tesoro más preciado.  
+Gracias por ser mi Valentín hoy y siempre 💞
 </div>
-
-<!-- AUDIOS -->
-
-<audio id="bgMusic" loop
-src="https://cdn.pixabay.com/audio/2022/03/15/audio_c8b05c7b6c.mp3"></audio>
-
-<audio id="ourSong"
-src="https://cdn.pixabay.com/audio/2021/11/25/audio_cb09b5d3aa.mp3"></audio>
 
 <script>
 
-/* PASSWORD + BG MUSIC */
-
+/* PASSWORD + START BG MUSIC */
 function enter(){
  if(pass.value==="Jerry"){
   login.style.display="none";
-  bgMusic.volume = 0.5;
   bgMusic.play().catch(()=>{});
  } else alert("Contraseña incorrecta 💔");
 }
 
 /* SONG BUTTON */
-
 function toggleSong(){
- if(ourSong.paused) ourSong.play();
- else ourSong.pause();
+ if(ourSong.paused){
+  ourSong.play();
+ } else {
+  ourSong.pause();
+ }
 }
 
-/* LOGIN HEART CANVAS */
-
-const c=document.getElementById("heartsCanvas");
+/* HEART CANVAS LOGIN */
+const c=heartsCanvas;
 const ctx=c.getContext("2d");
 c.width=innerWidth;
 c.height=innerHeight;
@@ -258,7 +258,7 @@ function drawHeart(x,y,s){
 
 function loop(){
  ctx.clearRect(0,0,c.width,c.height);
- if(Math.random()<.25) hearts.push(new heart());
+ if(Math.random()<.2) hearts.push(new heart());
  hearts.forEach((h,i)=>{
   h.y-=h.v;
   drawHeart(h.x,h.y,h.s/2);
@@ -268,8 +268,7 @@ function loop(){
 }
 loop();
 
-/* BG FLOAT HEARTS */
-
+/* FLOATING HEARTS */
 for(let i=0;i<25;i++){
  const s=document.createElement("span");
  s.innerHTML="❤";
@@ -279,10 +278,8 @@ for(let i=0;i<25;i++){
  bgHearts.appendChild(s);
 }
 
-/* COUNTER — RESTAURADO */
-
+/* COUNTER */
 const start=new Date("2024-02-14");
-
 function update(){
  const now=new Date();
  const diff=now-start;
@@ -291,10 +288,9 @@ function update(){
  const m=Math.floor(diff/60000)%60;
  const s=Math.floor(diff/1000)%60;
 
- counter.innerHTML =
+ counter.innerHTML=
  d+" días<br>"+h+" horas<br>"+m+" minutos<br>"+s+" segundos 💗";
 }
-
 setInterval(update,1000);
 update();
 
