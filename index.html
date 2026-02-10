@@ -1,42 +1,77 @@
-<!DOCTYPE html>
-<html lang="es">
+<!DOCTYPE html><html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Para mi amor 💖</title>
-
-<style>
-*{
-  box-sizing:border-box;
-  font-family:'Arial',sans-serif;
-}
+<title>Para mi amor 💖</title><style>
+*{box-sizing:border-box;font-family:'Arial',sans-serif}
 
 body{
   margin:0;
   min-height:100vh;
-  background:radial-gradient(circle at top,#2a0033,#0b0012);
-  display:flex;
-  justify-content:center;
-  align-items:center;
+  background:radial-gradient(circle at top,#3a0a5e,#0b0014 70%);
   overflow:hidden;
   color:#fff;
 }
 
-.container{
-  width:95%;
-  max-width:420px;
-  background:rgba(255,182,213,0.95);
-  border-radius:20px;
-  padding:20px;
-  box-shadow:0 0 25px rgba(255,0,150,.4);
-  position:relative;
+/* ===== FONDO ESTRELLAS ===== */
+#stars{
+  position:fixed;
+  inset:0;
+  z-index:0;
 }
 
-h2{
+/* ===== CORAZONES ===== */
+.heart{
+  position:fixed;
+  bottom:-20px;
+  color:rgba(255,105,180,.5);
+  animation:floatUp linear infinite;
+  pointer-events:none;
+}
+@keyframes floatUp{
+  from{transform:translateY(0) scale(.6);opacity:1}
+  to{transform:translateY(-110vh) scale(1.2);opacity:0}
+}
+
+/* ===== ENTRADA ===== */
+#intro{
+  position:fixed;
+  inset:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  background:radial-gradient(circle at top,#ff5fa2,#2a003d);
+  z-index:5;
   text-align:center;
+}
+#intro h1{margin-bottom:20px}
+#intro button{
+  padding:14px 36px;
+  border:none;
+  border-radius:40px;
+  background:#fff;
   color:#ff2f92;
+  font-size:18px;
+  cursor:pointer;
 }
 
+/* ===== CONTENEDOR ===== */
+.container{
+  position:relative;
+  z-index:2;
+  width:95%;
+  max-width:430px;
+  margin:20px auto;
+  background:rgba(255,182,213,.95);
+  border-radius:22px;
+  padding:20px;
+  box-shadow:0 0 30px rgba(255,0,150,.5);
+}
+
+h2{text-align:center;color:#ff2f92}
+
+/* ===== CARTA ===== */
 .carta{
   background:#fff;
   color:#444;
@@ -46,57 +81,88 @@ h2{
   min-height:260px;
   font-size:15px;
   line-height:1.6;
-  position:relative;
   cursor:pointer;
 }
+#texto{white-space:pre-line}
 
-#texto{
-  white-space:pre-line;
+/* ===== MUSICA ===== */
+.player{text-align:center;margin-top:20px}
+.player img{
+  width:150px;
+  height:150px;
+  border-radius:50%;
+  border:6px solid #ff6fb5;
+  animation:spin 18s linear infinite;
+}
+@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+
+button.music{
+  margin-top:12px;
+  background:#ff4fa1;
+  color:#fff;
+  border:none;
+  padding:12px 30px;
+  border-radius:30px;
+  font-size:16px;
 }
 
-/* Corazones */
-.heart{
-  position:fixed;
-  color:rgba(255,105,180,0.4);
-  font-size:18px;
-  animation:float 6s linear infinite;
+/* ===== GALERIA 3D ===== */
+.galeria{
+  margin-top:25px;
+  perspective:900px;
+  height:220px;
+  position:relative;
+}
+.cilindro{
+  width:100%;
+  height:100%;
+  position:absolute;
+  transform-style:preserve-3d;
+}
+.cilindro img{
+  position:absolute;
+  width:120px;
+  height:160px;
+  object-fit:cover;
+  border-radius:15px;
+  left:50%;
+  top:30px;
 }
 
-@keyframes float{
-  0%{transform:translateY(100vh);opacity:0;}
-  20%{opacity:1;}
-  100%{transform:translateY(-10vh);opacity:0;}
-}
-
-/* Frases flotantes */
 .frase{
   position:absolute;
   color:#ff4fa1;
   font-size:14px;
   animation:fadeUp 2.5s ease forwards;
-  pointer-events:none;
+}
+@keyframes fadeUp{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(-40px)}}
+</style></head><body>
+<canvas id="stars"></canvas><!-- ENTRADA --><div id="intro">
+  <h1>Para ti, mi amor 💖</h1>
+  <button onclick="enter()">Entrar 💕</button>
+</div><!-- AUDIOS --><audio id="fondo" src="https://files.catbox.moe/lm504y.mp3" loop></audio> <audio id="cancion" src="https://files.catbox.moe/egr68n.mp3"></audio>
+
+<div class="container"><h2>💌 Mensaje de amor 💌</h2>
+<div class="carta" onclick="fraseRandom(event)">
+  <div id="texto"></div>
+</div><h2>🎵 Nuestra canción 🎵</h2>
+<div class="player">
+  <img src="https://i.imgur.com/m2rqpiu.jpeg">
+  <br>
+  <button class="music" onclick="toggleCancion()">Reproducir / Pausar</button>
+</div><h2>📸 Nuestros recuerdos 📸</h2>
+<div class="galeria">
+  <div class="cilindro" id="cilindro"></div>
+</div></div><script>
+/* ===== ENTRAR ===== */
+function enter(){
+  document.getElementById('intro').style.display='none';
+  fondo.volume=0.4;
+  fondo.play();
 }
 
-@keyframes fadeUp{
-  from{opacity:1;transform:translateY(0);}
-  to{opacity:0;transform:translateY(-40px);}
-}
-</style>
-</head>
-
-<body>
-
-<div class="container">
-  <h2>💌 Mensaje de amor 💌</h2>
-
-  <div class="carta" onclick="fraseRandom(event)">
-    <div id="texto"></div>
-  </div>
-</div>
-
-<script>
-/* TEXTO */
-const mensaje = `¡Feliz San Valentín, mi amor!
+/* ===== TEXTO ===== */
+const mensaje=`¡Feliz San Valentín, mi amor!
 
 Hoy, en el día del amor, quiero recordarte lo increíblemente afortunado que soy de tenerte. Eres esa pieza que encaja perfectamente en mi vida, llenándola de colores, risas y momentos inolvidables.
 
@@ -105,53 +171,73 @@ No necesito un día especial para saber cuánto te amo, pero hoy aprovecho cada 
 Prometo seguir construyendo este camino contigo, cuidando nuestro amor como el tesoro más preciado. Gracias por ser mi Valentín hoy y siempre.
 
 Te amo con todo mi corazón, cebollín 🤎`;
-
-/* EFECTO ESCRITURA */
-let i = 0;
-const speed = 35;
-function escribir(){
-  if(i < mensaje.length){
-    document.getElementById("texto").innerHTML += mensaje.charAt(i);
-    i++;
-    setTimeout(escribir, speed);
-  }
-}
+let i=0;
+function escribir(){if(i<mensaje.length){texto.innerHTML+=mensaje.charAt(i++);setTimeout(escribir,35)}}
 escribir();
 
-/* CORAZONES */
+/* ===== MUSICA ===== */
+const fondo=document.getElementById('fondo');
+const cancion=document.getElementById('cancion');
+function toggleCancion(){
+  if(cancion.paused){fondo.pause();cancion.play();}
+  else{cancion.pause();fondo.play();}
+}
+
+/* ===== CORAZONES ===== */
 setInterval(()=>{
-  const heart = document.createElement("div");
-  heart.className="heart";
-  heart.innerHTML="💗";
-  heart.style.left=Math.random()*100+"vw";
-  heart.style.fontSize=12+Math.random()*18+"px";
-  heart.style.animationDuration=4+Math.random()*3+"s";
-  document.body.appendChild(heart);
-  setTimeout(()=>heart.remove(),7000);
+  const h=document.createElement('div');
+  h.className='heart';
+  h.innerHTML='❤';
+  h.style.left=Math.random()*100+'vw';
+  h.style.fontSize=14+Math.random()*22+'px';
+  h.style.animationDuration=5+Math.random()*4+'s';
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),9000);
 },300);
 
-/* FRASES AL TOCAR */
-const frases=[
-  "Te amo 💖",
-  "Mi persona favorita 💕",
-  "Para siempre 🫶",
-  "Eres mi hogar 🏡",
-  "Mi amor eterno 💞",
-  "Gracias por existir ✨",
-  "Solo tú 💘",
-  "Mi felicidad 💗"
-];
-
+/* ===== FRASES ===== */
+const frases=['Te amo 💖','Para siempre 🫶','Mi hogar 🏡','Mi persona favorita 💕','Solo tú 💘'];
 function fraseRandom(e){
-  const f=document.createElement("div");
-  f.className="frase";
+  const f=document.createElement('div');
+  f.className='frase';
   f.innerText=frases[Math.floor(Math.random()*frases.length)];
-  f.style.left=e.offsetX+"px";
-  f.style.top=e.offsetY+"px";
+  f.style.left=e.offsetX+'px';
+  f.style.top=e.offsetY+'px';
   e.currentTarget.appendChild(f);
   setTimeout(()=>f.remove(),2500);
 }
-</script>
 
-</body>
+/* ===== CILINDRO INTERACTIVO ===== */
+const imagenes=[
+ 'https://i.imgur.com/m2rqpiu.jpeg',
+ 'https://i.imgur.com/jbyIzFT.jpeg',
+ 'https://i.imgur.com/tpH81jp.jpeg',
+ 'https://i.imgur.com/mOQ2xhz.jpeg',
+ 'https://i.imgur.com/ra5P475.jpeg',
+ 'https://i.imgur.com/0xnanwq.jpeg',
+ 'https://i.imgur.com/2Xh4XhC.jpeg'
+];
+const cilindro=document.getElementById('cilindro');
+let rot=0,auto=true;
+imagenes.forEach((src,i)=>{
+  const img=document.createElement('img');
+  img.src=src;
+  img.style.transform=`rotateY(${(360/imagenes.length)*i}deg) translateZ(170px)`;
+  cilindro.appendChild(img);
+});
+function animate(){if(auto){rot+=0.3;cilindro.style.transform=`rotateY(${rot}deg)`}requestAnimationFrame(animate)}
+animate();
+cilindro.addEventListener('touchstart',()=>auto=false);
+cilindro.addEventListener('touchend',()=>setTimeout(()=>auto=true,2000));
+
+/* ===== ESTRELLAS ===== */
+const canvas=document.getElementById('stars');
+const ctx=canvas.getContext('2d');
+function resize(){canvas.width=innerWidth;canvas.height=innerHeight}
+resize();window.onresize=resize;
+let stars=[];
+for(let i=0;i<120;i++)stars.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*1.5});
+function drawStars(){ctx.clearRect(0,0,canvas.width,canvas.height);ctx.fillStyle='white';stars.forEach(s=>{ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fill();s.y+=0.1;if(s.y>canvas.height)s.y=0});requestAnimationFrame(drawStars)}
+drawStars();
+</script></body>
 </html>
