@@ -2,268 +2,369 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>San Valentín 💖</title>
+<title>Para Marlen 💖</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:'Poppins',sans-serif;
-  background:#000;
-  color:white;
-  overflow-x:hidden;
+html,body{
+ margin:0;
+ background:black;
+ font-family:Segoe UI, sans-serif;
+ overflow-x:hidden;
+ color:white;
 }
 
-/* LOGIN */
-#login{
-  position:fixed;
-  inset:0;
-  background:radial-gradient(circle,#1a0014,#000);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  z-index:99;
-}
+/* ===== PASSWORD ===== */
 
-.loginCard{
-  background:#140010;
-  padding:30px;
-  border-radius:20px;
-  text-align:center;
-  box-shadow:0 0 50px #ff4da6;
-  animation:pulse 2s infinite alternate;
-}
-
-@keyframes pulse{
-  from{box-shadow:0 0 20px #ff4da6}
-  to{box-shadow:0 0 70px #ff99cc}
+#lock{
+ position:fixed;
+ inset:0;
+ background:black;
+ display:flex;
+ flex-direction:column;
+ justify-content:center;
+ align-items:center;
+ z-index:999;
 }
 
 input{
-  padding:12px;
-  border-radius:10px;
-  border:none;
-  width:220px;
-  text-align:center;
+ padding:12px;
+ border-radius:12px;
+ border:none;
+ font-size:18px;
+ text-align:center;
 }
 
 button{
-  padding:12px 18px;
-  border:none;
-  border-radius:12px;
-  background:#ff4da6;
-  color:white;
-  cursor:pointer;
-  margin-top:10px;
+ padding:12px 18px;
+ border:none;
+ border-radius:12px;
+ background:#ff4da6;
+ color:white;
+ font-size:16px;
+ margin-top:10px;
 }
 
-/* FONDO CORAZONES CINE */
-#bg{
-  position:fixed;
-  inset:0;
-  overflow:hidden;
-  z-index:-1;
+/* ===== SPACE ===== */
+
+#space{
+ position:fixed;
+ inset:0;
+ z-index:-1;
 }
 
-.heart{
-  position:absolute;
-  opacity:.25;
-  animation:float linear forwards;
+/* ===== FRASES ===== */
+
+.phrase{
+ position:absolute;
+ color:#ffb3e6;
+ font-size:18px;
+ opacity:0;
+ animation:floatUp 4s linear forwards;
 }
 
-@keyframes float{
-  from{transform:translateY(40px) scale(.8)}
-  to{transform:translateY(-120vh) scale(1.4)}
+@keyframes floatUp{
+ 0%{transform:translateY(40px);opacity:0;}
+ 20%{opacity:1;}
+ 100%{transform:translateY(-160px);opacity:0;}
 }
 
-/* SECCIONES */
-.section{
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  padding:40px 20px;
+/* ===== STICKERS ===== */
+
+.sticker{
+ position:absolute;
+ font-size:24px;
+ animation:drift 4s linear forwards;
 }
 
-.title{
-  font-size:42px;
-  text-shadow:0 0 25px #ff4da6;
+@keyframes drift{
+ to{transform:translateY(-200px) rotate(180deg);opacity:0;}
 }
 
-/* FOTO PRINCIPAL */
-.mainPhoto{
-  width:220px;
-  height:220px;
-  border-radius:50%;
-  object-fit:cover;
-  border:5px solid #ff4da6;
-  box-shadow:0 0 40px #ff4da6;
-  animation:floatPhoto 5s infinite ease-in-out;
+/* ===== TITULOS ===== */
+
+h1{
+ text-align:center;
+ color:#ff77cc;
+ text-shadow:0 0 20px #ff4da6;
 }
 
-@keyframes floatPhoto{
-  50%{transform:translateY(-15px)}
-}
+/* ===== CARRUSEL ===== */
 
-/* SLIDER */
 .slider{
-  width:260px;
-  height:360px;
-  border-radius:20px;
-  overflow:hidden;
-  box-shadow:0 0 40px #ff4da6;
-}
-.slider img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
+ overflow:hidden;
+ width:100%;
+ margin-top:20px;
 }
 
-/* FRASES CLICK */
-.pop{
-  position:absolute;
-  color:#ffb3e6;
-  animation:pop 2s forwards;
-  text-shadow:0 0 10px #ff4da6;
-}
-@keyframes pop{
-  to{transform:translateY(-80px) scale(1.4);opacity:0}
+.track{
+ display:flex;
+ gap:30px;
+ animation:scroll 40s linear infinite;
 }
 
-/* CARTA */
+.slide{
+ position:relative;
+}
+
+.slide img{
+ height:320px;
+ border-radius:20px;
+ box-shadow:0 0 25px #ff4da6;
+}
+
+.caption{
+ position:absolute;
+ bottom:10px;
+ left:10px;
+ right:10px;
+ background:rgba(0,0,0,.6);
+ padding:8px;
+ border-radius:10px;
+ font-size:16px;
+}
+
+@keyframes scroll{
+ from{transform:translateX(0);}
+ to{transform:translateX(-50%);}
+}
+
+/* ===== CARTA ===== */
+
 .card{
-  background:#1a0014;
-  border:3px dashed #ff99cc;
-  border-radius:20px;
-  padding:30px;
-  max-width:650px;
-  box-shadow:0 0 30px #ff4da6;
-  line-height:1.7;
+ max-width:600px;
+ margin:60px auto;
+ padding:25px;
+ background:rgba(255,255,255,.08);
+ border-radius:20px;
+ backdrop-filter:blur(6px);
+ line-height:1.6;
 }
+
+/* ===== STORY ===== */
+
+.story{
+ position:fixed;
+ inset:0;
+ background:black;
+ display:none;
+ z-index:200;
+}
+
+.storySlide{
+ position:absolute;
+ inset:0;
+ display:flex;
+ flex-direction:column;
+ justify-content:center;
+ align-items:center;
+ text-align:center;
+ padding:30px;
+ opacity:0;
+ transform:scale(1.1);
+ transition:1s;
+}
+
+.storySlide.active{
+ opacity:1;
+ transform:scale(1);
+}
+
+.storySlide img{
+ width:85%;
+ max-width:380px;
+ border-radius:20px;
+ box-shadow:0 0 40px #ff4da6;
+}
+
+/* ===== STAR FALL ===== */
+
+.star{
+ position:absolute;
+ color:white;
+ animation:starFall 2s linear forwards;
+}
+
+@keyframes starFall{
+ to{transform:translateY(120vh) translateX(60px);opacity:0}
+}
+
+/* ===== MUSIC BTN ===== */
 
 .musicBtn{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  z-index:5;
+ position:fixed;
+ bottom:20px;
+ right:20px;
+ z-index:10;
 }
+
+/* ===== SECRET BTN ===== */
+
+.secretBtn{
+ position:fixed;
+ top:15px;
+ right:15px;
+ width:44px;
+ height:44px;
+ border-radius:50%;
+ font-size:20px;
+}
+
 </style>
 </head>
 
 <body>
 
-<div id="bg"></div>
-
-<!-- LOGIN -->
-<div id="login">
-  <div class="loginCard">
-    <h2>💌 Acceso secreto</h2>
-    <input id="pass" type="password" placeholder="Contraseña">
-    <br>
-    <button onclick="check()">Entrar</button>
-  </div>
+<!-- PASSWORD -->
+<div id="lock">
+<h2>Ingresa la contraseña 💌</h2>
+<input id="pass">
+<button onclick="unlock()">Entrar</button>
 </div>
 
-<!-- HERO -->
-<section class="section">
-  <h1 class="title">Feliz San Valentín mi cebollín 🤎</h1>
-  <p>Un universo hecho para ti ✨</p>
-</section>
+<canvas id="space"></canvas>
 
-<!-- FOTO -->
-<section class="section">
-  <img class="mainPhoto" src="https://i.imgur.com/RqvWXbV.jpg">
-  <h2>Eres mi lugar favorito</h2>
-</section>
+<h1>Feliz san Valentín mi cebollín 🤎</h1>
 
 <!-- SLIDER -->
-<section class="section">
-  <h2>Nuestros momentos 📸</h2>
-  <div class="slider">
-    <img id="slide">
-  </div>
-</section>
+<div class="slider">
+<div class="track">
+
+<div class="slide"><img src="https://i.imgur.com/m2rqpiu.jpeg"><div class="caption">Eres mi paz</div></div>
+<div class="slide"><img src="https://i.imgur.com/jbyIzFT.jpeg"><div class="caption">Mi alegría</div></div>
+<div class="slide"><img src="https://i.imgur.com/tpH81jp.jpeg"><div class="caption">Mi persona favorita</div></div>
+<div class="slide"><img src="https://i.imgur.com/mOQ2xhz.jpeg"><div class="caption">Mi lugar seguro</div></div>
+<div class="slide"><img src="https://i.imgur.com/ra5P475.jpeg"><div class="caption">Contigo todo</div></div>
+
+<!-- duplicado para loop -->
+<div class="slide"><img src="https://i.imgur.com/m2rqpiu.jpeg"><div class="caption">Eres mi paz</div></div>
+<div class="slide"><img src="https://i.imgur.com/jbyIzFT.jpeg"><div class="caption">Mi alegría</div></div>
+<div class="slide"><img src="https://i.imgur.com/tpH81jp.jpeg"><div class="caption">Mi persona favorita</div></div>
+
+</div>
+</div>
 
 <!-- CARTA -->
-<section class="section">
-  <div class="card" id="letter"></div>
-</section>
+<div class="card">
+Gracias por existir, por coincidir conmigo, por cada momento,
+cada risa, cada mirada y cada abrazo.
+No sé qué traerá el futuro,
+pero sí sé que contigo todo se siente más bonito.
+Te amo 🤎
+</div>
 
-<button class="musicBtn" onclick="music.paused?music.play():music.pause()">🎹 Piano</button>
+<!-- STORY -->
+<button class="secretBtn" onclick="openStory()">💌</button>
+
+<div class="story" id="story">
+<div class="storySlide active"><img src="https://i.imgur.com/0xnanwq.jpeg"><h2>Eres magia</h2></div>
+<div class="storySlide"><img src="https://i.imgur.com/2Xh4XhC.jpeg"><h2>Mi universo</h2></div>
+<div class="storySlide"><h1>Te amo 🤎</h1></div>
+</div>
+
+<button class="musicBtn" onclick="toggleMusic()">🎹 Piano</button>
+
 <audio id="music" loop>
 <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_c8b05c7b6c.mp3">
 </audio>
 
 <script>
+
 /* PASSWORD */
-function check(){
-  if(pass.value==="Jerry") login.style.display="none";
-  else alert("Incorrecta 💔");
+function unlock(){
+ if(pass.value==="Jerry"){
+  lock.style.display="none";
+ }else alert("Contraseña incorrecta");
 }
 
-/* CORAZONES */
-function heart(){
-  const h=document.createElement("div");
-  h.className="heart";
-  h.innerText=["💖","💕","💘","💝"][Math.random()*4|0];
-  h.style.left=Math.random()*100+"vw";
-  h.style.bottom="-20px";
-  h.style.fontSize=(14+Math.random()*30)+"px";
-  h.style.animationDuration=(6+Math.random()*6)+"s";
-  bg.appendChild(h);
-  setTimeout(()=>h.remove(),12000);
-}
-setInterval(heart,250);
+/* SPACE */
+const c=space;
+const ctx=c.getContext("2d");
+c.width=innerWidth;
+c.height=innerHeight;
 
-/* FRASES CLICK */
-const frases=["Te amo","Mi universo","Eres magia","Solo tú","Siempre contigo"];
-onclick=e=>{
-  const p=document.createElement("div");
-  p.className="pop";
-  p.innerText=frases[Math.random()*frases.length|0];
-  p.style.left=e.clientX+"px";
-  p.style.top=e.clientY+"px";
-  document.body.appendChild(p);
-  setTimeout(()=>p.remove(),2000);
+let stars=[];
+for(let i=0;i<400;i++){
+ stars.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.5,v:Math.random()*0.4});
+}
+
+function draw(){
+ ctx.clearRect(0,0,c.width,c.height);
+ ctx.fillStyle="white";
+ stars.forEach(s=>{
+  ctx.beginPath();
+  ctx.arc(s.x,s.y,s.r,0,6.28);
+  ctx.fill();
+  s.y+=s.v;
+  if(s.y>c.height){s.y=0;s.x=Math.random()*c.width;}
+ });
+ requestAnimationFrame(draw);
+}
+draw();
+
+/* FRASES + STICKERS */
+const frases=["Te amo","Mi universo","Siempre tú","Eres magia","Mi todo"];
+const stickers=["💖","💕","✨","🌹"];
+
+document.onclick=e=>{
+ const f=document.createElement("div");
+ f.className="phrase";
+ f.innerText=frases[Math.floor(Math.random()*frases.length)];
+ f.style.left=e.clientX+"px";
+ f.style.top=e.clientY+"px";
+ document.body.appendChild(f);
+ setTimeout(()=>f.remove(),4000);
+
+ for(let i=0;i<4;i++){
+  const s=document.createElement("div");
+  s.className="sticker";
+  s.innerText=stickers[Math.floor(Math.random()*stickers.length)];
+  s.style.left=e.clientX+"px";
+  s.style.top=e.clientY+"px";
+  document.body.appendChild(s);
+  setTimeout(()=>s.remove(),4000);
+ }
 };
 
-/* SLIDER */
-const fotos=[
-"https://i.imgur.com/RqvWXbV.jpg",
-"https://i.imgur.com/oQQwDZJ.jpeg",
-"https://i.imgur.com/jbylzFT.jpeg"
-];
-let i=0;
-function slideShow(){
-  slide.src=fotos[i];
-  i=(i+1)%fotos.length;
+/* STORY */
+let slide=0;
+const slides=document.querySelectorAll(".storySlide");
+
+function showSlide(n){
+ slides.forEach(s=>s.classList.remove("active"));
+ slides[n].classList.add("active");
 }
-slideShow();
-setInterval(slideShow,3000);
 
-/* CARTA TYPE */
-const texto=`¡Feliz San Valentín, mi cebollín! 🤎🌹
-
-Hoy quiero recordarte lo afortunado que soy de tenerte.
-Eres mi alegría, mi paz y mi persona favorita.
-
-Prometo seguir cuidando este amor siempre.
-Gracias por existir.
-
-Te amo con todo mi corazón. 💞`;
-
-let t=0;
-function write(){
-  if(t<texto.length){
-    letter.innerHTML+=texto[t++];
-    setTimeout(write,35);
-  }
+function openStory(){
+ story.style.display="block";
+ slide=0;
+ showSlide(slide);
 }
-write();
+
+story.onclick=()=>{
+ slide++;
+ if(slide>=slides.length) story.style.display="none";
+ else showSlide(slide);
+};
+
+/* STAR FALL */
+setInterval(()=>{
+ const s=document.createElement("div");
+ s.className="star";
+ s.innerText="✦";
+ s.style.left=Math.random()*100+"vw";
+ s.style.top="-20px";
+ document.body.appendChild(s);
+ setTimeout(()=>s.remove(),2000);
+},900);
+
+/* MUSIC */
+function toggleMusic(){
+ const m=document.getElementById("music");
+ if(m.paused) m.play(); else m.pause();
+}
+
 </script>
 
 </body>
