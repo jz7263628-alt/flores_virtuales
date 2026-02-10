@@ -2,309 +2,299 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Para mi amor 💖</title>
 <style>
-*{box-sizing:border-box;font-family:'Arial',sans-serif}
+:root {
+  --rosa-brillante: #ff2f92;
+  --rosa-suave: #ff8ac2;
+  --vidrio: rgba(255, 255, 255, 0.12);
+}
 
-body{
-  margin:0;
-  min-height:100vh;
-  background:radial-gradient(circle at top,#3a0a5e,#0b0014 70%);
-  /* CAMBIO 1: Habilitar scroll */
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background: radial-gradient(circle at top, #3a0a5e, #0b0014 80%);
+  color: #fff;
+  /* El scroll ahora es prioritario */
   overflow-y: auto;
   overflow-x: hidden;
-  color:#fff;
+  min-height: 100vh;
 }
 
-/* ===== FONDO ESTRELLAS ===== */
-#stars{
-  position:fixed;
-  inset:0;
-  z-index:0;
+/* FONDO DE ESTRELLAS FIJO */
+#stars {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  z-index: 1;
+  pointer-events: none; /* No interfiere con el dedo */
 }
 
-/* ===== CORAZONES ===== */
-.heart{
-  position:fixed;
-  bottom:-20px;
-  color:rgba(255,105,180,.5);
-  animation:floatUp linear infinite;
-  pointer-events:none;
-}
-@keyframes floatUp{
-  from{transform:translateY(0) scale(.6);opacity:1}
-  to{transform:translateY(-110vh) scale(1.2);opacity:0}
+/* CAPA DE CONTENIDO */
+.main-content {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 10px;
 }
 
-/* ===== ENTRADA ===== */
-#intro{
-  position:fixed;
-  inset:0;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-  background:radial-gradient(circle at top,#ff5fa2,#2a003d);
-  z-index:100;
-  text-align:center;
-}
-#intro h1{margin-bottom:20px}
-#intro button{
-  padding:14px 36px;
-  border:none;
-  border-radius:40px;
-  background:#fff;
-  color:#ff2f92;
-  font-size:18px;
-  cursor:pointer;
+/* CONTENEDOR EFECTO CRISTAL */
+.glass-panel {
+  width: 100%;
+  max-width: 400px;
+  background: var(--vidrio);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 25px;
+  padding: 25px;
+  margin-bottom: 30px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+  text-align: center;
 }
 
-/* ===== CONTENEDOR (CAMBIO 2: Transparente) ===== */
-.container{
-  position:relative;
-  z-index:10; /* Asegura que esté por encima de las estrellas */
-  width:95%;
-  max-width:430px;
-  margin:20px auto;
-  background:rgba(255, 255, 255, 0.15); /* Transparente */
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-radius:22px;
-  padding:20px;
-  box-shadow:0 0 30px rgba(0,0,0,0.3);
+/* CARTA */
+.carta {
+  background: rgba(255, 255, 255, 0.95);
+  color: #333;
+  padding: 20px;
+  border-radius: 18px;
+  border: 3px dashed var(--rosa-suave);
+  min-height: 200px;
+  font-size: 16px;
+  line-height: 1.6;
+  text-align: left;
+  margin-top: 15px;
 }
 
-h2{text-align:center;color:#ff8ac2}
-
-/* ===== CARTA ===== */
-.carta{
-  background:rgba(255,255,255,0.9);
-  color:#444;
-  padding:18px;
-  border-radius:15px;
-  border:3px dashed #ff8ac2;
-  min-height:260px;
-  font-size:15px;
-  line-height:1.6;
-  cursor:pointer;
-}
-#texto{white-space:pre-line}
-
-/* ===== MUSICA ===== */
-.player{text-align:center;margin-top:20px}
-.player img{
-  width:150px;
-  height:150px;
-  border-radius:50%;
-  border:6px solid #ff6fb5;
-  animation:spin 18s linear infinite;
+/* PLAYER */
+.player img {
+  width: 140px; height: 140px;
+  border-radius: 50%;
+  border: 5px solid var(--rosa-brillante);
+  animation: spin 15s linear infinite;
   object-fit: cover;
 }
-@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-button.music{
-  margin-top:12px;
-  background:#ff4fa1;
-  color:#fff;
-  border:none;
-  padding:12px 30px;
-  border-radius:30px;
-  font-size:16px;
+button {
+  background: var(--rosa-brillante);
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: bold;
   cursor: pointer;
+  margin-top: 15px;
+  box-shadow: 0 5px 15px rgba(255, 47, 146, 0.4);
 }
 
-/* ===== GALERIA 3D ===== */
-.galeria{
-  margin-top:25px;
-  perspective:900px;
-  height:220px;
-  position:relative;
+/* GALERIA 3D RESPONSIVE */
+.galeria-3d {
+  height: 250px;
+  perspective: 1000px;
   display: flex;
   justify-content: center;
+  align-items: center;
+  margin: 40px 0;
+  width: 100%;
 }
-.cilindro{
-  width:120px;
-  height:100%;
-  position:absolute;
-  transform-style:preserve-3d;
+.cilindro {
+  position: relative;
+  width: 100px;
+  height: 140px;
+  transform-style: preserve-3d;
+  transition: transform 0.1s;
 }
-.cilindro img{
-  position:absolute;
-  width:120px;
-  height:160px;
-  object-fit:cover;
-  border-radius:15px;
-  cursor: pointer;
+.cilindro img {
+  position: absolute;
+  width: 100px; height: 140px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 2px solid #fff;
 }
 
-/* MODAL (CAMBIO 3: Para ver la foto grande) */
+/* MODAL DE IMAGEN */
 #modal {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.9);
-  z-index: 200;
-  justify-content: center;
-  align-items: center;
+  background: rgba(0,0,0,0.95);
+  z-index: 2000;
+  justify-content: center; align-items: center;
 }
 #modal img { max-width: 90%; max-height: 80%; border-radius: 10px; }
 
-.frase{
-  position:absolute;
-  color:#ff4fa1;
-  font-size:14px;
-  animation:fadeUp 2.5s ease forwards;
+/* PANTALLA INICIAL */
+#intro {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  background: radial-gradient(circle at top, #ff5fa2, #2a003d);
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  text-align: center;
 }
-@keyframes fadeUp{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(-40px)}}
+
+.heart {
+  position: fixed;
+  z-index: 5;
+  color: rgba(255, 105, 180, 0.6);
+  pointer-events: none;
+  animation: floatUp linear infinite;
+}
+@keyframes floatUp {
+  0% { transform: translateY(0) scale(0.5); opacity: 0; }
+  10% { opacity: 1; }
+  100% { transform: translateY(-100vh) scale(1.2); opacity: 0; }
+}
 </style>
 </head>
 <body>
 
 <canvas id="stars"></canvas>
 
-<!-- ENTRADA -->
 <div id="intro">
-  <h1>Para ti, mi amor 💖</h1>
-  <button onclick="enter()">Entrar 💕</button>
+  <h1>Para mi amor 💖</h1>
+  <button onclick="iniciar()">Entrar 💕</button>
 </div>
 
-<!-- VENTANA FOTO GRANDE -->
 <div id="modal" onclick="this.style.display='none'">
   <img id="imgModal" src="">
 </div>
 
-<!-- AUDIOS -->
 <audio id="fondo" src="https://files.catbox.moe" loop></audio> 
 <audio id="cancion" src="https://files.catbox.moe"></audio>
 
-<div class="container">
-  <h2>💌 Mensaje de amor 💌</h2>
-  <div class="carta" onclick="fraseRandom(event)">
-    <div id="texto"></div>
+<div class="main-content">
+  
+  <div class="glass-panel">
+    <h2>💌 Mi Mensaje 💌</h2>
+    <div class="carta">
+      <div id="texto"></div>
+    </div>
   </div>
 
-  <h2>🎵 Nuestra canción 🎵</h2>
-  <div class="player">
-    <img src="https://i.imgur.com">
-    <br>
-    <button class="music" onclick="toggleCancion()">Reproducir / Pausar</button>
+  <div class="glass-panel">
+    <h2>🎵 Nuestra Canción 🎵</h2>
+    <div class="player">
+      <img src="https://i.imgur.com">
+      <br>
+      <button onclick="toggleMusica()">Reproducir / Pausar</button>
+    </div>
   </div>
 
-  <h2>📸 Nuestros recuerdos 📸</h2>
-  <div class="galeria">
-    <div class="cilindro" id="cilindro"></div>
+  <div class="glass-panel" style="overflow: hidden;">
+    <h2>📸 Recuerdos 📸</h2>
+    <div class="galeria-3d">
+      <div class="cilindro" id="cilindro"></div>
+    </div>
   </div>
+
 </div>
 
 <script>
-/* ===== FUNCIONES DE AUDIO ===== */
-const fondo=document.getElementById('fondo');
-const cancion=document.getElementById('cancion');
+const audioFondo = document.getElementById('fondo');
+const audioCancion = document.getElementById('cancion');
 
-function enter(){
-  document.getElementById('intro').style.display='none';
-  fondo.volume=0.4;
-  fondo.play();
-  escribir();
+function iniciar() {
+  document.getElementById('intro').style.display = 'none';
+  audioFondo.volume = 0.3;
+  audioFondo.play();
+  escribirTexto();
 }
 
-function toggleCancion(){
-  if(cancion.paused){fondo.pause();cancion.play();}
-  else{cancion.pause();fondo.play();}
-}
+const mensaje = `¡Feliz San Valentín, mi amor! 🤎\n\nEres lo más bonito que me ha pasado. Gracias por cada risa y por ser mi compañera. Te amo con todo mi corazón, cebollín.`;
 
-/* ===== TEXTO MECANOGRAFIADO ===== */
-const mensaje=`¡Feliz San Valentín, mi amor!
-
-Hoy, en el día del amor, quiero recordarte lo increíblemente afortunado que soy de tenerte. Eres esa pieza que encaja perfectamente en mi vida, llenándola de colores, risas y momentos inolvidables.
-
-Te amo con todo mi corazón, cebollín 🤎`;
-let idx=0;
-function escribir(){
-  if(idx<mensaje.length){
-    document.getElementById('texto').innerHTML+=mensaje.charAt(idx++);
-    setTimeout(escribir,35);
+let i = 0;
+function escribirTexto() {
+  if (i < mensaje.length) {
+    document.getElementById('texto').innerHTML += mensaje.charAt(i) === '\n' ? '<br>' : mensaje.charAt(i);
+    i++;
+    setTimeout(escribirTexto, 40);
   }
 }
 
-/* ===== CORAZONES ===== */
-setInterval(()=>{
-  const h=document.createElement('div');
-  h.className='heart';
-  h.innerHTML='❤';
-  h.style.left=Math.random()*100+'vw';
-  h.style.fontSize=14+Math.random()*22+'px';
-  h.style.animationDuration=5+Math.random()*4+'s';
-  document.body.appendChild(h);
-  setTimeout(()=>h.remove(),9000);
-},300);
-
-/* ===== FRASES EN LA CARTA ===== */
-const frases=['Te amo 💖','Para siempre 🫶','Mi hogar 🏡','Mi persona favorita 💕','Solo tú 💘'];
-function fraseRandom(e){
-  const f=document.createElement('div');
-  f.className='frase';
-  f.innerText=frases[Math.floor(Math.random()*frases.length)];
-  f.style.left=e.offsetX+'px';
-  f.style.top=e.offsetY+'px';
-  e.currentTarget.appendChild(f);
-  setTimeout(()=>f.remove(),2500);
+function toggleMusica() {
+  if (audioCancion.paused) {
+    audioFondo.pause();
+    audioCancion.play();
+  } else {
+    audioCancion.pause();
+    audioFondo.play();
+  }
 }
 
-/* ===== CILINDRO INTERACTIVO ===== */
-const imagenes=[
- 'https://i.imgur.com',
- 'https://i.imgur.com',
- 'https://i.imgur.com',
- 'https://i.imgur.com',
- 'https://i.imgur.com',
- 'https://i.imgur.com',
- 'https://i.imgur.com'
+/* CILINDRO 3D */
+const fotos = [
+  'https://i.imgur.com', 'https://i.imgur.com',
+  'https://i.imgur.com', 'https://i.imgur.com',
+  'https://i.imgur.com', 'https://i.imgur.com',
+  'https://i.imgur.com'
 ];
-const cilindro=document.getElementById('cilindro');
-let rot=0,auto=true;
 
-imagenes.forEach((src,i)=>{
-  const img=document.createElement('img');
-  img.src=src;
-  img.style.transform=`rotateY(${(360/imagenes.length)*i}deg) translateZ(170px)`;
-  
-  // Abrir en grande al hacer clic
+const cilindro = document.getElementById('cilindro');
+fotos.forEach((url, index) => {
+  const img = document.createElement('img');
+  img.src = url;
+  const angle = (360 / fotos.length) * index;
+  img.style.transform = `rotateY(${angle}deg) translateZ(150px)`;
   img.onclick = () => {
-    document.getElementById('imgModal').src = src;
+    document.getElementById('imgModal').src = url;
     document.getElementById('modal').style.display = 'flex';
   };
-  
   cilindro.appendChild(img);
 });
 
-function animate(){
-  if(auto){
-    rot+=0.3;
-    cilindro.style.transform=`rotateY(${rot}deg)`;
-  }
-  requestAnimationFrame(animate);
+let rotation = 0;
+function animarCilindro() {
+  rotation -= 0.5;
+  cilindro.style.transform = `rotateY(${rotation}deg)`;
+  requestAnimationFrame(animarCilindro);
 }
-animate();
+animarCilindro();
 
-/* ===== ESTRELLAS DEL FONDO ===== */
-const canvas=document.getElementById('stars');
-const ctx=canvas.getContext('2d');
-function resize(){canvas.width=innerWidth;canvas.height=innerHeight}
-resize();window.onresize=resize;
-let stars=[];
-for(let i=0;i<120;i++)stars.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*1.5});
-function drawStars(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  ctx.fillStyle='white';
-  stars.forEach(s=>{
-    ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fill();
-    s.y+=0.1;if(s.y>canvas.height)s.y=0;
+/* ESTRELLAS */
+const canvas = document.getElementById('stars');
+const ctx = canvas.getContext('2d');
+function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+window.onresize = resize; resize();
+
+let stars = Array.from({length: 100}, () => ({
+  x: Math.random() * canvas.width,
+  y: Math.random() * canvas.height,
+  r: Math.random() * 1.5,
+  v: 0.2 + Math.random() * 0.5
+}));
+
+function draw() {
+  ctx.clearRect(0,0,canvas.width, canvas.height);
+  ctx.fillStyle = "#fff";
+  stars.forEach(s => {
+    ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI*2); ctx.fill();
+    s.y += s.v; if(s.y > canvas.height) s.y = 0;
   });
-  requestAnimationFrame(drawStars);
+  requestAnimationFrame(draw);
 }
-drawStars();
+draw();
+
+/* CORAZONES */
+setInterval(() => {
+  const h = document.createElement('div');
+  h.className = 'heart'; h.innerHTML = '❤';
+  h.style.left = Math.random() * 100 + 'vw';
+  h.style.fontSize = (10 + Math.random() * 20) + 'px';
+  h.style.animationDuration = (4 + Math.random() * 3) + 's';
+  document.body.appendChild(h);
+  setTimeout(() => h.remove(), 7000);
+}, 400);
 </script>
 </body>
 </html>
