@@ -8,40 +8,41 @@
 <style>
 body{
  margin:0;
- font-family:Segoe UI, sans-serif;
+ font-family:Segoe UI,sans-serif;
  background:#1a0015;
- color:#fff;
- overflow-x:hidden;
+ color:white;
+ overflow:hidden;
 }
 
-/* PORTADA */
-#cover{
+/* CORAZONES */
+.heart{
  position:fixed;
- inset:0;
- display:flex;
- justify-content:center;
- align-items:center;
- background:linear-gradient(#ffb3d9,#ff80bf);
- z-index:999;
+ top:-10%;
+ font-size:20px;
+ animation:fall linear infinite;
+ color:#ff66b2;
+}
+
+@keyframes fall{
+ to{
+  transform:translateY(110vh);
+  opacity:0;
+ }
+}
+
+/* CARDS */
+.card{
+ background:rgba(255,230,242,.95);
+ color:#5a0033;
+ margin:25px auto;
+ padding:24px;
+ width:92%;
+ max-width:520px;
+ border-radius:26px;
+ box-shadow:0 10px 30px rgba(0,0,0,.3);
  text-align:center;
-}
-
-.coverCard{
- background:rgba(255,255,255,.25);
- padding:40px;
- border-radius:30px;
- backdrop-filter:blur(12px);
- animation:float 4s ease-in-out infinite;
-}
-
-.coverCard h1{
- color:#800040;
- margin:0;
-}
-
-.coverCard p{
- color:#800040;
- font-size:16px;
+ z-index:2;
+ position:relative;
 }
 
 button{
@@ -52,82 +53,79 @@ button{
  color:white;
  font-size:18px;
  cursor:pointer;
- margin-top:15px;
 }
 
-/* FLOAT */
+/* PORTADA */
+#cover{
+ position:fixed;
+ inset:0;
+ background:linear-gradient(#ffb3d9,#ff80bf);
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ z-index:999;
+}
+
+.coverCard{
+ background:rgba(255,255,255,.3);
+ padding:40px;
+ border-radius:30px;
+ backdrop-filter:blur(12px);
+ animation:float 4s infinite;
+ text-align:center;
+}
+
 @keyframes float{
  0%,100%{transform:translateY(0)}
  50%{transform:translateY(-12px)}
 }
 
-/* CARDS */
-.card{
- background:#ffe6f2;
- color:#5a0033;
- margin:28px auto;
- padding:24px;
- width:92%;
- max-width:520px;
- border-radius:26px;
- box-shadow:0 10px 35px rgba(0,0,0,.25);
- border:3px dashed #ff99cc;
-}
-
-.card h2{
- text-align:center;
- margin-top:0;
-}
-
-/* IMAGES */
-.circleImg{
- width:170px;
- height:170px;
- border-radius:50%;
- object-fit:cover;
- display:block;
- margin:15px auto;
- border:6px solid #ffb3d9;
-}
-
-/* COUNTER */
-.counter{
- text-align:center;
- font-size:18px;
- line-height:1.6;
-}
-
-/* SONG PLAYER */
-.player{
- text-align:center;
-}
-
-.player button{
- font-size:16px;
-}
-
-/* CAROUSEL */
-.carousel{
- display:flex;
- gap:18px;
- overflow-x:auto;
- scroll-snap-type:x mandatory;
- padding:10px;
-}
-
-.carousel img{
- width:220px;
+/* CILINDRO */
+.scene{
+ width:260px;
  height:300px;
- object-fit:cover;
- border-radius:22px;
- scroll-snap-align:center;
- box-shadow:0 8px 25px rgba(0,0,0,.3);
+ margin:30px auto;
+ perspective:900px;
 }
 
-/* FINAL TEXT */
-.finalText{
- line-height:1.7;
- font-size:16px;
+.cylinder{
+ width:100%;
+ height:100%;
+ position:relative;
+ transform-style:preserve-3d;
+ animation:spin 18s linear infinite;
+}
+
+.cylinder img{
+ position:absolute;
+ width:200px;
+ height:280px;
+ left:30px;
+ top:10px;
+ border-radius:20px;
+ object-fit:cover;
+ box-shadow:0 10px 25px rgba(0,0,0,.4);
+}
+
+@keyframes spin{
+ from{transform:rotateY(0deg)}
+ to{transform:rotateY(360deg)}
+}
+
+/* FRASES */
+.loveText{
+ position:fixed;
+ font-size:18px;
+ color:#ffb3d9;
+ animation:floatUp 3s ease-out forwards;
+ pointer-events:none;
+}
+
+@keyframes floatUp{
+ to{
+  transform:translateY(-120px);
+  opacity:0;
+ }
 }
 </style>
 </head>
@@ -138,103 +136,87 @@ button{
 <div id="cover">
  <div class="coverCard">
   <h1>Para Marlen 💖</h1>
-  <p>Algo especial te está esperando…</p>
+  <p>Toca para comenzar</p>
   <button onclick="enter()">Entrar ❤️</button>
  </div>
 </div>
 
 <!-- AUDIO -->
 <audio id="bgMusic" loop>
- <source src="https://files.catbox.moe/4nrc17.mp3">
+ <source src="https://files.catbox.moe/lm504y.mp3">
 </audio>
 
 <audio id="ourSong">
  <source src="https://files.catbox.moe/egr68n.mp3">
 </audio>
 
-<audio id="secondSong">
- <source src="https://files.catbox.moe/4nrc17.mp3">
-</audio>
-
-<!-- SECCIÓN AMOR -->
+<!-- SECCIÓN -->
 <div class="card">
-<h2>💞 Mi amor eterno 💞</h2>
-<img class="circleImg" src="https://i.imgur.com/m2rqpiu.jpeg">
-<div class="player">
- <button onclick="toggleSong()">▶️ Reproducir nuestra canción</button>
-</div>
-</div>
-
-<!-- CONTADOR -->
-<div class="card">
-<h2>⏳ Nuestro tiempo juntos ⏳</h2>
-<div class="counter" id="counter"></div>
-</div>
-
-<!-- SEGUNDA CANCIÓN -->
-<div class="card">
-<h2>🎵 Nuestras canciones 🎵</h2>
-<img class="circleImg" src="https://i.imgur.com/jbyIzFT.jpeg">
-<div class="player">
- <button onclick="toggleSecond()">▶️ Reproducir</button>
-</div>
+ <h2>💞 Mi amor eterno 💞</h2>
+ <button onclick="toggleSong()">🎵 Nuestra canción</button>
 </div>
 
 <!-- RECUERDOS -->
 <div class="card">
-<h2>📸 Nuestros recuerdos 📸</h2>
-<div class="carousel">
- <img src="https://i.imgur.com/tpH81jp.jpeg">
- <img src="https://i.imgur.com/mOQ2xhz.jpeg">
- <img src="https://i.imgur.com/ra5P475.jpeg">
- <img src="https://i.imgur.com/0xnanwq.jpeg">
- <img src="https://i.imgur.com/2Xh4XhC.jpeg">
-</div>
-</div>
-
-<!-- MENSAJE FINAL -->
-<div class="card finalText">
-<h2>💌 Mensaje de amor 💌</h2>
-
-¡Feliz San Valentín, mi amor! 🤎<br><br>
-
-Desde el primer momento en que llegaste a mi vida, todo cambió.  
-Aprendí que el amor vive en los detalles, en las risas, en los silencios cómodos y en los abrazos que sanan.<br><br>
-
-Gracias por ser mi apoyo, mi calma y mi alegría diaria.  
-Prometo cuidarte, elegirte y amarte hoy y siempre.  
-Eres mi hogar 💞
+ <h2>📸 Nuestros recuerdos 📸</h2>
+ <div class="scene">
+  <div class="cylinder">
+   <img src="https://i.imgur.com/m2rqpiu.jpeg" style="transform:rotateY(0deg) translateZ(300px)">
+   <img src="https://i.imgur.com/jbyIzFT.jpeg" style="transform:rotateY(72deg) translateZ(300px)">
+   <img src="https://i.imgur.com/tpH81jp.jpeg" style="transform:rotateY(144deg) translateZ(300px)">
+   <img src="https://i.imgur.com/mOQ2xhz.jpeg" style="transform:rotateY(216deg) translateZ(300px)">
+   <img src="https://i.imgur.com/ra5P475.jpeg" style="transform:rotateY(288deg) translateZ(300px)">
+  </div>
+ </div>
 </div>
 
 <script>
+/* ENTRAR */
 function enter(){
  document.getElementById("cover").style.display="none";
- bgMusic.play().catch(()=>{});
+ bgMusic.play();
+ createHearts();
 }
 
+/* MUSICA */
 function toggleSong(){
- ourSong.paused ? ourSong.play() : ourSong.pause();
+ if(ourSong.paused){
+  bgMusic.pause();
+  ourSong.play();
+ }else{
+  ourSong.pause();
+  bgMusic.play();
+ }
 }
 
-function toggleSecond(){
- secondSong.paused ? secondSong.play() : secondSong.pause();
+/* CORAZONES */
+function createHearts(){
+ setInterval(()=>{
+  const h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="💖";
+  h.style.left=Math.random()*100+"vw";
+  h.style.animationDuration=3+Math.random()*3+"s";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),6000);
+ },400);
 }
 
-/* COUNTER */
-const start=new Date("2024-02-14");
-function update(){
- const now=new Date();
- const diff=now-start;
- const d=Math.floor(diff/86400000);
- const h=Math.floor(diff/3600000)%24;
- const m=Math.floor(diff/60000)%60;
- const s=Math.floor(diff/1000)%60;
+/* FRASES */
+const phrases=[
+ "Te amo 💖","Siempre contigo 💕","Eres mi todo ❤️",
+ "Mi persona favorita 😍","Contigo siempre 💞"
+];
 
- counter.innerHTML=
- d+" días<br>"+h+" horas<br>"+m+" minutos<br>"+s+" segundos 💗";
-}
-setInterval(update,1000);
-update();
+document.addEventListener("click",e=>{
+ const t=document.createElement("div");
+ t.className="loveText";
+ t.style.left=e.clientX+"px";
+ t.style.top=e.clientY+"px";
+ t.innerHTML=phrases[Math.floor(Math.random()*phrases.length)];
+ document.body.appendChild(t);
+ setTimeout(()=>t.remove(),3000);
+});
 </script>
 
 </body>
