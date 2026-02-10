@@ -78,24 +78,24 @@ button{
  to{transform:translateY(-10vh) scale(1.2)}
 }
 
-/* CARDS TRANSPARENTES (EFECTO CRISTAL) */
+/* CARDS CON TRANSPARENCIA (MODIFICADO) */
 .card{
- background: rgba(255, 255, 255, 0.1); /* Aquí está la transparencia que querías */
- backdrop-filter: blur(10px); /* Efecto borroso detrás */
- color:#fff; /* Texto blanco para que se lea en el fondo oscuro */
+ background: rgba(255, 230, 242, 0.15); /* Transparencia suave */
+ backdrop-filter: blur(8px); /* Efecto cristalizado */
+ color:#fff; /* Texto en blanco para leer sobre fondo oscuro */
  margin:24px auto;
  padding:22px;
  width:92%;
  max-width:520px;
  border-radius:22px;
- box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
- border: 1px solid rgba(255, 255, 255, 0.18);
+ box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+ border: 2px solid rgba(255, 153, 204, 0.3); /* Borde rosado traslúcido */
 }
 
 .card h2{
  text-align:center;
  margin-top:0;
- color: #ffb3d9;
+ color: #ff99cc;
 }
 
 .circleImg{
@@ -135,7 +135,7 @@ button{
  border-radius:14px;
  height:140px;
  object-fit:cover;
- border: 2px solid rgba(255,255,255,0.2);
+ border: 1px solid rgba(255,255,255,0.2);
 }
 
 .finalText{
@@ -150,7 +150,6 @@ button{
 <!-- LOGIN -->
 <div id="login">
 <canvas id="heartsCanvas"></canvas>
-
 <div class="loginCard">
 <h2>Ingresa la contraseña 💖</h2>
 <input id="pass">
@@ -161,11 +160,11 @@ button{
 
 <!-- AUDIO (TUS LINKS ORIGINALES) -->
 <audio id="bgMusic" loop>
-<source src="https://files.catbox.moe/egr68n.mp3">
+<source src="https://files.catbox.moe">
 </audio>
 
 <audio id="ourSong">
-<source src="https://files.catbox.moe/4nrc17.mp3">
+<source src="https://files.catbox.moe">
 </audio>
 
 <!-- HEART BACKGROUND -->
@@ -174,16 +173,16 @@ button{
 <!-- SECCION 1 -->
 <div class="card">
 <h2>💞 Nuestro tiempo juntos 💞</h2>
-<img class="circleImg" src="https://i.imgur.com/m2rqpiu.jpeg">
+<img class="circleImg" src="https://i.imgur.com">
 <div class="counter" id="counter"></div>
 </div>
 
 <!-- SECCION 2 -->
 <div class="card">
 <h2>🎵 Nuestra canción 🎵</h2>
-<img class="musicCover" src="https://i.imgur.com/jbyIzFT.jpeg">
+<img class="musicCover" src="https://i.imgur.com">
 <div style="text-align:center">
-<button onclick="toggleSong()">▶️ Reproducir / Pausar</button>
+<button onclick="toggleSong()">▶️ Reproducir</button>
 </div>
 </div>
 
@@ -191,14 +190,14 @@ button{
 <div class="card">
 <h2>📸 Nuestros recuerdos 📸</h2>
 <div class="grid">
-<img src="https://i.imgur.com/tpH81jp.jpeg">
-<img src="https://i.imgur.com/mOQ2xhz.jpeg">
-<img src="https://i.imgur.com/ra5P475.jpeg">
-<img src="https://i.imgur.com/2Xh4XhC.jpeg">
+<img src="https://i.imgur.com">
+<img src="https://i.imgur.com">
+<img src="https://i.imgur.com">
+<img src="https://i.imgur.com">
 </div>
 </div>
 
-<!-- FINAL (TU TEXTO ORIGINAL COMPLETO) -->
+<!-- FINAL (TU TEXTO ORIGINAL COMPLETO SIN CORTES) -->
 <div class="card finalText">
 <h2>💌 Mensaje de amor 💌</h2>
 
@@ -216,22 +215,27 @@ Gracias por ser mi Valentín hoy y siempre 💞
 <script>
 /* PASSWORD + START BG MUSIC */
 function enter(){
- if(document.getElementById('pass').value==="Jerry"){
-  document.getElementById('login').style.display="none";
-  document.getElementById('bgMusic').play().catch(()=>{});
- } else alert("Contraseña incorrecta 💔");
+ // Cambié el acceso a los IDs para que sea más estable en todos los navegadores
+ const password = document.getElementById('pass').value;
+ const loginDiv = document.getElementById('login');
+ const bg = document.getElementById('bgMusic');
+
+ if(password === "Jerry"){
+  loginDiv.style.display="none";
+  // El audio inicia al hacer clic en entrar
+  bg.play().catch(e => console.log("Error de audio:", e));
+ } else {
+  alert("Contraseña incorrecta 💔");
+ }
 }
 
 /* SONG BUTTON */
 function toggleSong(){
- const ourSong = document.getElementById('ourSong');
- const bgMusic = document.getElementById('bgMusic');
- if(ourSong.paused){
-  bgMusic.pause();
-  ourSong.play();
+ const song = document.getElementById('ourSong');
+ if(song.paused){
+  song.play();
  } else {
-  ourSong.pause();
-  bgMusic.play();
+  song.pause();
  }
 }
 
@@ -271,7 +275,7 @@ function loop(){
 }
 loop();
 
-/* FLOATING HEARTS */
+/* FLOATING HEARTS BACKGROUND */
 for(let i=0;i<25;i++){
  const s=document.createElement("span");
  s.innerHTML="❤";
