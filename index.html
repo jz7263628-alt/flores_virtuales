@@ -10,39 +10,48 @@ body{
  margin:0;
  font-family:Segoe UI,sans-serif;
  background:#1a0015;
- color:white;
- overflow:hidden;
+ color:#fff;
+ overflow-x:hidden;
 }
 
-/* CORAZONES */
-.heart{
+/* ===== FONDO CORAZONES (ORIGINAL) ===== */
+.bgHearts span{
  position:fixed;
- top:-10%;
- font-size:20px;
- animation:fall linear infinite;
- color:#ff66b2;
+ color:#ff4da6;
+ animation:rise linear infinite;
+ opacity:.25;
+ pointer-events:none;
 }
 
-@keyframes fall{
- to{
-  transform:translateY(110vh);
-  opacity:0;
- }
+@keyframes rise{
+ from{transform:translateY(100vh) scale(.6)}
+ to{transform:translateY(-10vh) scale(1.2)}
 }
 
-/* CARDS */
-.card{
- background:rgba(255,230,242,.95);
- color:#5a0033;
- margin:25px auto;
- padding:24px;
- width:92%;
- max-width:520px;
- border-radius:26px;
- box-shadow:0 10px 30px rgba(0,0,0,.3);
+/* ===== PORTADA ===== */
+#cover{
+ position:fixed;
+ inset:0;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ background:#0a0008;
+ z-index:999;
+}
+
+.coverCard{
+ background:rgba(255,255,255,.12);
+ backdrop-filter:blur(12px);
+ padding:40px;
+ border-radius:25px;
  text-align:center;
- z-index:2;
- position:relative;
+ box-shadow:0 0 40px rgba(255,0,120,.4);
+ animation:float 4s ease-in-out infinite;
+}
+
+@keyframes float{
+ 0%,100%{transform:translateY(0)}
+ 50%{transform:translateY(-10px)}
 }
 
 button{
@@ -51,41 +60,49 @@ button{
  border-radius:30px;
  background:#ff4da6;
  color:white;
- font-size:18px;
+ font-size:17px;
  cursor:pointer;
+ margin-top:12px;
 }
 
-/* PORTADA */
-#cover{
- position:fixed;
- inset:0;
- background:linear-gradient(#ffb3d9,#ff80bf);
- display:flex;
- justify-content:center;
- align-items:center;
- z-index:999;
-}
-
-.coverCard{
- background:rgba(255,255,255,.3);
- padding:40px;
- border-radius:30px;
- backdrop-filter:blur(12px);
- animation:float 4s infinite;
+/* ===== CARDS ===== */
+.card{
+ background:#ffe6f2;
+ color:#5a0033;
+ margin:26px auto;
+ padding:24px;
+ width:92%;
+ max-width:520px;
+ border-radius:26px;
+ box-shadow:0 10px 30px rgba(0,0,0,.25);
+ border:3px dashed #ff99cc;
  text-align:center;
+ position:relative;
+ z-index:2;
 }
 
-@keyframes float{
- 0%,100%{transform:translateY(0)}
- 50%{transform:translateY(-12px)}
+.circleImg{
+ width:170px;
+ height:170px;
+ border-radius:50%;
+ object-fit:cover;
+ display:block;
+ margin:15px auto;
+ border:6px solid #ffb3d9;
 }
 
-/* CILINDRO */
+/* ===== CONTADOR ===== */
+.counter{
+ font-size:18px;
+ line-height:1.6;
+}
+
+/* ===== CILINDRO 3D REAL ===== */
 .scene{
  width:260px;
- height:300px;
+ height:320px;
  margin:30px auto;
- perspective:900px;
+ perspective:1200px;
 }
 
 .cylinder{
@@ -93,7 +110,7 @@ button{
  height:100%;
  position:relative;
  transform-style:preserve-3d;
- animation:spin 18s linear infinite;
+ animation:spin 20s linear infinite;
 }
 
 .cylinder img{
@@ -101,18 +118,26 @@ button{
  width:200px;
  height:280px;
  left:30px;
- top:10px;
- border-radius:20px;
+ top:20px;
+ border-radius:18px;
  object-fit:cover;
- box-shadow:0 10px 25px rgba(0,0,0,.4);
+ box-shadow:0 15px 30px rgba(0,0,0,.45);
 }
+
+.cylinder img:nth-child(1){transform:rotateY(0deg) translateZ(300px);}
+.cylinder img:nth-child(2){transform:rotateY(51deg) translateZ(300px);}
+.cylinder img:nth-child(3){transform:rotateY(102deg) translateZ(300px);}
+.cylinder img:nth-child(4){transform:rotateY(153deg) translateZ(300px);}
+.cylinder img:nth-child(5){transform:rotateY(204deg) translateZ(300px);}
+.cylinder img:nth-child(6){transform:rotateY(255deg) translateZ(300px);}
+.cylinder img:nth-child(7){transform:rotateY(306deg) translateZ(300px);}
 
 @keyframes spin{
  from{transform:rotateY(0deg)}
  to{transform:rotateY(360deg)}
 }
 
-/* FRASES */
+/* ===== FRASES AL TOCAR ===== */
 .loveText{
  position:fixed;
  font-size:18px;
@@ -132,90 +157,129 @@ button{
 
 <body>
 
-<!-- PORTADA -->
+<!-- ===== PORTADA ===== -->
 <div id="cover">
  <div class="coverCard">
-  <h1>Para Marlen 💖</h1>
-  <p>Toca para comenzar</p>
+  <h2>Para Marlen 💖</h2>
+  <p>Algo especial te está esperando…</p>
   <button onclick="enter()">Entrar ❤️</button>
  </div>
 </div>
 
-<!-- AUDIO -->
+<!-- ===== AUDIO ===== -->
 <audio id="bgMusic" loop>
- <source src="https://files.catbox.moe/lm504y.mp3">
+ <source src="https://files.catbox.moe/lm504y.mp3" type="audio/mpeg">
 </audio>
 
 <audio id="ourSong">
- <source src="https://files.catbox.moe/egr68n.mp3">
+ <source src="https://files.catbox.moe/egr68n.mp3" type="audio/mpeg">
 </audio>
 
-<!-- SECCIÓN -->
+<!-- ===== FONDO CORAZONES ===== -->
+<div class="bgHearts" id="bgHearts"></div>
+
+<!-- ===== SECCIÓN AMOR ===== -->
 <div class="card">
  <h2>💞 Mi amor eterno 💞</h2>
- <button onclick="toggleSong()">🎵 Nuestra canción</button>
+ <img class="circleImg" src="https://i.imgur.com/m2rqpiu.jpeg">
 </div>
 
-<!-- RECUERDOS -->
+<!-- ===== CONTADOR ===== -->
+<div class="card">
+ <h2>⏳ Nuestro tiempo juntos ⏳</h2>
+ <div class="counter" id="counter"></div>
+</div>
+
+<!-- ===== NUESTRA CANCIÓN ===== -->
+<div class="card">
+ <h2>🎵 Nuestra canción 🎵</h2>
+ <button id="playOurSong">▶ Reproducir</button>
+</div>
+
+<!-- ===== RECUERDOS ===== -->
 <div class="card">
  <h2>📸 Nuestros recuerdos 📸</h2>
  <div class="scene">
   <div class="cylinder">
-   <img src="https://i.imgur.com/m2rqpiu.jpeg" style="transform:rotateY(0deg) translateZ(300px)">
-   <img src="https://i.imgur.com/jbyIzFT.jpeg" style="transform:rotateY(72deg) translateZ(300px)">
-   <img src="https://i.imgur.com/tpH81jp.jpeg" style="transform:rotateY(144deg) translateZ(300px)">
-   <img src="https://i.imgur.com/mOQ2xhz.jpeg" style="transform:rotateY(216deg) translateZ(300px)">
-   <img src="https://i.imgur.com/ra5P475.jpeg" style="transform:rotateY(288deg) translateZ(300px)">
+   <img src="https://i.imgur.com/m2rqpiu.jpeg">
+   <img src="https://i.imgur.com/jbyIzFT.jpeg">
+   <img src="https://i.imgur.com/tpH81jp.jpeg">
+   <img src="https://i.imgur.com/mOQ2xhz.jpeg">
+   <img src="https://i.imgur.com/ra5P475.jpeg">
+   <img src="https://i.imgur.com/0xnanwq.jpeg">
+   <img src="https://i.imgur.com/2Xh4XhC.jpeg">
   </div>
  </div>
 </div>
 
+<!-- ===== MENSAJE FINAL ===== -->
+<div class="card">
+ <h2>💌 Mensaje de amor 💌</h2>
+ <p>
+ Feliz San Valentín, mi amor 🤎<br><br>
+ Gracias por ser mi lugar seguro, mi alegría diaria y mi persona favorita.
+ Prometo seguir cuidando este amor hoy y siempre 💞
+ </p>
+</div>
+
 <script>
-/* ENTRAR */
+/* ===== ENTRAR ===== */
 function enter(){
  document.getElementById("cover").style.display="none";
+ bgMusic.play().catch(()=>{});
+}
+
+/* ===== CORAZONES ===== */
+for(let i=0;i<25;i++){
+ const s=document.createElement("span");
+ s.innerHTML="❤";
+ s.style.left=Math.random()*100+"vw";
+ s.style.fontSize=(16+Math.random()*30)+"px";
+ s.style.animationDuration=(8+Math.random()*10)+"s";
+ bgHearts.appendChild(s);
+}
+
+/* ===== CONTADOR ===== */
+const start=new Date("2024-02-14");
+function update(){
+ const now=new Date();
+ const diff=now-start;
+ const d=Math.floor(diff/86400000);
+ const h=Math.floor(diff/3600000)%24;
+ const m=Math.floor(diff/60000)%60;
+ const s=Math.floor(diff/1000)%60;
+ counter.innerHTML=
+ d+" días<br>"+h+" horas<br>"+m+" minutos<br>"+s+" segundos 💗";
+}
+setInterval(update,1000);
+update();
+
+/* ===== MUSICA INTELIGENTE ===== */
+const btn=document.getElementById("playOurSong");
+btn.addEventListener("click",()=>{
+ bgMusic.pause();
+ ourSong.currentTime=0;
+ ourSong.play();
+});
+ourSong.addEventListener("ended",()=>{
  bgMusic.play();
- createHearts();
-}
+});
 
-/* MUSICA */
-function toggleSong(){
- if(ourSong.paused){
-  bgMusic.pause();
-  ourSong.play();
- }else{
-  ourSong.pause();
-  bgMusic.play();
- }
-}
-
-/* CORAZONES */
-function createHearts(){
- setInterval(()=>{
-  const h=document.createElement("div");
-  h.className="heart";
-  h.innerHTML="💖";
-  h.style.left=Math.random()*100+"vw";
-  h.style.animationDuration=3+Math.random()*3+"s";
-  document.body.appendChild(h);
-  setTimeout(()=>h.remove(),6000);
- },400);
-}
-
-/* FRASES */
-const phrases=[
- "Te amo 💖","Siempre contigo 💕","Eres mi todo ❤️",
- "Mi persona favorita 😍","Contigo siempre 💞"
+/* ===== FRASES AL TOCAR ===== */
+const frases=[
+ "Te amo 💖","Siempre juntos 💕",
+ "Mi persona favorita 😍",
+ "Nuestro amor ❤️","Para siempre 💞"
 ];
 
 document.addEventListener("click",e=>{
- const t=document.createElement("div");
- t.className="loveText";
- t.style.left=e.clientX+"px";
- t.style.top=e.clientY+"px";
- t.innerHTML=phrases[Math.floor(Math.random()*phrases.length)];
- document.body.appendChild(t);
- setTimeout(()=>t.remove(),3000);
+ const f=document.createElement("div");
+ f.className="loveText";
+ f.innerHTML=frases[Math.floor(Math.random()*frases.length)];
+ f.style.left=e.clientX+"px";
+ f.style.top=e.clientY+"px";
+ document.body.appendChild(f);
+ setTimeout(()=>f.remove(),3000);
 });
 </script>
 
