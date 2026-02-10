@@ -15,6 +15,7 @@ body{
 }
 
 /* LOGIN */
+
 #login{
  position:fixed;
  inset:0;
@@ -66,6 +67,7 @@ button{
 }
 
 /* HEART BG */
+
 .bgHearts span{
  position:fixed;
  color:#ff4da6;
@@ -78,24 +80,23 @@ button{
  to{transform:translateY(-10vh) scale(1.2)}
 }
 
-/* CARDS CON TRANSPARENCIA (MODIFICADO) */
+/* CARDS */
+
 .card{
- background: rgba(255, 230, 242, 0.15); /* Transparencia suave */
- backdrop-filter: blur(8px); /* Efecto cristalizado */
- color:#fff; /* Texto en blanco para leer sobre fondo oscuro */
+ background:#ffe6f2;
+ color:#5a0033;
  margin:24px auto;
  padding:22px;
  width:92%;
  max-width:520px;
  border-radius:22px;
- box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
- border: 2px solid rgba(255, 153, 204, 0.3); /* Borde rosado traslúcido */
+ box-shadow:0 8px 30px rgba(0,0,0,.25);
+ border:3px dashed #ff99cc;
 }
 
 .card h2{
  text-align:center;
  margin-top:0;
- color: #ff99cc;
 }
 
 .circleImg{
@@ -135,7 +136,6 @@ button{
  border-radius:14px;
  height:140px;
  object-fit:cover;
- border: 1px solid rgba(255,255,255,0.2);
 }
 
 .finalText{
@@ -150,6 +150,7 @@ button{
 <!-- LOGIN -->
 <div id="login">
 <canvas id="heartsCanvas"></canvas>
+
 <div class="loginCard">
 <h2>Ingresa la contraseña 💖</h2>
 <input id="pass">
@@ -158,13 +159,13 @@ button{
 </div>
 </div>
 
-<!-- AUDIO (TUS LINKS ORIGINALES) -->
+<!-- AUDIO -->
 <audio id="bgMusic" loop>
-<source src="https://files.catbox.moe">
+<source src="https://files.catbox.moe/egr68n.mp3">
 </audio>
 
 <audio id="ourSong">
-<source src="https://files.catbox.moe">
+<source src="https://files.catbox.moe/4nrc17.mp3">
 </audio>
 
 <!-- HEART BACKGROUND -->
@@ -173,14 +174,14 @@ button{
 <!-- SECCION 1 -->
 <div class="card">
 <h2>💞 Nuestro tiempo juntos 💞</h2>
-<img class="circleImg" src="https://i.imgur.com">
+<img class="circleImg" src="https://i.imgur.com/m2rqpiu.jpeg">
 <div class="counter" id="counter"></div>
 </div>
 
 <!-- SECCION 2 -->
 <div class="card">
 <h2>🎵 Nuestra canción 🎵</h2>
-<img class="musicCover" src="https://i.imgur.com">
+<img class="musicCover" src="https://i.imgur.com/jbyIzFT.jpeg">
 <div style="text-align:center">
 <button onclick="toggleSong()">▶️ Reproducir</button>
 </div>
@@ -190,14 +191,14 @@ button{
 <div class="card">
 <h2>📸 Nuestros recuerdos 📸</h2>
 <div class="grid">
-<img src="https://i.imgur.com">
-<img src="https://i.imgur.com">
-<img src="https://i.imgur.com">
-<img src="https://i.imgur.com">
+<img src="https://i.imgur.com/tpH81jp.jpeg">
+<img src="https://i.imgur.com/mOQ2xhz.jpeg">
+<img src="https://i.imgur.com/ra5P475.jpeg">
+<img src="https://i.imgur.com/2Xh4XhC.jpeg">
 </div>
 </div>
 
-<!-- FINAL (TU TEXTO ORIGINAL COMPLETO SIN CORTES) -->
+<!-- FINAL -->
 <div class="card finalText">
 <h2>💌 Mensaje de amor 💌</h2>
 
@@ -213,37 +214,29 @@ Gracias por ser mi Valentín hoy y siempre 💞
 </div>
 
 <script>
+
 /* PASSWORD + START BG MUSIC */
 function enter(){
- // Cambié el acceso a los IDs para que sea más estable en todos los navegadores
- const password = document.getElementById('pass').value;
- const loginDiv = document.getElementById('login');
- const bg = document.getElementById('bgMusic');
-
- if(password === "Jerry"){
-  loginDiv.style.display="none";
-  // El audio inicia al hacer clic en entrar
-  bg.play().catch(e => console.log("Error de audio:", e));
- } else {
-  alert("Contraseña incorrecta 💔");
- }
+ if(pass.value==="Jerry"){
+  login.style.display="none";
+  bgMusic.play().catch(()=>{});
+ } else alert("Contraseña incorrecta 💔");
 }
 
 /* SONG BUTTON */
 function toggleSong(){
- const song = document.getElementById('ourSong');
- if(song.paused){
-  song.play();
+ if(ourSong.paused){
+  ourSong.play();
  } else {
-  song.pause();
+  ourSong.pause();
  }
 }
 
 /* HEART CANVAS LOGIN */
-const c=document.getElementById('heartsCanvas');
+const c=heartsCanvas;
 const ctx=c.getContext("2d");
-c.width=window.innerWidth;
-c.height=window.innerHeight;
+c.width=innerWidth;
+c.height=innerHeight;
 
 let hearts=[];
 
@@ -275,14 +268,14 @@ function loop(){
 }
 loop();
 
-/* FLOATING HEARTS BACKGROUND */
+/* FLOATING HEARTS */
 for(let i=0;i<25;i++){
  const s=document.createElement("span");
  s.innerHTML="❤";
  s.style.left=Math.random()*100+"vw";
  s.style.fontSize=(16+Math.random()*30)+"px";
  s.style.animationDuration=(8+Math.random()*10)+"s";
- document.getElementById('bgHearts').appendChild(s);
+ bgHearts.appendChild(s);
 }
 
 /* COUNTER */
@@ -295,11 +288,12 @@ function update(){
  const m=Math.floor(diff/60000)%60;
  const s=Math.floor(diff/1000)%60;
 
- document.getElementById('counter').innerHTML=
+ counter.innerHTML=
  d+" días<br>"+h+" horas<br>"+m+" minutos<br>"+s+" segundos 💗";
 }
 setInterval(update,1000);
 update();
+
 </script>
 
 </body>
