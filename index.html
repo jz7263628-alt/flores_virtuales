@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Para Marlen 💖</title>
-
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
@@ -15,8 +14,7 @@ html,body{
  color:white;
 }
 
-/* ===== PASSWORD ===== */
-
+/* PASSWORD */
 #lock{
  position:fixed;
  inset:0;
@@ -46,16 +44,27 @@ button{
  margin-top:10px;
 }
 
-/* ===== SPACE ===== */
-
+/* SPACE */
 #space{
  position:fixed;
  inset:0;
  z-index:-1;
 }
 
-/* ===== FRASES ===== */
+/* TITLES */
+h1{
+ text-align:center;
+ color:#ff77cc;
+ text-shadow:0 0 20px #ff4da6;
+ margin-top:30px;
+}
 
+#contador{
+ text-align:center;
+ color:#ffd6f0;
+}
+
+/* FRASES */
 .phrase{
  position:absolute;
  color:#ffb3e6;
@@ -70,8 +79,7 @@ button{
  100%{transform:translateY(-160px);opacity:0;}
 }
 
-/* ===== STICKERS ===== */
-
+/* STICKERS */
 .sticker{
  position:absolute;
  font-size:24px;
@@ -82,26 +90,17 @@ button{
  to{transform:translateY(-200px) rotate(180deg);opacity:0;}
 }
 
-/* ===== TITULOS ===== */
-
-h1{
- text-align:center;
- color:#ff77cc;
- text-shadow:0 0 20px #ff4da6;
-}
-
-/* ===== CARRUSEL ===== */
-
+/* SLIDER */
 .slider{
  overflow:hidden;
  width:100%;
- margin-top:20px;
+ margin-top:30px;
 }
 
 .track{
  display:flex;
  gap:30px;
- animation:scroll 40s linear infinite;
+ animation:scroll 28s linear infinite;
 }
 
 .slide{
@@ -109,7 +108,7 @@ h1{
 }
 
 .slide img{
- height:320px;
+ height:420px;
  border-radius:20px;
  box-shadow:0 0 25px #ff4da6;
 }
@@ -130,8 +129,7 @@ h1{
  to{transform:translateX(-50%);}
 }
 
-/* ===== CARTA ===== */
-
+/* CARD */
 .card{
  max-width:600px;
  margin:60px auto;
@@ -142,8 +140,7 @@ h1{
  line-height:1.6;
 }
 
-/* ===== STORY ===== */
-
+/* STORY */
 .story{
  position:fixed;
  inset:0;
@@ -178,8 +175,7 @@ h1{
  box-shadow:0 0 40px #ff4da6;
 }
 
-/* ===== STAR FALL ===== */
-
+/* STAR FALL */
 .star{
  position:absolute;
  color:white;
@@ -190,16 +186,13 @@ h1{
  to{transform:translateY(120vh) translateX(60px);opacity:0}
 }
 
-/* ===== MUSIC BTN ===== */
-
+/* BUTTONS */
 .musicBtn{
  position:fixed;
  bottom:20px;
  right:20px;
  z-index:10;
 }
-
-/* ===== SECRET BTN ===== */
 
 .secretBtn{
  position:fixed;
@@ -226,6 +219,7 @@ h1{
 <canvas id="space"></canvas>
 
 <h1>Feliz san Valentín mi cebollín 🤎</h1>
+<h2 id="contador"></h2>
 
 <!-- SLIDER -->
 <div class="slider">
@@ -237,7 +231,7 @@ h1{
 <div class="slide"><img src="https://i.imgur.com/mOQ2xhz.jpeg"><div class="caption">Mi lugar seguro</div></div>
 <div class="slide"><img src="https://i.imgur.com/ra5P475.jpeg"><div class="caption">Contigo todo</div></div>
 
-<!-- duplicado para loop -->
+<!-- DUPLICADO PARA LOOP -->
 <div class="slide"><img src="https://i.imgur.com/m2rqpiu.jpeg"><div class="caption">Eres mi paz</div></div>
 <div class="slide"><img src="https://i.imgur.com/jbyIzFT.jpeg"><div class="caption">Mi alegría</div></div>
 <div class="slide"><img src="https://i.imgur.com/tpH81jp.jpeg"><div class="caption">Mi persona favorita</div></div>
@@ -247,12 +241,14 @@ h1{
 
 <!-- CARTA -->
 <div class="card">
-Gracias por existir, por coincidir conmigo, por cada momento,
-cada risa, cada mirada y cada abrazo.
+Gracias por existir, por coincidir conmigo, por cada risa,
+cada momento y cada abrazo.
 No sé qué traerá el futuro,
 pero sí sé que contigo todo se siente más bonito.
 Te amo 🤎
 </div>
+
+<button onclick="regalo()" style="display:block;margin:30px auto;">🎁 Abrir regalo</button>
 
 <!-- STORY -->
 <button class="secretBtn" onclick="openStory()">💌</button>
@@ -275,8 +271,17 @@ Te amo 🤎
 function unlock(){
  if(pass.value==="Jerry"){
   lock.style.display="none";
- }else alert("Contraseña incorrecta");
+ } else alert("Contraseña incorrecta");
 }
+
+/* CONTADOR */
+const inicio = new Date("2024-02-14");
+function actualizarContador(){
+ const hoy=new Date();
+ const dias=Math.floor((hoy-inicio)/86400000);
+ contador.innerText="Llevamos "+dias+" días latiendo juntos 🤎";
+}
+actualizarContador();
 
 /* SPACE */
 const c=space;
@@ -327,6 +332,14 @@ document.onclick=e=>{
  }
 };
 
+/* REGALO */
+function regalo(){
+ for(let i=0;i<40;i++){
+  setTimeout(()=>document.body.click(),i*60);
+ }
+ alert("Eres mi mejor regalo 💖");
+}
+
 /* STORY */
 let slide=0;
 const slides=document.querySelectorAll(".storySlide");
@@ -347,6 +360,13 @@ story.onclick=()=>{
  if(slide>=slides.length) story.style.display="none";
  else showSlide(slide);
 };
+
+/* SWIPE */
+let startX=0;
+document.addEventListener("touchstart",e=>startX=e.touches[0].clientX);
+document.addEventListener("touchend",e=>{
+ if(Math.abs(e.changedTouches[0].clientX-startX)>60) openStory();
+});
 
 /* STAR FALL */
 setInterval(()=>{
