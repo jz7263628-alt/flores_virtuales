@@ -4,135 +4,297 @@
 <meta charset="UTF-8">
 <title>Para Marlen 💖</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- Esta línea es el "truco" maestro para que Imgur deje ver las fotos -->
-<meta name="referrer" content="no-referrer">
 
 <style>
-body { margin:0; font-family:Segoe UI, sans-serif; background:#0a0008; color:#fff; overflow-x:hidden; }
-
-/* EFECTO ESTRELLAS */
-#galaxy {
-  position: fixed; inset: 0; z-index: -1;
-  background-image: 
-    radial-gradient(1px 1px at 20px 30px, #fff, rgba(0,0,0,0)),
-    radial-gradient(1px 1px at 150px 50px, #fff, rgba(0,0,0,0)),
-    radial-gradient(2px 2px at 80px 180px, #ff4da6, rgba(0,0,0,0));
-  background-size: 250px 250px;
-  animation: moveGalaxy 100s linear infinite;
+body{
+ margin:0;
+ font-family:Segoe UI, sans-serif;
+ background:#1a0015;
+ color:#fff;
+ overflow-x:hidden;
 }
-@keyframes moveGalaxy { from {background-position: 0 0;} to {background-position: 1000px 1000px;} }
 
 /* LOGIN */
-#login { position:fixed; inset:0; display:flex; justify-content:center; align-items:center; background:#0a0008; z-index:999; }
-.loginCard { background:rgba(255,255,255,.1); backdrop-filter:blur(15px); padding:40px; border-radius:25px; text-align:center; border: 1px solid #ff4da6; }
 
-/* TARJETAS SÓLIDAS (PARA QUE NO SE PIERDAN LAS FOTOS) */
-.card {
- background:#ffe6f2; color:#5a0033; margin:24px auto; padding:22px; width:92%; max-width:520px;
- border-radius:22px; box-shadow:0 8px 30px rgba(0,0,0,0.4); border:3px dashed #ff99cc; position: relative; z-index: 10;
+#login{
+ position:fixed;
+ inset:0;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ background:#0a0008;
+ z-index:999;
 }
 
-.circleImg, .musicCover { width:160px; height:160px; border-radius:50%; object-fit:cover; display:block; margin:12px auto; border:6px solid #ffb3d9; }
-.musicCover { animation: spin 15s linear infinite; }
-@keyframes spin { from {transform:rotate(0deg)} to {transform:rotate(360deg)} }
+#heartsCanvas{
+ position:absolute;
+ inset:0;
+}
 
-.grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
-.grid img { width:100%; border-radius:14px; height:140px; object-fit:cover; border: 2px solid #ffb3d9; }
+.loginCard{
+ position:relative;
+ background:rgba(255,255,255,.12);
+ backdrop-filter:blur(12px);
+ padding:40px;
+ border-radius:25px;
+ text-align:center;
+ box-shadow:0 0 40px rgba(255,0,120,.4);
+ animation:float 4s ease-in-out infinite;
+}
 
-button { padding:12px 20px; border-radius:20px; background:#ff4da6; color:white; border:none; cursor:pointer; }
+@keyframes float{
+ 0%,100%{transform:translateY(0)}
+ 50%{transform:translateY(-10px)}
+}
+
+input{
+ padding:12px;
+ border-radius:15px;
+ border:none;
+ text-align:center;
+ font-size:16px;
+}
+
+button{
+ padding:12px 20px;
+ border:none;
+ border-radius:20px;
+ background:#ff4da6;
+ color:white;
+ font-size:16px;
+ margin-top:12px;
+ cursor:pointer;
+}
+
+/* HEART BG */
+
+.bgHearts span{
+ position:fixed;
+ color:#ff4da6;
+ animation:rise linear infinite;
+ opacity:.25;
+}
+
+@keyframes rise{
+ from{transform:translateY(100vh) scale(.6)}
+ to{transform:translateY(-10vh) scale(1.2)}
+}
+
+/* CARDS */
+
+.card{
+ background:#ffe6f2;
+ color:#5a0033;
+ margin:24px auto;
+ padding:22px;
+ width:92%;
+ max-width:520px;
+ border-radius:22px;
+ box-shadow:0 8px 30px rgba(0,0,0,.25);
+ border:3px dashed #ff99cc;
+}
+
+.card h2{
+ text-align:center;
+ margin-top:0;
+}
+
+.circleImg{
+ width:160px;
+ height:160px;
+ border-radius:50%;
+ object-fit:cover;
+ display:block;
+ margin:12px auto;
+ border:6px solid #ffb3d9;
+}
+
+.counter{
+ text-align:center;
+ font-size:18px;
+ line-height:1.6;
+}
+
+.musicCover{
+ width:160px;
+ height:160px;
+ border-radius:50%;
+ object-fit:cover;
+ margin:10px auto;
+ display:block;
+ border:6px solid #ffb3d9;
+}
+
+.grid{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:10px;
+}
+
+.grid img{
+ width:100%;
+ border-radius:14px;
+ height:140px;
+ object-fit:cover;
+}
+
+.finalText{
+ line-height:1.6;
+ font-size:16px;
+}
 </style>
 </head>
+
 <body>
 
-<div id="galaxy"></div>
-
+<!-- LOGIN -->
 <div id="login">
- <div class="loginCard">
-  <h2>Clave 💖</h2>
-  <input id="pass" type="password" style="padding:10px; border-radius:10px; text-align:center;">
-  <br><button onclick="enter()">Entrar</button>
- </div>
+<canvas id="heartsCanvas"></canvas>
+
+<div class="loginCard">
+<h2>Ingresa la contraseña 💖</h2>
+<input id="pass">
+<br>
+<button onclick="enter()">Entrar</button>
+</div>
 </div>
 
-<!-- AUDIOS -->
-<audio id="bgMusic" loop preload="auto">
- <source src="https://files.catbox.moe">
+<!-- AUDIO -->
+<audio id="bgMusic" loop>
+<source src="https://files.catbox.moe">
 </audio>
-<audio id="ourSong" preload="auto">
- <source src="https://files.catbox.moe">
+
+<audio id="ourSong">
+<source src="https://files.catbox.moe">
 </audio>
 
-<!-- CONTENIDO -->
+<!-- HEART BACKGROUND -->
+<div class="bgHearts" id="bgHearts"></div>
+
+<!-- SECCION 1 -->
 <div class="card">
- <h2>💞 Nuestro tiempo 💞</h2>
- <img class="circleImg" src="https://i.imgur.com" referrerpolicy="no-referrer">
- <div id="counter" style="text-align:center; font-size:18px; font-weight:bold;"></div>
+<h2>💞 Nuestro tiempo juntos 💞</h2>
+<img class="circleImg" src="https://i.imgur.com">
+<div class="counter" id="counter"></div>
 </div>
 
-<div class="card" style="text-align:center;">
- <h2>🎵 Canción Especial 🎵</h2>
- <img class="musicCover" src="https://i.imgur.com" referrerpolicy="no-referrer">
- <button id="btnPlay" onclick="toggleSong()">▶️ Play / Pausa</button>
-</div>
-
+<!-- SECCION 2 -->
 <div class="card">
- <h2>📸 Recuerdos 📸</h2>
- <div class="grid">
-  <img src="https://i.imgur.com" referrerpolicy="no-referrer">
-  <img src="https://i.imgur.com" referrerpolicy="no-referrer">
-  <img src="https://i.imgur.com" referrerpolicy="no-referrer">
-  <img src="https://i.imgur.com" referrerpolicy="no-referrer">
- </div>
+<h2>🎵 Nuestra canción 🎵</h2>
+<img class="musicCover" src="https://i.imgur.com">
+<div style="text-align:center">
+<button onclick="toggleSong()">▶️ Reproducir</button>
+</div>
 </div>
 
-<div class="card" style="text-align:center;">
- <h2>💌 Mensaje 💌</h2>
- <div id="typewriter" style="line-height:1.6; font-size:17px;"></div>
+<!-- SECCION 3 -->
+<div class="card">
+<h2>📸 Nuestros recuerdos 📸</h2>
+<div class="grid">
+<img src="https://i.imgur.com">
+<img src="https://i.imgur.com">
+<img src="https://i.imgur.com">
+<img src="https://i.imgur.com">
+</div>
+</div>
+
+<!-- FINAL -->
+<div class="card finalText">
+<h2>💌 Mensaje de amor 💌</h2>
+
+¡Feliz San Valentín, mi amor! 🤎<br><br>
+
+Hoy, en el día del amor, quiero recordarte lo increíblemente afortunado que soy de tenerte.  
+Eres esa pieza que encaja perfectamente en mi vida, llenándola de colores, risas y momentos inolvidables.<br><br>
+
+No necesito un día especial para saber cuánto te amo, pero hoy aprovecho para celebrarte, agradecerte por tu paciencia, tu ternura y por ser mi compañera de aventuras.<br><br>
+
+Prometo seguir construyendo este camino contigo, cuidando nuestro amor como el tesoro más preciado.  
+Gracias por ser mi Valentín hoy y siempre 💞
 </div>
 
 <script>
+
+/* PASSWORD + START BG MUSIC */
 function enter(){
- if(document.getElementById('pass').value === "Jerry"){
-  document.getElementById('login').style.display="none";
-  document.getElementById('bgMusic').play().catch(()=>{});
-  startTypewriter();
- } else { alert("Incorrecto 💔"); }
+ if(pass.value==="Jerry"){
+  login.style.display="none";
+  bgMusic.play().catch(()=>{});
+ } else alert("Contraseña incorrecta 💔");
 }
 
+/* SONG BUTTON */
 function toggleSong(){
- const special = document.getElementById('ourSong');
- const bg = document.getElementById('bgMusic');
- const btn = document.getElementById('btnPlay');
- 
- if(special.paused){
-  bg.pause();
-  special.play();
-  btn.innerHTML = "⏸️ Pausar";
+ if(ourSong.paused){
+  ourSong.play();
  } else {
-  special.pause();
-  bg.play(); // Aquí nos aseguramos de que el FONDO REGRESE
-  btn.innerHTML = "▶️ Reproducir";
+  ourSong.pause();
  }
 }
 
-const mensaje = "¡Feliz San Valentín, mi amor! 🤎 Gracias por ser mi compañera de aventuras hoy y siempre. Eres mi universo entero 💞";
-let idx = 0;
-function startTypewriter() {
- if (idx < mensaje.length) {
-  document.getElementById("typewriter").innerHTML += mensaje.charAt(idx);
-  idx++; setTimeout(startTypewriter, 40);
- }
+/* HEART CANVAS LOGIN */
+const c=heartsCanvas;
+const ctx=c.getContext("2d");
+c.width=innerWidth;
+c.height=innerHeight;
+
+let hearts=[];
+
+function heart(){
+ this.x=Math.random()*c.width;
+ this.y=c.height+20;
+ this.s=10+Math.random()*18;
+ this.v=1+Math.random()*2;
 }
 
-const start = new Date("2024-02-14");
-setInterval(() => {
- const diff = new Date() - start;
- const d = Math.floor(diff/86400000);
- const h = Math.floor(diff/3600000)%24;
- const m = Math.floor(diff/60000)%60;
- const s = Math.floor(diff/1000)%60;
- document.getElementById('counter').innerHTML= d+"d "+h+"h "+m+"m "+s+"s 💗";
-}, 1000);
+function drawHeart(x,y,s){
+ ctx.beginPath();
+ ctx.moveTo(x,y);
+ ctx.bezierCurveTo(x-s,y-s,x-2*s,y+s,x,y+2*s);
+ ctx.bezierCurveTo(x+2*s,y+s,x+s,y-s,x,y);
+ ctx.fillStyle="rgba(255,80,150,.8)";
+ ctx.fill();
+}
+
+function loop(){
+ ctx.clearRect(0,0,c.width,c.height);
+ if(Math.random()<.2) hearts.push(new heart());
+ hearts.forEach((h,i)=>{
+  h.y-=h.v;
+  drawHeart(h.x,h.y,h.s/2);
+  if(h.y<-40) hearts.splice(i,1);
+ });
+ requestAnimationFrame(loop);
+}
+loop();
+
+/* FLOATING HEARTS */
+for(let i=0;i<25;i++){
+ const s=document.createElement("span");
+ s.innerHTML="❤";
+ s.style.left=Math.random()*100+"vw";
+ s.style.fontSize=(16+Math.random()*30)+"px";
+ s.style.animationDuration=(8+Math.random()*10)+"s";
+ bgHearts.appendChild(s);
+}
+
+/* COUNTER */
+const start=new Date("2024-02-14");
+function update(){
+ const now=new Date();
+ const diff=now-start;
+ const d=Math.floor(diff/86400000);
+ const h=Math.floor(diff/3600000)%24;
+ const m=Math.floor(diff/60000)%60;
+ const s=Math.floor(diff/1000)%60;
+
+ counter.innerHTML=
+ d+" días<br>"+h+" horas<br>"+m+" minutos<br>"+s+" segundos 💗";
+}
+setInterval(update,1000);
+update();
+
 </script>
+
 </body>
 </html>
