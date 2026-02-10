@@ -99,9 +99,9 @@ button{
  margin-top:0;
 }
 
-/* IMAGES */
+/* PROFILE IMAGE */
 
-.circleImg, .musicCover{
+.circleImg{
  width:180px;
  height:180px;
  border-radius:50%;
@@ -111,7 +111,27 @@ button{
  border:6px solid #ffb3d9;
 }
 
-/* GRID */
+/* COUNTER */
+
+.counter{
+ text-align:center;
+ font-size:18px;
+ line-height:1.6;
+}
+
+/* MUSIC */
+
+.musicCover{
+ width:180px;
+ height:180px;
+ border-radius:50%;
+ object-fit:cover;
+ margin:10px auto;
+ display:block;
+ border:6px solid #ffb3d9;
+}
+
+/* COLLAGE */
 
 .grid{
  display:grid;
@@ -126,15 +146,11 @@ button{
  object-fit:cover;
 }
 
-/* MUSIC BUTTON BIG */
+/* FINAL */
 
-.bigMusicBtn{
- display:block;
- width:100%;
- padding:14px;
- font-size:18px;
- background:#ff2f92;
- margin-top:10px;
+.finalText{
+ line-height:1.6;
+ font-size:16px;
 }
 
 </style>
@@ -145,6 +161,7 @@ button{
 <!-- LOGIN -->
 <div id="login">
 <canvas id="heartsCanvas"></canvas>
+
 <div class="loginCard">
 <h2>Ingresa la contraseña 💖</h2>
 <input id="pass">
@@ -153,25 +170,24 @@ button{
 </div>
 </div>
 
+<!-- BG HEARTS -->
 <div class="bgHearts" id="bgHearts"></div>
 
-<!-- TIEMPO -->
+<!-- SECCION 1 -->
 <div class="card">
 <h2>💞 Nuestro tiempo juntos 💞</h2>
 <img class="circleImg" src="https://i.imgur.com/m2rqpiu.jpeg">
-<div id="counter"></div>
+<div class="counter" id="counter"></div>
 </div>
 
-<!-- MUSICA -->
+<!-- SECCION 2 -->
 <div class="card">
-<h2>🎵 Nuestras canciones 🎵</h2>
+<h2>🎵 Nuestra canción 🎵</h2>
 <img class="musicCover" src="https://i.imgur.com/jbyIzFT.jpeg">
-
-<button class="bigMusicBtn" onclick="playBG()">▶️ Música de fondo</button>
-<button class="bigMusicBtn" onclick="playSong()">💿 Nuestra canción</button>
+<button onclick="toggleSong()">💿 Reproducir / Pausar</button>
 </div>
 
-<!-- RECUERDOS -->
+<!-- SECCION 3 -->
 <div class="card">
 <h2>📸 Nuestros recuerdos 📸</h2>
 <div class="grid">
@@ -182,37 +198,40 @@ button{
 </div>
 </div>
 
-<!-- MENSAJE -->
-<div class="card">
+<!-- FINAL -->
+<div class="card finalText">
 <h2>💌 Mensaje de amor 💌</h2>
 Feliz San Valentín mi cebollín 🤎
 </div>
 
-<!-- AUDIO -->
-<audio id="bgMusic" loop src="https://cdn.pixabay.com/audio/2022/03/15/audio_c8b05c7b6c.mp3"></audio>
-<audio id="ourSong" src="https://cdn.pixabay.com/audio/2021/11/25/audio_cb09b5d3aa.mp3"></audio>
+<!-- AUDIOS -->
+
+<audio id="bgMusic" loop
+src="https://cdn.pixabay.com/audio/2022/03/15/audio_c8b05c7b6c.mp3"></audio>
+
+<audio id="ourSong"
+src="https://cdn.pixabay.com/audio/2021/11/25/audio_cb09b5d3aa.mp3"></audio>
 
 <script>
 
-/* PASSWORD */
+/* PASSWORD + BG MUSIC */
+
 function enter(){
  if(pass.value==="Jerry"){
   login.style.display="none";
- } else alert("Contraseña incorrecta");
+  bgMusic.volume = 0.5;
+  bgMusic.play().catch(()=>{});
+ } else alert("Contraseña incorrecta 💔");
 }
 
-/* AUDIO BUTTON PLAY */
-function playBG(){
- bgMusic.currentTime = 0;
- bgMusic.play();
+/* SONG BUTTON */
+
+function toggleSong(){
+ if(ourSong.paused) ourSong.play();
+ else ourSong.pause();
 }
 
-function playSong(){
- ourSong.currentTime = 0;
- ourSong.play();
-}
-
-/* HEARTS LOGIN */
+/* LOGIN HEART CANVAS */
 
 const c=document.getElementById("heartsCanvas");
 const ctx=c.getContext("2d");
@@ -249,7 +268,7 @@ function loop(){
 }
 loop();
 
-/* BG HEARTS */
+/* BG FLOAT HEARTS */
 
 for(let i=0;i<25;i++){
  const s=document.createElement("span");
@@ -260,14 +279,24 @@ for(let i=0;i<25;i++){
  bgHearts.appendChild(s);
 }
 
-/* COUNTER */
+/* COUNTER — RESTAURADO */
 
 const start=new Date("2024-02-14");
-setInterval(()=>{
+
+function update(){
  const now=new Date();
- const d=Math.floor((now-start)/86400000);
- counter.innerHTML=d+" días juntos 💗";
-},1000);
+ const diff=now-start;
+ const d=Math.floor(diff/86400000);
+ const h=Math.floor(diff/3600000)%24;
+ const m=Math.floor(diff/60000)%60;
+ const s=Math.floor(diff/1000)%60;
+
+ counter.innerHTML =
+ d+" días<br>"+h+" horas<br>"+m+" minutos<br>"+s+" segundos 💗";
+}
+
+setInterval(update,1000);
+update();
 
 </script>
 
