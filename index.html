@@ -2,285 +2,155 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Para Marlen 💖</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para mi amor 💖</title>
 
 <style>
+*{
+  box-sizing:border-box;
+  font-family:'Arial',sans-serif;
+}
+
 body{
- margin:0;
- font-family:Segoe UI,sans-serif;
- background:#1a0015;
- color:#fff;
- overflow-x:hidden;
+  margin:0;
+  min-height:100vh;
+  background:radial-gradient(circle at top,#2a0033,#0b0012);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+  color:#fff;
 }
 
-/* ===== FONDO CORAZONES (ORIGINAL) ===== */
-.bgHearts span{
- position:fixed;
- color:#ff4da6;
- animation:rise linear infinite;
- opacity:.25;
- pointer-events:none;
+.container{
+  width:95%;
+  max-width:420px;
+  background:rgba(255,182,213,0.95);
+  border-radius:20px;
+  padding:20px;
+  box-shadow:0 0 25px rgba(255,0,150,.4);
+  position:relative;
 }
 
-@keyframes rise{
- from{transform:translateY(100vh) scale(.6)}
- to{transform:translateY(-10vh) scale(1.2)}
+h2{
+  text-align:center;
+  color:#ff2f92;
 }
 
-/* ===== PORTADA ===== */
-#cover{
- position:fixed;
- inset:0;
- display:flex;
- justify-content:center;
- align-items:center;
- background:#0a0008;
- z-index:999;
+.carta{
+  background:#fff;
+  color:#444;
+  padding:18px;
+  border-radius:15px;
+  border:3px dashed #ff8ac2;
+  min-height:260px;
+  font-size:15px;
+  line-height:1.6;
+  position:relative;
+  cursor:pointer;
 }
 
-.coverCard{
- background:rgba(255,255,255,.12);
- backdrop-filter:blur(12px);
- padding:40px;
- border-radius:25px;
- text-align:center;
- box-shadow:0 0 40px rgba(255,0,120,.4);
- animation:float 4s ease-in-out infinite;
+#texto{
+  white-space:pre-line;
+}
+
+/* Corazones */
+.heart{
+  position:fixed;
+  color:rgba(255,105,180,0.4);
+  font-size:18px;
+  animation:float 6s linear infinite;
 }
 
 @keyframes float{
- 0%,100%{transform:translateY(0)}
- 50%{transform:translateY(-10px)}
+  0%{transform:translateY(100vh);opacity:0;}
+  20%{opacity:1;}
+  100%{transform:translateY(-10vh);opacity:0;}
 }
 
-button{
- padding:14px 26px;
- border:none;
- border-radius:30px;
- background:#ff4da6;
- color:white;
- font-size:17px;
- cursor:pointer;
- margin-top:12px;
+/* Frases flotantes */
+.frase{
+  position:absolute;
+  color:#ff4fa1;
+  font-size:14px;
+  animation:fadeUp 2.5s ease forwards;
+  pointer-events:none;
 }
 
-/* ===== CARDS ===== */
-.card{
- background:#ffe6f2;
- color:#5a0033;
- margin:26px auto;
- padding:24px;
- width:92%;
- max-width:520px;
- border-radius:26px;
- box-shadow:0 10px 30px rgba(0,0,0,.25);
- border:3px dashed #ff99cc;
- text-align:center;
- position:relative;
- z-index:2;
-}
-
-.circleImg{
- width:170px;
- height:170px;
- border-radius:50%;
- object-fit:cover;
- display:block;
- margin:15px auto;
- border:6px solid #ffb3d9;
-}
-
-/* ===== CONTADOR ===== */
-.counter{
- font-size:18px;
- line-height:1.6;
-}
-
-/* ===== CILINDRO 3D REAL ===== */
-.scene{
- width:260px;
- height:320px;
- margin:30px auto;
- perspective:1200px;
-}
-
-.cylinder{
- width:100%;
- height:100%;
- position:relative;
- transform-style:preserve-3d;
- animation:spin 20s linear infinite;
-}
-
-.cylinder img{
- position:absolute;
- width:200px;
- height:280px;
- left:30px;
- top:20px;
- border-radius:18px;
- object-fit:cover;
- box-shadow:0 15px 30px rgba(0,0,0,.45);
-}
-
-.cylinder img:nth-child(1){transform:rotateY(0deg) translateZ(300px);}
-.cylinder img:nth-child(2){transform:rotateY(51deg) translateZ(300px);}
-.cylinder img:nth-child(3){transform:rotateY(102deg) translateZ(300px);}
-.cylinder img:nth-child(4){transform:rotateY(153deg) translateZ(300px);}
-.cylinder img:nth-child(5){transform:rotateY(204deg) translateZ(300px);}
-.cylinder img:nth-child(6){transform:rotateY(255deg) translateZ(300px);}
-.cylinder img:nth-child(7){transform:rotateY(306deg) translateZ(300px);}
-
-@keyframes spin{
- from{transform:rotateY(0deg)}
- to{transform:rotateY(360deg)}
-}
-
-/* ===== FRASES AL TOCAR ===== */
-.loveText{
- position:fixed;
- font-size:18px;
- color:#ffb3d9;
- animation:floatUp 3s ease-out forwards;
- pointer-events:none;
-}
-
-@keyframes floatUp{
- to{
-  transform:translateY(-120px);
-  opacity:0;
- }
+@keyframes fadeUp{
+  from{opacity:1;transform:translateY(0);}
+  to{opacity:0;transform:translateY(-40px);}
 }
 </style>
 </head>
 
 <body>
 
-<!-- ===== PORTADA ===== -->
-<div id="cover">
- <div class="coverCard">
-  <h2>Para Marlen 💖</h2>
-  <p>Algo especial te está esperando…</p>
-  <button onclick="enter()">Entrar ❤️</button>
- </div>
-</div>
+<div class="container">
+  <h2>💌 Mensaje de amor 💌</h2>
 
-<!-- ===== AUDIO ===== -->
-<audio id="bgMusic" loop>
- <source src="https://files.catbox.moe/lm504y.mp3" type="audio/mpeg">
-</audio>
-
-<audio id="ourSong">
- <source src="https://files.catbox.moe/egr68n.mp3" type="audio/mpeg">
-</audio>
-
-<!-- ===== FONDO CORAZONES ===== -->
-<div class="bgHearts" id="bgHearts"></div>
-
-<!-- ===== SECCIÓN AMOR ===== -->
-<div class="card">
- <h2>💞 Mi amor eterno 💞</h2>
- <img class="circleImg" src="https://i.imgur.com/m2rqpiu.jpeg">
-</div>
-
-<!-- ===== CONTADOR ===== -->
-<div class="card">
- <h2>⏳ Nuestro tiempo juntos ⏳</h2>
- <div class="counter" id="counter"></div>
-</div>
-
-<!-- ===== NUESTRA CANCIÓN ===== -->
-<div class="card">
- <h2>🎵 Nuestra canción 🎵</h2>
- <button id="playOurSong">▶ Reproducir</button>
-</div>
-
-<!-- ===== RECUERDOS ===== -->
-<div class="card">
- <h2>📸 Nuestros recuerdos 📸</h2>
- <div class="scene">
-  <div class="cylinder">
-   <img src="https://i.imgur.com/m2rqpiu.jpeg">
-   <img src="https://i.imgur.com/jbyIzFT.jpeg">
-   <img src="https://i.imgur.com/tpH81jp.jpeg">
-   <img src="https://i.imgur.com/mOQ2xhz.jpeg">
-   <img src="https://i.imgur.com/ra5P475.jpeg">
-   <img src="https://i.imgur.com/0xnanwq.jpeg">
-   <img src="https://i.imgur.com/2Xh4XhC.jpeg">
+  <div class="carta" onclick="fraseRandom(event)">
+    <div id="texto"></div>
   </div>
- </div>
-</div>
-
-<!-- ===== MENSAJE FINAL ===== -->
-<div class="card">
- <h2>💌 Mensaje de amor 💌</h2>
- <p>
- Feliz San Valentín, mi amor 🤎<br><br>
- Gracias por ser mi lugar seguro, mi alegría diaria y mi persona favorita.
- Prometo seguir cuidando este amor hoy y siempre 💞
- </p>
 </div>
 
 <script>
-/* ===== ENTRAR ===== */
-function enter(){
- document.getElementById("cover").style.display="none";
- bgMusic.play().catch(()=>{});
+/* TEXTO */
+const mensaje = `¡Feliz San Valentín, mi amor!
+
+Hoy, en el día del amor, quiero recordarte lo increíblemente afortunado que soy de tenerte. Eres esa pieza que encaja perfectamente en mi vida, llenándola de colores, risas y momentos inolvidables.
+
+No necesito un día especial para saber cuánto te amo, pero hoy aprovecho cada segundo para celebrarte, para agradecerte por tu paciencia, tu ternura y por ser mi compañera de aventuras.
+
+Prometo seguir construyendo este camino contigo, cuidando nuestro amor como el tesoro más preciado. Gracias por ser mi Valentín hoy y siempre.
+
+Te amo con todo mi corazón, cebollín 🤎`;
+
+/* EFECTO ESCRITURA */
+let i = 0;
+const speed = 35;
+function escribir(){
+  if(i < mensaje.length){
+    document.getElementById("texto").innerHTML += mensaje.charAt(i);
+    i++;
+    setTimeout(escribir, speed);
+  }
 }
+escribir();
 
-/* ===== CORAZONES ===== */
-for(let i=0;i<25;i++){
- const s=document.createElement("span");
- s.innerHTML="❤";
- s.style.left=Math.random()*100+"vw";
- s.style.fontSize=(16+Math.random()*30)+"px";
- s.style.animationDuration=(8+Math.random()*10)+"s";
- bgHearts.appendChild(s);
-}
+/* CORAZONES */
+setInterval(()=>{
+  const heart = document.createElement("div");
+  heart.className="heart";
+  heart.innerHTML="💗";
+  heart.style.left=Math.random()*100+"vw";
+  heart.style.fontSize=12+Math.random()*18+"px";
+  heart.style.animationDuration=4+Math.random()*3+"s";
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(),7000);
+},300);
 
-/* ===== CONTADOR ===== */
-const start=new Date("2024-02-14");
-function update(){
- const now=new Date();
- const diff=now-start;
- const d=Math.floor(diff/86400000);
- const h=Math.floor(diff/3600000)%24;
- const m=Math.floor(diff/60000)%60;
- const s=Math.floor(diff/1000)%60;
- counter.innerHTML=
- d+" días<br>"+h+" horas<br>"+m+" minutos<br>"+s+" segundos 💗";
-}
-setInterval(update,1000);
-update();
-
-/* ===== MUSICA INTELIGENTE ===== */
-const btn=document.getElementById("playOurSong");
-btn.addEventListener("click",()=>{
- bgMusic.pause();
- ourSong.currentTime=0;
- ourSong.play();
-});
-ourSong.addEventListener("ended",()=>{
- bgMusic.play();
-});
-
-/* ===== FRASES AL TOCAR ===== */
+/* FRASES AL TOCAR */
 const frases=[
- "Te amo 💖","Siempre juntos 💕",
- "Mi persona favorita 😍",
- "Nuestro amor ❤️","Para siempre 💞"
+  "Te amo 💖",
+  "Mi persona favorita 💕",
+  "Para siempre 🫶",
+  "Eres mi hogar 🏡",
+  "Mi amor eterno 💞",
+  "Gracias por existir ✨",
+  "Solo tú 💘",
+  "Mi felicidad 💗"
 ];
 
-document.addEventListener("click",e=>{
- const f=document.createElement("div");
- f.className="loveText";
- f.innerHTML=frases[Math.floor(Math.random()*frases.length)];
- f.style.left=e.clientX+"px";
- f.style.top=e.clientY+"px";
- document.body.appendChild(f);
- setTimeout(()=>f.remove(),3000);
-});
+function fraseRandom(e){
+  const f=document.createElement("div");
+  f.className="frase";
+  f.innerText=frases[Math.floor(Math.random()*frases.length)];
+  f.style.left=e.offsetX+"px";
+  f.style.top=e.offsetY+"px";
+  e.currentTarget.appendChild(f);
+  setTimeout(()=>f.remove(),2500);
+}
 </script>
 
 </body>
