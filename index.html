@@ -5,163 +5,164 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Para mi amor 💖</title>
 <style>
-  * { box-sizing: border-box; font-family: 'Arial', sans-serif; -webkit-tap-highlight-color: transparent; }
-  
-  body {
-    margin: 0;
-    padding: 0;
-    background: #0b0014;
-    color: #fff;
-    overflow-x: hidden;
-    overflow-y: auto; /* Habilita el scroll */
-    min-height: 100vh;
-  }
+*{box-sizing:border-box;font-family:'Arial',sans-serif}
 
-  /* FONDO DE ESTRELLAS */
-  #stars {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    z-index: -1;
-  }
+body{
+  margin:0;
+  min-height:100vh;
+  background:radial-gradient(circle at top,#3a0a5e,#0b0014 70%);
+  /* SOLUCIÓN 1: Scroll habilitado correctamente */
+  overflow-y: auto;
+  overflow-x: hidden;
+  color:#fff;
+}
 
-  /* PANTALLA DE ENTRADA */
-  #intro {
-    position: fixed;
-    inset: 0;
-    background: radial-gradient(circle at top, #ff5fa2, #2a003d);
-    z-index: 9999;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
+/* ===== FONDO ESTRELLAS FIJO ===== */
+#stars{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  /* SOLUCIÓN 2: No bloquea clics ni carga de elementos */
+  pointer-events: none; 
+}
 
-  #intro button {
-    padding: 16px 45px;
-    border: none;
-    border-radius: 40px;
-    background: white;
-    color: #ff2f92;
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-  }
+/* ===== CORAZONES ===== */
+.heart{
+  position:fixed;
+  bottom:-20px;
+  color:rgba(255,105,180,.5);
+  animation:floatUp linear infinite;
+  pointer-events:none;
+  z-index: 1;
+}
+@keyframes floatUp{
+  from{transform:translateY(0) scale(.6);opacity:1}
+  to{transform:translateY(-110vh) scale(1.2);opacity:0}
+}
 
-  /* CONTENEDOR TRANSPARENTE */
-  .container {
-    position: relative;
-    z-index: 10;
-    width: 92%;
-    max-width: 420px;
-    margin: 30px auto;
-    background: rgba(255, 255, 255, 0.12); /* Transparencia */
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 25px;
-    padding: 20px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-  }
+/* ===== ENTRADA ===== */
+#intro{
+  position:fixed;
+  inset:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  background:radial-gradient(circle at top,#ff5fa2,#2a003d);
+  z-index:1000;
+  text-align:center;
+}
+#intro button{
+  padding:14px 36px;
+  border:none;
+  border-radius:40px;
+  background:#fff;
+  color:#ff2f92;
+  font-size:18px;
+  cursor:pointer;
+  font-weight: bold;
+}
 
-  h2 { text-align: center; color: #ff8ac2; text-shadow: 1px 1px 3px #000; margin-top: 25px; }
+/* ===== CONTENEDOR TRANSPARENTE ===== */
+.container{
+  position:relative;
+  /* SOLUCIÓN 3: Z-index superior para asegurar visibilidad */
+  z-index:10; 
+  width:95%;
+  max-width:430px;
+  margin:25px auto;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius:22px;
+  padding:20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
 
-  /* CARTA CON TEXTO COMPLETO */
-  .carta {
-    background: rgba(255, 255, 255, 0.95);
-    color: #333;
-    padding: 20px;
-    border-radius: 18px;
-    border: 3px dashed #ff8ac2;
-    min-height: 250px;
-    font-size: 15px;
-    line-height: 1.6;
-    margin-bottom: 20px;
-  }
+h2{text-align:center;color:#ff8ac2; text-shadow: 1px 1px 2px #000;}
 
-  /* PLAYER MUSICA */
-  .player { text-align: center; margin: 20px 0; }
-  .player img {
-    width: 140px; height: 140px;
-    border-radius: 50%;
-    border: 5px solid #ff4fa1;
-    animation: spin 18s linear infinite;
-    object-fit: cover;
-  }
-  @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+/* ===== CARTA (TEXTO COMPLETO) ===== */
+.carta{
+  background:rgba(255,255,255,0.95);
+  color:#333;
+  padding:18px;
+  border-radius:15px;
+  border:3px dashed #ff8ac2;
+  min-height:260px;
+  font-size:15px;
+  line-height:1.6;
+  cursor:pointer;
+}
+#texto{white-space:pre-line}
 
-  .btn-musica {
-    background: #ff4fa1;
-    color: white;
-    border: none;
-    padding: 12px 30px;
-    border-radius: 30px;
-    margin-top: 15px;
-    cursor: pointer;
-    font-weight: bold;
-  }
+/* ===== PLAYER ===== */
+.player{text-align:center;margin-top:20px}
+.player img{
+  width:150px; height:150px;
+  border-radius:50%;
+  border:6px solid #ff6fb5;
+  animation:spin 18s linear infinite;
+  object-fit: cover;
+}
+@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
 
-  /* GALERIA 3D */
-  .galeria {
-    height: 250px;
-    perspective: 1000px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 40px 0;
-  }
+button.music{
+  margin-top:12px;
+  background:#ff4fa1; color:#fff;
+  border:none; padding:12px 30px;
+  border-radius:30px; cursor: pointer;
+}
 
-  .cilindro {
-    width: 110px;
-    height: 150px;
-    position: relative;
-    transform-style: preserve-3d;
-  }
+/* ===== GALERIA 3D ===== */
+.galeria{
+  margin-top:40px;
+  perspective:1000px;
+  height:240px;
+  display: flex;
+  justify-content: center;
+  position:relative;
+}
+.cilindro{
+  width:120px; height:160px;
+  position:absolute;
+  transform-style:preserve-3d;
+}
+.cilindro img{
+  position:absolute;
+  width:110px; height:150px;
+  object-fit:cover;
+  border-radius:12px;
+  border: 2px solid #fff;
+  cursor: pointer;
+}
 
-  .cilindro img {
-    position: absolute;
-    width: 110px;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 12px;
-    border: 2px solid white;
-    cursor: pointer;
-  }
-
-  /* VENTANA FOTO GRANDE */
-  #modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.95);
-    z-index: 10000;
-    justify-content: center;
-    align-items: center;
-  }
-  #modal img { max-width: 90%; max-height: 85%; border-radius: 12px; }
+#modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.95);
+  z-index: 2000;
+  justify-content: center; align-items: center;
+}
+#modal img { max-width: 90%; max-height: 85%; border-radius: 10px; }
 </style>
 </head>
 <body>
 
 <canvas id="stars"></canvas>
 
-<!-- PANTALLA INICIO -->
 <div id="intro">
   <h1>Para ti, mi amor 💖</h1>
-  <button onclick="iniciarProyecto()">Entrar 💕</button>
+  <button onclick="enter()">Entrar 💕</button>
 </div>
 
-<!-- MODAL FOTOS -->
 <div id="modal" onclick="this.style.display='none'">
   <img id="imgModal" src="">
 </div>
 
-<!-- AUDIOS -->
-<audio id="fondo" loop preload="auto">
-  <source src="https://files.catbox.moe" type="audio/mpeg">
-</audio> 
-<audio id="cancion" preload="auto">
-  <source src="https://files.catbox.moe" type="audio/mpeg">
-</audio>
+<audio id="fondo" src="https://files.catbox.moe" loop></audio> 
+<audio id="cancion" src="https://files.catbox.moe"></audio>
 
 <div class="container">
   <h2>💌 Mensaje de amor 💌</h2>
@@ -173,7 +174,7 @@
   <div class="player">
     <img src="https://i.imgur.com">
     <br>
-    <button class="btn-musica" onclick="toggleMusica()">Reproducir / Pausar</button>
+    <button class="music" onclick="toggleCancion()">Reproducir / Pausar</button>
   </div>
 
   <h2>📸 Nuestros recuerdos 📸</h2>
@@ -183,30 +184,17 @@
 </div>
 
 <script>
-  const audioFondo = document.getElementById('fondo');
-  const audioCancion = document.getElementById('cancion');
-  const divTexto = document.getElementById('texto');
-  const cilindro = document.getElementById('cilindro');
+const fondo=document.getElementById('fondo');
+const cancion=document.getElementById('cancion');
 
-  function iniciarProyecto() {
-    document.getElementById('intro').style.display = 'none';
-    audioFondo.volume = 0.3;
-    audioFondo.play();
-    empezarAEscribir();
-  }
+function enter(){
+  document.getElementById('intro').style.display='none';
+  fondo.volume=0.4;
+  fondo.play();
+  escribir();
+}
 
-  function toggleMusica() {
-    if(audioCancion.paused) {
-      audioFondo.pause();
-      audioCancion.play();
-    } else {
-      audioCancion.pause();
-      audioFondo.play();
-    }
-  }
-
-  /* TEXTO COMPLETO ORIGINAL */
-  const mensajeFull = `¡Feliz San Valentín, mi amor!
+const mensaje=`¡Feliz San Valentín, mi amor!
 
 Hoy, en el día del amor, quiero recordarte lo increíblemente afortunado que soy de tenerte. Eres esa pieza que encaja perfectamente en mi vida, llenándola de colores, risas y momentos inolvidables.
 
@@ -216,66 +204,73 @@ Prometo seguir construyendo este camino contigo, cuidando nuestro amor como el t
 
 Te amo con todo mi corazón, cebollín 🤎`;
 
-  let charIndex = 0;
-  function empezarAEscribir() {
-    if(charIndex < mensajeFull.length) {
-      const char = mensajeFull.charAt(charIndex++);
-      divTexto.innerHTML += (char === '\n') ? '<br>' : char;
-      setTimeout(empezarAEscribir, 35);
-    }
+let idx=0;
+function escribir(){
+  if(idx < mensaje.length){
+    document.getElementById('texto').innerHTML += mensaje.charAt(idx++);
+    setTimeout(escribir, 35);
   }
+}
 
-  /* GENERAR FOTOS */
-  const fotosUrls = [
-    'https://i.imgur.com', 'https://i.imgur.com',
-    'https://i.imgur.com', 'https://i.imgur.com',
-    'https://i.imgur.com', 'https://i.imgur.com',
-    'https://i.imgur.com'
-  ];
+function toggleCancion(){
+  if(cancion.paused){fondo.pause();cancion.play();}
+  else{cancion.pause();fondo.play();}
+}
 
-  fotosUrls.forEach((url, i) => {
-    const img = document.createElement('img');
-    img.src = url;
-    const angulo = (360 / fotosUrls.length) * i;
-    img.style.transform = `rotateY(${angulo}deg) translateZ(160px)`;
-    img.onclick = () => {
-      document.getElementById('imgModal').src = url;
-      document.getElementById('modal').style.display = 'flex';
-    };
-    cilindro.appendChild(img);
+/* CILINDRO */
+const imagenes=[
+ 'https://i.imgur.com', 'https://i.imgur.com',
+ 'https://i.imgur.com', 'https://i.imgur.com',
+ 'https://i.imgur.com', 'https://i.imgur.com',
+ 'https://i.imgur.com'
+];
+const cilindro=document.getElementById('cilindro');
+let rot=0;
+
+imagenes.forEach((src,i)=>{
+  const img=document.createElement('img');
+  img.src=src;
+  img.style.transform=`rotateY(${(360/imagenes.length)*i}deg) translateZ(160px)`;
+  img.onclick = () => {
+    document.getElementById('imgModal').src = src;
+    document.getElementById('modal').style.display = 'flex';
+  };
+  cilindro.appendChild(img);
+});
+
+function animate(){
+  rot+=0.4;
+  cilindro.style.transform=`rotateY(${rot}deg)`;
+  requestAnimationFrame(animate);
+}
+animate();
+
+/* ESTRELLAS */
+const canvas=document.getElementById('stars');
+const ctx=canvas.getContext('2d');
+function res(){canvas.width=innerWidth;canvas.height=innerHeight}
+res(); window.onresize=res;
+let stars=[];
+for(let i=0;i<100;i++)stars.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*1.5});
+function draw(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle='white';
+  stars.forEach(s=>{
+    ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2); ctx.fill();
+    s.y+=0.1; if(s.y>canvas.height)s.y=0;
   });
+  requestAnimationFrame(draw);
+}
+draw();
 
-  let rotacion = 0;
-  function animarGiro() {
-    rotacion -= 0.4;
-    cilindro.style.transform = `rotateY(${rotacion}deg)`;
-    requestAnimationFrame(animarGiro);
-  }
-  animarGiro();
-
-  /* ESTRELLAS */
-  const cvs = document.getElementById('stars');
-  const ctx = cvs.getContext('2d');
-  function ajustar() { cvs.width = window.innerWidth; cvs.height = window.innerHeight; }
-  ajustar(); window.onresize = ajustar;
-  
-  let estrellasArr = Array.from({length: 120}, () => ({
-    x: Math.random() * cvs.width,
-    y: Math.random() * cvs.height,
-    r: Math.random() * 1.5,
-    v: 0.1 + Math.random() * 0.2
-  }));
-
-  function dibujarEstrellas() {
-    ctx.clearRect(0,0,cvs.width,cvs.height);
-    ctx.fillStyle = "white";
-    estrellasArr.forEach(s => {
-      ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI*2); ctx.fill();
-      s.y += s.v; if(s.y > cvs.height) s.y = 0;
-    });
-    requestAnimationFrame(dibujarEstrellas);
-  }
-  dibujarEstrellas();
+/* CORAZONES */
+setInterval(()=>{
+  const h=document.createElement('div');
+  h.className='heart'; h.innerHTML='❤';
+  h.style.left=Math.random()*100+'vw';
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),8000);
+},500);
 </script>
 </body>
 </html>
