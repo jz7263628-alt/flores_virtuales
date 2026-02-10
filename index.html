@@ -2,275 +2,305 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Para mi amor 💖</title>
+<title>Para Marlen 💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <style>
-*{box-sizing:border-box;font-family:'Arial',sans-serif}
-
 body{
-  margin:0;
-  min-height:100vh;
-  background:radial-gradient(circle at top,#3a0a5e,#0b0014 70%);
-  /* SOLUCIÓN 1: Scroll habilitado correctamente */
-  overflow-y: auto;
-  overflow-x: hidden;
-  color:#fff;
+ margin:0;
+ font-family:Segoe UI, sans-serif;
+ background:#1a0015;
+ color:#fff;
+ /* Habilitamos el scroll para que puedas bajar */
+ overflow-x:hidden;
+ overflow-y:auto; 
 }
 
-/* ===== FONDO ESTRELLAS FIJO ===== */
-#stars{
-  position:fixed;
-  inset:0;
-  z-index:0;
-  /* SOLUCIÓN 2: No bloquea clics ni carga de elementos */
-  pointer-events: none; 
+/* LOGIN */
+#login{
+ position:fixed;
+ inset:0;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ background:#0a0008;
+ z-index:999;
 }
 
-/* ===== CORAZONES ===== */
-.heart{
-  position:fixed;
-  bottom:-20px;
-  color:rgba(255,105,180,.5);
-  animation:floatUp linear infinite;
-  pointer-events:none;
-  z-index: 1;
-}
-@keyframes floatUp{
-  from{transform:translateY(0) scale(.6);opacity:1}
-  to{transform:translateY(-110vh) scale(1.2);opacity:0}
+#heartsCanvas{
+ position:absolute;
+ inset:0;
 }
 
-/* ===== ENTRADA ===== */
-#intro{
-  position:fixed;
-  inset:0;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-  background:radial-gradient(circle at top,#ff5fa2,#2a003d);
-  z-index:1000;
-  text-align:center;
-}
-#intro button{
-  padding:14px 36px;
-  border:none;
-  border-radius:40px;
-  background:#fff;
-  color:#ff2f92;
-  font-size:18px;
-  cursor:pointer;
-  font-weight: bold;
+.loginCard{
+ position:relative;
+ background:rgba(255,255,255,.12);
+ backdrop-filter:blur(12px);
+ padding:40px;
+ border-radius:25px;
+ text-align:center;
+ box-shadow:0 0 40px rgba(255,0,120,.4);
+ animation:float 4s ease-in-out infinite;
 }
 
-/* ===== CONTENEDOR TRANSPARENTE ===== */
-.container{
-  position:relative;
-  /* SOLUCIÓN 3: Z-index superior para asegurar visibilidad */
-  z-index:10; 
-  width:95%;
-  max-width:430px;
-  margin:25px auto;
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius:22px;
-  padding:20px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+@keyframes float{
+ 0%,100%{transform:translateY(0)}
+ 50%{transform:translateY(-10px)}
 }
 
-h2{text-align:center;color:#ff8ac2; text-shadow: 1px 1px 2px #000;}
-
-/* ===== CARTA (TEXTO COMPLETO) ===== */
-.carta{
-  background:rgba(255,255,255,0.95);
-  color:#333;
-  padding:18px;
-  border-radius:15px;
-  border:3px dashed #ff8ac2;
-  min-height:260px;
-  font-size:15px;
-  line-height:1.6;
-  cursor:pointer;
-}
-#texto{white-space:pre-line}
-
-/* ===== PLAYER ===== */
-.player{text-align:center;margin-top:20px}
-.player img{
-  width:150px; height:150px;
-  border-radius:50%;
-  border:6px solid #ff6fb5;
-  animation:spin 18s linear infinite;
-  object-fit: cover;
-}
-@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
-
-button.music{
-  margin-top:12px;
-  background:#ff4fa1; color:#fff;
-  border:none; padding:12px 30px;
-  border-radius:30px; cursor: pointer;
+input{
+ padding:12px;
+ border-radius:15px;
+ border:none;
+ text-align:center;
+ font-size:16px;
 }
 
-/* ===== GALERIA 3D ===== */
-.galeria{
-  margin-top:40px;
-  perspective:1000px;
-  height:240px;
-  display: flex;
-  justify-content: center;
-  position:relative;
-}
-.cilindro{
-  width:120px; height:160px;
-  position:absolute;
-  transform-style:preserve-3d;
-}
-.cilindro img{
-  position:absolute;
-  width:110px; height:150px;
-  object-fit:cover;
-  border-radius:12px;
-  border: 2px solid #fff;
-  cursor: pointer;
+button{
+ padding:12px 20px;
+ border:none;
+ border-radius:20px;
+ background:#ff4da6;
+ color:white;
+ font-size:16px;
+ margin-top:12px;
+ cursor:pointer;
 }
 
-#modal {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.95);
-  z-index: 2000;
-  justify-content: center; align-items: center;
+/* HEART BG */
+.bgHearts span{
+ position:fixed;
+ color:#ff4da6;
+ animation:rise linear infinite;
+ opacity:.25;
+ z-index: 1;
 }
-#modal img { max-width: 90%; max-height: 85%; border-radius: 10px; }
+
+@keyframes rise{
+ from{transform:translateY(100vh) scale(.6)}
+ to{transform:translateY(-10vh) scale(1.2)}
+}
+
+/* CARDS - Ajustadas con transparencia */
+.card{
+ background: rgba(255, 230, 242, 0.2); /* Transparencia para ver el fondo */
+ backdrop-filter: blur(8px);
+ color:#fff;
+ margin:24px auto;
+ padding:22px;
+ width:92%;
+ max-width:520px;
+ border-radius:22px;
+ box-shadow:0 8px 30px rgba(0,0,0,.4);
+ border:2px solid rgba(255, 153, 204, 0.5);
+ position: relative;
+ z-index: 10;
+}
+
+.card h2{
+ text-align:center;
+ margin-top:0;
+ color: #ff99cc;
+}
+
+.circleImg{
+ width:160px;
+ height:160px;
+ border-radius:50%;
+ object-fit:cover;
+ display:block;
+ margin:12px auto;
+ border:6px solid #ffb3d9;
+}
+
+.counter{
+ text-align:center;
+ font-size:18px;
+ line-height:1.6;
+}
+
+.musicCover{
+ width:160px;
+ height:160px;
+ border-radius:50%;
+ object-fit:cover;
+ margin:10px auto;
+ display:block;
+ border:6px solid #ffb3d9;
+ animation: spin 15s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.grid{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:10px;
+}
+
+.grid img{
+ width:100%;
+ border-radius:14px;
+ height:140px;
+ object-fit:cover;
+ border: 2px solid #ffb3d9;
+}
+
+.finalText{
+ line-height:1.6;
+ font-size:16px;
+ background: rgba(255, 255, 255, 0.1);
+}
 </style>
 </head>
+
 <body>
 
-<canvas id="stars"></canvas>
-
-<div id="intro">
-  <h1>Para ti, mi amor 💖</h1>
-  <button onclick="enter()">Entrar 💕</button>
+<!-- LOGIN -->
+<div id="login">
+<canvas id="heartsCanvas"></canvas>
+<div class="loginCard">
+<h2>Ingresa la contraseña 💖</h2>
+<input id="pass" type="password">
+<br>
+<button onclick="enter()">Entrar</button>
+</div>
 </div>
 
-<div id="modal" onclick="this.style.display='none'">
-  <img id="imgModal" src="">
-</div>
+<!-- AUDIO - INTERCAMBIADOS SEGÚN TU PEDIDO -->
+<audio id="bgMusic" loop>
+<source src="https://files.catbox.moe">
+</audio>
 
-<audio id="fondo" src="https://files.catbox.moe" loop></audio> 
-<audio id="cancion" src="https://files.catbox.moe"></audio>
+<audio id="ourSong">
+<source src="https://files.catbox.moe">
+</audio>
 
-<div class="container">
-  <h2>💌 Mensaje de amor 💌</h2>
-  <div class="carta">
-    <div id="texto"></div>
+<!-- HEART BACKGROUND -->
+<div class="bgHearts" id="bgHearts"></div>
+
+<!-- CONTENIDO PRINCIPAL -->
+<div class="container" style="padding-top: 20px; padding-bottom: 40px;">
+
+  <!-- SECCION 1 -->
+  <div class="card">
+  <h2>💞 Nuestro tiempo juntos 💞</h2>
+  <img class="circleImg" src="https://i.imgur.com">
+  <div class="counter" id="counter"></div>
   </div>
 
+  <!-- SECCION 2 -->
+  <div class="card">
   <h2>🎵 Nuestra canción 🎵</h2>
-  <div class="player">
-    <img src="https://i.imgur.com">
-    <br>
-    <button class="music" onclick="toggleCancion()">Reproducir / Pausar</button>
+  <img class="musicCover" src="https://i.imgur.com">
+  <div style="text-align:center">
+  <button onclick="toggleSong()">▶️ Reproducir / Pausar</button>
+  </div>
   </div>
 
+  <!-- SECCION 3 -->
+  <div class="card">
   <h2>📸 Nuestros recuerdos 📸</h2>
-  <div class="galeria">
-    <div class="cilindro" id="cilindro"></div>
+  <div class="grid">
+  <img src="https://i.imgur.com">
+  <img src="https://i.imgur.com">
+  <img src="https://i.imgur.com">
+  <img src="https://i.imgur.com">
   </div>
+  </div>
+
+  <!-- FINAL -->
+  <div class="card finalText">
+  <h2>💌 Mensaje de amor 💌</h2>
+  ¡Feliz San Valentín, mi amor! 🤎<br><br>
+  Hoy, en el día del amor, quiero recordarte lo increíblemente afortunado que soy de tenerte. Eres esa pieza que encaja perfectamente en mi vida, llenándola de colores, risas y momentos inolvidables.<br><br>
+  Prometo seguir construyendo este camino contigo, cuidando nuestro amor como el tesoro más preciado. Gracias por ser mi Valentín hoy y siempre 💞
+  </div>
+
 </div>
 
 <script>
-const fondo=document.getElementById('fondo');
-const cancion=document.getElementById('cancion');
-
+/* PASSWORD + START BG MUSIC */
 function enter(){
-  document.getElementById('intro').style.display='none';
-  fondo.volume=0.4;
-  fondo.play();
-  escribir();
+ if(document.getElementById('pass').value==="Jerry"){
+  document.getElementById('login').style.display="none";
+  document.getElementById('bgMusic').play().catch(()=>{});
+ } else alert("Contraseña incorrecta 💔");
 }
 
-const mensaje=`¡Feliz San Valentín, mi amor!
-
-Hoy, en el día del amor, quiero recordarte lo increíblemente afortunado que soy de tenerte. Eres esa pieza que encaja perfectamente en mi vida, llenándola de colores, risas y momentos inolvidables.
-
-No necesito un día especial para saber cuánto te amo, pero hoy aprovecho cada segundo para celebrarte, para agradecerte por tu paciencia, tu ternura y por ser mi compañera de aventuras.
-
-Prometo seguir construyendo este camino contigo, cuidando nuestro amor como el tesoro más preciado. Gracias por ser mi Valentín hoy y siempre.
-
-Te amo con todo mi corazón, cebollín 🤎`;
-
-let idx=0;
-function escribir(){
-  if(idx < mensaje.length){
-    document.getElementById('texto').innerHTML += mensaje.charAt(idx++);
-    setTimeout(escribir, 35);
-  }
+/* SONG BUTTON */
+function toggleSong(){
+ const song = document.getElementById('ourSong');
+ const bg = document.getElementById('bgMusic');
+ if(song.paused){
+  bg.pause();
+  song.play();
+ } else {
+  song.pause();
+  bg.play();
+ }
 }
 
-function toggleCancion(){
-  if(cancion.paused){fondo.pause();cancion.play();}
-  else{cancion.pause();fondo.play();}
+/* HEART CANVAS LOGIN */
+const c=document.getElementById('heartsCanvas');
+const ctx=c.getContext("2d");
+c.width=window.innerWidth;
+c.height=window.innerHeight;
+let hearts=[];
+function heart(){
+ this.x=Math.random()*c.width;
+ this.y=c.height+20;
+ this.s=10+Math.random()*18;
+ this.v=1+Math.random()*2;
+}
+function drawHeart(x,y,s){
+ ctx.beginPath();
+ ctx.moveTo(x,y);
+ ctx.bezierCurveTo(x-s,y-s,x-2*s,y+s,x,y+2*s);
+ ctx.bezierCurveTo(x+2*s,y+s,x+s,y-s,x,y);
+ ctx.fillStyle="rgba(255,80,150,.8)";
+ ctx.fill();
+}
+function loop(){
+ ctx.clearRect(0,0,c.width,c.height);
+ if(Math.random()<.2) hearts.push(new heart());
+ hearts.forEach((h,i)=>{
+  h.y-=h.v;
+  drawHeart(h.x,h.y,h.s/2);
+  if(h.y<-40) hearts.splice(i,1);
+ });
+ requestAnimationFrame(loop);
+}
+loop();
+
+/* FLOATING HEARTS BACKGROUND */
+for(let i=0;i<25;i++){
+ const s=document.createElement("span");
+ s.innerHTML="❤";
+ s.style.left=Math.random()*100+"vw";
+ s.style.fontSize=(16+Math.random()*30)+"px";
+ s.style.animationDuration=(8+Math.random()*10)+"s";
+ document.getElementById('bgHearts').appendChild(s);
 }
 
-/* CILINDRO */
-const imagenes=[
- 'https://i.imgur.com', 'https://i.imgur.com',
- 'https://i.imgur.com', 'https://i.imgur.com',
- 'https://i.imgur.com', 'https://i.imgur.com',
- 'https://i.imgur.com'
-];
-const cilindro=document.getElementById('cilindro');
-let rot=0;
-
-imagenes.forEach((src,i)=>{
-  const img=document.createElement('img');
-  img.src=src;
-  img.style.transform=`rotateY(${(360/imagenes.length)*i}deg) translateZ(160px)`;
-  img.onclick = () => {
-    document.getElementById('imgModal').src = src;
-    document.getElementById('modal').style.display = 'flex';
-  };
-  cilindro.appendChild(img);
-});
-
-function animate(){
-  rot+=0.4;
-  cilindro.style.transform=`rotateY(${rot}deg)`;
-  requestAnimationFrame(animate);
+/* COUNTER */
+const start=new Date("2024-02-14");
+function update(){
+ const now=new Date();
+ const diff=now-start;
+ const d=Math.floor(diff/86400000);
+ const h=Math.floor(diff/3600000)%24;
+ const m=Math.floor(diff/60000)%60;
+ const s=Math.floor(diff/1000)%60;
+ document.getElementById('counter').innerHTML=
+ d+" días<br>"+h+" horas<br>"+m+" minutos<br>"+s+" segundos 💗";
 }
-animate();
-
-/* ESTRELLAS */
-const canvas=document.getElementById('stars');
-const ctx=canvas.getContext('2d');
-function res(){canvas.width=innerWidth;canvas.height=innerHeight}
-res(); window.onresize=res;
-let stars=[];
-for(let i=0;i<100;i++)stars.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*1.5});
-function draw(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  ctx.fillStyle='white';
-  stars.forEach(s=>{
-    ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2); ctx.fill();
-    s.y+=0.1; if(s.y>canvas.height)s.y=0;
-  });
-  requestAnimationFrame(draw);
-}
-draw();
-
-/* CORAZONES */
-setInterval(()=>{
-  const h=document.createElement('div');
-  h.className='heart'; h.innerHTML='❤';
-  h.style.left=Math.random()*100+'vw';
-  document.body.appendChild(h);
-  setTimeout(()=>h.remove(),8000);
-},500);
+setInterval(update,1000);
+update();
 </script>
+
 </body>
 </html>
