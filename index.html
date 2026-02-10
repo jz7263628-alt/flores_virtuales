@@ -3,296 +3,280 @@
 <head>
 <meta charset="UTF-8">
 <title>Para Marlen 💖</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <style>
-body{
- margin:0;
- font-family:Segoe UI, sans-serif;
- background:#1a0015;
- color:#fff;
- overflow-x:hidden;
+:root {
+    --primary: #ff4da6;
+    --glass: rgba(255, 255, 255, 0.12);
 }
 
-/* LOGIN */
-#login{
- position:fixed;
- inset:0;
- display:flex;
- justify-content:center;
- align-items:center;
- background:#0a0008;
- z-index:999;
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: radial-gradient(circle at center, #2d0025, #0a0008);
+    color: #fff;
+    overflow-x: hidden;
+    touch-action: manipulation;
 }
 
-#heartsCanvas{
- position:absolute;
- inset:0;
+/* LOGIN MEJORADO */
+#login {
+    position: fixed; inset: 0;
+    display: flex; justify-content: center; align-items: center;
+    background: #000; z-index: 9999;
 }
 
-.loginCard{
- position:relative;
- background:rgba(255,255,255,.12);
- backdrop-filter:blur(12px);
- padding:40px;
- border-radius:25px;
- text-align:center;
- box-shadow:0 0 40px rgba(255,0,120,.4);
- animation:float 4s ease-in-out infinite;
+.loginCard {
+    background: var(--glass);
+    backdrop-filter: blur(20px);
+    padding: 40px;
+    border-radius: 30px;
+    text-align: center;
+    border: 1px solid rgba(255, 77, 166, 0.3);
+    box-shadow: 0 0 50px rgba(255, 77, 166, 0.2);
 }
 
-@keyframes float{
- 0%,100%{transform:translateY(0)}
- 50%{transform:translateY(-10px)}
+/* CILINDRO 3D DE FOTOS */
+.scene {
+    width: 200px; height: 200px;
+    perspective: 1000px;
+    margin: 60px auto;
 }
 
-input{
- padding:12px;
- border-radius:15px;
- border:none;
- text-align:center;
- font-size:16px;
+.carousel {
+    width: 100%; height: 100%;
+    position: absolute;
+    transform-style: preserve-3d;
+    transition: transform 1s;
+    animation: rotateCarousel 15s infinite linear;
 }
 
-button{
- padding:12px 20px;
- border:none;
- border-radius:20px;
- background:#ff4da6;
- color:white;
- font-size:16px;
- margin-top:12px;
- cursor:pointer;
+.carousel:active { animation-play-state: paused; }
+
+.carousel__item {
+    position: absolute;
+    width: 190px; height: 190px;
+    left: 10px; top: 10px;
+    border: 4px solid var(--primary);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(255,77,166,0.5);
 }
 
-/* HEART BG */
-.bgHearts span{
- position:fixed;
- color:#ff4da6;
- animation:rise linear infinite;
- opacity:.25;
+.carousel__item img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Posiciones del cilindro */
+.carousel__item:nth-child(1) { transform: rotateY(0deg) translateZ(250px); }
+.carousel__item:nth-child(2) { transform: rotateY(90deg) translateZ(250px); }
+.carousel__item:nth-child(3) { transform: rotateY(180deg) translateZ(250px); }
+.carousel__item:nth-child(4) { transform: rotateY(270deg) translateZ(250px); }
+
+@keyframes rotateCarousel {
+    from { transform: rotateY(0deg); }
+    to { transform: rotateY(360deg); }
 }
 
-@keyframes rise{
- from{transform:translateY(100vh) scale(.6)}
- to{transform:translateY(-10vh) scale(1.2)}
+/* CARDS */
+.card {
+    background: rgba(20, 0, 15, 0.8);
+    margin: 25px auto;
+    padding: 25px;
+    width: 85%;
+    max-width: 500px;
+    border-radius: 25px;
+    border: 1px solid var(--primary);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
 }
 
-/* CARDS - MEJORADAS SIN TRANSPARENCIA FALLIDA */
-.card{
- background:#2d0025; /* Fondo sólido oscuro para que no falle nada */
- color:#fff;
- margin:24px auto;
- padding:22px;
- width:92%;
- max-width:520px;
- border-radius:22px;
- box-shadow:0 8px 30px rgba(0,0,0,.5);
- border:2px solid #ff99cc;
+/* FRASES FLOTANTES */
+.floating-text {
+    position: fixed;
+    pointer-events: none;
+    color: #ffb3d9;
+    font-weight: bold;
+    text-shadow: 0 0 10px #ff4da6;
+    z-index: 1000;
+    animation: fadeUp 2s forwards;
+    white-space: nowrap;
 }
 
-.card h2{
- text-align:center;
- margin-top:0;
- color: #ffb3d9;
+@keyframes fadeUp {
+    0% { opacity: 0; transform: translateY(0) scale(0.5); }
+    20% { opacity: 1; }
+    100% { opacity: 0; transform: translateY(-100px) scale(1.2); }
 }
 
-.circleImg{
- width:160px;
- height:160px;
- border-radius:50%;
- object-fit:cover;
- display:block;
- margin:12px auto;
- border:6px solid #ffb3d9;
+/* CORAZONES AL CLICK */
+.click-heart {
+    position: fixed;
+    pointer-events: none;
+    z-index: 1001;
+    animation: heartPop 1s forwards;
 }
 
-.counter{
- text-align:center;
- font-size:18px;
- line-height:1.6;
+@keyframes heartPop {
+    0% { transform: scale(0); opacity: 1; }
+    100% { transform: scale(3) rotate(20deg); opacity: 0; }
 }
 
-.musicCover{
- width:160px;
- height:160px;
- border-radius:50%;
- object-fit:cover;
- margin:10px auto;
- display:block;
- border:6px solid #ffb3d9;
- animation: spin 15s linear infinite; /* Añadí el giro que tenías antes */
+#typewriter {
+    min-height: 100px;
+    font-size: 1.1rem;
+    line-height: 1.6;
 }
 
-@keyframes spin { from {transform:rotate(0deg)} to {transform:rotate(360deg)} }
-
-.grid{
- display:grid;
- grid-template-columns:1fr 1fr;
- gap:10px;
+button {
+    background: var(--primary);
+    border: none; padding: 15px 30px;
+    border-radius: 50px; color: white;
+    font-weight: bold; cursor: pointer;
+    transition: 0.3s;
 }
+button:active { transform: scale(0.9); }
 
-.grid img{
- width:100%;
- border-radius:14px;
- height:140px;
- object-fit:cover;
- border: 2px solid #ffb3d9;
+.musicCover {
+    width: 150px; height: 150px;
+    border-radius: 50%;
+    border: 5px solid var(--primary);
+    margin: 20px auto; display: block;
+    animation: spin 10s linear infinite;
 }
-
-.finalText{
- line-height:1.6;
- font-size:16px;
- text-align: center;
-}
+@keyframes spin { to { transform: rotate(360deg); } }
 </style>
 </head>
 
-<body>
+<body onclick="createMagic(event)">
 
-<!-- LOGIN -->
 <div id="login">
-<canvas id="heartsCanvas"></canvas>
-<div class="loginCard">
-<h2>Ingresa la contraseña 💖</h2>
-<input id="pass">
-<br>
-<button onclick="enter()">Entrar</button>
-</div>
+    <div class="loginCard">
+        <h2>Contraseña 💖</h2>
+        <input id="pass" type="password" style="padding:10px; border-radius:10px; border:none; text-align:center;">
+        <br>
+        <button onclick="enter()">Entrar</button>
+    </div>
 </div>
 
-<!-- AUDIO (TUS LINKS QUE SÍ FUNCIONAN) -->
 <audio id="bgMusic" loop>
-<source src="https://files.catbox.moe/egr68n.mp3">
+    <source src="https://files.catbox.moe/lm504y.mp3">
 </audio>
-
 <audio id="ourSong">
-<source src="https://files.catbox.moe/4nrc17.mp3">
+    <source src="https://files.catbox.moe/egr68n.mp3">
 </audio>
 
-<div class="bgHearts" id="bgHearts"></div>
+<!-- CILINDRO 3D -->
+<div class="scene">
+    <div class="carousel" id="carousel">
+        <div class="carousel__item"><img src="https://i.imgur.com"></div>
+        <div class="carousel__item"><img src="https://i.imgur.com"></div>
+        <div class="carousel__item"><img src="https://i.imgur.com"></div>
+        <div class="carousel__item"><img src="https://i.imgur.com"></div>
+    </div>
+</div>
 
-<!-- SECCION 1 -->
+<div class="card" style="text-align:center;">
+    <h2>💞 Tiempo Juntos 💞</h2>
+    <div id="counter" style="font-size: 24px; color: #ffb3d9;"></div>
+</div>
+
+<div class="card" style="text-align:center;">
+    <h2>🎵 Nuestra Canción 🎵</h2>
+    <img src="https://i.imgur.com" class="musicCover">
+    <button id="btnPlay" onclick="toggleSong()">▶️ Reproducir Especial</button>
+</div>
+
 <div class="card">
-<h2>💞 Nuestro tiempo juntos 💞</h2>
-<img class="circleImg" src="https://i.imgur.com/m2rqpiu.jpeg">
-<div class="counter" id="counter"></div>
-</div>
-
-<!-- SECCION 2 -->
-<div class="card">
-<h2>🎵 Nuestra canción 🎵</h2>
-<img class="musicCover" src="https://i.imgur.com/jbyIzFT.jpeg">
-<div style="text-align:center">
-<button id="btnPlay" onclick="toggleSong()">▶️ Reproducir</button>
-</div>
-</div>
-
-<!-- SECCION 3 -->
-<div class="card">
-<h2>📸 Nuestros recuerdos 📸</h2>
-<div class="grid">
-<img src="https://i.imgur.com/tpH81jp.jpeg">
-<img src="https://i.imgur.com/mOQ2xhz.jpeg">
-<img src="https://i.imgur.com/ra5P475.jpeg">
-<img src="https://i.imgur.com/2Xh4XhC.jpeg">
-</div>
-</div>
-
-<!-- FINAL (TEXTO COMPLETO) -->
-<div class="card finalText">
-<h2>💌 Mensaje de amor 💌</h2>
-¡Feliz San Valentín, mi amor! 🤎<br><br>
-Hoy, en el día del amor, quiero recordarte lo increíblemente afortunado que soy de tenerte.  
-Eres esa pieza que encaja perfectamente en mi vida, llenándola de colores, risas y momentos inolvidables.<br><br>
-No necesito un día especial para saber cuánto te amo, pero hoy aprovecho para celebrarte, agradecerte por tu paciencia, tu ternura y por ser mi compañera de aventuras.<br><br>
-Prometo seguir construyendo este camino contigo, cuidando nuestro amor como el tesoro más preciado.  
-Gracias por ser mi Valentín hoy y siempre 💞
+    <h2 style="text-align:center">💌 Mensaje Eterno 💌</h2>
+    <div id="typewriter"></div>
 </div>
 
 <script>
-/* PASSWORD + INICIO MÚSICA */
+const frases = [
+    "Eres mi sol ☀️", "Te amo infinito ♾️", "Mi lugar favorito es contigo", 
+    "Eres lo mejor de mi vida 🤎", "Siempre juntos 💞", "Mi niña hermosa",
+    "Gracias por existir", "Te robaste mi corazón 💓", "Eres mi sueño hecho realidad",
+    "Tu sonrisa me da vida", "Marlen y Jerry x siempre", "Eres mi destino",
+    "Me encantas cada día más", "Tú y yo, el mejor equipo", "Amor de mi vida"
+];
+
 function enter(){
- if(document.getElementById('pass').value==="Jerry"){
-  document.getElementById('login').style.display="none";
-  document.getElementById('bgMusic').play().catch(()=>{});
- } else alert("Contraseña incorrecta 💔");
+    if(document.getElementById('pass').value === "Jerry"){
+        document.getElementById('login').style.display="none";
+        document.getElementById('bgMusic').play();
+        startTypewriter();
+    } else { alert("Error 💔"); }
 }
 
-/* FUNCIÓN DE AUDIO MEJORADA */
+function createMagic(e) {
+    // Vibración (solo en Android/Móvil)
+    if (navigator.vibrate) navigator.vibrate(20);
+
+    // Crear Frase
+    const txt = document.createElement('div');
+    txt.className = 'floating-text';
+    txt.innerHTML = frases[Math.floor(Math.random()*frases.length)];
+    txt.style.left = e.clientX + 'px';
+    txt.style.top = e.clientY + 'px';
+    document.body.appendChild(txt);
+    setTimeout(() => txt.remove(), 2000);
+
+    // Crear Corazón
+    const h = document.createElement('div');
+    h.className = 'click-heart';
+    h.innerHTML = "❤️";
+    h.style.left = (e.clientX - 10) + 'px';
+    h.style.top = (e.clientY - 10) + 'px';
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 1000);
+}
+
 function toggleSong(){
- const ourSong = document.getElementById('ourSong');
- const bgMusic = document.getElementById('bgMusic');
- const btn = document.getElementById('btnPlay');
+    const special = document.getElementById('ourSong');
+    const background = document.getElementById('bgMusic');
+    const btn = document.getElementById('btnPlay');
 
- if(ourSong.paused){
-  bgMusic.pause(); // Pasa la de fondo
-  ourSong.play();  // Inicia la especial
-  btn.innerHTML = "⏸️ Pausar";
- } else {
-  ourSong.pause(); // Pausa la especial
-  bgMusic.play();  // Regresa la de fondo
-  btn.innerHTML = "▶️ Reproducir";
- }
-}
-
-/* HEART CANVAS LOGIN */
-const c=document.getElementById('heartsCanvas');
-const ctx=c.getContext("2d");
-c.width=window.innerWidth;
-c.height=window.innerHeight;
-let hearts=[];
-function heart(){
- this.x=Math.random()*c.width;
- this.y=c.height+20;
- this.s=10+Math.random()*18;
- this.v=1+Math.random()*2;
-}
-function drawHeart(x,y,s){
- ctx.beginPath();
- ctx.moveTo(x,y);
- ctx.bezierCurveTo(x-s,y-s,x-2*s,y+s,x,y+2*s);
- ctx.bezierCurveTo(x+2*s,y+s,x+s,y-s,x,y);
- ctx.fillStyle="rgba(255,80,150,.8)";
- ctx.fill();
-}
-function loop(){
- ctx.clearRect(0,0,c.width,c.height);
- if(Math.random()<.2) hearts.push(new heart());
- hearts.forEach((h,i)=>{
-  h.y-=h.v;
-  drawHeart(h.x,h.y,h.s/2);
-  if(h.y<-40) hearts.splice(i,1);
- });
- requestAnimationFrame(loop);
-}
-loop();
-
-/* FLOATING HEARTS */
-for(let i=0;i<25;i++){
- const s=document.createElement("span");
- s.innerHTML="❤";
- s.style.left=Math.random()*100+"vw";
- s.style.fontSize=(16+Math.random()*30)+"px";
- s.style.animationDuration=(8+Math.random()*10)+"s";
- document.getElementById('bgHearts').appendChild(s);
+    if(special.paused){
+        background.pause();
+        special.play();
+        btn.innerHTML = "⏸️ Pausar Especial";
+    } else {
+        special.pause();
+        background.play();
+        btn.innerHTML = "▶️ Reproducir Especial";
+    }
 }
 
-/* COUNTER */
-const start=new Date("2024-02-14");
-function update(){
- const now=new Date();
- const diff=now-start;
- const d=Math.floor(diff/86400000);
- const h=Math.floor(diff/3600000)%24;
- const m=Math.floor(diff/60000)%60;
- const s=Math.floor(diff/1000)%60;
- document.getElementById('counter').innerHTML=
- d+" días<br>"+h+" horas<br>"+m+" minutos<br>"+s+" segundos 💗";
+// Efecto de escritura
+const textoOriginal = "¡Feliz San Valentín, mi amor! 🤎 Hoy quiero recordarte lo increíblemente afortunado que soy de tenerte. Eres esa pieza que encaja perfectamente en mi vida, llenándola de colores y risas. No necesito un día especial para saber cuánto te amo, pero hoy te celebro. Gracias por ser mi compañera de aventuras. Te amo hoy y siempre 💞";
+let i = 0;
+function startTypewriter() {
+    if (i < textoOriginal.length) {
+        document.getElementById("typewriter").innerHTML += textoOriginal.charAt(i);
+        i++;
+        setTimeout(startTypewriter, 50); // Velocidad de escritura
+    }
 }
-setInterval(update,1000);
-update();
+
+// Contador
+const start = new Date("2024-02-14");
+setInterval(() => {
+    const diff = new Date() - start;
+    const d = Math.floor(diff/86400000);
+    const h = Math.floor(diff/3600000)%24;
+    const m = Math.floor(diff/60000)%60;
+    const s = Math.floor(diff/1000)%60;
+    document.getElementById('counter').innerHTML = `${d}d ${h}h ${m}m ${s}s`;
+}, 1000);
+
+// Control manual del cilindro (giro al arrastrar)
+let startX;
+let currAngle = 0;
+document.addEventListener('touchstart', e => startX = e.touches[0].pageX);
+document.addEventListener('touchmove', e => {
+    let diff = e.touches[0].pageX - startX;
+    document.getElementById('carousel').style.animation = "none";
+    document.getElementById('carousel').style.transform = `rotateY(${currAngle + diff/2}deg)`;
+});
 </script>
-
 </body>
 </html>
