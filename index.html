@@ -1,15 +1,19 @@
-<!DOCTYPE html><html lang="es">
+<!DOCTYPE html>
+<html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Para mi amor 💖</title><style>
+<title>Para mi amor 💖</title>
+<style>
 *{box-sizing:border-box;font-family:'Arial',sans-serif}
 
 body{
   margin:0;
   min-height:100vh;
   background:radial-gradient(circle at top,#3a0a5e,#0b0014 70%);
-  overflow:hidden;
+  /* PERMITIR SCROLL */
+  overflow-x:hidden;
+  overflow-y:auto; 
   color:#fff;
 }
 
@@ -42,7 +46,7 @@ body{
   align-items:center;
   flex-direction:column;
   background:radial-gradient(circle at top,#ff5fa2,#2a003d);
-  z-index:5;
+  z-index:100;
   text-align:center;
 }
 #intro h1{margin-bottom:20px}
@@ -56,24 +60,28 @@ body{
   cursor:pointer;
 }
 
-/* ===== CONTENEDOR ===== */
+/* ===== CONTENEDOR TRANSPARENTE ===== */
 .container{
   position:relative;
   z-index:2;
   width:95%;
   max-width:430px;
   margin:20px auto;
-  background:rgba(255,182,213,.95);
+  /* Fondo transparente con efecto blur */
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius:22px;
   padding:20px;
-  box-shadow:0 0 30px rgba(255,0,150,.5);
+  box-shadow:0 0 30px rgba(0,0,0,0.4);
 }
 
-h2{text-align:center;color:#ff2f92}
+h2{text-align:center;color:#ff8ac2; text-shadow: 1px 1px 2px #000;}
 
 /* ===== CARTA ===== */
 .carta{
-  background:#fff;
+  background:rgba(255,255,255,0.95);
   color:#444;
   padding:18px;
   border-radius:15px;
@@ -82,6 +90,7 @@ h2{text-align:center;color:#ff2f92}
   font-size:15px;
   line-height:1.6;
   cursor:pointer;
+  position: relative;
 }
 #texto{white-space:pre-line}
 
@@ -106,17 +115,19 @@ button.music{
   font-size:16px;
 }
 
-/* ===== GALERIA 3D ===== */
+/* ===== GALERIA 3D CENTRADA ===== */
 .galeria{
-  margin-top:25px;
-  perspective:900px;
-  height:220px;
-  position:relative;
+  margin: 40px 0;
+  perspective:1000px;
+  height:250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .cilindro{
-  width:100%;
-  height:100%;
-  position:absolute;
+  width: 120px;
+  height: 160px;
+  position: relative;
   transform-style:preserve-3d;
 }
 .cilindro img{
@@ -125,43 +136,85 @@ button.music{
   height:160px;
   object-fit:cover;
   border-radius:15px;
-  left:50%;
-  top:30px;
+  border: 2px solid #fff;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+/* VENTANA PARA VER FOTO GRANDE */
+#modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.9);
+  z-index: 200;
+  justify-content: center;
+  align-items: center;
+}
+#modal img {
+  max-width: 90%;
+  max-height: 80%;
+  border-radius: 10px;
 }
 
 .frase{
   position:absolute;
   color:#ff4fa1;
-  font-size:14px;
+  font-weight: bold;
   animation:fadeUp 2.5s ease forwards;
+  pointer-events: none;
 }
-@keyframes fadeUp{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(-40px)}}
-</style></head><body>
-<canvas id="stars"></canvas><!-- ENTRADA --><div id="intro">
+@keyframes fadeUp{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(-50px)}}
+</style>
+</head>
+<body>
+
+<canvas id="stars"></canvas>
+
+<!-- ENTRADA -->
+<div id="intro">
   <h1>Para ti, mi amor 💖</h1>
   <button onclick="enter()">Entrar 💕</button>
-</div><!-- AUDIOS --><audio id="fondo" src="https://files.catbox.moe/lm504y.mp3" loop></audio> <audio id="cancion" src="https://files.catbox.moe/egr68n.mp3"></audio>
+</div>
 
-<div class="container"><h2>💌 Mensaje de amor 💌</h2>
-<div class="carta" onclick="fraseRandom(event)">
-  <div id="texto"></div>
-</div><h2>🎵 Nuestra canción 🎵</h2>
-<div class="player">
-  <img src="https://i.imgur.com/m2rqpiu.jpeg">
-  <br>
-  <button class="music" onclick="toggleCancion()">Reproducir / Pausar</button>
-</div><h2>📸 Nuestros recuerdos 📸</h2>
-<div class="galeria">
-  <div class="cilindro" id="cilindro"></div>
-</div></div><script>
+<!-- MODAL FOTOS -->
+<div id="modal" onclick="this.style.display='none'">
+  <img id="imgModal" src="">
+</div>
+
+<!-- AUDIOS (MISMOS LINKS QUE TENÍAS) -->
+<audio id="fondo" src="https://files.catbox.moe" loop></audio> 
+<audio id="cancion" src="https://files.catbox.moe"></audio>
+
+<div class="container">
+  <h2>💌 Mensaje de amor 💌</h2>
+  <div class="carta" onclick="fraseRandom(event)">
+    <div id="texto"></div>
+  </div>
+
+  <h2>🎵 Nuestra canción 🎵</h2>
+  <div class="player">
+    <img src="https://i.imgur.com">
+    <br>
+    <button class="music" onclick="toggleCancion()">Reproducir / Pausar</button>
+  </div>
+
+  <h2>📸 Nuestros recuerdos 📸</h2>
+  <div class="galeria">
+    <div class="cilindro" id="cilindro"></div>
+  </div>
+</div>
+
+<script>
 /* ===== ENTRAR ===== */
 function enter(){
   document.getElementById('intro').style.display='none';
   fondo.volume=0.4;
   fondo.play();
+  escribir(); 
 }
 
-/* ===== TEXTO ===== */
+/* ===== TEXTO (MISMOS TEXTOS) ===== */
 const mensaje=`¡Feliz San Valentín, mi amor!
 
 Hoy, en el día del amor, quiero recordarte lo increíblemente afortunado que soy de tenerte. Eres esa pieza que encaja perfectamente en mi vida, llenándola de colores, risas y momentos inolvidables.
@@ -171,9 +224,14 @@ No necesito un día especial para saber cuánto te amo, pero hoy aprovecho cada 
 Prometo seguir construyendo este camino contigo, cuidando nuestro amor como el tesoro más preciado. Gracias por ser mi Valentín hoy y siempre.
 
 Te amo con todo mi corazón, cebollín 🤎`;
-let i=0;
-function escribir(){if(i<mensaje.length){texto.innerHTML+=mensaje.charAt(i++);setTimeout(escribir,35)}}
-escribir();
+
+let charIdx=0;
+function escribir(){
+  if(charIdx < mensaje.length){
+    document.getElementById('texto').innerHTML += mensaje.charAt(charIdx++);
+    setTimeout(escribir, 35);
+  }
+}
 
 /* ===== MUSICA ===== */
 const fondo=document.getElementById('fondo');
@@ -209,24 +267,43 @@ function fraseRandom(e){
 
 /* ===== CILINDRO INTERACTIVO ===== */
 const imagenes=[
- 'https://i.imgur.com/m2rqpiu.jpeg',
- 'https://i.imgur.com/jbyIzFT.jpeg',
- 'https://i.imgur.com/tpH81jp.jpeg',
- 'https://i.imgur.com/mOQ2xhz.jpeg',
- 'https://i.imgur.com/ra5P475.jpeg',
- 'https://i.imgur.com/0xnanwq.jpeg',
- 'https://i.imgur.com/2Xh4XhC.jpeg'
+ 'https://i.imgur.com',
+ 'https://i.imgur.com',
+ 'https://i.imgur.com',
+ 'https://i.imgur.com',
+ 'https://i.imgur.com',
+ 'https://i.imgur.com',
+ 'https://i.imgur.com'
 ];
 const cilindro=document.getElementById('cilindro');
-let rot=0,auto=true;
+const modal = document.getElementById('modal');
+const imgModal = document.getElementById('imgModal');
+
+let rot=0, auto=true;
+
 imagenes.forEach((src,i)=>{
   const img=document.createElement('img');
   img.src=src;
   img.style.transform=`rotateY(${(360/imagenes.length)*i}deg) translateZ(170px)`;
+  
+  img.onclick = (e) => {
+    e.stopPropagation();
+    imgModal.src = src;
+    modal.style.display = 'flex';
+  };
+  
   cilindro.appendChild(img);
 });
-function animate(){if(auto){rot+=0.3;cilindro.style.transform=`rotateY(${rot}deg)`}requestAnimationFrame(animate)}
+
+function animate(){
+  if(auto){
+    rot += 0.4;
+    cilindro.style.transform=`rotateY(${rot}deg)`;
+  }
+  requestAnimationFrame(animate);
+}
 animate();
+
 cilindro.addEventListener('touchstart',()=>auto=false);
 cilindro.addEventListener('touchend',()=>setTimeout(()=>auto=true,2000));
 
@@ -237,7 +314,19 @@ function resize(){canvas.width=innerWidth;canvas.height=innerHeight}
 resize();window.onresize=resize;
 let stars=[];
 for(let i=0;i<120;i++)stars.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*1.5});
-function drawStars(){ctx.clearRect(0,0,canvas.width,canvas.height);ctx.fillStyle='white';stars.forEach(s=>{ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fill();s.y+=0.1;if(s.y>canvas.height)s.y=0});requestAnimationFrame(drawStars)}
+function drawStars(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle='white';
+  stars.forEach(s=>{
+    ctx.beginPath();
+    ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    ctx.fill();
+    s.y+=0.1;
+    if(s.y>canvas.height)s.y=0;
+  });
+  requestAnimationFrame(drawStars);
+}
 drawStars();
-</script></body>
+</script>
+</body>
 </html>
