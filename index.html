@@ -9,7 +9,7 @@
 body{
  margin:0;
  font-family:Segoe UI, sans-serif;
- background:#1a0015;
+ background:#140010;
  color:#fff;
  overflow-x:hidden;
 }
@@ -64,7 +64,7 @@ button{
  margin-top:12px;
 }
 
-/* TITULOS PREMIUM */
+/* TITULOS BRILLO */
 
 .card h2{
  font-size:22px;
@@ -81,7 +81,7 @@ button{
  to{background-position:200%}
 }
 
-/* HEART BG */
+/* CORAZONES FONDO */
 
 .bgHearts span{
  position:fixed;
@@ -95,7 +95,7 @@ button{
  to{transform:translateY(-10vh)}
 }
 
-/* CARDS */
+/* TARJETAS 3D SUAVE */
 
 .card{
  position:relative;
@@ -104,13 +104,13 @@ button{
  margin:24px auto;
  padding:22px;
  width:92%;
- max-width:520px;
+ max-width:560px;
  border-radius:22px;
- box-shadow:0 8px 30px rgba(0,0,0,.25);
+ box-shadow:0 12px 30px rgba(0,0,0,.25);
  border:3px dashed #ff99cc;
 
  opacity:0;
- transform:translateY(40px);
+ transform:translateY(40px) scale(.97);
  animation:cardIn .9s ease forwards;
 
  transform-style:preserve-3d;
@@ -121,16 +121,17 @@ button{
 .card:nth-of-type(2){animation-delay:.4s}
 .card:nth-of-type(3){animation-delay:.6s}
 .card:nth-of-type(4){animation-delay:.8s}
+.card:nth-of-type(5){animation-delay:1s}
 
 @keyframes cardIn{
- to{opacity:1; transform:translateY(0)}
+ to{opacity:1; transform:translateY(0) scale(1)}
 }
 
-/* PROFILE */
+/* IMAGEN PERFIL */
 
 .circleImg{
- width:160px;
- height:160px;
+ width:170px;
+ height:170px;
  border-radius:50%;
  object-fit:cover;
  display:block;
@@ -138,7 +139,7 @@ button{
  border:6px solid #ffb3d9;
 }
 
-/* COUNTER */
+/* CONTADOR */
 
 .counter{
  text-align:center;
@@ -146,7 +147,7 @@ button{
  line-height:1.6;
 }
 
-/* MUSIC */
+/* MUSICA */
 
 .musicCover{
  width:160px;
@@ -158,7 +159,7 @@ button{
  border:6px solid #ffb3d9;
 }
 
-/* GRID */
+/* GRID RESPONSIVE */
 
 .grid{
  display:grid;
@@ -171,19 +172,22 @@ button{
  height:150px;
  object-fit:cover;
  border-radius:14px;
- transition:transform .3s;
+ transition:transform .3s, box-shadow .3s;
 }
 
 .grid img:hover{
- transform:scale(1.06);
+ transform:scale(1.07);
+ box-shadow:0 8px 20px rgba(0,0,0,.25);
 }
 
-/* FINAL TEXT */
+/* TEXTO */
 
-.finalText{
- font-size:18px;
+.sectionText{
+ font-size:17px;
  line-height:1.8;
 }
+
+/* TYPE */
 
 .typeTarget{
  white-space:pre-line;
@@ -204,7 +208,7 @@ button{
 </div>
 </div>
 
-<!-- MUSIC -->
+<!-- MUSICA -->
 <audio id="bgMusic" loop>
 <source src="https://files.catbox.moe/4nrc17.mp3">
 </audio>
@@ -215,14 +219,14 @@ button{
 
 <div class="bgHearts" id="bgHearts"></div>
 
-<!-- SECCION 1 -->
+<!-- SECCION CONTADOR -->
 <div class="card">
 <h2>💞 Nuestro tiempo juntos 💞</h2>
 <img class="circleImg" src="https://i.imgur.com/m2rqpiu.jpeg">
 <div class="counter" id="counter"></div>
 </div>
 
-<!-- SECCION 2 -->
+<!-- MUSICA -->
 <div class="card">
 <h2>🎵 Nuestra canción 🎵</h2>
 <img class="musicCover" src="https://i.imgur.com/jbyIzFT.jpeg">
@@ -231,7 +235,13 @@ button{
 </div>
 </div>
 
-<!-- SECCION 3 -->
+<!-- HISTORIA -->
+<div class="card sectionText">
+<h2>📖 Nuestra historia 📖</h2>
+<div id="storyText" class="typeTarget"></div>
+</div>
+
+<!-- RECUERDOS -->
 <div class="card">
 <h2>📸 Nuestros recuerdos 📸</h2>
 <div class="grid">
@@ -253,9 +263,9 @@ button{
 </div>
 
 <!-- FINAL -->
-<div class="card finalText">
+<div class="card sectionText">
 <h2>💌 Mensaje final 💌</h2>
-<div id="typedMsg" class="typeTarget"></div>
+<div id="finalText" class="typeTarget"></div>
 </div>
 
 <script>
@@ -265,11 +275,12 @@ function enter(){
  if(pass.value==="Jerry"){
   login.style.display="none";
   bgMusic.play().catch(()=>{});
-  setTimeout(typeMsg,800);
+  setTimeout(typeStory,600);
+  setTimeout(typeFinal,9000);
  } else alert("Contraseña incorrecta 💔");
 }
 
-/* MUSIC SWITCH */
+/* MUSIC */
 function toggleSong(){
  if(ourSong.paused){
   bgMusic.pause();
@@ -282,46 +293,71 @@ function toggleSong(){
  }
 }
 
-/* TYPEWRITER */
+/* STORY — TEXTO COMPLETO CORREGIDO */
 
-const msg = `Aún recuerdo cuando vi al ratón Jerry en el gym…
-siempre me robabas la barra 😝
+const story = `Aún recuerdo cuando vi al ratón Jerry en el gym.
+Eras una niña muy raterita porque siempre me robabas la barra 😝
+Pero había algo que me llamaba mucho la atención… tal vez esa forma de tenerle miedo a casi todo y aun así seguir.
 
-Nuestra primera cita fue ir por jitomates — y fue perfecta.
+Nuestra primera cita fue ir por jitomates — y estuvo increíblemente cool 🤎
 
-Amo tu forma de ver a las personas.
-Admiro tu fuerza.
-Amo a la niña valiente aunque tenga miedo.
-Amo cómo haces mágicos los momentos simples.
+No entiendo en qué momento te convertiste en alguien tan importante para mí.
 
-Mi cebollín en su motito,
-la de los rufles de queso,
-hamburguesas sin piña,
-crepúsculo,
-las cosas simples,
-los piecitos de ratón,
-esa sonrisa de ratoncito.
+Hay muchas cosas que amo de ti:
+Tu forma de ver a las personas.
+Tu manera de seguir adelante aunque hayas vivido cosas difíciles.
+La niña valiente que sigue aunque tenga miedo.
+La forma en que haces especial cualquier momento simple.
+
+Mi cebollín en su motito.
+La de los rufles de queso.
+Las hamburguesas sin piña.
+Crepúsculo.
+Las cosas simples.
+Los piecitos de ratón.
+Esa sonrisa de ratoncito.
 
 Nuestro primer mensaje fue el 11 de septiembre del 2024:
-Holaaa :)
+“Holaaa :)”
 
-Quiero más viajes,
+Quiero seguir haciendo muchas cosas contigo:
+más viajes,
 más fotos,
-más locuras,
-más risas en el centro.
+más aventuras,
+que nos corran los borregos,
+reír como loquitos en el centro,
+y siempre cuidarte.
 
-Hay muchos momentos hermosos en la vida…
-pero el mejor fue cuando te conocí.
+Y sí — también cuando a mí se me olvide todo —
+sé que tú llevarás tu maletita con cositas para los dos ❤️`;
 
-Te amo mucho mi cebollín 🥰`;
+/* FINAL */
 
-let i=0;
-function typeMsg(){
- if(i<msg.length){
-  typedMsg.innerHTML += msg[i]==="\n"?"<br>":msg[i];
-  i++;
-  setTimeout(typeMsg,24);
+const finalMsg = `Hay muchos momentos hermosos en la vida…
+pero sin duda el mejor de todos fue cuando te conocí.
+
+Te amo mucho, mi cebollín 🥰`;
+
+/* TYPE EFFECT */
+
+function typeWriter(text, el, speed){
+ let i=0;
+ function t(){
+  if(i<text.length){
+   el.innerHTML += text[i]==="\n"?"<br>":text[i];
+   i++;
+   setTimeout(t,speed);
+  }
  }
+ t();
+}
+
+function typeStory(){
+ typeWriter(story, storyText, 22);
+}
+
+function typeFinal(){
+ typeWriter(finalMsg, finalText, 28);
 }
 
 /* COUNTER */
@@ -336,7 +372,7 @@ setInterval(()=>{
  Math.floor(d/1000)%60+" segundos 💗";
 },1000);
 
-/* FLOAT HEARTS */
+/* CORAZONES BG */
 
 for(let i=0;i<25;i++){
  const s=document.createElement("span");
@@ -347,22 +383,15 @@ for(let i=0;i<25;i++){
  bgHearts.appendChild(s);
 }
 
-/* LOGIN HEART CANVAS */
+/* LOGIN CANVAS */
 
 const c=heartsCanvas;
 const ctx=c.getContext("2d");
 c.width=innerWidth;
 c.height=innerHeight;
 let hearts=[];
-
-function heart(){
- this.x=Math.random()*c.width;
- this.y=c.height+20;
- this.s=10+Math.random()*18;
- this.v=1+Math.random()*2;
-}
-
-function drawHeart(x,y,s){
+function heart(){this.x=Math.random()*c.width;this.y=c.height;this.s=8+Math.random()*16;this.v=1+Math.random()*2;}
+function draw(x,y,s){
  ctx.beginPath();
  ctx.moveTo(x,y);
  ctx.bezierCurveTo(x-s,y-s,x-2*s,y+s,x,y+2*s);
@@ -370,18 +399,13 @@ function drawHeart(x,y,s){
  ctx.fillStyle="rgba(255,80,150,.8)";
  ctx.fill();
 }
-
 (function loop(){
  ctx.clearRect(0,0,c.width,c.height);
  if(Math.random()<.2) hearts.push(new heart());
- hearts.forEach((h,i)=>{
-  h.y-=h.v;
-  drawHeart(h.x,h.y,h.s/2);
-  if(h.y<-40) hearts.splice(i,1);
- });
+ hearts.forEach((h,i)=>{h.y-=h.v; draw(h.x,h.y,h.s/2); if(h.y<-40) hearts.splice(i,1);});
  requestAnimationFrame(loop);
 })();
-
 </script>
+
 </body>
 </html>
