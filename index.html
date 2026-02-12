@@ -14,7 +14,7 @@ body{
  overflow-x:hidden;
 }
 
-/* ===== TITULOS PREMIUM ===== */
+/* TITULOS PREMIUM */
 h2{
  text-align:center;
  font-weight:900;
@@ -26,7 +26,7 @@ h2{
 }
 @keyframes shine{to{background-position:200%}}
 
-/* ===== INTRO ===== */
+/* INTRO */
 #intro{
  position:fixed; inset:0;
  background:#000;
@@ -41,12 +41,11 @@ h2{
  border-radius:16px;
  box-shadow:0 0 60px #ff4da6;
  animation:pulse 2s infinite;
+ cursor:pointer;
 }
-@keyframes pulse{
- 50%{transform:scale(1.1)}
-}
+@keyframes pulse{50%{transform:scale(1.1)}}
 
-/* ===== LOGIN ===== */
+/* LOGIN */
 #login{
  position:fixed; inset:0;
  display:none;
@@ -77,9 +76,10 @@ button{
  color:white;
  margin-top:10px;
  font-weight:700;
+ cursor:pointer;
 }
 
-/* ===== TARJETAS ===== */
+/* TARJETAS */
 .card{
  background:#ffe6f2;
  color:#4a0030;
@@ -98,7 +98,14 @@ button{
  opacity:1;
 }
 
-/* ===== GALERIA ===== */
+/* TEXTO */
+.type{
+ white-space:pre-line;
+ line-height:1.7;
+ font-weight:600;
+}
+
+/* GALERIA */
 .grid{
  display:grid;
  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
@@ -114,14 +121,7 @@ button{
 }
 .grid img:hover{transform:scale(1.06)}
 
-/* ===== TYPE TEXT ===== */
-.type{
- white-space:pre-line;
- line-height:1.7;
- font-weight:600;
-}
-
-/* ===== VISOR ===== */
+/* VISOR */
 #viewer{
  position:fixed; inset:0;
  background:rgba(0,0,0,.85);
@@ -136,24 +136,18 @@ button{
  border-radius:18px;
 }
 
-/* ===== LIBRO ===== */
-.book{
- perspective:1000px;
-}
+/* LIBRO */
+.book{perspective:1000px;}
 .page{
  background:white;
  color:#4a0030;
  padding:20px;
  border-radius:16px;
- transform:rotateY(0);
  transition:.6s;
  box-shadow:0 10px 30px rgba(0,0,0,.3);
 }
-.page.flip{
- transform:rotateY(180deg);
-}
 
-/* ===== CORAZONES TOQUE ===== */
+/* CORAZONES TOQUE */
 .tapHeart{
  position:fixed;
  font-size:22px;
@@ -164,16 +158,14 @@ button{
  to{transform:translateY(-80px);opacity:0}
 }
 
-/* ===== REGALO FINAL ===== */
+/* REGALO */
 .gift{
  font-size:70px;
  text-align:center;
  cursor:pointer;
  animation:giftPulse 2s infinite;
 }
-@keyframes giftPulse{
- 50%{transform:scale(1.15)}
-}
+@keyframes giftPulse{50%{transform:scale(1.15)}}
 
 </style>
 </head>
@@ -199,33 +191,36 @@ button{
 <audio id="bgMusic" loop src="https://files.catbox.moe/4nrc17.mp3"></audio>
 <audio id="ourSong" src="https://files.catbox.moe/egr68n.mp3"></audio>
 
-<!-- TARJETAS -->
-
+<!-- MUSICA -->
 <div class="card">
 <h2>🎵 Nuestra canción</h2>
 <button onclick="toggleSong()" id="songBtn">▶️ Reproducir</button>
 </div>
 
+<!-- HISTORIA COMPLETA -->
 <div class="card">
 <h2>📖 Nuestra historia</h2>
 <div id="story" class="type"></div>
 </div>
 
+<!-- GALERIA -->
 <div class="card">
-<h2>📸 Recuerdos</h2>
+<h2>📸 Todos nuestros recuerdos</h2>
 <div class="grid" id="gallery"></div>
 </div>
 
+<!-- LIBRO -->
 <div class="card">
 <h2>📘 Libro de momentos</h2>
 <div class="book">
 <div id="page" class="page"></div>
-<button onclick="nextPage()">Siguiente página</button>
+<button onclick="nextPage()">Siguiente</button>
 </div>
 </div>
 
+<!-- REGALO FINAL -->
 <div class="card">
-<h2>🎁 Ábreme</h2>
+<h2>🎁 Regalo final</h2>
 <div class="gift" onclick="openGift()">🎁</div>
 <div id="final" class="type"></div>
 </div>
@@ -264,26 +259,56 @@ function toggleSong(){
  }
 }
 
-/* TYPE STORY */
+/* TEXTO COMPLETO CORREGIDO */
 const storyText=`Aún recuerdo cuando vi al ratón Jerry en el gym.
 Eras una niña muy raterita porque siempre me robabas la barra 😝
 
-Nuestra primera cita fue ir por jitomates.
+Había algo en ti que me llamaba mucho la atención.
+Tu forma de ser… tu forma de mirar el mundo.
 
-Amo tu forma de ver a las personas.
-Admiro que siempre intentas ser mejor.
+Nuestra primera cita fue ir por jitomates 🤎
+Y aunque fue algo simple, fue muy especial.
+
+No entiendo en qué momento te convertiste
+en una persona tan importante para mí.
+
+Hay muchas cosas que amo de ti:
+tu forma de ver a las personas,
+tu corazón,
+que siempre intentas ser mejor
+aunque hayas vivido cosas difíciles.
+
+Amo a la niña que a veces tiene miedo,
+pero aun así va.
+
+La que hace especial cualquier momento simple.
+Mi cebollín que en su motito se ve muy cool.
 
 La niña de los rufles de queso,
-hamburguesas sin piña,
-crepúsculo y cosas simples.
+las hamburguesas sin piña,
+Crepúsculo,
+las cosas simples.
 
-Nuestro primer mensaje:
-11 de septiembre de 2024 — “Holaaa :)”
+La niña de los piecitos de ratón
+y esos dientitos de ratoncito.
 
-Quiero viajar contigo,
-reír en el centro,
+Nuestro primer mensaje fue
+el 11 de septiembre de 2024:
+“Holaaa :)”
+
+Quiero seguir haciendo más cosas contigo:
+viajar,
+salir,
+tomarnos más fotos,
+reír como loquitos en el centro,
 que nos correteen los borregos,
-y cuidarte siempre ❤️`;
+cuidarte siempre.
+
+Y cuando yo olvide mis cosas,
+tú lleves tu maletita con cositas para los dos ❤️
+
+Quiero verte cumplir tus metas.
+Seguir creciendo contigo.`
 
 function typeStory(){
  let i=0;
@@ -295,44 +320,13 @@ function typeStory(){
  })();
 }
 
-/* GALERIA TODAS */
-const imgs=["m2rqpiu","jbyIzFT","tpH81jp","mOQ2xhz","ra5P475","0xnanwq","2Xh4XhC","UX4FUgZ","3h5EZdw","8yDYtN4","1IveqjS","D2fqpOe","cqMYyp1","S888hKj"];
-imgs.forEach(id=>{
- const im=new Image();
- im.src="https://i.imgur.com/"+id+".jpeg";
- im.loading="lazy";
- im.onclick=()=>{viewer.style.display="flex";viewImg.src=im.src};
- gallery.appendChild(im);
-});
-
-/* LIBRO */
-const pages=[
-"Tu risa favorita",
-"Tu motito cool",
-"Nuestros viajes",
-"Nuestros jitomates 😝",
-"Nuestro inicio"
-];
-let pi=0;
-function nextPage(){
- page.classList.add("flip");
- setTimeout(()=>{
-  page.innerHTML=pages[pi%pages.length];
-  page.classList.remove("flip");
-  pi++;
- },300);
-}
-nextPage();
-
-/* REGALO FINAL */
+/* FINAL */
 function openGift(){
- final.innerHTML="";
  typeWriter(`Hay muchos momentos hermosos en la vida,
-pero el mejor fue cuando te conocí.
+pero sin duda el mejor de todos fue cuando te conocí.
 
 Te amo mucho mi cebollín 🥰`, final, 28);
 }
-
 function typeWriter(t,el,s){
  let i=0;
  (function w(){
@@ -342,6 +336,31 @@ function typeWriter(t,el,s){
   }
  })();
 }
+
+/* IMAGENES TODAS */
+const imgs=["m2rqpiu","jbyIzFT","tpH81jp","mOQ2xhz","ra5P475","0xnanwq","2Xh4XhC","UX4FUgZ","3h5EZdw","8yDYtN4","1IveqjS","D2fqpOe","cqMYyp1","S888hKj"];
+imgs.forEach(id=>{
+ const im=new Image();
+ im.src="https://i.imgur.com/"+id+".jpeg";
+ im.loading="lazy";
+ im.onclick=()=>{viewer.style.display="flex";viewImg.src=im.src};
+ gallery.appendChild(im);
+});
+
+/* LIBRO PAGINAS */
+const pages=[
+"Tu risa favorita",
+"Tu motito cool",
+"Nuestros jitomates",
+"Risas en el centro",
+"Nuestro inicio"
+];
+let pi=0;
+function nextPage(){
+ page.innerHTML=pages[pi%pages.length];
+ pi++;
+}
+nextPage();
 
 /* REVEAL */
 const obs=new IntersectionObserver(e=>{
