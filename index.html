@@ -2,251 +2,260 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Para mi Jerry 💖</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Para mi cebollín 🤎</title>
 
 <style>
+
 body{
- margin:0;
- font-family:Segoe UI,sans-serif;
- background:radial-gradient(circle,#2b0020,#000);
- color:#fff;
- overflow-x:hidden;
+margin:0;
+font-family:'Segoe UI',sans-serif;
+background:linear-gradient(180deg,#ffd6e7,#ffeaf3);
+color:#5a2a3a;
+overflow-x:hidden;
 }
 
-/* TITULOS PREMIUM */
-h2{
- text-align:center;
- font-weight:900;
- background:linear-gradient(90deg,#ff4da6,#ffd1ea,#ff4da6);
- -webkit-background-clip:text;
- -webkit-text-fill-color:transparent;
- background-size:200%;
- animation:shine 6s linear infinite;
-}
-@keyframes shine{to{background-position:200%}}
+/* ===== LOGIN ===== */
 
-/* INTRO */
-#intro{
- position:fixed; inset:0;
- background:#000;
- display:flex;
- justify-content:center;
- align-items:center;
- z-index:1000;
-}
-.film{
- width:240px;height:160px;
- background:#ff4da6;
- border-radius:16px;
- box-shadow:0 0 60px #ff4da6;
- animation:pulse 2s infinite;
- cursor:pointer;
-}
-@keyframes pulse{50%{transform:scale(1.1)}}
-
-/* LOGIN */
 #login{
- position:fixed; inset:0;
- display:none;
- justify-content:center;
- align-items:center;
- background:#0a0008;
- z-index:999;
+position:fixed;
+inset:0;
+background:linear-gradient(180deg,#ffb6d5,#ffcfe6);
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+z-index:10;
 }
-.loginCard{
- background:rgba(255,255,255,.15);
- backdrop-filter:blur(14px);
- padding:40px;
- border-radius:25px;
- text-align:center;
-}
-input{
- padding:12px;
- border-radius:14px;
- border:none;
- text-align:center;
+
+input,button{
+padding:12px 18px;
+border-radius:14px;
+border:none;
+font-size:16px;
 }
 
 button{
- padding:12px 20px;
- border:none;
- border-radius:18px;
- background:#ff4da6;
- color:white;
- margin-top:10px;
- font-weight:700;
- cursor:pointer;
+background:#ff4da6;
+color:white;
+box-shadow:0 8px 20px rgba(0,0,0,.2);
 }
 
-/* TARJETAS */
+/* ===== TARJETAS ===== */
+
 .card{
- background:#ffe6f2;
- color:#4a0030;
- margin:26px auto;
- padding:24px;
- width:94%;
- max-width:720px;
- border-radius:22px;
- box-shadow:0 20px 50px rgba(0,0,0,.4);
- transform:translateY(60px);
- opacity:0;
- transition:.7s;
-}
-.card.show{
- transform:translateY(0);
- opacity:1;
+background:white;
+margin:22px auto;
+padding:20px;
+border-radius:22px;
+max-width:720px;
+box-shadow:0 20px 50px rgba(0,0,0,.15);
+transform-style:preserve-3d;
+transition:.3s;
 }
 
-/* TEXTO */
-.type{
- white-space:pre-line;
- line-height:1.7;
- font-weight:600;
+.card:hover{
+transform:translateY(-6px) scale(1.01);
+box-shadow:0 30px 70px rgba(0,0,0,.25);
 }
 
-/* GALERIA */
+h2{
+text-align:center;
+font-size:24px;
+margin-bottom:16px;
+background:linear-gradient(45deg,#ff4da6,#ff80bf);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+/* ===== IMÁGENES ===== */
+
+.circleImg{
+width:200px;
+height:200px;
+border-radius:50%;
+object-fit:cover;
+display:block;
+margin:auto;
+box-shadow:0 12px 30px rgba(0,0,0,.3);
+}
+
 .grid{
- display:grid;
- grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
- gap:12px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+gap:10px;
 }
+
 .grid img{
- width:100%;
- height:170px;
- object-fit:cover;
- border-radius:14px;
- cursor:pointer;
- transition:.25s;
-}
-.grid img:hover{transform:scale(1.06)}
-
-/* VISOR */
-#viewer{
- position:fixed; inset:0;
- background:rgba(0,0,0,.85);
- display:none;
- justify-content:center;
- align-items:center;
- z-index:2000;
-}
-#viewer img{
- max-width:92%;
- max-height:92%;
- border-radius:18px;
+width:100%;
+height:160px;
+object-fit:cover;
+border-radius:16px;
+box-shadow:0 8px 20px rgba(0,0,0,.25);
 }
 
-/* LIBRO */
-.book{perspective:1000px;}
-.page{
- background:white;
- color:#4a0030;
- padding:20px;
- border-radius:16px;
- transition:.6s;
- box-shadow:0 10px 30px rgba(0,0,0,.3);
+/* ===== TEXTO FINAL ===== */
+
+.finalText{
+font-size:18px;
+line-height:1.7;
+color:#4a1f2d;
+text-shadow:0 1px 0 white;
 }
 
-/* CORAZONES TOQUE */
-.tapHeart{
- position:fixed;
- font-size:22px;
- pointer-events:none;
- animation:pop 1s forwards;
-}
-@keyframes pop{
- to{transform:translateY(-80px);opacity:0}
+/* ===== CORAZONES ===== */
+
+.bgHearts span{
+position:fixed;
+bottom:-40px;
+animation:floatUp linear infinite;
+opacity:.25;
 }
 
-/* REGALO */
+@keyframes floatUp{
+to{
+transform:translateY(-110vh);
+}
+}
+
+/* ===== REGALO ===== */
+
 .gift{
- font-size:70px;
- text-align:center;
- cursor:pointer;
- animation:giftPulse 2s infinite;
+font-size:70px;
+cursor:pointer;
+text-align:center;
+animation:pulse 2s infinite;
 }
-@keyframes giftPulse{50%{transform:scale(1.15)}}
+
+@keyframes pulse{
+0%,100%{transform:scale(1)}
+50%{transform:scale(1.15)}
+}
+
+#final{
+white-space:pre-line;
+}
 
 </style>
 </head>
 
 <body>
 
-<!-- INTRO -->
-<div id="intro" onclick="start()">
-<div class="film"></div>
-</div>
-
 <!-- LOGIN -->
 <div id="login">
-<div class="loginCard">
-<h2>Contraseña 💖</h2>
+<h2>Ingresa la contraseña 🤎</h2>
 <input id="pass">
-<br>
+<br><br>
 <button onclick="enter()">Entrar</button>
-</div>
 </div>
 
 <!-- AUDIO -->
-<audio id="bgMusic" loop src="https://files.catbox.moe/4nrc17.mp3"></audio>
-<audio id="ourSong" src="https://files.catbox.moe/egr68n.mp3"></audio>
+<audio id="bgMusic" loop>
+<source src="https://files.catbox.moe/4nrc17.mp3">
+</audio>
 
-<!-- MUSICA -->
+<audio id="ourSong">
+<source src="https://files.catbox.moe/egr68n.mp3">
+</audio>
+
+<div class="bgHearts" id="bgHearts"></div>
+
+<!-- TIEMPO -->
 <div class="card">
-<h2>🎵 Nuestra canción</h2>
+<h2>💞 Nuestro tiempo juntos 💞</h2>
+<img class="circleImg" src="https://i.imgur.com/m2rqpiu.jpeg">
+<div id="counter"></div>
+</div>
+
+<!-- CANCIÓN -->
+<div class="card">
+<h2>🎵 Nuestra canción 🎵</h2>
+
+<img src="https://i.imgur.com/jbyIzFT.jpeg"
+style="width:100%;max-width:420px;border-radius:18px;display:block;margin:auto;box-shadow:0 10px 30px rgba(0,0,0,.35);">
+
+<br>
 <button onclick="toggleSong()" id="songBtn">▶️ Reproducir</button>
 </div>
 
-<!-- HISTORIA COMPLETA -->
+<!-- GALERÍA COMPLETA -->
 <div class="card">
-<h2>📖 Nuestra historia</h2>
-<div id="story" class="type"></div>
+<h2>📸 Nuestros recuerdos 📸</h2>
+<div class="grid">
+
+<img src="https://i.imgur.com/tpH81jp.jpeg">
+<img src="https://i.imgur.com/mOQ2xhz.jpeg">
+<img src="https://i.imgur.com/ra5P475.jpeg">
+<img src="https://i.imgur.com/0xnanwq.jpeg">
+<img src="https://i.imgur.com/2Xh4XhC.jpeg">
+<img src="https://i.imgur.com/UX4FUgZ.jpeg">
+<img src="https://i.imgur.com/3h5EZdw.jpeg">
+<img src="https://i.imgur.com/8yDYtN4.jpeg">
+<img src="https://i.imgur.com/1IveqjS.jpeg">
+<img src="https://i.imgur.com/D2fqpOe.jpeg">
+<img src="https://i.imgur.com/cqMYyp1.jpeg">
+<img src="https://i.imgur.com/S888hKj.jpeg">
+
+</div>
 </div>
 
-<!-- GALERIA -->
-<div class="card">
-<h2>📸 Todos nuestros recuerdos</h2>
-<div class="grid" id="gallery"></div>
+<!-- MENSAJE COMPLETO -->
+<div class="card finalText">
+
+Aún recuerdo cuando vi al ratón Jerry en el gym.  
+Eras una niña muy raterita porque siempre me robabas la barra 😝  
+Pero aun así había algo que me llamaba mucho la atención de ti…  
+tal vez esa forma tan tierna de tenerle miedo a casi todo.
+
+Aun así te atreviste a saludarme cuando empezamos a hablar…  
+y ese día nunca lo voy a olvidar.
+
+Nuestra primera cita fue ir por jitomates — y eso estuvo muy cool 🤎
+
+No entiendo cómo te fuiste convirtiendo en una persona tan importante para mí.
+
+Hay muchas cosas que amo de ti:  
+Tu forma de ver a las personas.  
+Que aunque hayas vivido cosas malas, siempre intentas ser mejor.  
+La niña que aunque va con miedo… va.  
+La que convierte momentos simples en especiales.  
+Mi cebollín en su motito viéndose cool.  
+La que ama los rufles y las hamburguesas sin piña.  
+La que ama Crepúsculo.  
+La de los piecitos de ratón y dientitos de ratoncito 🐭
+
+Nuestro primer mensaje fue el 11 de septiembre de 2024:  
+“Holaaa :)”
+
+Quiero seguir viviendo muchas cosas contigo:  
+viajar, que nos correteen los borregos,  
+cuidarte siempre,  
+que traigas tu maletita con cositas para los dos,  
+tomarnos más fotos,  
+verte cumplir tus metas,  
+y reírnos como loquitos en el centro 🧸
+
 </div>
 
-<!-- LIBRO -->
+<!-- REGALO -->
 <div class="card">
-<h2>📘 Libro de momentos</h2>
-<div class="book">
-<div id="page" class="page"></div>
-<button onclick="nextPage()">Siguiente</button>
-</div>
-</div>
-
-<!-- REGALO FINAL -->
-<div class="card">
-<h2>🎁 Regalo final</h2>
+<h2>🎁 Regalo final 🎁</h2>
 <div class="gift" onclick="openGift()">🎁</div>
-<div id="final" class="type"></div>
-</div>
-
-<div id="viewer" onclick="this.style.display='none'">
-<img id="viewImg">
+<div id="final"></div>
 </div>
 
 <script>
 
-/* INTRO */
-function start(){
- intro.style.display="none";
- login.style.display="flex";
-}
-
-/* LOGIN */
+/* LOGIN + MÚSICA */
 function enter(){
  if(pass.value==="Jerry"){
   login.style.display="none";
   bgMusic.play().catch(()=>{});
-  typeStory();
  }
 }
 
-/* MUSICA */
+/* CANCIÓN */
 function toggleSong(){
  if(ourSong.paused){
   bgMusic.pause();
@@ -259,126 +268,53 @@ function toggleSong(){
  }
 }
 
-/* TEXTO COMPLETO CORREGIDO */
-const storyText=`Aún recuerdo cuando vi al ratón Jerry en el gym.
-Eras una niña muy raterita porque siempre me robabas la barra 😝
+/* CONTADOR */
+const start=new Date("2024-09-11");
+setInterval(()=>{
+ const diff=Date.now()-start;
+ const d=Math.floor(diff/86400000);
+ const h=Math.floor(diff/3600000)%24;
+ const m=Math.floor(diff/60000)%60;
+ const s=Math.floor(diff/1000)%60;
+ counter.innerHTML=`${d} días 💗 ${h} horas ${m} min ${s} seg`;
+},1000);
 
-Había algo en ti que me llamaba mucho la atención.
-Tu forma de ser… tu forma de mirar el mundo.
-
-Nuestra primera cita fue ir por jitomates 🤎
-Y aunque fue algo simple, fue muy especial.
-
-No entiendo en qué momento te convertiste
-en una persona tan importante para mí.
-
-Hay muchas cosas que amo de ti:
-tu forma de ver a las personas,
-tu corazón,
-que siempre intentas ser mejor
-aunque hayas vivido cosas difíciles.
-
-Amo a la niña que a veces tiene miedo,
-pero aun así va.
-
-La que hace especial cualquier momento simple.
-Mi cebollín que en su motito se ve muy cool.
-
-La niña de los rufles de queso,
-las hamburguesas sin piña,
-Crepúsculo,
-las cosas simples.
-
-La niña de los piecitos de ratón
-y esos dientitos de ratoncito.
-
-Nuestro primer mensaje fue
-el 11 de septiembre de 2024:
-“Holaaa :)”
-
-Quiero seguir haciendo más cosas contigo:
-viajar,
-salir,
-tomarnos más fotos,
-reír como loquitos en el centro,
-que nos correteen los borregos,
-cuidarte siempre.
-
-Y cuando yo olvide mis cosas,
-tú lleves tu maletita con cositas para los dos ❤️
-
-Quiero verte cumplir tus metas.
-Seguir creciendo contigo.`
-
-function typeStory(){
- let i=0;
- (function w(){
-  if(i<storyText.length){
-   story.innerHTML+=storyText[i]==="\n"?"<br>":storyText[i];
-   i++; setTimeout(w,18);
-  }
- })();
+/* CORAZONES */
+for(let i=0;i<30;i++){
+ const s=document.createElement("span");
+ s.innerHTML="❤";
+ s.style.left=Math.random()*100+"vw";
+ s.style.fontSize=(16+Math.random()*26)+"px";
+ s.style.animationDuration=(8+Math.random()*8)+"s";
+ bgHearts.appendChild(s);
 }
 
-/* FINAL */
+/* REGALO — FIX BUG TEXTO */
+let writing=false;
+
 function openGift(){
+ if(writing) return;
+ writing=true;
+ final.innerHTML="";
  typeWriter(`Hay muchos momentos hermosos en la vida,
 pero sin duda el mejor de todos fue cuando te conocí.
 
 Te amo mucho mi cebollín 🥰`, final, 28);
 }
-function typeWriter(t,el,s){
+
+function typeWriter(text,el,speed){
  let i=0;
- (function w(){
-  if(i<t.length){
-   el.innerHTML+=t[i]==="\n"?"<br>":t[i];
-   i++; setTimeout(w,s);
-  }
- })();
+ function w(){
+  if(i<text.length){
+   el.innerHTML+= text[i]==="\n"?"<br>":text[i];
+   i++;
+   setTimeout(w,speed);
+  }else writing=false;
+ }
+ w();
 }
-
-/* IMAGENES TODAS */
-const imgs=["m2rqpiu","jbyIzFT","tpH81jp","mOQ2xhz","ra5P475","0xnanwq","2Xh4XhC","UX4FUgZ","3h5EZdw","8yDYtN4","1IveqjS","D2fqpOe","cqMYyp1","S888hKj"];
-imgs.forEach(id=>{
- const im=new Image();
- im.src="https://i.imgur.com/"+id+".jpeg";
- im.loading="lazy";
- im.onclick=()=>{viewer.style.display="flex";viewImg.src=im.src};
- gallery.appendChild(im);
-});
-
-/* LIBRO PAGINAS */
-const pages=[
-"Tu risa favorita",
-"Tu motito cool",
-"Nuestros jitomates",
-"Risas en el centro",
-"Nuestro inicio"
-];
-let pi=0;
-function nextPage(){
- page.innerHTML=pages[pi%pages.length];
- pi++;
-}
-nextPage();
-
-/* REVEAL */
-const obs=new IntersectionObserver(e=>{
- e.forEach(x=>{if(x.isIntersecting)x.target.classList.add("show")});
-});
-document.querySelectorAll(".card").forEach(c=>obs.observe(c));
-
-/* CORAZONES TOQUE */
-document.addEventListener("click",e=>{
- const h=document.createElement("div");
- h.className="tapHeart";
- h.innerHTML="💖";
- h.style.left=e.clientX+"px";
- h.style.top=e.clientY+"px";
- document.body.appendChild(h);
- setTimeout(()=>h.remove(),1000);
-});
 
 </script>
+
 </body>
 </html>
