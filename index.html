@@ -3,50 +3,52 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Para mi amor 🤎</title>
+<title>Nuestro Regalo 🤎</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
+*{box-sizing:border-box}
 
 body{
 margin:0;
 font-family:Poppins,sans-serif;
-background:linear-gradient(140deg,#1a0015,#2b0022,#12000f);
+background:radial-gradient(circle at top,#2a0022,#0d000f 60%);
 color:white;
 overflow-x:hidden;
-perspective:1200px;
 }
 
-/* ===== INTRO REGALO ===== */
+/* INTRO CINE */
 
 #intro{
 position:fixed;
 inset:0;
 background:black;
 display:flex;
+flex-direction:column;
 justify-content:center;
 align-items:center;
-flex-direction:column;
 z-index:200;
+text-align:center;
 animation:fadeOut 2s 3s forwards;
+}
+
+#intro h1{
+font-size:28px;
+letter-spacing:2px;
+animation:zoom 3s ease;
+}
+
+@keyframes zoom{
+0%{transform:scale(.6);opacity:0}
+100%{transform:scale(1);opacity:1}
 }
 
 @keyframes fadeOut{
 to{opacity:0;pointer-events:none}
 }
 
-.gift{
-font-size:70px;
-animation:giftBeat 1.2s infinite;
-}
-
-@keyframes giftBeat{
-0%,100%{transform:scale(1)}
-50%{transform:scale(1.2)}
-}
-
-/* ===== LOGIN ===== */
+/* LOGIN */
 
 #login{
 position:fixed;
@@ -64,112 +66,90 @@ padding:14px;
 border-radius:14px;
 border:none;
 font-size:18px;
+width:220px;
 text-align:center;
 }
 
-/* ===== CARDS ===== */
+/* CARDS 3D */
 
 .card{
-background:rgba(255,255,255,.94);
+background:rgba(255,255,255,.96);
 color:#5a0033;
-border-radius:26px;
-padding:22px;
-margin:24px auto;
-width:94%;
+border-radius:22px;
+padding:20px;
+margin:18px auto;
+width:92%;
 max-width:560px;
-box-shadow:0 30px 60px rgba(0,0,0,.35);
-transform-style:preserve-3d;
-transition:.5s;
-position:relative;
-overflow:hidden;
+box-shadow:0 20px 45px rgba(0,0,0,.45);
+transition:transform .35s;
 }
 
-.card:hover{
-transform:scale(1.04) rotateX(6deg) rotateY(-6deg);
+.card:active{
+transform:scale(.97);
 }
-
-.card::after{
-content:"";
-position:absolute;
-inset:0;
-background:linear-gradient(120deg,transparent,rgba(255,255,255,.5),transparent);
-opacity:0;
-}
-
-.card:hover::after{
-opacity:.9;
-animation:shine 1.2s;
-}
-
-@keyframes shine{
-from{transform:translateX(-120%)}
-to{transform:translateX(120%)}
-}
-
-/* ===== TITLES ===== */
 
 .card h2{
-margin:0 0 14px;
-font-size:24px;
+margin:0 0 12px;
+font-size:20px;
 background:linear-gradient(45deg,#ff4e8a,#ff758c,#ffb199);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
-text-shadow:0 2px 8px rgba(255,80,140,.35);
 }
 
-/* ===== BUTTON ===== */
+/* BUTTON */
 
 button{
-padding:14px 22px;
+padding:12px 20px;
 border:none;
-border-radius:18px;
+border-radius:16px;
 font-weight:600;
 background:linear-gradient(45deg,#ff4e8a,#ff758c);
 color:white;
 cursor:pointer;
-box-shadow:0 15px 30px rgba(255,80,120,.35);
+box-shadow:0 12px 22px rgba(255,80,120,.35);
 }
 
-/* ===== PROFILE ===== */
+/* IMAGE */
 
 .circleImg{
-width:70vw;
-max-width:220px;
-height:70vw;
-max-height:220px;
+width:60vw;
+max-width:200px;
+aspect-ratio:1;
 border-radius:50%;
 object-fit:cover;
-box-shadow:0 20px 40px rgba(0,0,0,.35);
+box-shadow:0 15px 30px rgba(0,0,0,.35);
 }
 
-/* ===== GALLERY ===== */
+/* SLIDER */
 
 .slider{
 display:flex;
-gap:16px;
+gap:12px;
 overflow-x:auto;
 scroll-snap-type:x mandatory;
 }
 
 .slider img{
-height:200px;
-border-radius:18px;
-object-fit:cover;
+height:180px;
+border-radius:16px;
 scroll-snap-align:center;
-box-shadow:0 15px 35px rgba(0,0,0,.35);
-transition:.4s;
+object-fit:cover;
+box-shadow:0 10px 25px rgba(0,0,0,.35);
 }
 
-.slider img:hover{
-transform:scale(1.15) rotateY(10deg);
+/* COUNTER */
+
+.counter{
+font-weight:600;
+color:#d63384;
 }
 
-/* ===== LETTER ===== */
+/* LETTER */
 
 .envelope{
 background:#ffd6e7;
-border-radius:20px;
-padding:18px;
+border-radius:18px;
+padding:14px;
 cursor:pointer;
 text-align:center;
 font-weight:600;
@@ -177,43 +157,45 @@ font-weight:600;
 
 .letter{
 background:white;
-border-radius:18px;
-padding:22px;
-margin-top:14px;
-line-height:1.7;
-font-size:16px;
+border-radius:16px;
+padding:18px;
+margin-top:12px;
+line-height:1.6;
 color:#5a2a3a;
 max-height:0;
 overflow:hidden;
-transition:1s;
+transition:max-height .8s;
 }
 
 .letter.open{
-max-height:800px;
+max-height:700px;
 }
 
-/* ===== COUNTER ===== */
-
-.counter{
-font-weight:600;
-color:#d63384;
-}
-
-/* ===== PARTICLES ===== */
+/* PARTICLES LIGHT */
 
 .spark{
 position:fixed;
-width:6px;
-height:6px;
+width:3px;
+height:3px;
 border-radius:50%;
 background:white;
-opacity:.4;
-animation:sparkMove linear infinite;
+opacity:.25;
+animation:float linear infinite;
 }
 
-@keyframes sparkMove{
-from{transform:translateY(110vh)}
-to{transform:translateY(-10vh)}
+@keyframes float{
+from{transform:translateY(105vh)}
+to{transform:translateY(-5vh)}
+}
+
+/* BOTON SECRETO */
+
+.secret{
+position:fixed;
+bottom:14px;
+right:14px;
+opacity:.15;
+font-size:26px;
 }
 
 </style>
@@ -223,13 +205,13 @@ to{transform:translateY(-10vh)}
 
 <!-- INTRO -->
 <div id="intro">
-<div class="gift">🎁</div>
-<div>Un regalo para ti…</div>
+<h1>Para Nosotros 🤎</h1>
+<div>Un regalo especial</div>
 </div>
 
 <!-- LOGIN -->
 <div id="login">
-<h2>Ingresa la contraseña 🤎</h2>
+<h2>Contraseña</h2>
 <input id="pass"><br><br>
 <button onclick="enter()">Entrar</button>
 </div>
@@ -245,37 +227,42 @@ to{transform:translateY(-10vh)}
 
 <!-- TIEMPO -->
 <div class="card">
-<h2>💞 Nuestro tiempo juntos 💞</h2>
-<center><img class="circleImg" src="https://i.imgur.com/m2rqpiu.jpeg"></center>
+<h2>💞 Nuestro tiempo</h2>
+<center>
+<img class="circleImg" src="https://i.imgur.com/m2rqpiu.jpeg">
+</center>
 <div class="counter" id="counter"></div>
 </div>
 
-<!-- CANCIÓN -->
+<!-- SONG -->
 <div class="card">
-<h2>🎵 Nuestra canción 🎵</h2>
+<h2>🎵 Nuestra canción</h2>
 <center>
-<button onclick="toggleSong()">▶️ Reproducir</button>
+<button onclick="toggleSong()">Reproducir / Pausar</button>
 </center>
 </div>
 
-<!-- GALERÍA -->
+<!-- GALERIA -->
 <div class="card">
-<h2>📸 Recuerdos 📸</h2>
+<h2>📸 Recuerdos</h2>
 <div class="slider" id="slider"></div>
 </div>
 
 <!-- CARTA -->
 <div class="card">
-<h2>💌 Mensaje de amor 💌</h2>
-<div class="envelope" onclick="openLetter()">💌 Abrir carta</div>
+<h2>💌 Carta</h2>
+<div class="envelope" onclick="openLetter()">Abrir</div>
 <div class="letter" id="letter">
 <p id="typeText"></p>
 </div>
 </div>
 
+<!-- BOTON OCULTO -->
+<div class="secret" onclick="secret()">💎</div>
+
 <script>
 
-/* PASSWORD + MUSIC */
+/* PASSWORD */
 
 function enter(){
  if(pass.value==="Jerry"){
@@ -284,7 +271,7 @@ function enter(){
  }
 }
 
-/* SONG SWITCH */
+/* SONG */
 
 function toggleSong(){
  if(ourSong.paused){
@@ -300,27 +287,23 @@ function toggleSong(){
 
 const start=new Date("2024-02-14");
 setInterval(()=>{
- const d=(Date.now()-start)/1000|0;
+ const s=((Date.now()-start)/1000)|0;
  counter.innerHTML=
- Math.floor(d/86400)+" días<br>"+
- Math.floor(d/3600)%24+" horas<br>"+
- Math.floor(d/60)%60+" minutos<br>"+
- d%60+" segundos 💗";
+ Math.floor(s/86400)+" días<br>"+
+ Math.floor(s/3600)%24+" horas<br>"+
+ Math.floor(s/60)%60+" min<br>"+
+ s%60+" seg 💗";
 },1000);
 
 /* LETTER TYPE */
 
-const text=`¡Feliz San Valentín, mi amor! 🤎
+const text=`Mi amor 🤎
 
-Hoy quiero recordarte lo increíblemente afortunado que soy de tenerte.
-Eres esa pieza que encaja perfectamente en mi vida,
-llenándola de colores, risas y momentos inolvidables.
+Eres mi lugar seguro,
+mi alegría diaria,
+mi coincidencia favorita.
 
-Gracias por tu paciencia, tu ternura
-y por ser mi compañera de aventuras.
-
-Prometo seguir construyendo este camino contigo.
-Siempre contigo.`;
+Gracias por existir conmigo.`;
 
 function openLetter(){
  letter.classList.add("open");
@@ -334,13 +317,18 @@ function openLetter(){
  })();
 }
 
+/* SECRET */
+
+function secret(){
+ alert("Siempre te elegiría otra vez 💍");
+}
+
 /* GALLERY */
 
 [
 "https://i.imgur.com/tpH81jp.jpeg",
 "https://i.imgur.com/mOQ2xhz.jpeg",
 "https://i.imgur.com/ra5P475.jpeg",
-"https://i.imgur.com/2Xh4XhC.jpeg",
 "https://i.imgur.com/0xnanwq.jpeg",
 "https://i.imgur.com/UX4FUgZ.jpeg",
 "https://i.imgur.com/3h5EZdw.jpeg",
@@ -350,35 +338,34 @@ function openLetter(){
 "https://i.imgur.com/cqMYyp1.jpeg",
 "https://i.imgur.com/S888hKj.jpeg"
 ].forEach(src=>{
- const im=document.createElement("img");
+ const im=new Image();
+ im.loading="lazy";
  im.src=src;
  slider.appendChild(im);
 });
 
-/* PARTICLES */
+/* PARTICLES LOW */
 
-for(let i=0;i<50;i++){
+for(let i=0;i<16;i++){
  const s=document.createElement("div");
  s.className="spark";
  s.style.left=Math.random()*100+"vw";
- s.style.animationDuration=(8+Math.random()*12)+"s";
+ s.style.animationDuration=(12+Math.random()*10)+"s";
  document.body.appendChild(s);
 }
 
-/* TOUCH HEARTS */
+/* HEART TAP */
 
-document.addEventListener("click", e=>{
- for(let i=0;i<5;i++){
-  const h=document.createElement("div");
-  h.innerHTML="💖";
-  h.style.position="fixed";
-  h.style.left=e.clientX+"px";
-  h.style.top=e.clientY+"px";
-  h.style.transition="1s";
-  document.body.appendChild(h);
-  setTimeout(()=>{h.style.transform="translateY(-120px)";h.style.opacity=0},10);
-  setTimeout(()=>h.remove(),1000);
- }
+document.addEventListener("click",e=>{
+ const h=document.createElement("div");
+ h.innerHTML="💖";
+ h.style.position="fixed";
+ h.style.left=e.clientX+"px";
+ h.style.top=e.clientY+"px";
+ h.style.transition="1s";
+ document.body.appendChild(h);
+ setTimeout(()=>{h.style.transform="translateY(-90px)";h.style.opacity=0},10);
+ setTimeout(()=>h.remove(),1000);
 });
 
 </script>
