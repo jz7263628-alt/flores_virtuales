@@ -4,105 +4,97 @@
 <meta charset="UTF-8">
 <title>San Valentín 💞</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+
 <style>
 body{
  margin:0;
- font-family:Arial,Helvetica,sans-serif;
- background:#0b0b0f;
+ font-family: Arial, sans-serif;
+ background: linear-gradient(135deg,#ff9a9e,#fad0c4);
  color:white;
  overflow-x:hidden;
 }
 
+h2{
+ font-family: 'Dancing Script', cursive;
+ font-size:32px;
+ text-align:center;
+ text-shadow:0 0 10px rgba(255,255,255,.6), 0 0 20px rgba(255,100,150,.6);
+ letter-spacing:1px;
+}
+
 .card{
- background:rgba(255,255,255,.06);
+ background:rgba(255,255,255,.15);
+ backdrop-filter: blur(10px);
  border-radius:20px;
  padding:20px;
  margin:20px;
- backdrop-filter: blur(10px);
- box-shadow:0 0 25px rgba(255,0,120,.2);
+ box-shadow:0 0 25px rgba(0,0,0,.2);
 }
 
 .circleImg{
- width:180px;
- height:180px;
+ width:200px;
+ height:200px;
  border-radius:50%;
  object-fit:cover;
  display:block;
  margin:auto;
+ box-shadow:0 0 20px rgba(0,0,0,.4);
 }
 
 .musicCover{
  width:220px;
- border-radius:16px;
+ border-radius:15px;
  display:block;
  margin:auto;
+ box-shadow:0 0 20px rgba(0,0,0,.4);
 }
 
 .grid{
  display:grid;
- grid-template-columns:repeat(2,1fr);
+ grid-template-columns:1fr 1fr;
  gap:10px;
 }
+
 .grid img{
  width:100%;
- border-radius:12px;
+ border-radius:15px;
 }
 
 .counter{
  text-align:center;
  font-size:22px;
  margin-top:10px;
+ font-weight:bold;
+}
+
+button{
+ background:#ff4d6d;
+ border:none;
+ padding:12px 22px;
+ border-radius:30px;
+ color:white;
+ font-size:16px;
+ cursor:pointer;
+ box-shadow:0 0 15px rgba(0,0,0,.3);
 }
 
 .finalText{
  font-size:18px;
  line-height:1.6;
-}
-
-#btnPlay{
- padding:12px 20px;
- border:none;
- border-radius:12px;
- font-size:16px;
- cursor:pointer;
-}
-
-#login{
- position:fixed;
- inset:0;
- background:#000;
- display:flex;
- flex-direction:column;
- align-items:center;
- justify-content:center;
- z-index:10;
-}
-
-#login input{
- padding:10px;
- font-size:18px;
- border-radius:10px;
- border:none;
- margin-top:10px;
-}
-
-#login button{
- margin-top:10px;
- padding:10px 20px;
- font-size:18px;
- border-radius:10px;
- border:none;
- cursor:pointer;
+ text-align:center;
 }
 
 .bgHearts span{
  position:fixed;
- top:100%;
- animation:up linear infinite;
- opacity:.5;
+ bottom:-20px;
+ animation:floatUp linear infinite;
+ opacity:.6;
 }
-@keyframes up{
- to{ transform:translateY(-120vh); }
+
+@keyframes floatUp{
+ from{transform:translateY(0);}
+ to{transform:translateY(-120vh);}
 }
 </style>
 </head>
@@ -110,20 +102,25 @@ body{
 <body>
 
 <!-- LOGIN -->
-<div id="login">
-<h2>Ingresa la contraseña 💌</h2>
-<input id="pass" type="password">
+<div id="login" class="card" style="text-align:center">
+<h2>🔒 Ingresa la contraseña 🔒</h2>
+<input id="pass" type="password" placeholder="Contraseña">
+<br><br>
 <button onclick="enter()">Entrar</button>
-<canvas id="heartsCanvas"></canvas>
 </div>
 
-<!-- AUDIO (ACTUALIZADO — SOLO ESTO CAMBIÓ) -->
-<audio id="bgMusic" loop preload="auto">
- <source src="https://files.catbox.moe/egr68n.mp3" type="audio/mpeg">
+<canvas id="heartsCanvas"></canvas>
+
+<!-- 🔁 CANCIONES INTERCAMBIADAS -->
+
+<!-- AHORA ESTA ES LA DE FONDO -->
+<audio id="bgMusic" loop>
+<source src="https://files.catbox.moe/4nrc17.mp3">
 </audio>
 
-<audio id="ourSong" preload="auto">
- <source src="https://files.catbox.moe/4nrc17.mp3" type="audio/mpeg">
+<!-- ESTA ES LA DEL BOTÓN -->
+<audio id="ourSong">
+<source src="https://files.catbox.moe/egr68n.mp3">
 </audio>
 
 <div class="bgHearts" id="bgHearts"></div>
@@ -155,7 +152,7 @@ body{
 </div>
 </div>
 
-<!-- FINAL -->
+<!-- MENSAJE -->
 <div class="card finalText">
 <h2>💌 Mensaje de amor 💌</h2>
 ¡Feliz San Valentín, mi amor! 🤎<br><br>
@@ -170,9 +167,7 @@ Gracias por ser mi Valentín hoy y siempre 💞
 function enter(){
  if(document.getElementById('pass').value==="Jerry"){
   document.getElementById('login').style.display="none";
-  const bg=document.getElementById('bgMusic');
-  bg.currentTime=0;
-  bg.play().catch(()=>{});
+  document.getElementById('bgMusic').play().catch(()=>{});
  } else alert("Contraseña incorrecta 💔");
 }
 
@@ -183,7 +178,6 @@ function toggleSong(){
 
  if(ourSong.paused){
   bgMusic.pause();
-  ourSong.currentTime=0;
   ourSong.play();
   btn.innerHTML="⏸️ Pausar";
  }else{
