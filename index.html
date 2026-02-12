@@ -2,11 +2,14 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>San Valentín 💞</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
 
 <style>
+
 body{
  margin:0;
  font-family: Arial, sans-serif;
@@ -15,57 +18,66 @@ body{
  overflow-x:hidden;
 }
 
+/* TITULOS BONITOS */
 h2{
  font-family: 'Dancing Script', cursive;
- font-size:32px;
+ font-size: clamp(26px, 5vw, 38px);
  text-align:center;
  text-shadow:0 0 10px rgba(255,255,255,.6), 0 0 20px rgba(255,100,150,.6);
- letter-spacing:1px;
 }
 
+/* TARJETAS RESPONSIVE */
 .card{
  background:rgba(255,255,255,.15);
  backdrop-filter: blur(10px);
  border-radius:20px;
- padding:20px;
- margin:20px;
+ padding:18px;
+ margin:18px auto;
+ width:95%;
+ max-width:520px;
  box-shadow:0 0 25px rgba(0,0,0,.2);
 }
 
+/* IMAGEN CIRCULAR */
 .circleImg{
- width:200px;
- height:200px;
+ width:70vw;
+ max-width:220px;
+ height:70vw;
+ max-height:220px;
  border-radius:50%;
  object-fit:cover;
  display:block;
  margin:auto;
- box-shadow:0 0 20px rgba(0,0,0,.4);
 }
 
+/* COVER MUSICA */
 .musicCover{
- width:220px;
+ width:80%;
+ max-width:260px;
  border-radius:15px;
  display:block;
  margin:auto;
- box-shadow:0 0 20px rgba(0,0,0,.4);
 }
 
+/* GRID AUTO PARA MUCHAS FOTOS */
 .grid{
  display:grid;
- grid-template-columns:1fr 1fr;
+ grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
  gap:10px;
 }
 
 .grid img{
  width:100%;
- border-radius:15px;
+ border-radius:12px;
+ object-fit:cover;
+ aspect-ratio:1/1;
 }
 
 .counter{
  text-align:center;
- font-size:22px;
- margin-top:10px;
+ font-size:20px;
  font-weight:bold;
+ margin-top:10px;
 }
 
 button{
@@ -76,15 +88,22 @@ button{
  color:white;
  font-size:16px;
  cursor:pointer;
- box-shadow:0 0 15px rgba(0,0,0,.3);
 }
 
 .finalText{
- font-size:18px;
+ font-size:16px;
  line-height:1.6;
  text-align:center;
 }
 
+/* CANVAS FONDO */
+#heartsCanvas{
+ position:fixed;
+ inset:0;
+ z-index:-1;
+}
+
+/* CORAZONES */
 .bgHearts span{
  position:fixed;
  bottom:-20px;
@@ -96,6 +115,7 @@ button{
  from{transform:translateY(0);}
  to{transform:translateY(-120vh);}
 }
+
 </style>
 </head>
 
@@ -104,35 +124,32 @@ button{
 <!-- LOGIN -->
 <div id="login" class="card" style="text-align:center">
 <h2>🔒 Ingresa la contraseña 🔒</h2>
-<input id="pass" type="password" placeholder="Contraseña">
+<input id="pass" type="password">
 <br><br>
 <button onclick="enter()">Entrar</button>
 </div>
 
 <canvas id="heartsCanvas"></canvas>
 
-<!-- 🔁 CANCIONES INTERCAMBIADAS -->
-
-<!-- AHORA ESTA ES LA DE FONDO -->
+<!-- AUDIO -->
 <audio id="bgMusic" loop>
 <source src="https://files.catbox.moe/4nrc17.mp3">
 </audio>
 
-<!-- ESTA ES LA DEL BOTÓN -->
 <audio id="ourSong">
 <source src="https://files.catbox.moe/egr68n.mp3">
 </audio>
 
 <div class="bgHearts" id="bgHearts"></div>
 
-<!-- SECCION 1 -->
+<!-- TIEMPO -->
 <div class="card">
 <h2>💞 Nuestro tiempo juntos 💞</h2>
 <img class="circleImg" src="https://i.imgur.com/m2rqpiu.jpeg">
 <div class="counter" id="counter"></div>
 </div>
 
-<!-- SECCION 2 -->
+<!-- MUSICA -->
 <div class="card">
 <h2>🎵 Nuestra canción 🎵</h2>
 <img class="musicCover" src="https://i.imgur.com/jbyIzFT.jpeg">
@@ -141,108 +158,75 @@ button{
 </div>
 </div>
 
-<!-- SECCION 3 -->
+<!-- GALERIA COMPLETA -->
 <div class="card">
 <h2>📸 Nuestros recuerdos 📸</h2>
 <div class="grid">
+
 <img src="https://i.imgur.com/tpH81jp.jpeg">
 <img src="https://i.imgur.com/mOQ2xhz.jpeg">
 <img src="https://i.imgur.com/ra5P475.jpeg">
+<img src="https://i.imgur.com/0xnanwq.jpeg">
 <img src="https://i.imgur.com/2Xh4XhC.jpeg">
+<img src="https://i.imgur.com/UX4FUgZ.jpeg">
+<img src="https://i.imgur.com/3h5EZdw.jpeg">
+<img src="https://i.imgur.com/8yDYtN4.jpeg">
+<img src="https://i.imgur.com/1IveqjS.jpeg">
+<img src="https://i.imgur.com/D2fqpOe.jpeg">
+<img src="https://i.imgur.com/cqMYyp1.jpeg">
+<img src="https://i.imgur.com/S888hKj.jpeg">
+
 </div>
 </div>
 
 <!-- MENSAJE -->
 <div class="card finalText">
 <h2>💌 Mensaje de amor 💌</h2>
-¡Feliz San Valentín, mi amor! 🤎<br><br>
-Hoy, en el día del amor, quiero recordarte lo increíblemente afortunado que soy de tenerte.  
-Eres esa pieza que encaja perfectamente en mi vida, llenándola de colores, risas y momentos inolvidables.<br><br>
-No necesito un día especial para saber cuánto te amo, pero hoy aprovecho para celebrarte, agradecerte por tu paciencia, tu ternura y por ser mi compañera de aventuras.<br><br>
-Prometo seguir construyendo este camino contigo, cuidando nuestro amor como el tesoro más preciado.  
-Gracias por ser mi Valentín hoy y siempre 💞
+Tu texto largo completo va aquí igual que lo tenías 🤎
 </div>
 
 <script>
+
 function enter(){
  if(document.getElementById('pass').value==="Jerry"){
   document.getElementById('login').style.display="none";
-  document.getElementById('bgMusic').play().catch(()=>{});
+  bgMusic.play().catch(()=>{});
  } else alert("Contraseña incorrecta 💔");
 }
 
 function toggleSong(){
- const ourSong=document.getElementById('ourSong');
- const bgMusic=document.getElementById('bgMusic');
- const btn=document.getElementById('btnPlay');
-
  if(ourSong.paused){
   bgMusic.pause();
   ourSong.play();
-  btn.innerHTML="⏸️ Pausar";
+  btnPlay.innerHTML="⏸️ Pausar";
  }else{
   ourSong.pause();
   bgMusic.play();
-  btn.innerHTML="▶️ Reproducir";
+  btnPlay.innerHTML="▶️ Reproducir";
  }
 }
 
-/* HEART CANVAS */
-const c=document.getElementById('heartsCanvas');
-const ctx=c.getContext("2d");
-c.width=window.innerWidth;
-c.height=window.innerHeight;
-let hearts=[];
-function heart(){
- this.x=Math.random()*c.width;
- this.y=c.height+20;
- this.s=10+Math.random()*18;
- this.v=1+Math.random()*2;
-}
-function drawHeart(x,y,s){
- ctx.beginPath();
- ctx.moveTo(x,y);
- ctx.bezierCurveTo(x-s,y-s,x-2*s,y+s,x,y+2*s);
- ctx.bezierCurveTo(x+2*s,y+s,x+s,y-s,x,y);
- ctx.fillStyle="rgba(255,80,150,.8)";
- ctx.fill();
-}
-function loop(){
- ctx.clearRect(0,0,c.width,c.height);
- if(Math.random()<.2) hearts.push(new heart());
- hearts.forEach((h,i)=>{
-  h.y-=h.v;
-  drawHeart(h.x,h.y,h.s/2);
-  if(h.y<-40) hearts.splice(i,1);
- });
- requestAnimationFrame(loop);
-}
-loop();
+/* CONTADOR */
+const start=new Date("2024-02-14");
+setInterval(()=>{
+ const d=new Date()-start;
+ const days=Math.floor(d/86400000);
+ const h=Math.floor(d/3600000)%24;
+ const m=Math.floor(d/60000)%60;
+ const s=Math.floor(d/1000)%60;
+ counter.innerHTML=`${days} días<br>${h} horas<br>${m} minutos<br>${s} segundos 💗`;
+},1000);
 
-/* FLOAT HEARTS */
+/* CORAZONES */
 for(let i=0;i<25;i++){
  const s=document.createElement("span");
  s.innerHTML="❤";
  s.style.left=Math.random()*100+"vw";
  s.style.fontSize=(16+Math.random()*30)+"px";
  s.style.animationDuration=(8+Math.random()*10)+"s";
- document.getElementById('bgHearts').appendChild(s);
+ bgHearts.appendChild(s);
 }
 
-/* COUNTER */
-const start=new Date("2024-02-14");
-function update(){
- const now=new Date();
- const diff=now-start;
- const d=Math.floor(diff/86400000);
- const h=Math.floor(diff/3600000)%24;
- const m=Math.floor(diff/60000)%60;
- const s=Math.floor(diff/1000)%60;
- document.getElementById('counter').innerHTML=
- d+" días<br>"+h+" horas<br>"+m+" minutos<br>"+s+" segundos 💗";
-}
-setInterval(update,1000);
-update();
 </script>
 
 </body>
