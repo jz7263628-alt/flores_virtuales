@@ -15,20 +15,14 @@ body{
 }
 
 /* SOBRE */
-
 #intro{
- position:fixed;
- inset:0;
+ position:fixed; inset:0;
  background:radial-gradient(circle,#2b0020,#000);
- display:flex;
- justify-content:center;
- align-items:center;
+ display:flex; justify-content:center; align-items:center;
  z-index:1000;
 }
-
 .envelope{
- width:220px;
- height:150px;
+ width:220px;height:150px;
  background:#ff4da6;
  border-radius:8px;
  position:relative;
@@ -46,17 +40,14 @@ body{
 .open{transform:scale(8);opacity:0}
 
 /* LOGIN */
-
 #login{
- position:fixed;
- inset:0;
+ position:fixed; inset:0;
  display:none;
  justify-content:center;
  align-items:center;
  background:#0a0008;
  z-index:999;
 }
-
 .loginCard{
  background:rgba(255,255,255,.12);
  backdrop-filter:blur(12px);
@@ -65,14 +56,12 @@ body{
  text-align:center;
  box-shadow:0 0 40px rgba(255,0,120,.4);
 }
-
 input{
  padding:12px;
  border-radius:15px;
  border:none;
  text-align:center;
 }
-
 button{
  padding:12px 20px;
  border:none;
@@ -84,32 +73,28 @@ button{
 }
 
 /* TARJETAS */
-
 .card{
  background:#ffe6f2;
  color:#4a0030;
  margin:24px auto;
  padding:22px;
- width:92%;
- max-width:560px;
+ width:94%;
+ max-width:620px;
  border-radius:22px;
  box-shadow:0 12px 30px rgba(0,0,0,.25);
  border:3px dashed #ff99cc;
  opacity:0;
- transform:translateY(40px) scale(.96);
- animation:in .9s forwards;
+ transform:translateY(40px);
+ animation:in .8s forwards;
 }
-
 @keyframes in{to{opacity:1; transform:none}}
 
 .card h2{
  text-align:center;
  font-weight:900;
- letter-spacing:.5px;
 }
 
 /* IMAGENES */
-
 .circleImg{
  width:170px;height:170px;
  border-radius:50%;
@@ -121,13 +106,12 @@ button{
 
 .grid{
  display:grid;
- grid-template-columns:repeat(2,1fr);
- gap:10px;
+ grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+ gap:12px;
 }
-
 .grid img{
  width:100%;
- height:150px;
+ height:170px;
  object-fit:cover;
  border-radius:14px;
  transition:.3s;
@@ -140,6 +124,8 @@ button{
  line-height:1.8;
 }
 
+.type{white-space:pre-line;}
+
 .petal{
  position:fixed;
  top:-20px;
@@ -149,8 +135,6 @@ button{
 @keyframes fall{
  to{transform:translateY(110vh) rotate(360deg)}
 }
-
-.type{white-space:pre-line;}
 </style>
 </head>
 
@@ -171,7 +155,7 @@ button{
 </div>
 </div>
 
-<!-- MUSICA -->
+<!-- MUSICA (orden correcto) -->
 <audio id="bgMusic" loop src="https://files.catbox.moe/4nrc17.mp3"></audio>
 <audio id="ourSong" src="https://files.catbox.moe/egr68n.mp3"></audio>
 
@@ -184,12 +168,12 @@ button{
 
 <!-- TIMELINE -->
 <div class="card">
-<h2>🕰️ Nuestra historia en momentos</h2>
+<h2>🕰️ Nuestra historia</h2>
 <div class="timeline">
 11 Septiembre 2024 — Nuestro primer mensaje: “Holaaa :)”<br>
 El gym — cuando conocí al ratón Jerry que me robaba la barra 😝<br>
 Nuestra primera cita — ir por jitomates 🤎<br>
-Las risas, la motito, los rufles y nuestras loqueras
+Las risas, la motito y nuestras loqueras
 </div>
 </div>
 
@@ -199,24 +183,26 @@ Las risas, la motito, los rufles y nuestras loqueras
 <div id="story" class="type"></div>
 </div>
 
-<!-- FOTOS -->
+<!-- FOTOS — TODAS -->
 <div class="card">
 <h2>📸 Nuestros recuerdos</h2>
 <div class="grid">
-<img src="https://i.imgur.com/m2rqpiu.jpeg">
-<img src="https://i.imgur.com/jbyIzFT.jpeg">
-<img src="https://i.imgur.com/tpH81jp.jpeg">
-<img src="https://i.imgur.com/mOQ2xhz.jpeg">
-<img src="https://i.imgur.com/ra5P475.jpeg">
-<img src="https://i.imgur.com/0xnanwq.jpeg">
-<img src="https://i.imgur.com/2Xh4XhC.jpeg">
-<img src="https://i.imgur.com/UX4FUgZ.jpeg">
-<img src="https://i.imgur.com/3h5EZdw.jpeg">
-<img src="https://i.imgur.com/8yDYtN4.jpeg">
-<img src="https://i.imgur.com/1IveqjS.jpeg">
-<img src="https://i.imgur.com/D2fqpOe.jpeg">
-<img src="https://i.imgur.com/cqMYyp1.jpeg">
-<img src="https://i.imgur.com/S888hKj.jpeg">
+
+<img src="https://i.imgur.com/m2rqpiu.jpeg" loading="lazy">
+<img src="https://i.imgur.com/jbyIzFT.jpeg" loading="lazy">
+<img src="https://i.imgur.com/tpH81jp.jpeg" loading="lazy">
+<img src="https://i.imgur.com/mOQ2xhz.jpeg" loading="lazy">
+<img src="https://i.imgur.com/ra5P475.jpeg" loading="lazy">
+<img src="https://i.imgur.com/0xnanwq.jpeg" loading="lazy">
+<img src="https://i.imgur.com/2Xh4XhC.jpeg" loading="lazy">
+<img src="https://i.imgur.com/UX4FUgZ.jpeg" loading="lazy">
+<img src="https://i.imgur.com/3h5EZdw.jpeg" loading="lazy">
+<img src="https://i.imgur.com/8yDYtN4.jpeg" loading="lazy">
+<img src="https://i.imgur.com/1IveqjS.jpeg" loading="lazy">
+<img src="https://i.imgur.com/D2fqpOe.jpeg" loading="lazy">
+<img src="https://i.imgur.com/cqMYyp1.jpeg" loading="lazy">
+<img src="https://i.imgur.com/S888hKj.jpeg" loading="lazy">
+
 </div>
 </div>
 
@@ -229,14 +215,12 @@ Las risas, la motito, los rufles y nuestras loqueras
 
 <script>
 
-/* SOBRE */
 function openEnvelope(){
  document.querySelector(".envelope").classList.add("open");
  setTimeout(()=>intro.style.display="none",700);
  setTimeout(()=>login.style.display="flex",700);
 }
 
-/* LOGIN */
 function enter(){
  if(pass.value==="Jerry"){
   login.style.display="none";
@@ -259,18 +243,18 @@ setInterval(()=>{
 
 /* TEXTO COMPLETO CORREGIDO */
 
-const storyText=`Aún recuerdo cuando vi al ratón Jerry en el gym. 
+const storyText=`Aún recuerdo cuando vi al ratón Jerry en el gym.
 Eras una niña muy raterita porque siempre me robabas la barra 😝
 
-Nuestra primera cita fue ir por jitomates, ¿sabes? — y eso estuvo increíble.
+Nuestra primera cita fue ir por jitomates, y eso estuvo increíble.
 
-No sé exactamente en qué momento te convertiste en una persona tan importante para mí, pero pasó… y me encanta que haya pasado.
+No sé en qué momento te convertiste en alguien tan importante para mí, pero me encanta que haya pasado.
 
-Hay muchas cosas que amo de ti, pero en especial tu forma de ver a las personas. De verdad admiro eso.
+Hay muchas cosas que amo de ti, en especial tu forma de ver a las personas. De verdad admiro eso.
 
 Admiro que, aunque hayas vivido cosas difíciles, siempre intentas ser mejor.
 
-Amo a la niña que a veces tiene miedo de lo que pueda pasar, pero aun así avanza.
+Amo a la niña que a veces tiene miedo de lo que pueda pasar, pero aun así va.
 
 La forma en que conviertes momentos simples en algo especial.
 
@@ -288,19 +272,16 @@ Quiero seguir haciendo más cosas contigo:
 viajar,
 tomar más fotos,
 reír como loquitos en el centro,
-que nos corran los borregos,
+que nos correteen los borregos,
 cuidarte siempre.
 
-Y cuando a mí se me olvide llevar cosas para salir,
-sé que tú llevarás tu maletita con cositas para los dos ❤️`;
-
+Y cuando a mí se me olvide llevar cosas,
+tú llevarás tu maletita con cositas para los dos ❤️`;
 
 const finalText=`Hay muchos momentos hermosos en la vida,
 pero sin duda el mejor de todos fue cuando te conocí.
 
 Te amo mucho, mi cebollín 🥰`;
-
-/* TYPE */
 
 function typeWriter(t,el,s){
  let i=0;
@@ -314,8 +295,6 @@ function typeWriter(t,el,s){
 
 function typeStory(){typeWriter(storyText,story,22);}
 function typeFinal(){typeWriter(finalText,final,28);}
-
-/* PETALOS */
 
 function surprise(){
  for(let i=0;i<35;i++){
