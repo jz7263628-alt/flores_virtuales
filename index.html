@@ -2,176 +2,209 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Para mi cebollín 🤎</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
-
+*{box-sizing:border-box}
 body{
-margin:0;
-font-family:'Segoe UI',sans-serif;
-background:linear-gradient(180deg,#ffd6e7,#fff0f6);
-color:#4a1f2d;
-overflow-x:hidden;
-}
-
-/* ===== ENTRADA SUAVE ===== */
-body{
-animation:fadeIn 1.2s ease;
-}
-@keyframes fadeIn{
-from{opacity:0; transform:translateY(20px)}
-to{opacity:1; transform:none}
+ margin:0;
+ font-family:Segoe UI, sans-serif;
+ background:linear-gradient(180deg,#140010,#2a0030);
+ color:#fff;
+ overflow-x:hidden;
 }
 
 /* LOGIN */
-
 #login{
-position:fixed;
-inset:0;
-background:linear-gradient(180deg,#ffb6d5,#ffcfe6);
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-z-index:10;
+ position:fixed;
+ inset:0;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ background:#0a0008;
+ z-index:999;
+}
+#heartsCanvas{position:absolute; inset:0;}
+
+.loginCard{
+ position:relative;
+ background:rgba(255,255,255,.15);
+ backdrop-filter:blur(14px);
+ padding:40px;
+ border-radius:25px;
+ text-align:center;
+ box-shadow:0 0 40px rgba(255,0,120,.4);
+ animation:float 4s ease-in-out infinite;
+}
+@keyframes float{
+0%,100%{transform:translateY(0)}
+50%{transform:translateY(-12px)}
 }
 
-input,button{
-padding:12px 18px;
-border-radius:14px;
-border:none;
-font-size:16px;
+input{
+ padding:14px;
+ border-radius:14px;
+ border:none;
+ text-align:center;
+ font-size:16px;
+ width:200px;
 }
 
 button{
-background:linear-gradient(45deg,#ff4da6,#ff80bf);
-color:white;
-box-shadow:0 10px 25px rgba(0,0,0,.25);
+ padding:12px 20px;
+ border:none;
+ border-radius:20px;
+ background:linear-gradient(45deg,#ff4da6,#ff80bf);
+ color:white;
+ font-size:16px;
+ margin-top:12px;
+ cursor:pointer;
 }
 
-/* TARJETAS 3D LIGHT */
+/* HEART BG */
+.bgHearts span{
+ position:fixed;
+ color:#ff4da6;
+ animation:rise linear infinite;
+ opacity:.25;
+ pointer-events:none;
+}
+@keyframes rise{
+ from{transform:translateY(100vh) scale(.6)}
+ to{transform:translateY(-10vh) scale(1.2)}
+}
 
+/* CARDS */
 .card{
-background:white;
-margin:22px auto;
-padding:22px;
-border-radius:22px;
-max-width:720px;
-box-shadow:0 20px 50px rgba(0,0,0,.15);
-transition:.35s;
-transform-style:preserve-3d;
+ background:#fff;
+ color:#4a0030;
+ margin:22px auto;
+ padding:22px;
+ width:95%;
+ max-width:560px;
+ border-radius:24px;
+ box-shadow:0 12px 40px rgba(0,0,0,.25);
+ border:3px solid #ffd6eb;
+ transition:.35s;
 }
-
 .card:hover{
-transform:rotateX(4deg) rotateY(-4deg) translateY(-6px);
-box-shadow:0 30px 70px rgba(0,0,0,.25);
+ transform:translateY(-6px);
+ box-shadow:0 22px 60px rgba(0,0,0,.35);
 }
 
-h2{
-text-align:center;
-font-size:24px;
-margin-bottom:16px;
-background:linear-gradient(45deg,#ff4da6,#ff80bf);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
+.card h2{
+ text-align:center;
+ margin-top:0;
+ font-size:22px;
+ background:linear-gradient(45deg,#ff2f92,#ff85c2);
+ -webkit-background-clip:text;
+ -webkit-text-fill-color:transparent;
 }
 
-/* IMÁGENES */
-
-.circleImg{
-width:200px;
-height:200px;
-border-radius:50%;
-object-fit:cover;
-display:block;
-margin:auto;
-box-shadow:0 14px 35px rgba(0,0,0,.35);
+/* IMAGES */
+.circleImg,.musicCover{
+ width:170px;
+ height:170px;
+ border-radius:50%;
+ object-fit:cover;
+ display:block;
+ margin:14px auto;
+ border:6px solid #ffb3d9;
+ box-shadow:0 10px 25px rgba(0,0,0,.25);
 }
 
+/* GRID */
 .grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
-gap:12px;
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+ gap:10px;
 }
-
 .grid img{
-width:100%;
-height:160px;
-object-fit:cover;
-border-radius:16px;
-transition:.35s;
-box-shadow:0 10px 25px rgba(0,0,0,.25);
+ width:100%;
+ height:140px;
+ object-fit:cover;
+ border-radius:16px;
+ transition:.35s;
+ cursor:pointer;
+}
+.grid img:hover{transform:scale(1.06);}
+
+/* ZOOM */
+#zoom{
+ position:fixed;
+ inset:0;
+ background:rgba(0,0,0,.85);
+ display:none;
+ justify-content:center;
+ align-items:center;
+ z-index:9999;
+}
+#zoom img{
+ max-width:90%;
+ max-height:90%;
+ border-radius:18px;
 }
 
-.grid img:hover{
-transform:scale(1.08) rotateZ(1deg);
-box-shadow:0 18px 45px rgba(0,0,0,.35);
+/* CAROUSEL */
+.carousel{
+ display:flex;
+ gap:14px;
+ overflow:hidden;
 }
-
-/* TEXTO */
+.carousel img{
+ width:180px;
+ height:140px;
+ object-fit:cover;
+ border-radius:16px;
+ animation:slide 30s linear infinite;
+}
+@keyframes slide{
+ from{transform:translateX(0)}
+ to{transform:translateX(-50%)}
+}
 
 .finalText{
-font-size:18px;
-line-height:1.7;
+ line-height:1.7;
+ font-size:16px;
+ color:#3a0030;
 }
 
-/* CORAZONES + PARTÍCULAS */
-
-.bgHearts span{
-position:fixed;
-bottom:-40px;
-animation:floatUp linear infinite;
-opacity:.25;
-filter:blur(.3px);
+.finalGift{
+ text-align:center;
+ font-size:20px;
+ font-weight:bold;
+ background:linear-gradient(45deg,#ff2f92,#ffb3d9);
+ -webkit-background-clip:text;
+ -webkit-text-fill-color:transparent;
+ opacity:0;
+ transform:scale(.8);
+ transition:1.2s;
 }
-
-@keyframes floatUp{
-to{transform:translateY(-110vh) rotate(360deg);}
+.finalGift.show{
+ opacity:1;
+ transform:scale(1);
 }
-
-/* REGALO PRO */
-
-.gift{
-font-size:72px;
-cursor:pointer;
-text-align:center;
-animation:glow 2s infinite alternate;
-}
-
-@keyframes glow{
-from{filter:drop-shadow(0 0 6px #ff4da6)}
-to{filter:drop-shadow(0 0 22px #ff80bf)}
-}
-
-#final{
-white-space:pre-line;
-font-size:20px;
-text-align:center;
-margin-top:14px;
-}
-
-/* BOTÓN CANCIÓN */
-
-#songBtn{
-display:block;
-margin:auto;
-}
-
 </style>
 </head>
 
 <body>
 
 <div id="login">
-<h2>Ingresa la contraseña 🤎</h2>
+<canvas id="heartsCanvas"></canvas>
+<div class="loginCard">
+<h2>Ingresa la contraseña 💖</h2>
 <input id="pass">
-<br><br>
+<br>
 <button onclick="enter()">Entrar</button>
 </div>
+</div>
 
-<!-- AUDIO -->
+<div id="zoom" onclick="this.style.display='none'">
+<img id="zoomImg">
+</div>
+
+<!-- MÚSICA -->
 <audio id="bgMusic" loop>
 <source src="https://files.catbox.moe/4nrc17.mp3">
 </audio>
@@ -192,19 +225,31 @@ margin:auto;
 <!-- CANCIÓN -->
 <div class="card">
 <h2>🎵 Nuestra canción 🎵</h2>
-
-<img src="https://i.imgur.com/jbyIzFT.jpeg"
-style="width:100%;max-width:420px;border-radius:18px;display:block;margin:auto;box-shadow:0 12px 30px rgba(0,0,0,.35);">
-
-<br>
-<button onclick="toggleSong()" id="songBtn">▶️ Reproducir</button>
+<img class="musicCover" src="https://i.imgur.com/jbyIzFT.jpeg">
+<div style="text-align:center">
+<button id="btnPlay" onclick="toggleSong()">▶️ Reproducir</button>
+</div>
 </div>
 
-<!-- GALERÍA — TODAS -->
+<!-- CAROUSEL -->
 <div class="card">
-<h2>📸 Nuestros recuerdos 📸</h2>
-<div class="grid">
+<h2>🎞️ Momentos especiales 🎞️</h2>
+<div class="carousel">
+<img src="https://i.imgur.com/tpH81jp.jpeg">
+<img src="https://i.imgur.com/mOQ2xhz.jpeg">
+<img src="https://i.imgur.com/ra5P475.jpeg">
+<img src="https://i.imgur.com/0xnanwq.jpeg">
+<img src="https://i.imgur.com/2Xh4XhC.jpeg">
+<img src="https://i.imgur.com/UX4FUgZ.jpeg">
+<img src="https://i.imgur.com/3h5EZdw.jpeg">
+<img src="https://i.imgur.com/8yDYtN4.jpeg">
+</div>
+</div>
 
+<!-- TODAS LAS FOTOS -->
+<div class="card">
+<h2>📸 Todos nuestros recuerdos 📸</h2>
+<div class="grid">
 <img src="https://i.imgur.com/tpH81jp.jpeg">
 <img src="https://i.imgur.com/mOQ2xhz.jpeg">
 <img src="https://i.imgur.com/ra5P475.jpeg">
@@ -217,53 +262,45 @@ style="width:100%;max-width:420px;border-radius:18px;display:block;margin:auto;b
 <img src="https://i.imgur.com/D2fqpOe.jpeg">
 <img src="https://i.imgur.com/cqMYyp1.jpeg">
 <img src="https://i.imgur.com/S888hKj.jpeg">
-
 </div>
 </div>
 
-<!-- MENSAJE COMPLETO -->
+<!-- HISTORIA -->
 <div class="card finalText">
+<h2>💌 Nuestra historia 💌</h2>
 
-Aún recuerdo cuando vi al ratón Jerry en el gym.
-Eras una niña muy raterita porque siempre me robabas la barra 😝
-Pero había algo que me llamaba mucho la atención de ti…
-esa forma tan tierna de tenerle miedo a casi todo.
+Aún recuerdo cuando vi al ratón Jerry en el gym. Siempre me robabas la barra 😝  
+Pero había algo en ti que me llamaba la atención desde el principio.<br><br>
 
-Nuestra primera cita fue ir por jitomates — y estuvo muy cool 🤎
+Nuestra primera cita fue ir por jitomates — y aunque suena raro, fue perfecta.<br><br>
 
-Hay muchas cosas que amo de ti:
-Tu forma de ver a las personas.
-Que aunque hayas vivido cosas malas, siempre intentas ser mejor.
-La niña que aunque va con miedo… va.
-La que convierte momentos simples en especiales.
-Mi cebollín en su motito viéndose cool.
-La que ama los rufles y las hamburguesas sin piña.
-La que ama Crepúsculo.
-La de los piecitos y dientitos de ratón 🐭
+Nuestro primer mensaje fue el 11 de septiembre de 2024:<br>
+<b>“Holaaa :)”</b><br><br>
 
-Nuestro primer mensaje fue el 11 de septiembre de 2024:
-“Holaaa :)”
+Quiero seguir haciendo más cosas contigo: viajar, que nos corretien los borregos, tomarnos más fotos, reírnos como loquitos, cuidarte siempre y verte cumplir tus metas.<br><br>
 
-Quiero seguir viviendo muchas cosas contigo:
-viajar, que nos correteen los borregos,
-cuidarte siempre,
-tu maletita con cositas para los dos,
-más fotos,
-verte cumplir tus metas,
-y reírnos como loquitos 🧸
+Hay muchas cosas que amo de ti:  
+tu forma de ver a las personas,  
+tu fuerza para seguir siendo mejor,  
+tu ternura,  
+tus rufles,  
+tu motito cool,  
+tus piesitos de ratón,  
+tus dientitos de ratoncito.<br><br>
 
+Te amo mucho, Jerry 🤎
 </div>
 
 <!-- REGALO -->
 <div class="card">
-<h2>🎁 Regalo final 🎁</h2>
-<div class="gift" onclick="openGift()">🎁</div>
-<div id="final"></div>
+<div class="finalGift" id="gift">
+Hay muchos momentos hermosos en la vida…<br>
+pero el más especial fue cuando te conocí.<br><br>
+Te amo mucho mi cebollín 🥰
+</div>
 </div>
 
 <script>
-
-/* LOGIN */
 function enter(){
  if(pass.value==="Jerry"){
   login.style.display="none";
@@ -271,62 +308,79 @@ function enter(){
  }
 }
 
-/* CANCIÓN */
+/* AUDIO FIX */
 function toggleSong(){
  if(ourSong.paused){
   bgMusic.pause();
-  ourSong.play();
-  songBtn.innerHTML="⏸️ Pausar";
- }else{
+  ourSong.currentTime=0;
+  ourSong.play().catch(()=>{});
+  btnPlay.innerHTML="⏸️ Pausar";
+ } else {
   ourSong.pause();
-  bgMusic.play();
-  songBtn.innerHTML="▶️ Reproducir";
+  bgMusic.play().catch(()=>{});
+  btnPlay.innerHTML="▶️ Reproducir";
  }
 }
 
-/* CONTADOR */
+/* ZOOM */
+document.querySelectorAll(".grid img").forEach(img=>{
+ img.onclick=()=>{ zoom.style.display="flex"; zoomImg.src=img.src; }
+});
+
+/* HEARTS */
+for(let i=0;i<20;i++){
+ const s=document.createElement("span");
+ s.innerHTML="❤";
+ s.style.left=Math.random()*100+"vw";
+ s.style.fontSize=(16+Math.random()*26)+"px";
+ s.style.animationDuration=(8+Math.random()*10)+"s";
+ bgHearts.appendChild(s);
+}
+
+/* COUNTER */
 const start=new Date("2024-09-11");
-setInterval(()=>{
+function updateCounter(){
  const diff=Date.now()-start;
  const d=Math.floor(diff/86400000);
  const h=Math.floor(diff/3600000)%24;
  const m=Math.floor(diff/60000)%60;
- const s=Math.floor(diff/1000)%60;
- counter.innerHTML=`${d} días 💗 ${h} horas ${m} min ${s} seg`;
-},1000);
-
-/* CORAZONES OPTIMIZADOS */
-for(let i=0;i<28;i++){
- const s=document.createElement("span");
- s.innerHTML="❤";
- s.style.left=Math.random()*100+"vw";
- s.style.fontSize=(16+Math.random()*22)+"px";
- s.style.animationDuration=(8+Math.random()*6)+"s";
- bgHearts.appendChild(s);
+ counter.innerHTML="<b>"+d+"</b> días 💗<br>"+h+" horas · "+m+" min";
 }
+setInterval(updateCounter,60000);
+updateCounter();
 
-/* REGALO TYPEWRITER FIX */
-let writing=false;
-function openGift(){
- if(writing) return;
- writing=true;
- final.innerHTML="";
- const text=`Hay muchos momentos hermosos en la vida,
-pero sin duda el mejor de todos fue cuando te conocí.
+/* GIFT */
+setTimeout(()=>gift.classList.add("show"),1500);
 
-Te amo mucho mi cebollín 🥰`;
- let i=0;
- function w(){
-  if(i<text.length){
-   final.innerHTML+= text[i]==="\n"?"<br>":text[i];
-   i++;
-   setTimeout(w,30);
-  } else writing=false;
- }
- w();
+/* LOGIN HEART CANVAS */
+const c=document.getElementById("heartsCanvas");
+const ctx=c.getContext("2d");
+c.width=innerWidth;
+c.height=innerHeight;
+window.addEventListener('resize',()=>{c.width=innerWidth;c.height=innerHeight;});
+
+let hearts=[];
+function heart(){this.x=Math.random()*c.width;this.y=c.height;this.s=8+Math.random()*12;this.v=1+Math.random()*2;}
+function drawHeart(x,y,s){
+ ctx.beginPath();
+ ctx.moveTo(x,y);
+ ctx.bezierCurveTo(x-s,y-s,x-2*s,y+s,x,y+2*s);
+ ctx.bezierCurveTo(x+2*s,y+s,x+s,y-s,x,y);
+ ctx.fillStyle="rgba(255,80,150,.8)";
+ ctx.fill();
 }
-
+function loop(){
+ ctx.clearRect(0,0,c.width,c.height);
+ if(Math.random()<.2) hearts.push(new heart());
+ hearts.forEach((h,i)=>{
+  h.y-=h.v;
+  drawHeart(h.x,h.y,h.s/2);
+  if(h.y<-40) hearts.splice(i,1);
+ });
+ requestAnimationFrame(loop);
+}
+loop();
 </script>
 
 </body>
- </html>
+</html>
