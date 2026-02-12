@@ -2,148 +2,107 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Para Marlen 💖</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>San Valentín 💞</title>
 
 <style>
 body{
  margin:0;
- font-family:Segoe UI, sans-serif;
- background:#1a0015;
- color:#fff;
+ font-family:Arial,Helvetica,sans-serif;
+ background:#0b0b0f;
+ color:white;
  overflow-x:hidden;
 }
 
-/* LOGIN */
-#login{
- position:fixed;
- inset:0;
- display:flex;
- justify-content:center;
- align-items:center;
- background:#0a0008;
- z-index:999;
-}
-
-#heartsCanvas{
- position:absolute;
- inset:0;
-}
-
-.loginCard{
- position:relative;
- background:rgba(255,255,255,.12);
- backdrop-filter:blur(12px);
- padding:40px;
- border-radius:25px;
- text-align:center;
- box-shadow:0 0 40px rgba(255,0,120,.4);
- animation:float 4s ease-in-out infinite;
-}
-
-@keyframes float{
- 0%,100%{transform:translateY(0)}
- 50%{transform:translateY(-10px)}
-}
-
-input{
- padding:12px;
- border-radius:15px;
- border:none;
- text-align:center;
- font-size:16px;
-}
-
-button{
- padding:12px 20px;
- border:none;
- border-radius:20px;
- background:#ff4da6;
- color:white;
- font-size:16px;
- margin-top:12px;
- cursor:pointer;
-}
-
-/* HEART BG */
-.bgHearts span{
- position:fixed;
- color:#ff4da6;
- animation:rise linear infinite;
- opacity:.25;
-}
-
-@keyframes rise{
- from{transform:translateY(100vh) scale(.6)}
- to{transform:translateY(-10vh) scale(1.2)}
-}
-
-/* CARDS - MEJORADAS SIN TRANSPARENCIA FALLIDA */
 .card{
- background:#2d0025; /* Fondo sólido oscuro para que no falle nada */
- color:#fff;
- margin:24px auto;
- padding:22px;
- width:92%;
- max-width:520px;
- border-radius:22px;
- box-shadow:0 8px 30px rgba(0,0,0,.5);
- border:2px solid #ff99cc;
-}
-
-.card h2{
- text-align:center;
- margin-top:0;
- color: #ffb3d9;
+ background:rgba(255,255,255,.06);
+ border-radius:20px;
+ padding:20px;
+ margin:20px;
+ backdrop-filter: blur(10px);
+ box-shadow:0 0 25px rgba(255,0,120,.2);
 }
 
 .circleImg{
- width:160px;
- height:160px;
+ width:180px;
+ height:180px;
  border-radius:50%;
  object-fit:cover;
  display:block;
- margin:12px auto;
- border:6px solid #ffb3d9;
+ margin:auto;
+}
+
+.musicCover{
+ width:220px;
+ border-radius:16px;
+ display:block;
+ margin:auto;
+}
+
+.grid{
+ display:grid;
+ grid-template-columns:repeat(2,1fr);
+ gap:10px;
+}
+.grid img{
+ width:100%;
+ border-radius:12px;
 }
 
 .counter{
  text-align:center;
+ font-size:22px;
+ margin-top:10px;
+}
+
+.finalText{
  font-size:18px;
  line-height:1.6;
 }
 
-.musicCover{
- width:160px;
- height:160px;
- border-radius:50%;
- object-fit:cover;
- margin:10px auto;
- display:block;
- border:6px solid #ffb3d9;
- animation: spin 15s linear infinite; /* Añadí el giro que tenías antes */
-}
-
-@keyframes spin { from {transform:rotate(0deg)} to {transform:rotate(360deg)} }
-
-.grid{
- display:grid;
- grid-template-columns:1fr 1fr;
- gap:10px;
-}
-
-.grid img{
- width:100%;
- border-radius:14px;
- height:140px;
- object-fit:cover;
- border: 2px solid #ffb3d9;
-}
-
-.finalText{
- line-height:1.6;
+#btnPlay{
+ padding:12px 20px;
+ border:none;
+ border-radius:12px;
  font-size:16px;
- text-align: center;
+ cursor:pointer;
+}
+
+#login{
+ position:fixed;
+ inset:0;
+ background:#000;
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+ justify-content:center;
+ z-index:10;
+}
+
+#login input{
+ padding:10px;
+ font-size:18px;
+ border-radius:10px;
+ border:none;
+ margin-top:10px;
+}
+
+#login button{
+ margin-top:10px;
+ padding:10px 20px;
+ font-size:18px;
+ border-radius:10px;
+ border:none;
+ cursor:pointer;
+}
+
+.bgHearts span{
+ position:fixed;
+ top:100%;
+ animation:up linear infinite;
+ opacity:.5;
+}
+@keyframes up{
+ to{ transform:translateY(-120vh); }
 }
 </style>
 </head>
@@ -152,22 +111,19 @@ button{
 
 <!-- LOGIN -->
 <div id="login">
-<canvas id="heartsCanvas"></canvas>
-<div class="loginCard">
-<h2>Ingresa la contraseña 💖</h2>
-<input id="pass">
-<br>
+<h2>Ingresa la contraseña 💌</h2>
+<input id="pass" type="password">
 <button onclick="enter()">Entrar</button>
-</div>
+<canvas id="heartsCanvas"></canvas>
 </div>
 
-<!-- AUDIO (TUS LINKS QUE SÍ FUNCIONAN) -->
-<audio id="bgMusic" loop>
-<source src="https://files.catbox.moe/egr68n.mp3">
+<!-- AUDIO (ACTUALIZADO — SOLO ESTO CAMBIÓ) -->
+<audio id="bgMusic" loop preload="auto">
+ <source src="https://files.catbox.moe/egr68n.mp3" type="audio/mpeg">
 </audio>
 
-<audio id="ourSong">
-<source src="https://files.catbox.moe/4nrc17.mp3">
+<audio id="ourSong" preload="auto">
+ <source src="https://files.catbox.moe/4nrc17.mp3" type="audio/mpeg">
 </audio>
 
 <div class="bgHearts" id="bgHearts"></div>
@@ -199,7 +155,7 @@ button{
 </div>
 </div>
 
-<!-- FINAL (TEXTO COMPLETO) -->
+<!-- FINAL -->
 <div class="card finalText">
 <h2>💌 Mensaje de amor 💌</h2>
 ¡Feliz San Valentín, mi amor! 🤎<br><br>
@@ -211,32 +167,33 @@ Gracias por ser mi Valentín hoy y siempre 💞
 </div>
 
 <script>
-/* PASSWORD + INICIO MÚSICA */
 function enter(){
  if(document.getElementById('pass').value==="Jerry"){
   document.getElementById('login').style.display="none";
-  document.getElementById('bgMusic').play().catch(()=>{});
+  const bg=document.getElementById('bgMusic');
+  bg.currentTime=0;
+  bg.play().catch(()=>{});
  } else alert("Contraseña incorrecta 💔");
 }
 
-/* FUNCIÓN DE AUDIO MEJORADA */
 function toggleSong(){
- const ourSong = document.getElementById('ourSong');
- const bgMusic = document.getElementById('bgMusic');
- const btn = document.getElementById('btnPlay');
+ const ourSong=document.getElementById('ourSong');
+ const bgMusic=document.getElementById('bgMusic');
+ const btn=document.getElementById('btnPlay');
 
  if(ourSong.paused){
-  bgMusic.pause(); // Pasa la de fondo
-  ourSong.play();  // Inicia la especial
-  btn.innerHTML = "⏸️ Pausar";
- } else {
-  ourSong.pause(); // Pausa la especial
-  bgMusic.play();  // Regresa la de fondo
-  btn.innerHTML = "▶️ Reproducir";
+  bgMusic.pause();
+  ourSong.currentTime=0;
+  ourSong.play();
+  btn.innerHTML="⏸️ Pausar";
+ }else{
+  ourSong.pause();
+  bgMusic.play();
+  btn.innerHTML="▶️ Reproducir";
  }
 }
 
-/* HEART CANVAS LOGIN */
+/* HEART CANVAS */
 const c=document.getElementById('heartsCanvas');
 const ctx=c.getContext("2d");
 c.width=window.innerWidth;
@@ -268,7 +225,7 @@ function loop(){
 }
 loop();
 
-/* FLOATING HEARTS */
+/* FLOAT HEARTS */
 for(let i=0;i<25;i++){
  const s=document.createElement("span");
  s.innerHTML="❤";
