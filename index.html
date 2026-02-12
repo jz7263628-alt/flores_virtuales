@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Para Marlen 💖</title>
+<title>Para mi Jerry 💖</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
@@ -14,7 +14,7 @@ body{
  overflow-x:hidden;
 }
 
-/* ============ SOBRE INICIAL ============ */
+/* SOBRE */
 
 #intro{
  position:fixed;
@@ -33,26 +33,19 @@ body{
  border-radius:8px;
  position:relative;
  cursor:pointer;
- transform-style:preserve-3d;
- transition:transform .8s;
+ transition:.8s;
 }
-
 .envelope:before{
  content:"";
  position:absolute;
- width:0;height:0;
  border-left:110px solid transparent;
  border-right:110px solid transparent;
  border-bottom:80px solid #ff80bf;
  top:-80px;
 }
+.open{transform:scale(8);opacity:0}
 
-.open{
- transform:scale(8);
- opacity:0;
-}
-
-/* ============ LOGIN ============ */
+/* LOGIN */
 
 #login{
  position:fixed;
@@ -87,9 +80,10 @@ button{
  background:#ff4da6;
  color:white;
  margin-top:10px;
+ cursor:pointer;
 }
 
-/* ============ TARJETAS 3D SUAVE ============ */
+/* TARJETAS */
 
 .card{
  background:#ffe6f2;
@@ -110,10 +104,11 @@ button{
 
 .card h2{
  text-align:center;
- font-weight:800;
+ font-weight:900;
+ letter-spacing:.5px;
 }
 
-/* ============ IMAGENES ============ */
+/* IMAGENES */
 
 .circleImg{
  width:170px;height:170px;
@@ -135,19 +130,15 @@ button{
  height:150px;
  object-fit:cover;
  border-radius:14px;
- transition:transform .3s;
+ transition:.3s;
 }
-.grid img:hover{transform:scale(1.06)}
-
-/* ============ TIMELINE ============ */
+.grid img:hover{transform:scale(1.05)}
 
 .timeline{
  border-left:4px solid #ff4da6;
  padding-left:14px;
  line-height:1.8;
 }
-
-/* ============ PETALOS ============ */
 
 .petal{
  position:fixed;
@@ -193,37 +184,47 @@ button{
 
 <!-- TIMELINE -->
 <div class="card">
-<h2>🕰️ Nuestra línea del tiempo</h2>
+<h2>🕰️ Nuestra historia en momentos</h2>
 <div class="timeline">
-• 11 Septiembre 2024 — “Holaaa :)”<br>
-• Primera cita — jitomates 🤎<br>
-• Gym — el ratón que robaba la barra 😝<br>
-• Motito, rufles y risas
+11 Septiembre 2024 — Nuestro primer mensaje: “Holaaa :)”<br>
+El gym — cuando conocí al ratón Jerry que me robaba la barra 😝<br>
+Nuestra primera cita — ir por jitomates 🤎<br>
+Las risas, la motito, los rufles y nuestras loqueras
 </div>
 </div>
 
 <!-- HISTORIA -->
 <div class="card">
-<h2>📖 Nuestra historia</h2>
+<h2>📖 Lo que amo de ti</h2>
 <div id="story" class="type"></div>
 </div>
 
 <!-- FOTOS -->
 <div class="card">
-<h2>📸 Recuerdos</h2>
+<h2>📸 Nuestros recuerdos</h2>
 <div class="grid">
+<img src="https://i.imgur.com/m2rqpiu.jpeg">
+<img src="https://i.imgur.com/jbyIzFT.jpeg">
 <img src="https://i.imgur.com/tpH81jp.jpeg">
 <img src="https://i.imgur.com/mOQ2xhz.jpeg">
 <img src="https://i.imgur.com/ra5P475.jpeg">
 <img src="https://i.imgur.com/0xnanwq.jpeg">
+<img src="https://i.imgur.com/2Xh4XhC.jpeg">
+<img src="https://i.imgur.com/UX4FUgZ.jpeg">
+<img src="https://i.imgur.com/3h5EZdw.jpeg">
+<img src="https://i.imgur.com/8yDYtN4.jpeg">
+<img src="https://i.imgur.com/1IveqjS.jpeg">
+<img src="https://i.imgur.com/D2fqpOe.jpeg">
+<img src="https://i.imgur.com/cqMYyp1.jpeg">
+<img src="https://i.imgur.com/S888hKj.jpeg">
 </div>
 </div>
 
 <!-- FINAL -->
 <div class="card">
-<h2>💌 Final</h2>
+<h2>💌 Mensaje final</h2>
 <div id="final" class="type"></div>
-<button onclick="surprise()">Sorpresa 💝</button>
+<button onclick="surprise()">Sorpresa 🌸</button>
 </div>
 
 <script>
@@ -241,7 +242,7 @@ function enter(){
   login.style.display="none";
   bgMusic.play().catch(()=>{});
   typeStory();
-  setTimeout(typeFinal,9000);
+  setTimeout(typeFinal,12000);
  }
 }
 
@@ -256,36 +257,48 @@ setInterval(()=>{
  Math.floor(d/1000)%60+" segundos 💗";
 },1000);
 
-/* TEXTO */
+/* TEXTO COMPLETO CORREGIDO */
 
-const storyText=`Aún recuerdo cuando vi al ratón Jerry en el gym.
-Eras una niña muy raterita porque me robabas la barra 😝
-Nuestra primera cita fue ir por jitomates — y fue increíble.
+const storyText=`Aún recuerdo cuando vi al ratón Jerry en el gym. 
+Eras una niña muy raterita porque siempre me robabas la barra 😝
 
-No sé en qué momento te volviste tan importante para mí.
+Nuestra primera cita fue ir por jitomates, ¿sabes? — y eso estuvo increíble.
 
-Amo tu forma de ver a las personas,
-tu valentía aunque tengas miedo,
-tu sonrisa de ratoncito,
-tu motito,
-los rufles de queso,
-las hamburguesas sin piña,
-las cosas simples.
+No sé exactamente en qué momento te convertiste en una persona tan importante para mí, pero pasó… y me encanta que haya pasado.
 
-Quiero más viajes,
-más fotos,
-más risas,
-que nos corran los borregos,
+Hay muchas cosas que amo de ti, pero en especial tu forma de ver a las personas. De verdad admiro eso.
+
+Admiro que, aunque hayas vivido cosas difíciles, siempre intentas ser mejor.
+
+Amo a la niña que a veces tiene miedo de lo que pueda pasar, pero aun así avanza.
+
+La forma en que conviertes momentos simples en algo especial.
+
+Mi cebollín que en su motito se ve muy cool.
+
+La niña a la que le gustan los rufles de queso.
+Las hamburguesas sin piña.
+Crepúsculo.
+Las cosas simples.
+
+La niña de los piecitos de ratón.
+Y esos dientitos de ratoncito.
+
+Quiero seguir haciendo más cosas contigo:
+viajar,
+tomar más fotos,
 reír como loquitos en el centro,
-y siempre cuidarte.
+que nos corran los borregos,
+cuidarte siempre.
 
-Y cuando yo olvide cosas —
+Y cuando a mí se me olvide llevar cosas para salir,
 sé que tú llevarás tu maletita con cositas para los dos ❤️`;
 
-const finalText=`Hay muchos momentos hermosos en la vida…
-pero sin duda el mejor fue cuando te conocí.
 
-Te amo mucho mi cebollín 🥰`;
+const finalText=`Hay muchos momentos hermosos en la vida,
+pero sin duda el mejor de todos fue cuando te conocí.
+
+Te amo mucho, mi cebollín 🥰`;
 
 /* TYPE */
 
@@ -302,10 +315,10 @@ function typeWriter(t,el,s){
 function typeStory(){typeWriter(storyText,story,22);}
 function typeFinal(){typeWriter(finalText,final,28);}
 
-/* SORPRESA PETALOS */
+/* PETALOS */
 
 function surprise(){
- for(let i=0;i<40;i++){
+ for(let i=0;i<35;i++){
   const p=document.createElement("div");
   p.className="petal";
   p.innerHTML="🌸";
@@ -317,6 +330,5 @@ function surprise(){
 }
 
 </script>
-
 </body>
 </html>
