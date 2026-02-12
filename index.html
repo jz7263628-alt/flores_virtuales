@@ -13,24 +13,10 @@
 body{
 margin:0;
 font-family:Poppins, sans-serif;
-background:radial-gradient(circle at 20% 20%, #ff9a9e, #fad0c4 60%, #fad0c4);
+background:linear-gradient(135deg,#1a0015,#3a002f,#12000f);
+color:white;
 overflow-x:hidden;
 perspective:1200px;
-}
-
-/* PARALLAX GLOW */
-body::before{
-content:"";
-position:fixed;
-inset:-40%;
-background:radial-gradient(circle,#ffffff55,transparent 60%);
-animation:glow 12s linear infinite;
-z-index:-1;
-}
-
-@keyframes glow{
-0%{transform:rotate(0deg)}
-100%{transform:rotate(360deg)}
 }
 
 /* LOGIN */
@@ -43,7 +29,6 @@ display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
-color:white;
 z-index:100;
 }
 
@@ -53,6 +38,62 @@ border-radius:14px;
 border:none;
 font-size:18px;
 text-align:center;
+}
+
+/* CARDS */
+
+.card{
+position:relative;
+background:rgba(255,255,255,.92);
+color:#5a0033;
+border-radius:26px;
+padding:22px;
+margin:24px auto;
+width:94%;
+max-width:560px;
+box-shadow:0 30px 60px rgba(0,0,0,.35);
+transform-style:preserve-3d;
+transition:.5s;
+overflow:hidden;
+}
+
+.card:hover{
+transform:scale(1.04) rotateX(6deg) rotateY(-6deg);
+}
+
+.card::after{
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(120deg,transparent,rgba(255,255,255,.4),transparent);
+opacity:0;
+}
+
+.card:hover::after{
+opacity:.8;
+animation:shine 1.4s;
+}
+
+@keyframes shine{
+from{transform:translateX(-120%)}
+to{transform:translateX(120%)}
+}
+
+/* TITLES */
+
+.card h2{
+margin:0 0 14px;
+font-size:24px;
+background:linear-gradient(45deg,#ff4e8a,#ff758c,#ffb199);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+text-shadow:0 2px 8px rgba(255,80,140,.35);
+animation:titlePulse 3s infinite alternate;
+}
+
+@keyframes titlePulse{
+from{transform:scale(1)}
+to{transform:scale(1.05)}
 }
 
 /* BUTTON */
@@ -66,44 +107,9 @@ background:linear-gradient(45deg,#ff4e8a,#ff758c);
 color:white;
 cursor:pointer;
 box-shadow:0 15px 30px rgba(255,80,120,.35);
-transition:.3s;
 }
 
-button:hover{
-transform:translateY(-3px) scale(1.05);
-}
-
-/* CARD 3D */
-
-.card{
-background:rgba(255,255,255,.88);
-border-radius:26px;
-padding:22px;
-margin:24px auto;
-width:94%;
-max-width:560px;
-box-shadow:0 30px 60px rgba(0,0,0,.25);
-transform-style:preserve-3d;
-transition:.5s;
-backdrop-filter:blur(10px);
-}
-
-.card:hover{
-transform:rotateX(8deg) rotateY(-8deg) scale(1.03);
-}
-
-/* TITLES */
-
-.card h2{
-margin:0 0 14px;
-font-size:24px;
-background:linear-gradient(45deg,#ff4e8a,#ff758c,#ffb199);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-font-weight:700;
-}
-
-/* PROFILE IMAGE */
+/* PROFILE */
 
 .circleImg{
 width:70vw;
@@ -113,86 +119,80 @@ max-height:220px;
 border-radius:50%;
 object-fit:cover;
 box-shadow:0 20px 40px rgba(0,0,0,.35);
-transition:.4s;
 }
 
-.circleImg:hover{
-transform:scale(1.1) rotateZ(2deg);
-}
-
-/* MUSIC COVER */
-
-.musicCover{
-width:85%;
-max-width:260px;
-border-radius:22px;
-box-shadow:0 20px 40px rgba(0,0,0,.35);
-}
-
-/* POLAROID FLOAT */
+/* GALLERY */
 
 .slider{
 display:flex;
 gap:16px;
 overflow-x:auto;
-padding:10px;
+scroll-snap-type:x mandatory;
 }
 
 .slider img{
 height:200px;
-border-radius:16px;
+border-radius:18px;
 object-fit:cover;
+scroll-snap-align:center;
 box-shadow:0 15px 35px rgba(0,0,0,.35);
 transition:.5s;
-transform:rotate(var(--r));
-background:white;
-padding:6px;
 }
 
 .slider img:hover{
-transform:scale(1.15) rotate(0deg);
+transform:scale(1.15) rotateY(10deg);
+}
+
+/* LETTER ENVELOPE */
+
+.envelope{
+background:#ffd6e7;
+border-radius:20px;
+padding:18px;
+cursor:pointer;
+text-align:center;
+font-weight:600;
+}
+
+.letter{
+background:white;
+border-radius:18px;
+padding:22px;
+margin-top:14px;
+line-height:1.7;
+font-size:16px;
+color:#5a2a3a;
+max-height:0;
+overflow:hidden;
+transition:1s;
+}
+
+.letter.open{
+max-height:800px;
 }
 
 /* COUNTER */
 
 .counter{
-font-size:18px;
 font-weight:600;
 color:#d63384;
 }
 
-/* LETTER 3D */
+/* PARTICLES */
 
-.letter{
-background:#fff0f6;
-border-radius:20px;
-padding:22px;
-line-height:1.7;
-font-size:16px;
-color:#5a2a3a;
-transform:rotateX(-90deg);
-transform-origin:top;
-transition:.7s;
-box-shadow:0 15px 30px rgba(0,0,0,.15);
-}
-
-.letter.open{
-transform:rotateX(0);
-}
-
-/* HEART PARTICLES */
-
-.heart{
+.spark{
 position:fixed;
-font-size:22px;
-pointer-events:none;
-animation:floatUp linear infinite;
-opacity:.25;
+width:6px;
+height:6px;
+border-radius:50%;
+background:white;
+opacity:.4;
+animation:sparkMove linear infinite;
 }
 
-@keyframes floatUp{
-from{transform:translateY(100vh) scale(.6);}
-to{transform:translateY(-10vh) scale(1.2);}
+@keyframes sparkMove{
+from{transform:translateY(110vh)}
+to{transform:translateY(-10vh)}
 }
 
 </style>
@@ -206,8 +206,7 @@ to{transform:translateY(-10vh) scale(1.2);}
 <button onclick="enter()">Entrar</button>
 </div>
 
-<!-- AUDIO (orden como pediste) -->
-
+<!-- AUDIO ORDEN CORRECTO -->
 <audio id="bgMusic" loop>
 <source src="https://files.catbox.moe/4nrc17.mp3">
 </audio>
@@ -231,7 +230,6 @@ to{transform:translateY(-10vh) scale(1.2);}
 <div class="card">
 <h2>🎵 Nuestra canción 🎵</h2>
 <center>
-<img class="musicCover" src="https://i.imgur.com/jbyIzFT.jpeg"><br><br>
 <button id="btnPlay" onclick="toggleSong()">▶️ Reproducir</button>
 </center>
 </div>
@@ -247,7 +245,7 @@ to{transform:translateY(-10vh) scale(1.2);}
 
 <div class="card">
 <h2>💌 Mensaje de amor 💌</h2>
-<button onclick="openLetter()">Abrir carta</button>
+<div class="envelope" onclick="openLetter()">💌 Tocar para abrir carta</div>
 <div class="letter" id="letter">
 <p id="typeText"></p>
 </div>
@@ -256,6 +254,7 @@ to{transform:translateY(-10vh) scale(1.2);}
 <script>
 
 /* PASSWORD */
+
 function enter(){
  if(pass.value==="Jerry"){
   login.style.display="none";
@@ -264,19 +263,19 @@ function enter(){
 }
 
 /* AUDIO */
+
 function toggleSong(){
  if(ourSong.paused){
   bgMusic.pause();
   ourSong.play();
-  btnPlay.innerHTML="⏸️ Pausar";
  }else{
   ourSong.pause();
   bgMusic.play();
-  btnPlay.innerHTML="▶️ Reproducir";
  }
 }
 
 /* COUNTER */
+
 const start=new Date("2024-02-14");
 setInterval(()=>{
  const d=(Date.now()-start)/1000|0;
@@ -287,7 +286,7 @@ setInterval(()=>{
  d%60+" segundos 💗";
 },1000);
 
-/* TYPEWRITER FULL TEXT */
+/* TYPEWRITER */
 
 const text=`¡Feliz San Valentín, mi amor! 🤎
 
@@ -313,7 +312,7 @@ function openLetter(){
  })();
 }
 
-/* POLAROID IMAGES */
+/* GALLERY IMAGES */
 
 const imgs=[
 "https://i.imgur.com/tpH81jp.jpeg",
@@ -333,20 +332,34 @@ const imgs=[
 imgs.forEach(src=>{
  const im=document.createElement("img");
  im.src=src;
- im.style.setProperty("--r",(Math.random()*10-5)+"deg");
  slider.appendChild(im);
 });
 
-/* FLOATING HEARTS */
+/* PARTICLES */
 
-for(let i=0;i<35;i++){
- const h=document.createElement("div");
- h.className="heart";
- h.innerHTML="❤";
- h.style.left=Math.random()*100+"vw";
- h.style.animationDuration=(6+Math.random()*10)+"s";
- document.body.appendChild(h);
+for(let i=0;i<50;i++){
+ const s=document.createElement("div");
+ s.className="spark";
+ s.style.left=Math.random()*100+"vw";
+ s.style.animationDuration=(8+Math.random()*12)+"s";
+ document.body.appendChild(s);
 }
+
+/* TOUCH HEARTS */
+
+document.addEventListener("click", e=>{
+ for(let i=0;i<5;i++){
+  const h=document.createElement("div");
+  h.innerHTML="💖";
+  h.style.position="fixed";
+  h.style.left=e.clientX+"px";
+  h.style.top=e.clientY+"px";
+  h.style.transition="1s";
+  document.body.appendChild(h);
+  setTimeout(()=>{h.style.transform="translateY(-120px)";h.style.opacity=0},10);
+  setTimeout(()=>h.remove(),1000);
+ }
+});
 
 </script>
 
