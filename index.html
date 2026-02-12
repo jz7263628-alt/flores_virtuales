@@ -8,38 +8,45 @@
 <style>
 body{
  margin:0;
- font-family:Segoe UI, sans-serif;
- background:#140010;
+ font-family:Segoe UI,sans-serif;
+ background:radial-gradient(circle,#2b0020,#000);
  color:#fff;
  overflow-x:hidden;
 }
 
-/* SOBRE */
+/* ===== TITULOS PREMIUM ===== */
+h2{
+ text-align:center;
+ font-weight:900;
+ background:linear-gradient(90deg,#ff4da6,#ffd1ea,#ff4da6);
+ -webkit-background-clip:text;
+ -webkit-text-fill-color:transparent;
+ background-size:200%;
+ animation:shine 6s linear infinite;
+}
+@keyframes shine{to{background-position:200%}}
+
+/* ===== INTRO ===== */
 #intro{
  position:fixed; inset:0;
- background:radial-gradient(circle,#2b0020,#000);
- display:flex; justify-content:center; align-items:center;
+ background:#000;
+ display:flex;
+ justify-content:center;
+ align-items:center;
  z-index:1000;
 }
-.envelope{
- width:220px;height:150px;
+.film{
+ width:240px;height:160px;
  background:#ff4da6;
- border-radius:8px;
- position:relative;
- cursor:pointer;
- transition:.8s;
+ border-radius:16px;
+ box-shadow:0 0 60px #ff4da6;
+ animation:pulse 2s infinite;
 }
-.envelope:before{
- content:"";
- position:absolute;
- border-left:110px solid transparent;
- border-right:110px solid transparent;
- border-bottom:80px solid #ff80bf;
- top:-80px;
+@keyframes pulse{
+ 50%{transform:scale(1.1)}
 }
-.open{transform:scale(8);opacity:0}
 
-/* LOGIN */
+/* ===== LOGIN ===== */
 #login{
  position:fixed; inset:0;
  display:none;
@@ -49,61 +56,49 @@ body{
  z-index:999;
 }
 .loginCard{
- background:rgba(255,255,255,.12);
- backdrop-filter:blur(12px);
+ background:rgba(255,255,255,.15);
+ backdrop-filter:blur(14px);
  padding:40px;
  border-radius:25px;
  text-align:center;
- box-shadow:0 0 40px rgba(255,0,120,.4);
 }
 input{
  padding:12px;
- border-radius:15px;
+ border-radius:14px;
  border:none;
  text-align:center;
 }
+
 button{
  padding:12px 20px;
  border:none;
- border-radius:20px;
+ border-radius:18px;
  background:#ff4da6;
  color:white;
  margin-top:10px;
- cursor:pointer;
+ font-weight:700;
 }
 
-/* TARJETAS */
+/* ===== TARJETAS ===== */
 .card{
  background:#ffe6f2;
  color:#4a0030;
- margin:24px auto;
- padding:22px;
+ margin:26px auto;
+ padding:24px;
  width:94%;
- max-width:620px;
+ max-width:720px;
  border-radius:22px;
- box-shadow:0 12px 30px rgba(0,0,0,.25);
- border:3px dashed #ff99cc;
+ box-shadow:0 20px 50px rgba(0,0,0,.4);
+ transform:translateY(60px);
  opacity:0;
- transform:translateY(40px);
- animation:in .8s forwards;
+ transition:.7s;
 }
-@keyframes in{to{opacity:1; transform:none}}
-
-.card h2{
- text-align:center;
- font-weight:900;
+.card.show{
+ transform:translateY(0);
+ opacity:1;
 }
 
-/* IMAGENES */
-.circleImg{
- width:170px;height:170px;
- border-radius:50%;
- object-fit:cover;
- display:block;
- margin:auto;
- border:6px solid #ffb3d9;
-}
-
+/* ===== GALERIA ===== */
 .grid{
  display:grid;
  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
@@ -114,199 +109,256 @@ button{
  height:170px;
  object-fit:cover;
  border-radius:14px;
- transition:.3s;
+ cursor:pointer;
+ transition:.25s;
 }
-.grid img:hover{transform:scale(1.05)}
+.grid img:hover{transform:scale(1.06)}
 
-.timeline{
- border-left:4px solid #ff4da6;
- padding-left:14px;
- line-height:1.8;
+/* ===== TYPE TEXT ===== */
+.type{
+ white-space:pre-line;
+ line-height:1.7;
+ font-weight:600;
 }
 
-.type{white-space:pre-line;}
+/* ===== VISOR ===== */
+#viewer{
+ position:fixed; inset:0;
+ background:rgba(0,0,0,.85);
+ display:none;
+ justify-content:center;
+ align-items:center;
+ z-index:2000;
+}
+#viewer img{
+ max-width:92%;
+ max-height:92%;
+ border-radius:18px;
+}
 
-.petal{
+/* ===== LIBRO ===== */
+.book{
+ perspective:1000px;
+}
+.page{
+ background:white;
+ color:#4a0030;
+ padding:20px;
+ border-radius:16px;
+ transform:rotateY(0);
+ transition:.6s;
+ box-shadow:0 10px 30px rgba(0,0,0,.3);
+}
+.page.flip{
+ transform:rotateY(180deg);
+}
+
+/* ===== CORAZONES TOQUE ===== */
+.tapHeart{
  position:fixed;
- top:-20px;
- font-size:18px;
- animation:fall linear forwards;
+ font-size:22px;
+ pointer-events:none;
+ animation:pop 1s forwards;
 }
-@keyframes fall{
- to{transform:translateY(110vh) rotate(360deg)}
+@keyframes pop{
+ to{transform:translateY(-80px);opacity:0}
 }
+
+/* ===== REGALO FINAL ===== */
+.gift{
+ font-size:70px;
+ text-align:center;
+ cursor:pointer;
+ animation:giftPulse 2s infinite;
+}
+@keyframes giftPulse{
+ 50%{transform:scale(1.15)}
+}
+
 </style>
 </head>
 
 <body>
 
-<!-- SOBRE -->
-<div id="intro">
-<div class="envelope" onclick="openEnvelope()"></div>
+<!-- INTRO -->
+<div id="intro" onclick="start()">
+<div class="film"></div>
 </div>
 
 <!-- LOGIN -->
 <div id="login">
 <div class="loginCard">
-<h2>Ingresa la contraseña 💖</h2>
+<h2>Contraseña 💖</h2>
 <input id="pass">
 <br>
 <button onclick="enter()">Entrar</button>
 </div>
 </div>
 
-<!-- MUSICA (orden correcto) -->
+<!-- AUDIO -->
 <audio id="bgMusic" loop src="https://files.catbox.moe/4nrc17.mp3"></audio>
 <audio id="ourSong" src="https://files.catbox.moe/egr68n.mp3"></audio>
 
-<!-- CONTADOR -->
+<!-- TARJETAS -->
+
 <div class="card">
-<h2>💞 Nuestro tiempo 💞</h2>
-<img class="circleImg" src="https://i.imgur.com/m2rqpiu.jpeg">
-<div id="counter"></div>
+<h2>🎵 Nuestra canción</h2>
+<button onclick="toggleSong()" id="songBtn">▶️ Reproducir</button>
 </div>
 
-<!-- TIMELINE -->
 <div class="card">
-<h2>🕰️ Nuestra historia</h2>
-<div class="timeline">
-11 Septiembre 2024 — Nuestro primer mensaje: “Holaaa :)”<br>
-El gym — cuando conocí al ratón Jerry que me robaba la barra 😝<br>
-Nuestra primera cita — ir por jitomates 🤎<br>
-Las risas, la motito y nuestras loqueras
-</div>
-</div>
-
-<!-- HISTORIA -->
-<div class="card">
-<h2>📖 Lo que amo de ti</h2>
+<h2>📖 Nuestra historia</h2>
 <div id="story" class="type"></div>
 </div>
 
-<!-- FOTOS — TODAS -->
 <div class="card">
-<h2>📸 Nuestros recuerdos</h2>
-<div class="grid">
+<h2>📸 Recuerdos</h2>
+<div class="grid" id="gallery"></div>
+</div>
 
-<img src="https://i.imgur.com/m2rqpiu.jpeg" loading="lazy">
-<img src="https://i.imgur.com/jbyIzFT.jpeg" loading="lazy">
-<img src="https://i.imgur.com/tpH81jp.jpeg" loading="lazy">
-<img src="https://i.imgur.com/mOQ2xhz.jpeg" loading="lazy">
-<img src="https://i.imgur.com/ra5P475.jpeg" loading="lazy">
-<img src="https://i.imgur.com/0xnanwq.jpeg" loading="lazy">
-<img src="https://i.imgur.com/2Xh4XhC.jpeg" loading="lazy">
-<img src="https://i.imgur.com/UX4FUgZ.jpeg" loading="lazy">
-<img src="https://i.imgur.com/3h5EZdw.jpeg" loading="lazy">
-<img src="https://i.imgur.com/8yDYtN4.jpeg" loading="lazy">
-<img src="https://i.imgur.com/1IveqjS.jpeg" loading="lazy">
-<img src="https://i.imgur.com/D2fqpOe.jpeg" loading="lazy">
-<img src="https://i.imgur.com/cqMYyp1.jpeg" loading="lazy">
-<img src="https://i.imgur.com/S888hKj.jpeg" loading="lazy">
-
+<div class="card">
+<h2>📘 Libro de momentos</h2>
+<div class="book">
+<div id="page" class="page"></div>
+<button onclick="nextPage()">Siguiente página</button>
 </div>
 </div>
 
-<!-- FINAL -->
 <div class="card">
-<h2>💌 Mensaje final</h2>
+<h2>🎁 Ábreme</h2>
+<div class="gift" onclick="openGift()">🎁</div>
 <div id="final" class="type"></div>
-<button onclick="surprise()">Sorpresa 🌸</button>
+</div>
+
+<div id="viewer" onclick="this.style.display='none'">
+<img id="viewImg">
 </div>
 
 <script>
 
-function openEnvelope(){
- document.querySelector(".envelope").classList.add("open");
- setTimeout(()=>intro.style.display="none",700);
- setTimeout(()=>login.style.display="flex",700);
+/* INTRO */
+function start(){
+ intro.style.display="none";
+ login.style.display="flex";
 }
 
+/* LOGIN */
 function enter(){
  if(pass.value==="Jerry"){
   login.style.display="none";
   bgMusic.play().catch(()=>{});
   typeStory();
-  setTimeout(typeFinal,12000);
  }
 }
 
-/* CONTADOR */
-const start=new Date("2024-09-11");
-setInterval(()=>{
- const d=new Date()-start;
- counter.innerHTML=
- Math.floor(d/86400000)+" días<br>"+
- Math.floor(d/3600000)%24+" horas<br>"+
- Math.floor(d/60000)%60+" minutos<br>"+
- Math.floor(d/1000)%60+" segundos 💗";
-},1000);
+/* MUSICA */
+function toggleSong(){
+ if(ourSong.paused){
+  bgMusic.pause();
+  ourSong.play();
+  songBtn.innerHTML="⏸️ Pausar";
+ }else{
+  ourSong.pause();
+  bgMusic.play();
+  songBtn.innerHTML="▶️ Reproducir";
+ }
+}
 
-/* TEXTO COMPLETO CORREGIDO */
-
+/* TYPE STORY */
 const storyText=`Aún recuerdo cuando vi al ratón Jerry en el gym.
 Eras una niña muy raterita porque siempre me robabas la barra 😝
 
-Nuestra primera cita fue ir por jitomates, y eso estuvo increíble.
+Nuestra primera cita fue ir por jitomates.
 
-No sé en qué momento te convertiste en alguien tan importante para mí, pero me encanta que haya pasado.
+Amo tu forma de ver a las personas.
+Admiro que siempre intentas ser mejor.
 
-Hay muchas cosas que amo de ti, en especial tu forma de ver a las personas. De verdad admiro eso.
+La niña de los rufles de queso,
+hamburguesas sin piña,
+crepúsculo y cosas simples.
 
-Admiro que, aunque hayas vivido cosas difíciles, siempre intentas ser mejor.
+Nuestro primer mensaje:
+11 de septiembre de 2024 — “Holaaa :)”
 
-Amo a la niña que a veces tiene miedo de lo que pueda pasar, pero aun así va.
-
-La forma en que conviertes momentos simples en algo especial.
-
-Mi cebollín que en su motito se ve muy cool.
-
-La niña a la que le gustan los rufles de queso.
-Las hamburguesas sin piña.
-Crepúsculo.
-Las cosas simples.
-
-La niña de los piecitos de ratón.
-Y esos dientitos de ratoncito.
-
-Quiero seguir haciendo más cosas contigo:
-viajar,
-tomar más fotos,
-reír como loquitos en el centro,
+Quiero viajar contigo,
+reír en el centro,
 que nos correteen los borregos,
-cuidarte siempre.
+y cuidarte siempre ❤️`;
 
-Y cuando a mí se me olvide llevar cosas,
-tú llevarás tu maletita con cositas para los dos ❤️`;
+function typeStory(){
+ let i=0;
+ (function w(){
+  if(i<storyText.length){
+   story.innerHTML+=storyText[i]==="\n"?"<br>":storyText[i];
+   i++; setTimeout(w,18);
+  }
+ })();
+}
 
-const finalText=`Hay muchos momentos hermosos en la vida,
-pero sin duda el mejor de todos fue cuando te conocí.
+/* GALERIA TODAS */
+const imgs=["m2rqpiu","jbyIzFT","tpH81jp","mOQ2xhz","ra5P475","0xnanwq","2Xh4XhC","UX4FUgZ","3h5EZdw","8yDYtN4","1IveqjS","D2fqpOe","cqMYyp1","S888hKj"];
+imgs.forEach(id=>{
+ const im=new Image();
+ im.src="https://i.imgur.com/"+id+".jpeg";
+ im.loading="lazy";
+ im.onclick=()=>{viewer.style.display="flex";viewImg.src=im.src};
+ gallery.appendChild(im);
+});
 
-Te amo mucho, mi cebollín 🥰`;
+/* LIBRO */
+const pages=[
+"Tu risa favorita",
+"Tu motito cool",
+"Nuestros viajes",
+"Nuestros jitomates 😝",
+"Nuestro inicio"
+];
+let pi=0;
+function nextPage(){
+ page.classList.add("flip");
+ setTimeout(()=>{
+  page.innerHTML=pages[pi%pages.length];
+  page.classList.remove("flip");
+  pi++;
+ },300);
+}
+nextPage();
+
+/* REGALO FINAL */
+function openGift(){
+ final.innerHTML="";
+ typeWriter(`Hay muchos momentos hermosos en la vida,
+pero el mejor fue cuando te conocí.
+
+Te amo mucho mi cebollín 🥰`, final, 28);
+}
 
 function typeWriter(t,el,s){
  let i=0;
  (function w(){
   if(i<t.length){
-   el.innerHTML+= t[i]==="\n"?"<br>":t[i];
+   el.innerHTML+=t[i]==="\n"?"<br>":t[i];
    i++; setTimeout(w,s);
   }
  })();
 }
 
-function typeStory(){typeWriter(storyText,story,22);}
-function typeFinal(){typeWriter(finalText,final,28);}
+/* REVEAL */
+const obs=new IntersectionObserver(e=>{
+ e.forEach(x=>{if(x.isIntersecting)x.target.classList.add("show")});
+});
+document.querySelectorAll(".card").forEach(c=>obs.observe(c));
 
-function surprise(){
- for(let i=0;i<35;i++){
-  const p=document.createElement("div");
-  p.className="petal";
-  p.innerHTML="🌸";
-  p.style.left=Math.random()*100+"vw";
-  p.style.animationDuration=(4+Math.random()*4)+"s";
-  document.body.appendChild(p);
-  setTimeout(()=>p.remove(),8000);
- }
-}
+/* CORAZONES TOQUE */
+document.addEventListener("click",e=>{
+ const h=document.createElement("div");
+ h.className="tapHeart";
+ h.innerHTML="💖";
+ h.style.left=e.clientX+"px";
+ h.style.top=e.clientY+"px";
+ document.body.appendChild(h);
+ setTimeout(()=>h.remove(),1000);
+});
 
 </script>
 </body>
