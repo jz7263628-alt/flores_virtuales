@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Para mi amor 🤎</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
@@ -12,14 +11,42 @@
 
 body{
 margin:0;
-font-family:Poppins, sans-serif;
-background:linear-gradient(135deg,#1a0015,#3a002f,#12000f);
+font-family:Poppins,sans-serif;
+background:linear-gradient(140deg,#1a0015,#2b0022,#12000f);
 color:white;
 overflow-x:hidden;
 perspective:1200px;
 }
 
-/* LOGIN */
+/* ===== INTRO REGALO ===== */
+
+#intro{
+position:fixed;
+inset:0;
+background:black;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+z-index:200;
+animation:fadeOut 2s 3s forwards;
+}
+
+@keyframes fadeOut{
+to{opacity:0;pointer-events:none}
+}
+
+.gift{
+font-size:70px;
+animation:giftBeat 1.2s infinite;
+}
+
+@keyframes giftBeat{
+0%,100%{transform:scale(1)}
+50%{transform:scale(1.2)}
+}
+
+/* ===== LOGIN ===== */
 
 #login{
 position:fixed;
@@ -29,10 +56,10 @@ display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
-z-index:100;
+z-index:150;
 }
 
-#pass{
+input{
 padding:14px;
 border-radius:14px;
 border:none;
@@ -40,11 +67,10 @@ font-size:18px;
 text-align:center;
 }
 
-/* CARDS */
+/* ===== CARDS ===== */
 
 .card{
-position:relative;
-background:rgba(255,255,255,.92);
+background:rgba(255,255,255,.94);
 color:#5a0033;
 border-radius:26px;
 padding:22px;
@@ -54,6 +80,7 @@ max-width:560px;
 box-shadow:0 30px 60px rgba(0,0,0,.35);
 transform-style:preserve-3d;
 transition:.5s;
+position:relative;
 overflow:hidden;
 }
 
@@ -65,13 +92,13 @@ transform:scale(1.04) rotateX(6deg) rotateY(-6deg);
 content:"";
 position:absolute;
 inset:0;
-background:linear-gradient(120deg,transparent,rgba(255,255,255,.4),transparent);
+background:linear-gradient(120deg,transparent,rgba(255,255,255,.5),transparent);
 opacity:0;
 }
 
 .card:hover::after{
-opacity:.8;
-animation:shine 1.4s;
+opacity:.9;
+animation:shine 1.2s;
 }
 
 @keyframes shine{
@@ -79,7 +106,7 @@ from{transform:translateX(-120%)}
 to{transform:translateX(120%)}
 }
 
-/* TITLES */
+/* ===== TITLES ===== */
 
 .card h2{
 margin:0 0 14px;
@@ -88,15 +115,9 @@ background:linear-gradient(45deg,#ff4e8a,#ff758c,#ffb199);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
 text-shadow:0 2px 8px rgba(255,80,140,.35);
-animation:titlePulse 3s infinite alternate;
 }
 
-@keyframes titlePulse{
-from{transform:scale(1)}
-to{transform:scale(1.05)}
-}
-
-/* BUTTON */
+/* ===== BUTTON ===== */
 
 button{
 padding:14px 22px;
@@ -109,7 +130,7 @@ cursor:pointer;
 box-shadow:0 15px 30px rgba(255,80,120,.35);
 }
 
-/* PROFILE */
+/* ===== PROFILE ===== */
 
 .circleImg{
 width:70vw;
@@ -121,7 +142,7 @@ object-fit:cover;
 box-shadow:0 20px 40px rgba(0,0,0,.35);
 }
 
-/* GALLERY */
+/* ===== GALLERY ===== */
 
 .slider{
 display:flex;
@@ -136,14 +157,14 @@ border-radius:18px;
 object-fit:cover;
 scroll-snap-align:center;
 box-shadow:0 15px 35px rgba(0,0,0,.35);
-transition:.5s;
+transition:.4s;
 }
 
 .slider img:hover{
 transform:scale(1.15) rotateY(10deg);
 }
 
-/* LETTER ENVELOPE */
+/* ===== LETTER ===== */
 
 .envelope{
 background:#ffd6e7;
@@ -171,14 +192,14 @@ transition:1s;
 max-height:800px;
 }
 
-/* COUNTER */
+/* ===== COUNTER ===== */
 
 .counter{
 font-weight:600;
 color:#d63384;
 }
 
-/* PARTICLES */
+/* ===== PARTICLES ===== */
 
 .spark{
 position:fixed;
@@ -200,13 +221,20 @@ to{transform:translateY(-10vh)}
 
 <body>
 
+<!-- INTRO -->
+<div id="intro">
+<div class="gift">🎁</div>
+<div>Un regalo para ti…</div>
+</div>
+
+<!-- LOGIN -->
 <div id="login">
 <h2>Ingresa la contraseña 🤎</h2>
 <input id="pass"><br><br>
 <button onclick="enter()">Entrar</button>
 </div>
 
-<!-- AUDIO ORDEN CORRECTO -->
+<!-- AUDIO -->
 <audio id="bgMusic" loop>
 <source src="https://files.catbox.moe/4nrc17.mp3">
 </audio>
@@ -216,36 +244,30 @@ to{transform:translateY(-10vh)}
 </audio>
 
 <!-- TIEMPO -->
-
 <div class="card">
 <h2>💞 Nuestro tiempo juntos 💞</h2>
-<center>
-<img class="circleImg" src="https://i.imgur.com/m2rqpiu.jpeg">
-</center>
+<center><img class="circleImg" src="https://i.imgur.com/m2rqpiu.jpeg"></center>
 <div class="counter" id="counter"></div>
 </div>
 
 <!-- CANCIÓN -->
-
 <div class="card">
 <h2>🎵 Nuestra canción 🎵</h2>
 <center>
-<button id="btnPlay" onclick="toggleSong()">▶️ Reproducir</button>
+<button onclick="toggleSong()">▶️ Reproducir</button>
 </center>
 </div>
 
 <!-- GALERÍA -->
-
 <div class="card">
 <h2>📸 Recuerdos 📸</h2>
 <div class="slider" id="slider"></div>
 </div>
 
 <!-- CARTA -->
-
 <div class="card">
 <h2>💌 Mensaje de amor 💌</h2>
-<div class="envelope" onclick="openLetter()">💌 Tocar para abrir carta</div>
+<div class="envelope" onclick="openLetter()">💌 Abrir carta</div>
 <div class="letter" id="letter">
 <p id="typeText"></p>
 </div>
@@ -253,7 +275,7 @@ to{transform:translateY(-10vh)}
 
 <script>
 
-/* PASSWORD */
+/* PASSWORD + MUSIC */
 
 function enter(){
  if(pass.value==="Jerry"){
@@ -262,7 +284,7 @@ function enter(){
  }
 }
 
-/* AUDIO */
+/* SONG SWITCH */
 
 function toggleSong(){
  if(ourSong.paused){
@@ -286,7 +308,7 @@ setInterval(()=>{
  d%60+" segundos 💗";
 },1000);
 
-/* TYPEWRITER */
+/* LETTER TYPE */
 
 const text=`¡Feliz San Valentín, mi amor! 🤎
 
@@ -312,9 +334,9 @@ function openLetter(){
  })();
 }
 
-/* GALLERY IMAGES */
+/* GALLERY */
 
-const imgs=[
+[
 "https://i.imgur.com/tpH81jp.jpeg",
 "https://i.imgur.com/mOQ2xhz.jpeg",
 "https://i.imgur.com/ra5P475.jpeg",
@@ -327,9 +349,7 @@ const imgs=[
 "https://i.imgur.com/D2fqpOe.jpeg",
 "https://i.imgur.com/cqMYyp1.jpeg",
 "https://i.imgur.com/S888hKj.jpeg"
-];
-
-imgs.forEach(src=>{
+].forEach(src=>{
  const im=document.createElement("img");
  im.src=src;
  slider.appendChild(im);
