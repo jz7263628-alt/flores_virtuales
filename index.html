@@ -5,20 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>San Valentín 🤎</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
 <style>
 body{
  margin:0;
- font-family:Arial,sans-serif;
+ font-family:'Poppins',sans-serif;
  background:linear-gradient(135deg,#ff9a9e,#fad0c4);
  overflow-x:hidden;
  text-align:center;
  transition:1s;
+ color:#333;
 }
 
-/* MODO NOCHE */
+/* NIGHT MODE */
 body.night{
- background:linear-gradient(135deg,#1a1a2e,#16213e);
- color:white;
+ background:linear-gradient(135deg,#141e30,#243b55);
+ color:#eee;
 }
 
 /* LOGIN */
@@ -31,49 +34,44 @@ body.night{
  justify-content:center;
  align-items:center;
  color:white;
- z-index:10;
+ z-index:50;
 }
 
 #pass{
- padding:12px;
- border-radius:10px;
+ padding:14px;
+ border-radius:12px;
  border:none;
  font-size:18px;
  text-align:center;
 }
 
-/* CARDS */
+/* GLASS PREMIUM CARDS */
 .card{
- background:white;
- border-radius:20px;
- padding:20px;
- margin:18px auto;
+ background:rgba(255,255,255,.75);
+ backdrop-filter:blur(14px);
+ border-radius:24px;
+ padding:22px;
+ margin:20px auto;
  width:95%;
- max-width:520px;
- box-shadow:0 10px 25px rgba(0,0,0,.15);
- animation:fadeUp .8s ease both;
+ max-width:560px;
+ box-shadow:0 20px 40px rgba(0,0,0,.18);
+ border:1px solid rgba(255,255,255,.45);
+ animation:fadeUp .9s ease both;
 }
 
 body.night .card{
- background:#222;
+ background:rgba(30,30,45,.75);
+ border:1px solid rgba(255,255,255,.15);
 }
 
-@keyframes fadeUp{
- from{opacity:0; transform:translateY(40px);}
- to{opacity:1; transform:translateY(0);}
-}
-
-/* TITULOS */
+/* TITLES */
 .card h2{
- font-size:22px;
- background:linear-gradient(45deg,#ff4e8a,#ff9a9e);
+ font-size:24px;
+ font-weight:700;
+ margin-bottom:14px;
+ background:linear-gradient(45deg,#ff4e8a,#ff758c,#ffb199);
  -webkit-background-clip:text;
  -webkit-text-fill-color:transparent;
- animation:pulse 2s infinite;
-}
-
-@keyframes pulse{
- 50%{transform:scale(1.05);}
 }
 
 /* IMAGES */
@@ -84,123 +82,122 @@ body.night .card{
  max-height:220px;
  object-fit:cover;
  border-radius:50%;
+ box-shadow:0 10px 24px rgba(0,0,0,.25);
 }
 
 .musicCover{
- width:80%;
+ width:85%;
  max-width:260px;
- border-radius:14px;
+ border-radius:18px;
+ box-shadow:0 10px 24px rgba(0,0,0,.25);
 }
 
-/* GRID */
-.grid{
- display:grid;
- grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
- gap:10px;
+/* SLIDER */
+.slider{
+ display:flex;
+ overflow-x:auto;
+ gap:12px;
+ scroll-snap-type:x mandatory;
 }
 
-.grid img{
- width:100%;
- aspect-ratio:1/1;
- object-fit:cover;
- border-radius:12px;
- cursor:pointer;
- transition:.3s;
-}
-
-.grid img:hover{
- transform:scale(1.05);
-}
-
-/* LIGHTBOX */
-#lightbox{
- position:fixed;
- inset:0;
- background:rgba(0,0,0,.85);
- display:none;
- justify-content:center;
- align-items:center;
- z-index:20;
-}
-
-#lightbox img{
- max-width:90%;
- max-height:90%;
+.slider img{
+ height:180px;
  border-radius:16px;
+ scroll-snap-align:center;
+ object-fit:cover;
+ box-shadow:0 8px 18px rgba(0,0,0,.25);
 }
 
 /* BUTTON */
 button{
- padding:12px 18px;
+ padding:14px 20px;
  border:none;
- border-radius:14px;
+ border-radius:16px;
  font-size:16px;
- background:#ff4e8a;
+ font-weight:600;
+ background:linear-gradient(45deg,#ff4e8a,#ff758c);
  color:white;
- margin:6px;
+ margin:8px;
+ cursor:pointer;
+ box-shadow:0 10px 22px rgba(255,80,120,.35);
 }
 
-/* HEARTS FLOAT */
-.bgHearts span{
- position:fixed;
- bottom:-40px;
- animation:floatUp linear infinite;
- opacity:.6;
-}
-
-@keyframes floatUp{
- to{ transform:translateY(-120vh); }
-}
-
-/* SNOW HEARTS */
-.snow{
- position:fixed;
- top:-20px;
- animation:snow linear infinite;
- opacity:.5;
-}
-
-@keyframes snow{
- to{ transform:translateY(110vh); }
-}
-
+/* COUNTER */
 .counter{
  font-size:18px;
+ font-weight:600;
+ color:#ff4e8a;
 }
 
+/* LETTER */
 .letter{
- background:#fff0f4;
- border-radius:16px;
- padding:18px;
+ background:#fff7fb;
+ border-radius:18px;
+ padding:20px;
  transform:scaleY(0);
  transform-origin:top;
  transition:.6s;
+ text-align:left;
+ line-height:1.7;
+ font-size:16px;
+ color:#5a2a3a;
 }
 
 .letter.open{
  transform:scaleY(1);
 }
 
-canvas{
+body.night .letter{
+ background:#2a1f2a;
+ color:#ffd6e6;
+}
+
+/* GOLD PARTICLES */
+.gold{
  position:fixed;
- inset:0;
- pointer-events:none;
+ width:6px;
+ height:6px;
+ background:gold;
+ border-radius:50%;
+ opacity:.6;
+ animation:fall linear infinite;
+}
+
+@keyframes fall{
+ to{ transform:translateY(110vh); }
+}
+
+@keyframes fadeUp{
+ from{opacity:0; transform:translateY(40px);}
+ to{opacity:1; transform:translateY(0);}
+}
+
+/* SURPRISE */
+#surprise{
+ display:none;
+ font-size:22px;
+ font-weight:700;
+ animation:pulse 1s infinite;
+}
+
+@keyframes pulse{
+ 0%{transform:scale(1)}
+ 50%{transform:scale(1.1)}
+ 100%{transform:scale(1)}
 }
 </style>
 </head>
 
 <body>
 
-<!-- LOGIN -->
 <div id="login">
 <h2>Ingresa la contraseña 🤎</h2>
 <input id="pass">
 <br><br>
 <button onclick="enter()">Entrar</button>
-<canvas id="heartsCanvas"></canvas>
 </div>
 
-<!-- AUDIO -->
+<!-- AUDIO (orden corregido) -->
 <audio id="bgMusic" loop>
 <source src="https://files.catbox.moe/4nrc17.mp3">
 </audio>
@@ -209,9 +206,6 @@ canvas{
 <source src="https://files.catbox.moe/egr68n.mp3">
 </audio>
 
-<div class="bgHearts" id="bgHearts"></div>
-
-<!-- CONTENIDO -->
 <div class="card">
 <h2>💞 Nuestro tiempo juntos 💞</h2>
 <img class="circleImg" src="https://i.imgur.com/m2rqpiu.jpeg">
@@ -226,9 +220,8 @@ canvas{
 </div>
 
 <div class="card">
-<h2>📸 Nuestros recuerdos 📸</h2>
-<div class="grid">
-
+<h2>📸 Recuerdos (desliza) 📸</h2>
+<div class="slider">
 <img src="https://i.imgur.com/tpH81jp.jpeg">
 <img src="https://i.imgur.com/mOQ2xhz.jpeg">
 <img src="https://i.imgur.com/ra5P475.jpeg">
@@ -241,38 +234,24 @@ canvas{
 <img src="https://i.imgur.com/D2fqpOe.jpeg">
 <img src="https://i.imgur.com/cqMYyp1.jpeg">
 <img src="https://i.imgur.com/S888hKj.jpeg">
-
 </div>
 </div>
 
-<!-- CARTA -->
 <div class="card">
 <h2>💌 Carta 💌</h2>
 <button onclick="openLetter()">Abrir carta</button>
 <div class="letter" id="letter"><p id="typeText"></p></div>
 </div>
 
-<!-- BOTON TE AMO -->
 <div class="card">
-<h2>🔥 Botón secreto 🔥</h2>
-<button onclick="fireworks()">TE AMO</button>
+<h2>✨ Sorpresa ✨</h2>
+<button onclick="showSurprise()">Tocar</button>
+<div id="surprise">Eres mi persona favorita 🤎</div>
 </div>
-
-<!-- MENSAJE OCULTO -->
-<div class="card" onclick="this.innerHTML='Eres mi persona favorita 🤎'">
-<h2>🤫 Toca aquí 🤫</h2>
-</div>
-
-<!-- LIGHTBOX -->
-<div id="lightbox" onclick="this.style.display='none'">
-<img id="lightImg">
-</div>
-
-<canvas id="fx"></canvas>
 
 <script>
 
-/* MODO NOCHE AUTOMÁTICO */
+/* NIGHT AUTO */
 const h=new Date().getHours();
 if(h>=19 || h<=6) document.body.classList.add("night");
 
@@ -281,7 +260,7 @@ function enter(){
  if(pass.value==="Jerry"){
   login.style.display="none";
   bgMusic.play().catch(()=>{});
- } else alert("Contraseña incorrecta 💔");
+ }
 }
 
 /* AUDIO */
@@ -297,7 +276,7 @@ function toggleSong(){
  }
 }
 
-/* CONTADOR */
+/* COUNTER */
 const start=new Date("2024-02-14");
 setInterval(()=>{
  const d=(Date.now()-start)/1000|0;
@@ -308,29 +287,10 @@ setInterval(()=>{
  d%60+" segundos 💗";
 },1000);
 
-/* ZOOM FOTOS */
-document.querySelectorAll(".grid img").forEach(img=>{
- img.onclick=()=>{
-  lightImg.src=img.src;
-  lightbox.style.display="flex";
- }
-});
-
-/* HEARTS FLOAT */
-for(let i=0;i<30;i++){
- let s=document.createElement("span");
- s.innerHTML="❤";
- s.className="snow";
- s.style.left=Math.random()*100+"vw";
- s.style.fontSize=(14+Math.random()*26)+"px";
- s.style.animationDuration=(6+Math.random()*8)+"s";
- document.body.appendChild(s);
-}
-
-/* CARTA TYPE */
+/* LETTER TYPE */
 const text=`Feliz San Valentín mi amor 🤎
-Gracias por cada momento contigo.
-Eres mi lugar seguro y mi alegría diaria.
+Gracias por existir en mi vida.
+Contigo todo es más bonito.
 Te amo muchísimo.`;
 
 function openLetter(){
@@ -345,37 +305,20 @@ function openLetter(){
  })();
 }
 
-/* FUEGOS ARTIFICIALES */
-const fx=document.getElementById("fx");
-const ctx=fx.getContext("2d");
-fx.width=innerWidth;
-fx.height=innerHeight;
-let parts=[];
-
-function fireworks(){
- for(let i=0;i<80;i++){
-  parts.push({
-   x:innerWidth/2,
-   y:innerHeight/2,
-   vx:(Math.random()-0.5)*8,
-   vy:(Math.random()-0.5)*8,
-   life:60
-  });
- }
+/* GOLD PARTICLES */
+for(let i=0;i<40;i++){
+ const s=document.createElement("div");
+ s.className="gold";
+ s.style.left=Math.random()*100+"vw";
+ s.style.animationDuration=(5+Math.random()*6)+"s";
+ s.style.top=-20+"px";
+ document.body.appendChild(s);
 }
 
-function loop(){
- ctx.clearRect(0,0,fx.width,fx.height);
- parts.forEach(p=>{
-  p.x+=p.vx;
-  p.y+=p.vy;
-  p.life--;
-  ctx.fillRect(p.x,p.y,3,3);
- });
- parts=parts.filter(p=>p.life>0);
- requestAnimationFrame(loop);
+/* SURPRISE */
+function showSurprise(){
+ surprise.style.display="block";
 }
-loop();
 
 </script>
 </body>
