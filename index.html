@@ -31,8 +31,8 @@ body{
 
 .loginCard{
  position:relative;
- background:rgba(255,255,255,.18);
- backdrop-filter:blur(16px);
+ background:rgba(255,255,255,.15);
+ backdrop-filter:blur(14px);
  padding:40px;
  border-radius:25px;
  text-align:center;
@@ -76,23 +76,23 @@ button{
 }
 
 @keyframes rise{
- from{transform:translateY(100vh)}
- to{transform:translateY(-10vh)}
+ from{transform:translateY(100vh) scale(.6)}
+ to{transform:translateY(-10vh) scale(1.2)}
 }
 
-/* CARD */
+/* CARDS PREMIUM */
 
 .card{
- background:rgba(255,255,255,.65);
- backdrop-filter:blur(14px);
+ background:rgba(255,255,255,.88);
  color:#4a0030;
  margin:22px auto;
  padding:22px;
  width:95%;
  max-width:560px;
  border-radius:24px;
+ backdrop-filter:blur(10px);
  box-shadow:0 12px 40px rgba(0,0,0,.25);
- border:3px solid rgba(255,214,235,.6);
+ border:2px solid rgba(255,182,210,.6);
 }
 
 .card h2{
@@ -104,7 +104,9 @@ button{
  -webkit-text-fill-color:transparent;
 }
 
-.circleImg,.musicCover{
+/* IMAGES */
+
+.circleImg{
  width:170px;
  height:170px;
  border-radius:50%;
@@ -112,30 +114,36 @@ button{
  display:block;
  margin:14px auto;
  border:6px solid #ffb3d9;
+ box-shadow:0 10px 25px rgba(0,0,0,.25);
 }
 
-/* ===== CARRUSEL MEJORADO ===== */
+.musicCover{
+ width:170px;
+ height:170px;
+ border-radius:50%;
+ object-fit:cover;
+ margin:auto;
+ display:block;
+ border:6px solid #ffb3d9;
+}
+
+/* CAROUSEL LENTO */
 
 .carousel{
- overflow:hidden;
- position:relative;
-}
-
-.carouselTrack{
  display:flex;
  gap:14px;
- width:max-content;
- animation:scroll 60s linear infinite;
+ overflow:hidden;
 }
 
-.carouselTrack img{
+.carousel img{
  width:180px;
  height:140px;
  object-fit:cover;
  border-radius:16px;
+ animation:slide 60s linear infinite;
 }
 
-@keyframes scroll{
+@keyframes slide{
  from{transform:translateX(0)}
  to{transform:translateX(-50%)}
 }
@@ -161,7 +169,7 @@ button{
 #zoom{
  position:fixed;
  inset:0;
- background:rgba(0,0,0,.9);
+ background:rgba(0,0,0,.85);
  display:none;
  justify-content:center;
  align-items:center;
@@ -169,10 +177,12 @@ button{
 }
 
 #zoom img{
- max-width:95%;
- max-height:95%;
+ max-width:92%;
+ max-height:92%;
  border-radius:18px;
 }
+
+/* TEXT */
 
 .finalText{
  line-height:1.7;
@@ -181,16 +191,20 @@ button{
  white-space:pre-line;
 }
 
-.touchPhrase{
+/* GALAXIA */
+
+#galaxiaWrap{
  position:fixed;
- font-size:18px;
- pointer-events:none;
- animation:fadeUp 2s forwards;
+ inset:0;
+ background:black;
+ display:none;
+ z-index:999;
 }
 
-@keyframes fadeUp{
- from{opacity:1; transform:translateY(0)}
- to{opacity:0; transform:translateY(-60px)}
+#galaxiaCanvas{
+ width:100%;
+ height:100%;
+ display:block;
 }
 
 </style>
@@ -222,12 +236,14 @@ button{
 
 <div class="bgHearts" id="bgHearts"></div>
 
+<!-- TIEMPO -->
 <div class="card">
 <h2>💞 Nuestro tiempo juntos 💞</h2>
 <img class="circleImg" src="https://i.imgur.com/m2rqpiu.jpeg">
 <div id="counter"></div>
 </div>
 
+<!-- CANCION -->
 <div class="card">
 <h2>🎵 Nuestra canción 🎵</h2>
 <img class="musicCover" src="https://i.imgur.com/jbyIzFT.jpeg">
@@ -236,22 +252,10 @@ button{
 </div>
 </div>
 
-<!-- ===== CARRUSEL NUEVO ===== -->
-
+<!-- CAROUSEL -->
 <div class="card">
 <h2>🎞️ Momentos especiales 🎞️</h2>
 <div class="carousel">
-<div class="carouselTrack">
-<img src="https://i.imgur.com/tpH81jp.jpeg">
-<img src="https://i.imgur.com/mOQ2xhz.jpeg">
-<img src="https://i.imgur.com/ra5P475.jpeg">
-<img src="https://i.imgur.com/0xnanwq.jpeg">
-<img src="https://i.imgur.com/2Xh4XhC.jpeg">
-<img src="https://i.imgur.com/UX4FUgZ.jpeg">
-<img src="https://i.imgur.com/3h5EZdw.jpeg">
-<img src="https://i.imgur.com/8yDYtN4.jpeg">
-
-<!-- duplicadas para bucle suave -->
 <img src="https://i.imgur.com/tpH81jp.jpeg">
 <img src="https://i.imgur.com/mOQ2xhz.jpeg">
 <img src="https://i.imgur.com/ra5P475.jpeg">
@@ -262,11 +266,11 @@ button{
 <img src="https://i.imgur.com/8yDYtN4.jpeg">
 </div>
 </div>
-</div>
 
+<!-- GRID COMPLETA -->
 <div class="card">
 <h2>📸 Todos nuestros recuerdos 📸</h2>
-<div class="grid" id="gridFotos">
+<div class="grid">
 <img src="https://i.imgur.com/tpH81jp.jpeg">
 <img src="https://i.imgur.com/mOQ2xhz.jpeg">
 <img src="https://i.imgur.com/ra5P475.jpeg">
@@ -275,13 +279,21 @@ button{
 <img src="https://i.imgur.com/UX4FUgZ.jpeg">
 <img src="https://i.imgur.com/3h5EZdw.jpeg">
 <img src="https://i.imgur.com/8yDYtN4.jpeg">
+<img src="https://i.imgur.com/1IveqjS.jpeg">
+<img src="https://i.imgur.com/D2fqpOe.jpeg">
+<img src="https://i.imgur.com/cqMYyp1.jpeg">
+<img src="https://i.imgur.com/S888hKj.jpeg">
 </div>
 </div>
 
-<button id="btnGalaxia" style="position:fixed;bottom:20px;right:20px;z-index:50;">💫 Sorpresa</button>
+<!-- HISTORIA -->
+<div class="card finalText" id="typedText"></div>
 
-<div id="galaxiaWrap" style="position:fixed;inset:0;background:black;z-index:999;display:none;">
-<button id="salirGalaxia" style="position:absolute;top:20px;right:20px;z-index:1000;">✖ Salir</button>
+<!-- BOTON GALAXIA -->
+<button id="btnGalaxia" style="position:fixed;bottom:20px;right:20px;z-index:50;">💫 Sorpresa Galáctica</button>
+
+<div id="galaxiaWrap">
+<button onclick="closeGalaxy()" style="position:absolute;top:20px;right:20px;z-index:10;">Salir</button>
 <canvas id="galaxiaCanvas"></canvas>
 </div>
 
@@ -297,108 +309,145 @@ function enter(){
  }
 }
 
+/* AUDIO */
+function toggleSong(){
+ if(ourSong.paused){
+  bgMusic.pause();
+  ourSong.play();
+  btnPlay.innerHTML="⏸️ Pausar";
+ } else {
+  ourSong.pause();
+  bgMusic.play();
+  btnPlay.innerHTML="▶️ Reproducir";
+ }
+}
+
+/* COUNTER DESDE 11 SEP 2024 */
+const start=new Date("2024-09-11");
+setInterval(()=>{
+ const d=Math.floor((Date.now()-start)/86400000);
+ counter.innerHTML=d+" días juntos 💗";
+},1000);
+
+/* HEART BG */
+for(let i=0;i<20;i++){
+ const s=document.createElement("span");
+ s.innerHTML="❤";
+ s.style.left=Math.random()*100+"vw";
+ s.style.fontSize=(16+Math.random()*26)+"px";
+ s.style.animationDuration=(8+Math.random()*10)+"s";
+ bgHearts.appendChild(s);
+}
+
 /* ZOOM */
-document.querySelectorAll("#gridFotos img").forEach(img=>{
+document.querySelectorAll(".grid img").forEach(img=>{
  img.onclick=()=>{
   zoom.style.display="flex";
   zoomImg.src=img.src;
  }
 });
 
-/* CONTADOR */
-const start=new Date("2024-09-11");
-setInterval(()=>{
- const diff=Date.now()-start;
- const d=Math.floor(diff/86400000);
- const h=Math.floor(diff/3600000)%24;
- const m=Math.floor(diff/60000)%60;
- counter.innerHTML=`${d} días ${h}h ${m}m juntos 💗`;
-},1000);
+/* TOQUE — FRASES + CORAZON */
+const frasesTouch=["Te amo 💖","Siempre tú 💞","Mi amor ✨","Besos 😘"];
+document.addEventListener("click",e=>{
+ const el=document.createElement("div");
+ el.innerHTML=frasesTouch[Math.floor(Math.random()*frasesTouch.length)];
+ el.style.position="fixed";
+ el.style.left=e.clientX+"px";
+ el.style.top=e.clientY+"px";
+ el.style.color="#ff77bb";
+ el.style.fontSize="18px";
+ el.style.pointerEvents="none";
+ document.body.appendChild(el);
+ setTimeout(()=>el.remove(),1200);
+});
 
-/* ===== GALAXIA CINEMATOGRÁFICA ===== */
+/* TEXTO AUTO */
+const texto = `
+Aún recuerdo cuando vi al ratón Jerry en el gym...
+Siempre me robabas la barra 😝
+Pero había algo en ti que me llamaba la atención.
 
-let scene,camera,renderer,group;
-let mx=0,my=0;
+Nuestra primera cita fue ir por jitomates — y fue perfecta.
 
-btnGalaxia.onclick=()=>{
+Nuestro primer mensaje fue el 11 de septiembre de 2024:
+“Holaaa :)”
+
+Quiero viajar contigo,
+que nos corretien los borregos,
+reírnos como loquitos,
+cuidarte siempre,
+verte cumplir tus metas.
+
+Amo tu forma de ver a las personas,
+tu ternura,
+tus rufles,
+tu motito cool,
+tus piesitos de ratón,
+tus dientitos de ratoncito.
+
+Hay muchos momentos hermosos en la vida…
+pero el más especial fue cuando te conocí.
+
+Te amo mucho mi cebollín 🥰
+`;
+
+let i=0;
+function type(){
+ if(i<texto.length){
+  typedText.innerHTML += texto[i++];
+  setTimeout(type,25);
+ }
+}
+type();
+
+/* GALAXIA PRO — ESPIRAL */
+let scene,camera,renderer,stars;
+
+function openGalaxy(){
  galaxiaWrap.style.display="block";
- if(!renderer) initGalaxy();
-}
 
-salirGalaxia.onclick=()=>{
- galaxiaWrap.style.display="none";
-}
-
-function initGalaxy(){
  scene=new THREE.Scene();
- camera=new THREE.PerspectiveCamera(60,innerWidth/innerHeight,1,3000);
- camera.position.z=160;
+ camera=new THREE.PerspectiveCamera(60,innerWidth/innerHeight,1,2000);
+ camera.position.z=200;
 
  renderer=new THREE.WebGLRenderer({canvas:galaxiaCanvas});
  renderer.setSize(innerWidth,innerHeight);
 
- group=new THREE.Group();
- scene.add(group);
-
- /* estrellas */
  const geo=new THREE.BufferGeometry();
- const count=4000;
+ const count=8000;
  const pos=new Float32Array(count*3);
+
  for(let i=0;i<count;i++){
-  pos[i*3]=(Math.random()-0.5)*2000;
-  pos[i*3+1]=(Math.random()-0.5)*2000;
-  pos[i*3+2]=(Math.random()-0.5)*2000;
+  const r=i*0.03;
+  const a=i*0.1;
+  pos[i*3]=Math.cos(a)*r;
+  pos[i*3+1]=(Math.random()-0.5)*60;
+  pos[i*3+2]=Math.sin(a)*r;
  }
+
  geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
- const stars=new THREE.Points(geo,new THREE.PointsMaterial({size:1.2}));
- group.add(stars);
-
- /* frases 3D */
- const frases=[
- "Te amo 💖","Eres mi todo","Amor infinito","Siempre tú",
- "Mi corazón","Mi universo","Contigo todo",
- "Eres magia","Eres hogar","Mi vida"
- ];
-
- for(let i=0;i<100;i++){
-  const canvas=document.createElement("canvas");
-  canvas.width=512;
-  canvas.height=128;
-  const ctx=canvas.getContext("2d");
-  ctx.fillStyle="#ff66cc";
-  ctx.font="40px sans-serif";
-  ctx.fillText(frases[i%frases.length],20,70);
-
-  const tex=new THREE.CanvasTexture(canvas);
-  const mat=new THREE.SpriteMaterial({map:tex});
-  const sp=new THREE.Sprite(mat);
-
-  sp.position.set(
-   (Math.random()-0.5)*800,
-   (Math.random()-0.5)*400,
-   (Math.random()-0.5)*800
-  );
-  sp.scale.set(120,30,1);
-  group.add(sp);
- }
+ const mat=new THREE.PointsMaterial({size:1.5});
+ stars=new THREE.Points(geo,mat);
+ scene.add(stars);
 
  animateGalaxy();
 }
 
 function animateGalaxy(){
  requestAnimationFrame(animateGalaxy);
- group.rotation.y+=0.001;
- camera.position.x += (mx*80-camera.position.x)*.05;
- camera.position.y += (-my*60-camera.position.y)*.05;
- camera.lookAt(scene.position);
+ stars.rotation.y += 0.0015;
  renderer.render(scene,camera);
 }
 
-addEventListener("pointermove",e=>{
- mx=(e.clientX/innerWidth-.5);
- my=(e.clientY/innerHeight-.5);
-});
+function closeGalaxy(){
+ galaxiaWrap.style.display="none";
+ renderer.dispose();
+}
+
+btnGalaxia.onclick=openGalaxy;
 
 </script>
+
 </body>
 </html>
