@@ -8,12 +8,13 @@
 <style>
 *{box-sizing:border-box}
 
-body{
+html,body{
  margin:0;
  font-family:Segoe UI, sans-serif;
  background:linear-gradient(180deg,#140010,#2a0030);
  color:#fff;
  overflow-x:hidden;
+ scroll-behavior:smooth;
 }
 
 /* LOGIN */
@@ -47,40 +48,8 @@ body{
 50%{transform:translateY(-10px)}
 }
 
-input{
- padding:14px;
- border-radius:14px;
- border:none;
- text-align:center;
- font-size:16px;
+input,button{
  width:100%;
-}
-
-button{
- padding:12px 20px;
- border:none;
- border-radius:20px;
- background:linear-gradient(45deg,#ff4da6,#ff80bf);
- color:white;
- font-size:16px;
- margin-top:12px;
- cursor:pointer;
- width:100%;
-}
-
-/* HEART BG */
-
-.bgHearts span{
- position:fixed;
- color:#ff4da6;
- animation:rise linear infinite;
- opacity:.28;
- pointer-events:none;
-}
-
-@keyframes rise{
- from{transform:translateY(100vh)}
- to{transform:translateY(-10vh)}
 }
 
 /* CARDS */
@@ -96,9 +65,10 @@ button{
  backdrop-filter:blur(12px);
  box-shadow:0 12px 40px rgba(0,0,0,.25);
  border:2px solid rgba(255,182,210,.5);
+ transform:translateZ(0);
 }
 
-/* IMAGES */
+/* IMÁGENES — RESERVA ESPACIO */
 
 .circleImg,.musicCover{
  width:42vw;
@@ -111,12 +81,13 @@ button{
  border:5px solid #ffb3d9;
 }
 
-/* CAROUSEL 3D */
+/* CAROUSEL 3D — SIN SALTOS */
 
 .carouselWrap{
  perspective:1000px;
- height:200px;
+ height:210px;
  position:relative;
+ contain:layout paint;
 }
 
 .carousel{
@@ -125,6 +96,7 @@ button{
  position:absolute;
  transform-style:preserve-3d;
  animation:spin 22s linear infinite;
+ will-change:transform;
 }
 
 .carousel img{
@@ -143,7 +115,7 @@ button{
  to{transform:rotateY(360deg)}
 }
 
-/* GRID */
+/* GRID — ALTURA FIJA */
 
 .grid{
  display:grid;
@@ -153,7 +125,7 @@ button{
 
 .grid img{
  width:100%;
- height:120px;
+ aspect-ratio:1/1;
  object-fit:cover;
  border-radius:14px;
  cursor:pointer;
@@ -177,6 +149,22 @@ button{
  border-radius:18px;
 }
 
+/* CORAZONES FONDO */
+
+.bgHearts span{
+ position:fixed;
+ color:#ff4da6;
+ animation:rise linear infinite;
+ opacity:.28;
+ pointer-events:none;
+ will-change:transform;
+}
+
+@keyframes rise{
+ from{transform:translateY(100vh)}
+ to{transform:translateY(-10vh)}
+}
+
 /* TOUCH FX */
 
 .touchFx{
@@ -195,6 +183,7 @@ button{
  line-height:1.7;
  font-size:15px;
  white-space:pre-line;
+ min-height:260px;
 }
 
 </style>
@@ -227,13 +216,13 @@ button{
 
 <div class="card">
 <h2>💞 Nuestro tiempo juntos 💞</h2>
-<img class="circleImg" src="https://i.imgur.com/m2rqpiu.jpeg">
+<img class="circleImg" src="https://i.imgur.com/m2rqpiu.jpeg" loading="eager">
 <div id="counter"></div>
 </div>
 
 <div class="card">
 <h2>🎵 Nuestra canción 🎵</h2>
-<img class="musicCover" src="https://i.imgur.com/jbyIzFT.jpeg">
+<img class="musicCover" src="https://i.imgur.com/jbyIzFT.jpeg" loading="eager">
 <button id="btnPlay" onclick="toggleSong()">▶️ Reproducir</button>
 </div>
 
@@ -274,17 +263,17 @@ function toggleSong(){
  }
 }
 
-/* CONTADOR MEJORADO */
+/* CONTADOR */
 const start=new Date("2024-09-11T00:00:00");
 setInterval(()=>{
  let diff=Date.now()-start;
  let d=Math.floor(diff/86400000);
  let h=Math.floor(diff/3600000)%24;
  let m=Math.floor(diff/60000)%60;
- counter.innerHTML=`<b>${d}</b> días 💗<br>${h} horas — ${m} min`;
+ counter.innerHTML=`<b>${d}</b> días 💗<br>${h}h ${m}m`;
 },1000);
 
-/* CORAZONES FONDO */
+/* CORAZONES */
 for(let i=0;i<24;i++){
  const s=document.createElement("span");
  s.innerHTML="❤";
@@ -294,7 +283,7 @@ for(let i=0;i<24;i++){
  bgHearts.appendChild(s);
 }
 
-/* IMÁGENES COMPLETAS */
+/* IMÁGENES */
 const imgs=[
 "https://i.imgur.com/tpH81jp.jpeg",
 "https://i.imgur.com/mOQ2xhz.jpeg",
@@ -310,28 +299,27 @@ const imgs=[
 "https://i.imgur.com/S888hKj.jpeg"
 ];
 
-/* CARRUSEL */
 imgs.slice(0,8).forEach((src,i)=>{
- let im=document.createElement("img");
+ let im=new Image();
  im.src=src;
+ im.loading="eager";
  im.style.transform=`rotateY(${i*(360/8)}deg) translateZ(260px)`;
  carousel3d.appendChild(im);
 });
 
-/* GRID */
 imgs.forEach(src=>{
- let im=document.createElement("img");
+ let im=new Image();
  im.src=src;
+ im.loading="lazy";
  im.onclick=()=>{zoom.style.display="flex";zoomImg.src=src;}
  gridImgs.appendChild(im);
 });
 
-/* EFECTOS TOQUE LIMITADOS */
+/* TOQUE — LIMITADO */
 const frases=["Te amo 💖","Siempre tú 💞","Mi amor ✨","Besos 😘"];
 let lastTouch=0;
-
 document.addEventListener("click",e=>{
- if(Date.now()-lastTouch<500) return;
+ if(Date.now()-lastTouch<600) return;
  lastTouch=Date.now();
  let f=document.createElement("div");
  f.className="touchFx";
@@ -342,8 +330,8 @@ document.addEventListener("click",e=>{
  setTimeout(()=>f.remove(),1200);
 });
 
-/* TEXTO COMPLETO — NO ELIMINADO */
-const texto=`Aún recuerdo cuando vi al ratón Jerry en el gym.
+/* TEXTO AUTO — COMPLETO */
+const texto=`Aún recuerdo cuando vi al ratón Jerry en el gym...
 Siempre me robabas la barra 😝
 Pero había algo en ti que me llamaba la atención.
 
@@ -373,13 +361,13 @@ Te amo mucho mi cebollín 🥰`;
 let ti=0;
 function type(){
  if(ti<texto.length){
-  typedText.innerHTML+=texto[ti++];
-  setTimeout(type,24);
+  typedText.textContent+=texto[ti++];
+  setTimeout(type,26);
  }
 }
 type();
 
-/* CORAZONES LOGIN */
+/* LOGIN HEART CANVAS */
 const c=document.getElementById("heartsCanvas");
 const ctx=c.getContext("2d");
 c.width=innerWidth;
