@@ -31,7 +31,7 @@ body{
 
 .loginCard{
  position:relative;
- background:rgba(255,255,255,.15);
+ background:rgba(255,255,255,.18);
  backdrop-filter:blur(14px);
  padding:40px;
  border-radius:25px;
@@ -65,7 +65,31 @@ button{
  cursor:pointer;
 }
 
-/* CORAZONES FONDO */
+/* CARDS PREMIUM TRANSPARENTES */
+
+.card{
+ background:rgba(255,255,255,.82);
+ color:#4a0030;
+ margin:22px auto;
+ padding:22px;
+ width:95%;
+ max-width:560px;
+ border-radius:24px;
+ box-shadow:0 12px 40px rgba(0,0,0,.25);
+ border:3px solid rgba(255,182,217,.7);
+ backdrop-filter:blur(6px);
+}
+
+.card h2{
+ text-align:center;
+ margin-top:0;
+ font-size:22px;
+ background:linear-gradient(45deg,#ff2f92,#ff85c2);
+ -webkit-background-clip:text;
+ -webkit-text-fill-color:transparent;
+}
+
+/* HEART BG */
 
 .bgHearts span{
  position:fixed;
@@ -80,33 +104,9 @@ button{
  to{transform:translateY(-10vh) scale(1.2)}
 }
 
-/* CARDS PREMIUM */
-
-.card{
- background:rgba(255,255,255,.88);
- backdrop-filter:blur(10px);
- color:#4a0030;
- margin:22px auto;
- padding:22px;
- width:95%;
- max-width:560px;
- border-radius:24px;
- box-shadow:0 12px 40px rgba(0,0,0,.25);
- border:3px solid #ffd6eb;
-}
-
-.card h2{
- text-align:center;
- margin-top:0;
- font-size:22px;
- background:linear-gradient(45deg,#ff2f92,#ff85c2);
- -webkit-background-clip:text;
- -webkit-text-fill-color:transparent;
-}
-
 /* IMAGES */
 
-.circleImg{
+.circleImg,.musicCover{
  width:170px;
  height:170px;
  border-radius:50%;
@@ -114,16 +114,7 @@ button{
  display:block;
  margin:14px auto;
  border:6px solid #ffb3d9;
-}
-
-.musicCover{
- width:170px;
- height:170px;
- border-radius:50%;
- object-fit:cover;
- margin:auto;
- display:block;
- border:6px solid #ffb3d9;
+ box-shadow:0 10px 25px rgba(0,0,0,.25);
 }
 
 /* GRID */
@@ -140,25 +131,10 @@ button{
  object-fit:cover;
  border-radius:16px;
  cursor:pointer;
+ transition:.3s;
 }
 
-/* ZOOM */
-
-#zoom{
- position:fixed;
- inset:0;
- background:rgba(0,0,0,.85);
- display:none;
- justify-content:center;
- align-items:center;
- z-index:9999;
-}
-
-#zoom img{
- max-width:92%;
- max-height:92%;
- border-radius:18px;
-}
+.grid img:hover{transform:scale(1.05);}
 
 /* TEXTO */
 
@@ -168,55 +144,88 @@ button{
  color:#3a0030;
 }
 
-/* GALAXIA */
+/* TEXTO ESCRITURA */
 
-#galaxyWrap{
- position:fixed;
- inset:0;
- display:none;
- z-index:99999;
- background:radial-gradient(circle,#0a0015,#000);
+.type{
+ border-right:2px solid #ff2f92;
+ white-space:pre-line;
  overflow:hidden;
 }
 
-#starfield{
- position:absolute;
- inset:0;
-}
-
-.gWord{
- position:absolute;
- font-size:18px;
- font-weight:bold;
- color:#ffb3e6;
- text-shadow:0 0 8px #ff66cc,0 0 18px #ff33aa;
- white-space:nowrap;
-}
-
-#closeGalaxy{
- position:absolute;
- bottom:30px;
- left:50%;
- transform:translateX(-50%);
- padding:14px 26px;
- border-radius:30px;
- border:none;
- background:linear-gradient(45deg,#ff4da6,#ff99cc);
- color:white;
-}
-
-/* FRASES TOUCH */
+/* FRASES TAP */
 
 .tapMsg{
  position:fixed;
+ font-size:18px;
  color:#fff;
- font-weight:bold;
  pointer-events:none;
- animation:pop 1.4s ease-out forwards;
+ animation:pop 1.6s forwards;
+ text-shadow:0 0 8px #ff4da6;
 }
 
 @keyframes pop{
- to{transform:translateY(-60px);opacity:0}
+ to{transform:translateY(-40px);opacity:0;}
+}
+
+/* GALAXIA FINAL */
+
+#universe{
+ position:fixed;
+ inset:0;
+ background:radial-gradient(circle,#050010,#000);
+ display:none;
+ overflow:hidden;
+ z-index:5000;
+}
+
+.star{
+ position:absolute;
+ width:2px;height:2px;
+ background:white;
+ border-radius:50%;
+ animation:tw 2s infinite alternate;
+}
+@keyframes tw{to{opacity:.2}}
+
+.planet{
+ position:absolute;
+ top:50%;left:50%;
+ width:180px;height:180px;
+ margin:-90px;
+ border-radius:50%;
+ background:
+ radial-gradient(circle at 30% 30%,#ff9acb,#ff2f92);
+ box-shadow:0 0 40px #ff4da6;
+ animation:spin 20s linear infinite;
+}
+
+@keyframes spin{
+ to{transform:rotate(360deg)}
+}
+
+.orbitText{
+ position:absolute;
+ top:50%;left:50%;
+ width:320px;height:320px;
+ margin:-160px;
+ border:1px solid rgba(255,255,255,.15);
+ border-radius:50%;
+ animation:spin 40s linear infinite reverse;
+}
+
+.orbitText span{
+ position:absolute;
+ left:50%; top:-10px;
+ transform-origin:0 160px;
+ color:#ff9ad0;
+ font-size:14px;
+}
+
+.universeBtn{
+ position:fixed;
+ bottom:30px;
+ left:50%;
+ transform:translateX(-50%);
 }
 
 </style>
@@ -224,6 +233,7 @@ button{
 
 <body>
 
+<!-- LOGIN -->
 <div id="login">
 <canvas id="heartsCanvas"></canvas>
 <div class="loginCard">
@@ -234,11 +244,7 @@ button{
 </div>
 </div>
 
-<div id="zoom" onclick="this.style.display='none'">
-<img id="zoomImg">
-</div>
-
-<!-- AUDIO CORRECTO -->
+<!-- AUDIO -->
 <audio id="bgMusic" loop>
 <source src="https://files.catbox.moe/4nrc17.mp3">
 </audio>
@@ -256,7 +262,7 @@ button{
 <div id="counter"></div>
 </div>
 
-<!-- CANCIÓN -->
+<!-- CANCION -->
 <div class="card">
 <h2>🎵 Nuestra canción 🎵</h2>
 <img class="musicCover" src="https://i.imgur.com/jbyIzFT.jpeg">
@@ -265,11 +271,10 @@ button{
 </div>
 </div>
 
-<!-- GALERÍA COMPLETA -->
+<!-- TODAS LAS FOTOS -->
 <div class="card">
 <h2>📸 Todos nuestros recuerdos 📸</h2>
 <div class="grid">
-
 <img src="https://i.imgur.com/tpH81jp.jpeg">
 <img src="https://i.imgur.com/mOQ2xhz.jpeg">
 <img src="https://i.imgur.com/ra5P475.jpeg">
@@ -282,21 +287,23 @@ button{
 <img src="https://i.imgur.com/D2fqpOe.jpeg">
 <img src="https://i.imgur.com/cqMYyp1.jpeg">
 <img src="https://i.imgur.com/S888hKj.jpeg">
-
 </div>
 </div>
 
-<!-- HISTORIA COMPLETA -->
-<div class="card finalText" id="story"></div>
-
-<div class="card" style="text-align:center">
-<h2>🌌 Sorpresa Cinematográfica 🌌</h2>
-<button onclick="openGalaxy()">Entrar a la galaxia</button>
+<!-- HISTORIA -->
+<div class="card finalText">
+<h2>💌 Nuestra historia 💌</h2>
+<div id="story" class="type"></div>
 </div>
 
-<div id="galaxyWrap">
-<canvas id="starfield"></canvas>
-<button id="closeGalaxy" onclick="closeGalaxy()">Cerrar universo ✨</button>
+<!-- BOTON UNIVERSO -->
+<button class="universeBtn" onclick="openUniverse()">✨ Abrir universo ✨</button>
+
+<!-- UNIVERSO -->
+<div id="universe">
+<div class="planet"></div>
+<div class="orbitText" id="orbit"></div>
+<button class="universeBtn" onclick="closeUniverse()">Cerrar universo ✨</button>
 </div>
 
 <script>
@@ -315,12 +322,72 @@ function toggleSong(){
   bgMusic.pause();
   ourSong.play();
   btnPlay.innerHTML="⏸️ Pausar";
- } else {
+ }else{
   ourSong.pause();
   bgMusic.play();
   btnPlay.innerHTML="▶️ Reproducir";
  }
 }
+
+/* CONTADOR DESDE 11 SEP 2024 */
+const start=new Date("2024-09-11T00:00:00");
+setInterval(()=>{
+ let d=Date.now()-start;
+ let days=Math.floor(d/86400000);
+ let h=Math.floor(d/3600000)%24;
+ let m=Math.floor(d/60000)%60;
+ let s=Math.floor(d/1000)%60;
+ counter.innerHTML=`${days} días<br>${h} horas<br>${m} minutos<br>${s} segundos 💗`;
+},1000);
+
+/* TEXTO QUE SE ESCRIBE */
+const text=`Aún recuerdo cuando vi al ratón Jerry en el gym. Siempre me robabas la barra 😝
+Pero había algo en ti que me llamaba la atención desde el principio.
+
+Nuestra primera cita fue ir por jitomates — y aunque suena raro, fue perfecta.
+
+Nuestro primer mensaje fue el 11 de septiembre de 2024:
+“Holaaa :)”
+
+Quiero seguir viajando contigo, que nos corretien los borregos, reírnos como loquitos, tomarnos mil fotos y cuidarte siempre.
+
+Amo tu forma de ver a las personas,
+tu ternura,
+tus rufles,
+tu motito cool,
+tus piesitos de ratón,
+tus dientitos de ratoncito.
+
+Te amo mucho, Jerry 🤎`;
+
+let i=0;
+function type(){
+ if(i<text.length){
+  story.innerHTML+=text[i++];
+  setTimeout(type,28);
+ }
+}
+type();
+
+/* FRASES AL TOCAR */
+const frases=[
+"Te amo infinito 🤎",
+"Eres mi lugar seguro ✨",
+"Siempre tú 💞",
+"Mi persona favorita 🫶",
+"Contigo todo es mejor 🌸",
+"Mi cebollín hermoso 🥰"
+];
+
+document.addEventListener("click",e=>{
+ const s=document.createElement("div");
+ s.className="tapMsg";
+ s.innerText=frases[Math.floor(Math.random()*frases.length)];
+ s.style.left=e.clientX+"px";
+ s.style.top=e.clientY+"px";
+ document.body.appendChild(s);
+ setTimeout(()=>s.remove(),1600);
+});
 
 /* CORAZONES BG */
 for(let i=0;i<20;i++){
@@ -332,97 +399,38 @@ for(let i=0;i<20;i++){
  bgHearts.appendChild(s);
 }
 
-/* ZOOM */
-document.querySelectorAll(".grid img").forEach(img=>{
- img.onclick=()=>{ zoom.style.display="flex"; zoomImg.src=img.src; }
-});
-
-/* CONTADOR */
-const start=new Date("2024-09-11");
-setInterval(()=>{
- const d=Math.floor((Date.now()-start)/86400000);
- counter.innerHTML=d+" días juntos 💗";
-},1000);
-
-/* TEXTO COMPLETO + EFECTO ESCRITURA */
-const text=`Aún recuerdo cuando vi al ratón Jerry en el gym... 
-Siempre me robabas la barra 😝
-
-Nuestra primera cita fue ir por jitomates — y fue perfecta.
-
-Nuestro primer mensaje fue el 11 de septiembre de 2024:
-“Holaaa :)”
-
-Quiero seguir haciendo más cosas contigo:
-viajar, que nos corretien los borregos,
-reírnos como loquitos,
-cuidarte siempre,
-verte cumplir tus metas.
-
-Amo:
-tu forma de ver a las personas,
-tu ternura,
-tus rufles,
-tu motito cool,
-tus piesitos de ratón,
-tus dientitos de ratoncito.
-
-Hay muchos momentos hermosos en la vida,
-pero el mejor fue cuando te conocí.
-
-Te amo mucho mi cebollín 🤎`;
-
-let i=0;
-function type(){
- if(i<text.length){
-  story.innerHTML += text[i]=="\n"?"<br>":text[i];
-  i++;
-  setTimeout(type,28);
+/* UNIVERSO FINAL */
+function openUniverse(){
+ universe.style.display="block";
+ for(let i=0;i<120;i++){
+  let star=document.createElement("div");
+  star.className="star";
+  star.style.left=Math.random()*100+"%";
+  star.style.top=Math.random()*100+"%";
+  universe.appendChild(star);
  }
-}
-type();
-
-/* FRASES TOUCH */
-const frases=["Te amo","Eres mi paz","Siempre tú","Mi persona favorita","Contigo todo"];
-document.addEventListener("click",e=>{
- const t=document.createElement("div");
- t.className="tapMsg";
- t.innerText=frases[Math.floor(Math.random()*frases.length)];
- t.style.left=e.clientX+"px";
- t.style.top=e.clientY+"px";
- document.body.appendChild(t);
- setTimeout(()=>t.remove(),1400);
-});
-
-/* GALAXIA */
-const sf=document.getElementById("starfield");
-const sctx=sf.getContext("2d");
-sf.width=innerWidth;
-sf.height=innerHeight;
-let stars=Array.from({length:120},()=>({x:Math.random()*sf.width,y:Math.random()*sf.height,r:Math.random()*1.5}));
-
-function drawStars(){
- sctx.clearRect(0,0,sf.width,sf.height);
- stars.forEach(s=>{
-  sctx.beginPath();
-  sctx.arc(s.x,s.y,s.r,0,6.28);
-  sctx.fillStyle="#fff";
-  sctx.fill();
-  s.y+=0.2;
-  if(s.y>sf.height) s.y=0;
+ const frasesOrbit=[
+ "Te amo 💞","Mi vida ✨","Eres magia 🌙","Mi todo 🫶",
+ "Contigo siempre 💫","Amor infinito 🥰"
+ ];
+ frasesOrbit.forEach((t,i)=>{
+  let sp=document.createElement("span");
+  sp.innerText=t;
+  sp.style.transform=`rotate(${i*60}deg)`;
+  orbit.appendChild(sp);
  });
- requestAnimationFrame(drawStars);
 }
-drawStars();
 
-function openGalaxy(){ galaxyWrap.style.display="block"; }
-function closeGalaxy(){ galaxyWrap.style.display="none"; }
+function closeUniverse(){
+ universe.style.display="none";
+ orbit.innerHTML="";
+ document.querySelectorAll(".star").forEach(s=>s.remove());
+}
 
-/* HEART LOGIN CANVAS */
+/* HEART CANVAS LOGIN */
 const c=document.getElementById("heartsCanvas");
 const ctx=c.getContext("2d");
-c.width=innerWidth;
-c.height=innerHeight;
+c.width=innerWidth;c.height=innerHeight;
 let hearts=[];
 function heart(){this.x=Math.random()*c.width;this.y=c.height;this.s=8+Math.random()*12;this.v=1+Math.random()*2;}
 function drawHeart(x,y,s){
@@ -446,5 +454,6 @@ function loop(){
 loop();
 
 </script>
+
 </body>
 </html>
