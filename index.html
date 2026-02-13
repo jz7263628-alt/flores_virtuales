@@ -7,6 +7,7 @@
 
 <style>
 *{box-sizing:border-box}
+
 body{
  margin:0;
  font-family:Segoe UI, sans-serif;
@@ -33,16 +34,17 @@ body{
  position:relative;
  background:rgba(255,255,255,.18);
  backdrop-filter:blur(14px);
- padding:40px;
- border-radius:25px;
+ padding:30px;
+ border-radius:24px;
  text-align:center;
+ width:90%;
+ max-width:380px;
  box-shadow:0 0 40px rgba(255,0,120,.4);
  animation:float 4s ease-in-out infinite;
 }
 
 @keyframes float{
-0%,100%{transform:translateY(0)}
-50%{transform:translateY(-12px)}
+50%{transform:translateY(-10px)}
 }
 
 input{
@@ -51,7 +53,7 @@ input{
  border:none;
  text-align:center;
  font-size:16px;
- width:200px;
+ width:100%;
 }
 
 button{
@@ -63,6 +65,7 @@ button{
  font-size:16px;
  margin-top:12px;
  cursor:pointer;
+ width:100%;
 }
 
 /* HEART BG */
@@ -76,8 +79,8 @@ button{
 }
 
 @keyframes rise{
- from{transform:translateY(100vh) scale(.6)}
- to{transform:translateY(-10vh) scale(1.2)}
+ from{transform:translateY(100vh)}
+ to{transform:translateY(-10vh)}
 }
 
 /* CARDS */
@@ -85,42 +88,34 @@ button{
 .card{
  background:rgba(255,255,255,.55);
  color:#4a0030;
- margin:22px auto;
- padding:22px;
- width:95%;
+ margin:18px auto;
+ padding:18px;
+ width:94%;
  max-width:560px;
- border-radius:24px;
+ border-radius:22px;
  backdrop-filter:blur(12px);
  box-shadow:0 12px 40px rgba(0,0,0,.25);
  border:2px solid rgba(255,182,210,.5);
 }
 
-.card h2{
- text-align:center;
- margin-top:0;
- font-size:22px;
- background:linear-gradient(45deg,#ff2f92,#ff85c2);
- -webkit-background-clip:text;
- -webkit-text-fill-color:transparent;
-}
-
 /* IMAGES */
 
 .circleImg,.musicCover{
- width:170px;
- height:170px;
+ width:42vw;
+ max-width:170px;
+ aspect-ratio:1/1;
  border-radius:50%;
  object-fit:cover;
  display:block;
  margin:14px auto;
- border:6px solid #ffb3d9;
+ border:5px solid #ffb3d9;
 }
 
 /* CAROUSEL 3D */
 
 .carouselWrap{
  perspective:1000px;
- height:220px;
+ height:200px;
  position:relative;
 }
 
@@ -129,19 +124,18 @@ button{
  height:100%;
  position:absolute;
  transform-style:preserve-3d;
- animation:spin 26s linear infinite;
+ animation:spin 22s linear infinite;
 }
 
 .carousel img{
  position:absolute;
- width:180px;
- height:140px;
+ width:150px;
+ height:120px;
  object-fit:cover;
  border-radius:16px;
  left:50%;
- top:40px;
- margin-left:-90px;
- box-shadow:0 10px 25px rgba(0,0,0,.35);
+ top:30px;
+ margin-left:-75px;
 }
 
 @keyframes spin{
@@ -153,15 +147,15 @@ button{
 
 .grid{
  display:grid;
- grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
- gap:10px;
+ grid-template-columns:repeat(auto-fit,minmax(110px,1fr));
+ gap:8px;
 }
 
 .grid img{
  width:100%;
- height:140px;
+ height:120px;
  object-fit:cover;
- border-radius:16px;
+ border-radius:14px;
  cursor:pointer;
 }
 
@@ -178,8 +172,8 @@ button{
 }
 
 #zoom img{
- max-width:92%;
- max-height:92%;
+ max-width:95%;
+ max-height:95%;
  border-radius:18px;
 }
 
@@ -189,19 +183,17 @@ button{
  position:fixed;
  pointer-events:none;
  animation:floatUp 1.2s forwards;
- font-size:18px;
+ font-size:16px;
  color:#ff66bb;
- text-shadow:0 0 8px #ff99cc;
 }
 
 @keyframes floatUp{
- to{transform:translateY(-70px);opacity:0}
+ to{transform:translateY(-60px);opacity:0}
 }
 
 .finalText{
  line-height:1.7;
- font-size:16px;
- color:#3a0030;
+ font-size:15px;
  white-space:pre-line;
 }
 
@@ -215,7 +207,6 @@ button{
 <div class="loginCard">
 <h2>Ingresa la contraseña 💖</h2>
 <input id="pass">
-<br>
 <button onclick="enter()">Entrar</button>
 </div>
 </div>
@@ -243,9 +234,7 @@ button{
 <div class="card">
 <h2>🎵 Nuestra canción 🎵</h2>
 <img class="musicCover" src="https://i.imgur.com/jbyIzFT.jpeg">
-<div style="text-align:center">
 <button id="btnPlay" onclick="toggleSong()">▶️ Reproducir</button>
-</div>
 </div>
 
 <div class="card">
@@ -285,11 +274,10 @@ function toggleSong(){
  }
 }
 
-/* CONTADOR */
+/* CONTADOR MEJORADO */
 const start=new Date("2024-09-11T00:00:00");
 setInterval(()=>{
- let now=new Date();
- let diff=now-start;
+ let diff=Date.now()-start;
  let d=Math.floor(diff/86400000);
  let h=Math.floor(diff/3600000)%24;
  let m=Math.floor(diff/60000)%60;
@@ -297,16 +285,16 @@ setInterval(()=>{
 },1000);
 
 /* CORAZONES FONDO */
-for(let i=0;i<26;i++){
+for(let i=0;i<24;i++){
  const s=document.createElement("span");
  s.innerHTML="❤";
  s.style.left=Math.random()*100+"vw";
- s.style.fontSize=(16+Math.random()*26)+"px";
+ s.style.fontSize=(16+Math.random()*24)+"px";
  s.style.animationDuration=(8+Math.random()*10)+"s";
  bgHearts.appendChild(s);
 }
 
-/* IMÁGENES */
+/* IMÁGENES COMPLETAS */
 const imgs=[
 "https://i.imgur.com/tpH81jp.jpeg",
 "https://i.imgur.com/mOQ2xhz.jpeg",
@@ -315,14 +303,18 @@ const imgs=[
 "https://i.imgur.com/2Xh4XhC.jpeg",
 "https://i.imgur.com/UX4FUgZ.jpeg",
 "https://i.imgur.com/3h5EZdw.jpeg",
-"https://i.imgur.com/8yDYtN4.jpeg"
+"https://i.imgur.com/8yDYtN4.jpeg",
+"https://i.imgur.com/1IveqjS.jpeg",
+"https://i.imgur.com/D2fqpOe.jpeg",
+"https://i.imgur.com/cqMYyp1.jpeg",
+"https://i.imgur.com/S888hKj.jpeg"
 ];
 
 /* CARRUSEL */
-imgs.forEach((src,i)=>{
+imgs.slice(0,8).forEach((src,i)=>{
  let im=document.createElement("img");
  im.src=src;
- im.style.transform=`rotateY(${i*(360/imgs.length)}deg) translateZ(320px)`;
+ im.style.transform=`rotateY(${i*(360/8)}deg) translateZ(260px)`;
  carousel3d.appendChild(im);
 });
 
@@ -334,15 +326,13 @@ imgs.forEach(src=>{
  gridImgs.appendChild(im);
 });
 
-/* EFECTOS TOQUE — OPTIMIZADO */
+/* EFECTOS TOQUE LIMITADOS */
 const frases=["Te amo 💖","Siempre tú 💞","Mi amor ✨","Besos 😘"];
 let lastTouch=0;
 
 document.addEventListener("click",e=>{
- const now=Date.now();
- if(now-lastTouch<450) return; // throttle anti-lag
- lastTouch=now;
-
+ if(Date.now()-lastTouch<500) return;
+ lastTouch=Date.now();
  let f=document.createElement("div");
  f.className="touchFx";
  f.innerHTML=frases[Math.floor(Math.random()*frases.length)];
@@ -352,8 +342,30 @@ document.addEventListener("click",e=>{
  setTimeout(()=>f.remove(),1200);
 });
 
-/* TEXTO AUTO */
-const texto=`Hay muchos momentos hermosos en la vida…
+/* TEXTO COMPLETO — NO ELIMINADO */
+const texto=`Aún recuerdo cuando vi al ratón Jerry en el gym.
+Siempre me robabas la barra 😝
+Pero había algo en ti que me llamaba la atención.
+
+Nuestra primera cita fue ir por jitomates — y fue perfecta.
+
+Nuestro primer mensaje fue el 11 de septiembre de 2024:
+“Holaaa :)”
+
+Quiero viajar contigo,
+que nos corretien los borregos,
+reírnos como loquitos,
+cuidarte siempre,
+verte cumplir tus metas.
+
+Amo tu forma de ver a las personas,
+tu ternura,
+tus rufles,
+tu motito cool,
+tus piesitos de ratón,
+tus dientitos de ratoncito.
+
+Hay muchos momentos hermosos en la vida…
 pero el más especial fue cuando te conocí.
 
 Te amo mucho mi cebollín 🥰`;
@@ -362,12 +374,12 @@ let ti=0;
 function type(){
  if(ti<texto.length){
   typedText.innerHTML+=texto[ti++];
-  setTimeout(type,25);
+  setTimeout(type,24);
  }
 }
 type();
 
-/* CORAZONES LOGIN EXTRA */
+/* CORAZONES LOGIN */
 const c=document.getElementById("heartsCanvas");
 const ctx=c.getContext("2d");
 c.width=innerWidth;
@@ -395,6 +407,5 @@ function loop(){
 loop();
 
 </script>
-
 </body>
 </html>
