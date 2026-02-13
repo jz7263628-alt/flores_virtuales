@@ -80,7 +80,7 @@ button{
  to{transform:translateY(-10vh) scale(1.2)}
 }
 
-/* CARDS — MÁS TRANSPARENTES */
+/* CARDS */
 
 .card{
  background:rgba(255,255,255,.55);
@@ -106,7 +106,7 @@ button{
 
 /* IMAGES */
 
-.circleImg{
+.circleImg,.musicCover{
  width:170px;
  height:170px;
  border-radius:50%;
@@ -114,20 +114,9 @@ button{
  display:block;
  margin:14px auto;
  border:6px solid #ffb3d9;
- box-shadow:0 10px 25px rgba(0,0,0,.25);
 }
 
-.musicCover{
- width:170px;
- height:170px;
- border-radius:50%;
- object-fit:cover;
- margin:auto;
- display:block;
- border:6px solid #ffb3d9;
-}
-
-/* CAROUSEL GIRATORIO REAL */
+/* CAROUSEL 3D */
 
 .carouselWrap{
  perspective:1000px;
@@ -194,28 +183,26 @@ button{
  border-radius:18px;
 }
 
-/* TEXT */
+/* TOUCH FX */
+
+.touchFx{
+ position:fixed;
+ pointer-events:none;
+ animation:floatUp 1.2s forwards;
+ font-size:18px;
+ color:#ff66bb;
+ text-shadow:0 0 8px #ff99cc;
+}
+
+@keyframes floatUp{
+ to{transform:translateY(-70px);opacity:0}
+}
 
 .finalText{
  line-height:1.7;
  font-size:16px;
  color:#3a0030;
  white-space:pre-line;
-}
-
-/* EFECTOS TOQUE */
-
-.touchFx{
- position:fixed;
- pointer-events:none;
- animation:floatUp 1.4s forwards;
- font-size:20px;
- color:#ff66bb;
- text-shadow:0 0 8px #ff99cc;
-}
-
-@keyframes floatUp{
- to{transform:translateY(-80px);opacity:0}
 }
 
 </style>
@@ -247,14 +234,12 @@ button{
 
 <div class="bgHearts" id="bgHearts"></div>
 
-<!-- TIEMPO -->
 <div class="card">
 <h2>💞 Nuestro tiempo juntos 💞</h2>
 <img class="circleImg" src="https://i.imgur.com/m2rqpiu.jpeg">
 <div id="counter"></div>
 </div>
 
-<!-- CANCION -->
 <div class="card">
 <h2>🎵 Nuestra canción 🎵</h2>
 <img class="musicCover" src="https://i.imgur.com/jbyIzFT.jpeg">
@@ -263,7 +248,6 @@ button{
 </div>
 </div>
 
-<!-- CAROUSEL -->
 <div class="card">
 <h2>🎞️ Momentos especiales 🎞️</h2>
 <div class="carouselWrap">
@@ -271,13 +255,11 @@ button{
 </div>
 </div>
 
-<!-- GRID -->
 <div class="card">
 <h2>📸 Todos nuestros recuerdos 📸</h2>
 <div class="grid" id="gridImgs"></div>
 </div>
 
-<!-- TEXTO -->
 <div class="card finalText" id="typedText"></div>
 
 <script>
@@ -303,18 +285,15 @@ function toggleSong(){
  }
 }
 
-/* CONTADOR PRO */
+/* CONTADOR */
 const start=new Date("2024-09-11T00:00:00");
 setInterval(()=>{
  let now=new Date();
  let diff=now-start;
-
  let d=Math.floor(diff/86400000);
  let h=Math.floor(diff/3600000)%24;
  let m=Math.floor(diff/60000)%60;
-
- counter.innerHTML=
- `<b>${d}</b> días 💗<br>${h} horas — ${m} min`;
+ counter.innerHTML=`<b>${d}</b> días 💗<br>${h} horas — ${m} min`;
 },1000);
 
 /* CORAZONES FONDO */
@@ -339,7 +318,7 @@ const imgs=[
 "https://i.imgur.com/8yDYtN4.jpeg"
 ];
 
-/* CARRUSEL 3D */
+/* CARRUSEL */
 imgs.forEach((src,i)=>{
  let im=document.createElement("img");
  im.src=src;
@@ -355,19 +334,22 @@ imgs.forEach(src=>{
  gridImgs.appendChild(im);
 });
 
-/* EFECTOS TOQUE PRO */
-const frases=["Te amo 💖","Siempre tú 💞","Mi amor ✨","Besos 😘","Eres hogar 🏡"];
+/* EFECTOS TOQUE — OPTIMIZADO */
+const frases=["Te amo 💖","Siempre tú 💞","Mi amor ✨","Besos 😘"];
+let lastTouch=0;
 
 document.addEventListener("click",e=>{
- for(let i=0;i<3;i++){
-  let f=document.createElement("div");
-  f.className="touchFx";
-  f.innerHTML=frases[Math.floor(Math.random()*frases.length)];
-  f.style.left=(e.clientX+(Math.random()*40-20))+"px";
-  f.style.top=(e.clientY+(Math.random()*40-20))+"px";
-  document.body.appendChild(f);
-  setTimeout(()=>f.remove(),1400);
- }
+ const now=Date.now();
+ if(now-lastTouch<450) return; // throttle anti-lag
+ lastTouch=now;
+
+ let f=document.createElement("div");
+ f.className="touchFx";
+ f.innerHTML=frases[Math.floor(Math.random()*frases.length)];
+ f.style.left=e.clientX+"px";
+ f.style.top=e.clientY+"px";
+ document.body.appendChild(f);
+ setTimeout(()=>f.remove(),1200);
 });
 
 /* TEXTO AUTO */
@@ -384,6 +366,33 @@ function type(){
  }
 }
 type();
+
+/* CORAZONES LOGIN EXTRA */
+const c=document.getElementById("heartsCanvas");
+const ctx=c.getContext("2d");
+c.width=innerWidth;
+c.height=innerHeight;
+let hearts=[];
+function heart(){this.x=Math.random()*c.width;this.y=c.height;this.s=6+Math.random()*10;this.v=1+Math.random()*2;}
+function drawHeart(x,y,s){
+ ctx.beginPath();
+ ctx.moveTo(x,y);
+ ctx.bezierCurveTo(x-s,y-s,x-2*s,y+s,x,y+2*s);
+ ctx.bezierCurveTo(x+2*s,y+s,x+s,y-s,x,y);
+ ctx.fillStyle="rgba(255,80,150,.8)";
+ ctx.fill();
+}
+function loop(){
+ ctx.clearRect(0,0,c.width,c.height);
+ if(Math.random()<.25) hearts.push(new heart());
+ hearts.forEach((h,i)=>{
+  h.y-=h.v;
+  drawHeart(h.x,h.y,h.s);
+  if(h.y<-40) hearts.splice(i,1);
+ });
+ requestAnimationFrame(loop);
+}
+loop();
 
 </script>
 
