@@ -7,24 +7,20 @@
 
 <style>
 *{box-sizing:border-box}
+html,body{margin:0;overflow-x:hidden}
 
-html,body{
- margin:0;
- font-family:Segoe UI, sans-serif;
+body{
+ font-family:Segoe UI,sans-serif;
  background:linear-gradient(180deg,#140010,#2a0030);
  color:#fff;
- overflow-x:hidden;
- scroll-behavior:smooth;
+ min-height:100vh;
 }
 
 /* LOGIN */
 
 #login{
- position:fixed;
- inset:0;
- display:flex;
- justify-content:center;
- align-items:center;
+ position:fixed; inset:0;
+ display:flex; justify-content:center; align-items:center;
  background:#0a0008;
  z-index:999;
 }
@@ -35,129 +31,69 @@ html,body{
  position:relative;
  background:rgba(255,255,255,.18);
  backdrop-filter:blur(14px);
- padding:30px;
- border-radius:24px;
+ padding:40px;
+ border-radius:25px;
  text-align:center;
- width:90%;
- max-width:380px;
  box-shadow:0 0 40px rgba(255,0,120,.4);
  animation:float 4s ease-in-out infinite;
 }
 
 @keyframes float{
+0%,100%{transform:translateY(0)}
 50%{transform:translateY(-10px)}
 }
 
-input,button{
- width:100%;
-}
-
-/* CARDS */
-
-.card{
- background:rgba(255,255,255,.55);
- color:#4a0030;
- margin:18px auto;
- padding:18px;
- width:94%;
- max-width:560px;
- border-radius:22px;
- backdrop-filter:blur(12px);
- box-shadow:0 12px 40px rgba(0,0,0,.25);
- border:2px solid rgba(255,182,210,.5);
- transform:translateZ(0);
-}
-
-/* IMÁGENES — RESERVA ESPACIO */
-
-.circleImg,.musicCover{
- width:42vw;
- max-width:170px;
- aspect-ratio:1/1;
- border-radius:50%;
- object-fit:cover;
- display:block;
- margin:14px auto;
- border:5px solid #ffb3d9;
-}
-
-/* CAROUSEL 3D — SIN SALTOS */
-
-.carouselWrap{
- perspective:1000px;
- height:210px;
- position:relative;
- contain:layout paint;
-}
-
-.carousel{
- width:100%;
- height:100%;
- position:absolute;
- transform-style:preserve-3d;
- animation:spin 22s linear infinite;
- will-change:transform;
-}
-
-.carousel img{
- position:absolute;
- width:150px;
- height:120px;
- object-fit:cover;
- border-radius:16px;
- left:50%;
- top:30px;
- margin-left:-75px;
-}
-
-@keyframes spin{
- from{transform:rotateY(0)}
- to{transform:rotateY(360deg)}
-}
-
-/* GRID — ALTURA FIJA */
-
-.grid{
- display:grid;
- grid-template-columns:repeat(auto-fit,minmax(110px,1fr));
- gap:8px;
-}
-
-.grid img{
- width:100%;
- aspect-ratio:1/1;
- object-fit:cover;
+input{
+ padding:14px;
  border-radius:14px;
+ border:none;
+ text-align:center;
+ font-size:16px;
+ width:200px;
+}
+
+/* ===== BOTONES PREMIUM ===== */
+
+button{
+ padding:14px 22px;
+ border:none;
+ border-radius:22px;
+ background:linear-gradient(180deg,#ff9ad0,#ff4da6 60%,#d61a7f);
+ color:white;
+ font-size:16px;
  cursor:pointer;
+ position:relative;
+ overflow:hidden;
+ letter-spacing:.5px;
+
+ box-shadow:
+ 0 8px 18px rgba(255,0,120,.35),
+ inset 0 2px 6px rgba(255,255,255,.35),
+ inset 0 -4px 8px rgba(0,0,0,.25);
+
+ transition:.18s;
 }
 
-/* ZOOM */
-
-#zoom{
- position:fixed;
- inset:0;
- background:rgba(0,0,0,.85);
- display:none;
- justify-content:center;
- align-items:center;
- z-index:9999;
+button::before{
+ content:"";
+ position:absolute; inset:0;
+ background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.45),transparent 70%);
+ transform:translateX(-120%);
+ transition:.6s;
 }
 
-#zoom img{
- max-width:95%;
- max-height:95%;
- border-radius:18px;
-}
+button:hover::before{transform:translateX(120%)}
+button:hover{transform:translateY(-3px) scale(1.03)}
+button:active{transform:scale(.97)}
 
-/* CORAZONES FONDO */
+/* HEART BG */
 
 .bgHearts span{
  position:fixed;
  color:#ff4da6;
  animation:rise linear infinite;
- opacity:.28;
+ opacity:.25;
  pointer-events:none;
- will-change:transform;
 }
 
 @keyframes rise{
@@ -165,25 +101,103 @@ input,button{
  to{transform:translateY(-10vh)}
 }
 
-/* TOUCH FX */
+/* CARDS */
 
-.touchFx{
- position:fixed;
- pointer-events:none;
- animation:floatUp 1.2s forwards;
- font-size:16px;
- color:#ff66bb;
+.card{
+ background:rgba(255,255,255,.82);
+ color:#4a0030;
+ margin:22px auto;
+ padding:22px;
+ width:95%;
+ max-width:560px;
+ border-radius:24px;
+ backdrop-filter:blur(8px);
+ box-shadow:0 12px 40px rgba(0,0,0,.25);
+ border:2px solid rgba(255,182,210,.6);
 }
 
-@keyframes floatUp{
- to{transform:translateY(-60px);opacity:0}
+.card h2{
+ text-align:center;
+ margin-top:0;
+ font-size:22px;
+ background:linear-gradient(45deg,#ff2f92,#ff85c2);
+ -webkit-background-clip:text;
+ -webkit-text-fill-color:transparent;
 }
+
+/* IMAGES */
+
+.circleImg,.musicCover{
+ width:170px;height:170px;
+ border-radius:50%;
+ object-fit:cover;
+ display:block;
+ margin:14px auto;
+ border:6px solid #ffb3d9;
+ box-shadow:0 10px 25px rgba(0,0,0,.25);
+}
+
+/* CAROUSEL GIRATORIO */
+
+.carouselWrap{overflow:hidden}
+.carouselTrack{
+ display:flex;
+ gap:14px;
+ animation:carouselMove 28s linear infinite;
+}
+
+.carouselTrack img{
+ width:180px;height:140px;
+ object-fit:cover;
+ border-radius:16px;
+}
+
+@keyframes carouselMove{
+ from{transform:translateX(0)}
+ to{transform:translateX(-50%)}
+}
+
+/* GRID */
+
+.grid{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+ gap:10px;
+}
+
+.grid img{
+ width:100%;
+ height:140px;
+ object-fit:cover;
+ border-radius:16px;
+ cursor:pointer;
+}
+
+/* ZOOM */
+
+#zoom{
+ position:fixed; inset:0;
+ background:rgba(0,0,0,.9);
+ display:none;
+ justify-content:center;
+ align-items:center;
+ z-index:9999;
+}
+
+#zoom img{
+ max-width:92%;
+ max-height:92%;
+ border-radius:18px;
+}
+
+/* TEXTO */
 
 .finalText{
  line-height:1.7;
- font-size:15px;
+ font-size:16px;
+ color:#3a0030;
  white-space:pre-line;
- min-height:260px;
+ min-height:220px;
 }
 
 </style>
@@ -196,6 +210,7 @@ input,button{
 <div class="loginCard">
 <h2>Ingresa la contraseña 💖</h2>
 <input id="pass">
+<br><br>
 <button onclick="enter()">Entrar</button>
 </div>
 </div>
@@ -214,30 +229,65 @@ input,button{
 
 <div class="bgHearts" id="bgHearts"></div>
 
+<!-- TIEMPO -->
 <div class="card">
 <h2>💞 Nuestro tiempo juntos 💞</h2>
-<img class="circleImg" src="https://i.imgur.com/m2rqpiu.jpeg" loading="eager">
+<img class="circleImg" src="https://i.imgur.com/m2rqpiu.jpeg">
 <div id="counter"></div>
 </div>
 
+<!-- CANCION -->
 <div class="card">
 <h2>🎵 Nuestra canción 🎵</h2>
-<img class="musicCover" src="https://i.imgur.com/jbyIzFT.jpeg" loading="eager">
+<img class="musicCover" src="https://i.imgur.com/jbyIzFT.jpeg">
+<div style="text-align:center">
 <button id="btnPlay" onclick="toggleSong()">▶️ Reproducir</button>
 </div>
+</div>
 
+<!-- CAROUSEL -->
 <div class="card">
 <h2>🎞️ Momentos especiales 🎞️</h2>
 <div class="carouselWrap">
-<div class="carousel" id="carousel3d"></div>
+<div class="carouselTrack">
+<img src="https://i.imgur.com/tpH81jp.jpeg">
+<img src="https://i.imgur.com/mOQ2xhz.jpeg">
+<img src="https://i.imgur.com/ra5P475.jpeg">
+<img src="https://i.imgur.com/0xnanwq.jpeg">
+<img src="https://i.imgur.com/2Xh4XhC.jpeg">
+<img src="https://i.imgur.com/UX4FUgZ.jpeg">
+<img src="https://i.imgur.com/3h5EZdw.jpeg">
+<img src="https://i.imgur.com/8yDYtN4.jpeg">
+
+<!-- duplicadas para loop -->
+<img src="https://i.imgur.com/tpH81jp.jpeg">
+<img src="https://i.imgur.com/mOQ2xhz.jpeg">
+<img src="https://i.imgur.com/ra5P475.jpeg">
+<img src="https://i.imgur.com/0xnanwq.jpeg">
+</div>
 </div>
 </div>
 
+<!-- GRID -->
 <div class="card">
 <h2>📸 Todos nuestros recuerdos 📸</h2>
-<div class="grid" id="gridImgs"></div>
+<div class="grid">
+<img src="https://i.imgur.com/tpH81jp.jpeg">
+<img src="https://i.imgur.com/mOQ2xhz.jpeg">
+<img src="https://i.imgur.com/ra5P475.jpeg">
+<img src="https://i.imgur.com/0xnanwq.jpeg">
+<img src="https://i.imgur.com/2Xh4XhC.jpeg">
+<img src="https://i.imgur.com/UX4FUgZ.jpeg">
+<img src="https://i.imgur.com/3h5EZdw.jpeg">
+<img src="https://i.imgur.com/8yDYtN4.jpeg">
+<img src="https://i.imgur.com/1IveqjS.jpeg">
+<img src="https://i.imgur.com/D2fqpOe.jpeg">
+<img src="https://i.imgur.com/cqMYyp1.jpeg">
+<img src="https://i.imgur.com/S888hKj.jpeg">
+</div>
 </div>
 
+<!-- HISTORIA -->
 <div class="card finalText" id="typedText"></div>
 
 <script>
@@ -263,75 +313,55 @@ function toggleSong(){
  }
 }
 
-/* CONTADOR */
+/* CONTADOR COMPLETO */
 const start=new Date("2024-09-11T00:00:00");
 setInterval(()=>{
- let diff=Date.now()-start;
- let d=Math.floor(diff/86400000);
- let h=Math.floor(diff/3600000)%24;
- let m=Math.floor(diff/60000)%60;
- counter.innerHTML=`<b>${d}</b> días 💗<br>${h}h ${m}m`;
+ const diff=Date.now()-start;
+ const d=Math.floor(diff/86400000);
+ const h=Math.floor(diff/3600000)%24;
+ const m=Math.floor(diff/60000)%60;
+ counter.innerHTML=`${d} días ${h}h ${m}m juntos 💗`;
 },1000);
 
-/* CORAZONES */
-for(let i=0;i<24;i++){
+/* HEART BG */
+for(let i=0;i<26;i++){
  const s=document.createElement("span");
  s.innerHTML="❤";
  s.style.left=Math.random()*100+"vw";
- s.style.fontSize=(16+Math.random()*24)+"px";
+ s.style.fontSize=(14+Math.random()*22)+"px";
  s.style.animationDuration=(8+Math.random()*10)+"s";
  bgHearts.appendChild(s);
 }
 
-/* IMÁGENES */
-const imgs=[
-"https://i.imgur.com/tpH81jp.jpeg",
-"https://i.imgur.com/mOQ2xhz.jpeg",
-"https://i.imgur.com/ra5P475.jpeg",
-"https://i.imgur.com/0xnanwq.jpeg",
-"https://i.imgur.com/2Xh4XhC.jpeg",
-"https://i.imgur.com/UX4FUgZ.jpeg",
-"https://i.imgur.com/3h5EZdw.jpeg",
-"https://i.imgur.com/8yDYtN4.jpeg",
-"https://i.imgur.com/1IveqjS.jpeg",
-"https://i.imgur.com/D2fqpOe.jpeg",
-"https://i.imgur.com/cqMYyp1.jpeg",
-"https://i.imgur.com/S888hKj.jpeg"
-];
-
-imgs.slice(0,8).forEach((src,i)=>{
- let im=new Image();
- im.src=src;
- im.loading="eager";
- im.style.transform=`rotateY(${i*(360/8)}deg) translateZ(260px)`;
- carousel3d.appendChild(im);
+/* ZOOM */
+document.querySelectorAll(".grid img").forEach(img=>{
+ img.onclick=()=>{zoom.style.display="flex";zoomImg.src=img.src;}
 });
 
-imgs.forEach(src=>{
- let im=new Image();
- im.src=src;
- im.loading="lazy";
- im.onclick=()=>{zoom.style.display="flex";zoomImg.src=src;}
- gridImgs.appendChild(im);
-});
-
-/* TOQUE — LIMITADO */
-const frases=["Te amo 💖","Siempre tú 💞","Mi amor ✨","Besos 😘"];
+/* FRASES TOUCH CONTROLADAS */
+const frases=["Te amo 💖","Mi vida ✨","Siempre tú 💞","Besitos 😘","Contigo todo 🧸"];
 let lastTouch=0;
 document.addEventListener("click",e=>{
- if(Date.now()-lastTouch<600) return;
+ if(Date.now()-lastTouch<500) return;
  lastTouch=Date.now();
- let f=document.createElement("div");
- f.className="touchFx";
- f.innerHTML=frases[Math.floor(Math.random()*frases.length)];
- f.style.left=e.clientX+"px";
- f.style.top=e.clientY+"px";
- document.body.appendChild(f);
- setTimeout(()=>f.remove(),1200);
+
+ const el=document.createElement("div");
+ el.innerHTML=frases[Math.floor(Math.random()*frases.length)];
+ el.style.position="fixed";
+ el.style.left=e.clientX+"px";
+ el.style.top=e.clientY+"px";
+ el.style.color="#ff77bb";
+ el.style.fontSize="18px";
+ el.style.pointerEvents="none";
+ el.style.transition="1s";
+ document.body.appendChild(el);
+ setTimeout(()=>{el.style.opacity=0;el.style.transform="translateY(-40px)";},50);
+ setTimeout(()=>el.remove(),1000);
 });
 
 /* TEXTO AUTO — COMPLETO */
-const texto=`Aún recuerdo cuando vi al ratón Jerry en el gym...
+const texto = `
+Aún recuerdo cuando vi al ratón Jerry en el gym.
 Siempre me robabas la barra 😝
 Pero había algo en ti que me llamaba la atención.
 
@@ -356,24 +386,25 @@ tus dientitos de ratoncito.
 Hay muchos momentos hermosos en la vida…
 pero el más especial fue cuando te conocí.
 
-Te amo mucho mi cebollín 🥰`;
+Te amo mucho mi cebollín 🥰
+`;
 
-let ti=0;
+let i=0;
 function type(){
- if(ti<texto.length){
-  typedText.textContent+=texto[ti++];
-  setTimeout(type,26);
+ if(i<texto.length){
+  typedText.innerHTML+=texto[i++];
+  setTimeout(type,22);
  }
 }
 type();
 
-/* LOGIN HEART CANVAS */
-const c=document.getElementById("heartsCanvas");
+/* CORAZONES LOGIN CANVAS */
+const c=heartsCanvas;
 const ctx=c.getContext("2d");
 c.width=innerWidth;
 c.height=innerHeight;
 let hearts=[];
-function heart(){this.x=Math.random()*c.width;this.y=c.height;this.s=6+Math.random()*10;this.v=1+Math.random()*2;}
+function heart(){this.x=Math.random()*c.width;this.y=c.height;this.s=8;this.v=1+Math.random()*2;}
 function drawHeart(x,y,s){
  ctx.beginPath();
  ctx.moveTo(x,y);
@@ -384,7 +415,7 @@ function drawHeart(x,y,s){
 }
 function loop(){
  ctx.clearRect(0,0,c.width,c.height);
- if(Math.random()<.25) hearts.push(new heart());
+ if(Math.random()<.2) hearts.push(new heart());
  hearts.forEach((h,i)=>{
   h.y-=h.v;
   drawHeart(h.x,h.y,h.s);
@@ -395,5 +426,6 @@ function loop(){
 loop();
 
 </script>
+
 </body>
 </html>
