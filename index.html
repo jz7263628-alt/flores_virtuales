@@ -114,6 +114,34 @@ button{
  border:6px solid #ffb3d9;
 }
 
+/* ===== CARRUSEL MEJORADO ===== */
+
+.carousel{
+ overflow:hidden;
+ position:relative;
+}
+
+.carouselTrack{
+ display:flex;
+ gap:14px;
+ width:max-content;
+ animation:scroll 60s linear infinite;
+}
+
+.carouselTrack img{
+ width:180px;
+ height:140px;
+ object-fit:cover;
+ border-radius:16px;
+}
+
+@keyframes scroll{
+ from{transform:translateX(0)}
+ to{transform:translateX(-50%)}
+}
+
+/* GRID */
+
 .grid{
  display:grid;
  grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
@@ -127,6 +155,8 @@ button{
  border-radius:16px;
  cursor:pointer;
 }
+
+/* ZOOM */
 
 #zoom{
  position:fixed;
@@ -144,47 +174,12 @@ button{
  border-radius:18px;
 }
 
-.carousel{
- display:flex;
- gap:14px;
- overflow:hidden;
-}
-
-.carousel img{
- width:180px;
- height:140px;
- object-fit:cover;
- border-radius:16px;
- animation:slide 30s linear infinite;
-}
-
-@keyframes slide{
- from{transform:translateX(0)}
- to{transform:translateX(-50%)}
-}
-
 .finalText{
  line-height:1.7;
  font-size:16px;
  color:#3a0030;
  white-space:pre-line;
 }
-
-.finalGift{
- text-align:center;
- font-size:20px;
- font-weight:bold;
- opacity:0;
- transform:scale(.8);
- transition:1.2s;
-}
-
-.finalGift.show{
- opacity:1;
- transform:scale(1);
-}
-
-/* FRASES TOUCH */
 
 .touchPhrase{
  position:fixed;
@@ -241,9 +236,12 @@ button{
 </div>
 </div>
 
+<!-- ===== CARRUSEL NUEVO ===== -->
+
 <div class="card">
 <h2>🎞️ Momentos especiales 🎞️</h2>
 <div class="carousel">
+<div class="carouselTrack">
 <img src="https://i.imgur.com/tpH81jp.jpeg">
 <img src="https://i.imgur.com/mOQ2xhz.jpeg">
 <img src="https://i.imgur.com/ra5P475.jpeg">
@@ -252,6 +250,17 @@ button{
 <img src="https://i.imgur.com/UX4FUgZ.jpeg">
 <img src="https://i.imgur.com/3h5EZdw.jpeg">
 <img src="https://i.imgur.com/8yDYtN4.jpeg">
+
+<!-- duplicadas para bucle suave -->
+<img src="https://i.imgur.com/tpH81jp.jpeg">
+<img src="https://i.imgur.com/mOQ2xhz.jpeg">
+<img src="https://i.imgur.com/ra5P475.jpeg">
+<img src="https://i.imgur.com/0xnanwq.jpeg">
+<img src="https://i.imgur.com/2Xh4XhC.jpeg">
+<img src="https://i.imgur.com/UX4FUgZ.jpeg">
+<img src="https://i.imgur.com/3h5EZdw.jpeg">
+<img src="https://i.imgur.com/8yDYtN4.jpeg">
+</div>
 </div>
 </div>
 
@@ -266,21 +275,6 @@ button{
 <img src="https://i.imgur.com/UX4FUgZ.jpeg">
 <img src="https://i.imgur.com/3h5EZdw.jpeg">
 <img src="https://i.imgur.com/8yDYtN4.jpeg">
-<img src="https://i.imgur.com/1IveqjS.jpeg">
-<img src="https://i.imgur.com/D2fqpOe.jpeg">
-<img src="https://i.imgur.com/cqMYyp1.jpeg">
-<img src="https://i.imgur.com/S888hKj.jpeg">
-</div>
-</div>
-
-<div class="card finalText" id="historia"></div>
-
-<div class="card">
-<div class="finalGift" id="gift">
-Hay muchos momentos hermosos en la vida…
-pero el más especial fue cuando te conocí.
-
-Te amo mucho mi cebollín 🥰
 </div>
 </div>
 
@@ -303,20 +297,7 @@ function enter(){
  }
 }
 
-/* AUDIO */
-function toggleSong(){
- if(ourSong.paused){
-  bgMusic.pause();
-  ourSong.play();
-  btnPlay.innerHTML="⏸️ Pausar";
- } else {
-  ourSong.pause();
-  bgMusic.play();
-  btnPlay.innerHTML="▶️ Reproducir";
- }
-}
-
-/* ZOOM FOTOS */
+/* ZOOM */
 document.querySelectorAll("#gridFotos img").forEach(img=>{
  img.onclick=()=>{
   zoom.style.display="flex";
@@ -324,18 +305,8 @@ document.querySelectorAll("#gridFotos img").forEach(img=>{
  }
 });
 
-/* HEART BG */
-for(let i=0;i<25;i++){
- const s=document.createElement("span");
- s.innerHTML="❤";
- s.style.left=Math.random()*100+"vw";
- s.style.fontSize=(16+Math.random()*26)+"px";
- s.style.animationDuration=(8+Math.random()*10)+"s";
- bgHearts.appendChild(s);
-}
-
-/* CONTADOR DESDE 11 SEP 2024 */
-const start=new Date("2024-09-11T00:00:00");
+/* CONTADOR */
+const start=new Date("2024-09-11");
 setInterval(()=>{
  const diff=Date.now()-start;
  const d=Math.floor(diff/86400000);
@@ -344,89 +315,10 @@ setInterval(()=>{
  counter.innerHTML=`${d} días ${h}h ${m}m juntos 💗`;
 },1000);
 
-/* TEXTO ESCRIBIÉNDOSE */
-const textoHistoria = `💌 Nuestra historia 💌
+/* ===== GALAXIA CINEMATOGRÁFICA ===== */
 
-Aún recuerdo cuando vi al ratón Jerry en el gym. Siempre me robabas la barra 😝
-Pero había algo en ti que me llamaba la atención desde el principio.
-
-Nuestra primera cita fue ir por jitomates — y aunque suena raro, fue perfecta.
-
-Nuestro primer mensaje fue el 11 de septiembre de 2024:
-“Holaaa :)”
-
-Quiero seguir haciendo más cosas contigo: viajar, que nos corretien los borregos, tomarnos más fotos, reírnos como loquitos, cuidarte siempre y verte cumplir tus metas.
-
-Hay muchas cosas que amo de ti:
-tu forma de ver a las personas,
-tu fuerza para seguir siendo mejor,
-tu ternura,
-tus rufles,
-tu motito cool,
-tus piesitos de ratón,
-tus dientitos de ratoncito.
-
-Te amo mucho, Jerry 🤎`;
-
-let i=0;
-function escribir(){
- if(i<textoHistoria.length){
-  historia.innerHTML += textoHistoria[i];
-  i++;
-  setTimeout(escribir,25);
- }
-}
-escribir();
-
-/* FRASES AL TOCAR */
-const frasesTouch=[
-"Te amo 💖","Eres mi todo 💕","Mi universo 🌌","Siempre tú 💞",
-"Mi persona favorita 🥰","Amor infinito ♾️","Mi corazón 💓"
-];
-
-document.addEventListener("click",e=>{
- const f=document.createElement("div");
- f.className="touchPhrase";
- f.innerText=frasesTouch[Math.floor(Math.random()*frasesTouch.length)];
- f.style.left=e.clientX+"px";
- f.style.top=e.clientY+"px";
- document.body.appendChild(f);
- setTimeout(()=>f.remove(),2000);
-});
-
-/* REGALO */
-setTimeout(()=>gift.classList.add("show"),2000);
-
-/* ===== GALAXIA 3D SIMPLE FULLSCREEN ===== */
-let escena,camara,renderer,stars;
-
-function initGalaxy(){
- escena=new THREE.Scene();
- camara=new THREE.PerspectiveCamera(60,innerWidth/innerHeight,1,2000);
- camara.position.z=120;
- renderer=new THREE.WebGLRenderer({canvas:galaxiaCanvas});
- renderer.setSize(innerWidth,innerHeight);
-
- const geo=new THREE.BufferGeometry();
- const count=3000;
- const pos=new Float32Array(count*3);
- for(let i=0;i<count;i++){
-  pos[i*3]=(Math.random()-0.5)*1000;
-  pos[i*3+1]=(Math.random()-0.5)*1000;
-  pos[i*3+2]=(Math.random()-0.5)*1000;
- }
- geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
- stars=new THREE.Points(geo,new THREE.PointsMaterial({size:1}));
- escena.add(stars);
-
- animateGalaxy();
-}
-
-function animateGalaxy(){
- requestAnimationFrame(animateGalaxy);
- stars.rotation.y+=0.0008;
- renderer.render(escena,camara);
-}
+let scene,camera,renderer,group;
+let mx=0,my=0;
 
 btnGalaxia.onclick=()=>{
  galaxiaWrap.style.display="block";
@@ -437,34 +329,76 @@ salirGalaxia.onclick=()=>{
  galaxiaWrap.style.display="none";
 }
 
-/* LOGIN HEART CANVAS */
-const c=document.getElementById("heartsCanvas");
-const ctx=c.getContext("2d");
-c.width=innerWidth;
-c.height=innerHeight;
-let hearts=[];
-function heart(){this.x=Math.random()*c.width;this.y=c.height;this.s=8+Math.random()*12;this.v=1+Math.random()*2;}
-function drawHeart(x,y,s){
- ctx.beginPath();
- ctx.moveTo(x,y);
- ctx.bezierCurveTo(x-s,y-s,x-2*s,y+s,x,y+2*s);
- ctx.bezierCurveTo(x+2*s,y+s,x+s,y-s,x,y);
- ctx.fillStyle="rgba(255,80,150,.8)";
- ctx.fill();
+function initGalaxy(){
+ scene=new THREE.Scene();
+ camera=new THREE.PerspectiveCamera(60,innerWidth/innerHeight,1,3000);
+ camera.position.z=160;
+
+ renderer=new THREE.WebGLRenderer({canvas:galaxiaCanvas});
+ renderer.setSize(innerWidth,innerHeight);
+
+ group=new THREE.Group();
+ scene.add(group);
+
+ /* estrellas */
+ const geo=new THREE.BufferGeometry();
+ const count=4000;
+ const pos=new Float32Array(count*3);
+ for(let i=0;i<count;i++){
+  pos[i*3]=(Math.random()-0.5)*2000;
+  pos[i*3+1]=(Math.random()-0.5)*2000;
+  pos[i*3+2]=(Math.random()-0.5)*2000;
+ }
+ geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
+ const stars=new THREE.Points(geo,new THREE.PointsMaterial({size:1.2}));
+ group.add(stars);
+
+ /* frases 3D */
+ const frases=[
+ "Te amo 💖","Eres mi todo","Amor infinito","Siempre tú",
+ "Mi corazón","Mi universo","Contigo todo",
+ "Eres magia","Eres hogar","Mi vida"
+ ];
+
+ for(let i=0;i<100;i++){
+  const canvas=document.createElement("canvas");
+  canvas.width=512;
+  canvas.height=128;
+  const ctx=canvas.getContext("2d");
+  ctx.fillStyle="#ff66cc";
+  ctx.font="40px sans-serif";
+  ctx.fillText(frases[i%frases.length],20,70);
+
+  const tex=new THREE.CanvasTexture(canvas);
+  const mat=new THREE.SpriteMaterial({map:tex});
+  const sp=new THREE.Sprite(mat);
+
+  sp.position.set(
+   (Math.random()-0.5)*800,
+   (Math.random()-0.5)*400,
+   (Math.random()-0.5)*800
+  );
+  sp.scale.set(120,30,1);
+  group.add(sp);
+ }
+
+ animateGalaxy();
 }
-function loop(){
- ctx.clearRect(0,0,c.width,c.height);
- if(Math.random()<.2) hearts.push(new heart());
- hearts.forEach((h,i)=>{
-  h.y-=h.v;
-  drawHeart(h.x,h.y,h.s/2);
-  if(h.y<-40) hearts.splice(i,1);
- });
- requestAnimationFrame(loop);
+
+function animateGalaxy(){
+ requestAnimationFrame(animateGalaxy);
+ group.rotation.y+=0.001;
+ camera.position.x += (mx*80-camera.position.x)*.05;
+ camera.position.y += (-my*60-camera.position.y)*.05;
+ camera.lookAt(scene.position);
+ renderer.render(scene,camera);
 }
-loop();
+
+addEventListener("pointermove",e=>{
+ mx=(e.clientX/innerWidth-.5);
+ my=(e.clientY/innerHeight-.5);
+});
 
 </script>
-
 </body>
 </html>
