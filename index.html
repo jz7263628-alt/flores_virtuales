@@ -131,6 +131,25 @@ button:hover{
  cursor:pointer;
 }
 
+/* CARRUSEL */
+.carousel{
+ display:flex;
+ gap:14px;
+ overflow:hidden;
+}
+.carousel img{
+ width:180px;
+ height:140px;
+ object-fit:cover;
+ border-radius:16px;
+ animation:slide 30s linear infinite;
+}
+
+@keyframes slide{
+ from{transform:translateX(0)}
+ to{transform:translateX(-50%)}
+}
+
 /* ZOOM */
 #zoom{
  position:fixed;
@@ -199,7 +218,6 @@ button:hover{
 
 <body>
 
-<!-- LOGIN -->
 <div id="login">
 <div class="loginCard">
 <h2>Ingresa la contraseña 💖</h2>
@@ -213,7 +231,6 @@ button:hover{
 <img id="zoomImg">
 </div>
 
-<!-- MÚSICA (DEL INDEX VIEJO — COMPLETA) -->
 <audio id="bgMusic" loop>
 <source src="https://files.catbox.moe/4nrc17.mp3">
 </audio>
@@ -235,12 +252,27 @@ button:hover{
 <div id="counter"></div>
 </div>
 
-<!-- CANCIÓN (DEL INDEX VIEJO) -->
+<!-- CANCIÓN -->
 <div class="card">
 <h2>🎵 Nuestra canción 🎵</h2>
 <img class="musicCover" src="https://i.imgur.com/jbyIzFT.jpeg">
 <div style="text-align:center">
 <button id="btnPlay" onclick="toggleSong()">▶️ Reproducir</button>
+</div>
+</div>
+
+<!-- CARRUSEL -->
+<div class="card">
+<h2>🎞️ Momentos especiales 🎞️</h2>
+<div class="carousel">
+<img src="https://i.imgur.com/tpH81jp.jpeg">
+<img src="https://i.imgur.com/mOQ2xhz.jpeg">
+<img src="https://i.imgur.com/ra5P475.jpeg">
+<img src="https://i.imgur.com/0xnanwq.jpeg">
+<img src="https://i.imgur.com/2Xh4XhC.jpeg">
+<img src="https://i.imgur.com/UX4FUgZ.jpeg">
+<img src="https://i.imgur.com/3h5EZdw.jpeg">
+<img src="https://i.imgur.com/8yDYtN4.jpeg">
 </div>
 </div>
 
@@ -279,19 +311,7 @@ button:hover{
 
 <script>
 
-/* LOGIN LLUVIA */
-setInterval(()=>{
- if(login.style.display!=="none"){
-  const h=document.createElement("div");
-  h.className="loginRain";
-  h.innerHTML="💗";
-  h.style.left=Math.random()*100+"vw";
-  h.style.animationDuration=(3+Math.random()*3)+"s";
-  login.appendChild(h);
-  setTimeout(()=>h.remove(),6000);
- }
-},300);
-
+/* LOGIN */
 function enter(){
  if(pass.value==="Jerry"){
   login.style.display="none";
@@ -299,7 +319,7 @@ function enter(){
  }
 }
 
-/* CANCIÓN — DEL INDEX VIEJO */
+/* CANCIÓN */
 function toggleSong(){
  if(ourSong.paused){
   bgMusic.pause();
@@ -313,78 +333,26 @@ function toggleSong(){
  }
 }
 
-/* FRASES AL TOCAR */
-const frases=[
-"Eres mi lugar favorito 🤎",
-"Contigo todo es mejor 💞",
-"Mi coincidencia más bonita ✨",
-"Tu sonrisa es mi paz"
-];
-
-document.addEventListener("click",e=>{
- if(e.target.tagName==="BUTTON"||e.target.tagName==="INPUT") return;
- const f=document.createElement("div");
- f.className="tapPhrase";
- f.innerText=frases[Math.floor(Math.random()*frases.length)];
- f.style.left=e.clientX+"px";
- f.style.top=e.clientY+"px";
- document.body.appendChild(f);
- setTimeout(()=>f.remove(),2000);
-});
-
-/* ZOOM */
-document.querySelectorAll("#gallery img").forEach(img=>{
- img.onclick=()=>{ zoom.style.display="flex"; zoomImg.src=img.src; }
-});
-
-/* CORAZONES */
-for(let i=0;i<25;i++){
- const s=document.createElement("span");
- s.innerHTML="❤";
- s.style.left=Math.random()*100+"vw";
- s.style.fontSize=(16+Math.random()*26)+"px";
- s.style.animationDuration=(8+Math.random()*10)+"s";
- bgHearts.appendChild(s);
-}
-
-/* CONTADOR */
-const start=new Date("2024-09-11");
-setInterval(()=>{
- const d=Math.floor((Date.now()-start)/86400000);
- counter.innerHTML=d+" días juntos 💗";
-},60000);
-
-/* POEMAS COMPLETOS */
-const poemaTexto=`Cuando me enamoré de ti
-
-"Cuando me enamoré de ti, entendí que no era que todas aquellas personas que me hablaron del amor estuvieran mal, sino que nunca me hablaron de ti.
-
-Te prometo
-
-"Si te apagas, te prometo amarte con más fuerza.
-Prometo devolverte la luz que te caracteriza,
-regar tu jardín con el amor que me brindaste cuando estaba marchito.
-Te prometo cuidarte cuando enfermes
-y hacer lo que haga falta para asegurarme de que vuelvas a florecer.
-
-Porque, mi amor, si hay algo que le pido a Dios es que,
-si alguna vez llega a ser necesario,
-me permita ser aquello que te haga falta,
-como tú lo fuiste conmigo."`;
-
+/* TYPEWRITER SEGURO */
 function typeText(t, el){
+ el.textContent="";
+ const chars=[...t];
  let i=0;
  function w(){
-  if(i<t.length){
-   el.textContent+=t[i++];
-   setTimeout(w,22);
+  if(i<chars.length){
+   el.textContent+=chars[i++];
+   setTimeout(w,28);
   }
  }
  w();
 }
+
+const poemaTexto=`Cuando me enamoré de ti...
+
+Te prometo amarte siempre 🤎`;
+
 setTimeout(()=>typeText(poemaTexto,poema),1200);
 
-/* CARTA */
 function openLetter(){
  writeSound.play();
  const txt=`Esta carta es para ti.
