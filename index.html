@@ -21,36 +21,26 @@ body{
  position:fixed; inset:0;
  display:flex; justify-content:center; align-items:center;
  background:#000; z-index:9999;
- overflow: hidden;
 }
-
-.loginHearts {
-    position: absolute; width: 100%; height: 100%;
-    pointer-events: none;
-}
-
+.loginHearts { position: absolute; width: 100%; height: 100%; pointer-events: none; }
 .loginCard{
- position:relative;
- background:rgba(255,255,255,.1);
- backdrop-filter:blur(20px);
- padding:40px; border-radius:30px;
- text-align:center; border: 1px solid rgba(255, 77, 166, 0.4);
- box-shadow:0 0 50px rgba(255,0,120,.3);
- z-index: 2;
+ position:relative; background:rgba(255,255,255,.1); backdrop-filter:blur(20px);
+ padding:40px; border-radius:30px; text-align:center;
+ border: 1px solid rgba(255, 77, 166, 0.4); box-shadow:0 0 50px rgba(255,0,120,.3);
 }
 
-/* ANIMACIONES */
-@keyframes float{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
-@keyframes rise{ from{transform:translateY(110vh) scale(.6)} to{transform:translateY(-10vh) scale(1.2)} }
-
-input{ padding:14px; border-radius:14px; border:none; text-align:center; font-size:16px; width:200px; color: #000; }
-button{
- padding:12px 22px; border:none; border-radius:20px;
- background:linear-gradient(45deg,#ff4da6,#ff80bf);
- color:white; font-size:16px; margin-top:12px; cursor:pointer;
- transition:.25s; box-shadow:0 8px 18px rgba(0,0,0,.3);
+/* CARTA MODAL */
+#cartaModal {
+ position:fixed; inset:0; background:rgba(0,0,0,0.92);
+ display:none; z-index:10000; padding:30px 15px; overflow:auto;
 }
-button:hover{ transform:translateY(-3px) scale(1.05); }
+#cartaBox {
+ max-width:600px; margin:40px auto; background:#fff8f0;
+ color:#3a1a00; border-radius:25px; padding:35px;
+ font-size:18px; line-height:1.7; white-space:pre-line;
+ border: 3px solid #8b5a2b; box-shadow: 0 0 50px rgba(139,90,43,0.4);
+ text-align: center; position: relative;
+}
 
 /* CARDS */
 .card{
@@ -62,107 +52,101 @@ button:hover{ transform:translateY(-3px) scale(1.05); }
 }
 .card h2{ text-align:center; margin-top:0; color: #8b5a2b; }
 
-/* IMAGES */
+/* IMAGENES */
 .circleImg, .musicCover {
  width:170px; height:170px; border-radius:50%;
- object-fit:cover; display:block; margin:14px auto;
- border:6px solid #ffb3d9;
+ object-fit:cover; display:block; margin:14px auto; border:6px solid #ffb3d9;
 }
 
-/* CAROUSEL */
+/* CARRUSEL Y GRID */
 .carousel { display:flex; gap:14px; overflow:hidden; padding: 10px 0; }
 .carousel img { width:180px; height:140px; object-fit:cover; border-radius:16px; animation:slide 40s linear infinite; border: 2px solid #ffb3d9; }
 @keyframes slide{ from{transform:translateX(0)} to{transform:translateX(-100%)} }
-
-/* GRID */
 .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(100px,1fr)); gap:10px; }
 .grid img { width:100%; height:120px; object-fit:cover; border-radius:12px; cursor:pointer; }
 
 /* ZOOM */
-#zoom{ position:fixed; inset:0; background:rgba(0,0,0,.9); display:none; justify-content:center; align-items:center; z-index:10000; }
-#zoom img{ max-width:90%; max-height:90%; border-radius:15px; border: 3px solid #fff; }
+#zoom{ position:fixed; inset:0; background:rgba(0,0,0,.9); display:none; justify-content:center; align-items:center; z-index:10001; }
+#zoom img{ max-width:90%; max-height:90%; border-radius:15px; }
 
-/* FRASES TOUCH */
+/* EFECTOS */
 .touchText { position:fixed; color:#ff77bb; font-size:18px; font-weight: bold; pointer-events:none; animation:fadeUp 1.4s ease-out forwards; z-index: 999; }
 @keyframes fadeUp { from{opacity:1; transform:translateY(0)} to{opacity:0; transform:translateY(-60px)} }
-
-/* EMOJIS CAYENDO */
-.fallingEmoji { position:fixed; animation: fallEmoji linear forwards; font-size: 24px; top: -50px; z-index: 1000; }
+.fallingEmoji { position:fixed; animation: fallEmoji linear forwards; font-size: 26px; top: -50px; z-index: 10001; pointer-events: none; }
 @keyframes fallEmoji { to { transform: translateY(110vh) rotate(360deg); } }
+
+button { padding:14px 25px; border-radius:25px; border:none; background:#8b5a2b; color:white; cursor:pointer; font-weight:bold; }
+input { padding:12px; border-radius:15px; border:none; text-align:center; }
 </style>
 </head>
 
 <body>
 
-<!-- LOGIN -->
 <div id="login">
     <div class="loginHearts" id="loginHearts"></div>
     <div class="loginCard">
-        <h2 style="color: #ff4da6; margin-top:0;">Bienvenida 💖</h2>
-        <input id="pass" type="password" placeholder="Contraseña...">
-        <br><button onclick="enter()">Entrar</button>
+        <h2 style="color: #ff4da6">Contraseña 💖</h2>
+        <input id="pass" type="password">
+        <br><br><button onclick="enter()">Entrar</button>
     </div>
+</div>
+
+<div id="cartaModal">
+ <div style="text-align:center;"><button onclick="cerrarCarta()" style="background:#4a0030;">Cerrar ✉️</button></div>
+ <div id="cartaBox"></div>
 </div>
 
 <div id="zoom" onclick="this.style.display='none'"><img id="zoomImg"></div>
 
-<!-- AUDIOS -->
-<audio id="bgMusic" loop preload="auto"><source src="https://files.catbox.moe/4nrc17.mp3"></audio>
-<audio id="ourSong" preload="auto"><source src="https://files.catbox.moe/egr68n.mp3"></audio>
+<audio id="bgMusic" loop preload="auto"><source src="https://files.catbox.moe"></audio>
+<audio id="ourSong" preload="auto"><source src="https://files.catbox.moe"></audio>
 
 <!-- CONTENIDO -->
 <div class="card">
-    <h2>💞 Nuestro tiempo juntos 💞</h2>
-    <img class="circleImg" src="https://i.imgur.com/m2rqpiu.jpeg" referrerpolicy="no-referrer">
+    <h2>💞 Nuestro tiempo 💞</h2>
+    <img class="circleImg" src="https://i.imgur.com" referrerpolicy="no-referrer">
     <div id="counter" style="text-align:center; font-size:22px; font-weight:bold;"></div>
 </div>
 
 <div class="card">
     <h2>🎵 Nuestra canción 🎵</h2>
-    <img class="musicCover" src="https://i.imgur.com/jbyIzFT.jpeg" id="disco" referrerpolicy="no-referrer">
+    <img class="musicCover" src="https://i.imgur.com" id="disco" referrerpolicy="no-referrer">
     <div style="text-align:center"><button id="btnPlay" onclick="toggleSong()">▶️ Reproducir Especial</button></div>
 </div>
 
 <div class="card">
     <h2>🎞️ Momentos especiales 🎞️</h2>
     <div class="carousel">
-        <img src="https://i.imgur.com/tpH81jp.jpeg" referrerpolicy="no-referrer"><img src="https://i.imgur.com/mOQ2xhz.jpeg" referrerpolicy="no-referrer">
-        <img src="https://i.imgur.com/ra5P475.jpeg" referrerpolicy="no-referrer"><img src="https://i.imgur.com/0xnanwq.jpeg" referrerpolicy="no-referrer">
-        <img src="https://i.imgur.com/2Xh4XhC.jpeg" referrerpolicy="no-referrer"><img src="https://i.imgur.com/UX4FUgZ.jpeg" referrerpolicy="no-referrer">
-        <img src="https://i.imgur.com/3h5EZdw.jpeg" referrerpolicy="no-referrer"><img src="https://i.imgur.com/8yDYtN4.jpeg" referrerpolicy="no-referrer">
+        <img src="https://i.imgur.com" referrerpolicy="no-referrer"><img src="https://i.imgur.com" referrerpolicy="no-referrer">
+        <img src="https://i.imgur.com" referrerpolicy="no-referrer"><img src="https://i.imgur.com" referrerpolicy="no-referrer">
+        <img src="https://i.imgur.com" referrerpolicy="no-referrer"><img src="https://i.imgur.com" referrerpolicy="no-referrer">
     </div>
 </div>
 
 <div class="card">
     <h2>📸 Todos nuestros recuerdos 📸</h2>
     <div class="grid">
-        <img src="https://i.imgur.com/tpH81jp.jpeg" referrerpolicy="no-referrer"><img src="https://i.imgur.com/mOQ2xhz.jpeg" referrerpolicy="no-referrer">
-        <img src="https://i.imgur.com/ra5P475.jpeg" referrerpolicy="no-referrer"><img src="https://i.imgur.com/0xnanwq.jpeg" referrerpolicy="no-referrer">
-        <img src="https://i.imgur.com/2Xh4XhC.jpeg" referrerpolicy="no-referrer"><img src="https://i.imgur.com/UX4FUgZ.jpeg" referrerpolicy="no-referrer">
-        <img src="https://i.imgur.com/3h5EZdw.jpeg" referrerpolicy="no-referrer"><img src="https://i.imgur.com/8yDYtN4.jpeg" referrerpolicy="no-referrer">
-        <img src="https://i.imgur.com/1IveqjS.jpeg" referrerpolicy="no-referrer"><img src="https://i.imgur.com/D2fqpOe.jpeg" referrerpolicy="no-referrer">
-        <img src="https://i.imgur.com/cqMYyp1.jpeg" referrerpolicy="no-referrer"><img src="https://i.imgur.com/S888hKj.jpeg" referrerpolicy="no-referrer">
+        <img src="https://i.imgur.com" referrerpolicy="no-referrer"><img src="https://i.imgur.com" referrerpolicy="no-referrer">
+        <img src="https://i.imgur.com" referrerpolicy="no-referrer"><img src="https://i.imgur.com" referrerpolicy="no-referrer">
+        <img src="https://i.imgur.com" referrerpolicy="no-referrer"><img src="https://i.imgur.com" referrerpolicy="no-referrer">
+        <img src="https://i.imgur.com" referrerpolicy="no-referrer"><img src="https://i.imgur.com" referrerpolicy="no-referrer">
+        <img src="https://i.imgur.com" referrerpolicy="no-referrer"><img src="https://i.imgur.com" referrerpolicy="no-referrer">
     </div>
 </div>
 
-<div class="card">
-    <h2>💌 Mensaje para ti 💌</h2>
-    <div id="typedText" style="white-space:pre-line; line-height:1.8; font-size:18px; text-align:center;"></div>
+<div class="card" style="text-align:center">
+    <h2>💌 Sorpresa Final 💌</h2>
+    <button onclick="abrirCarta()" style="font-size:18px; padding:15px 40px;">Abrir carta ✉️</button>
 </div>
 
 <script>
-/* CORAZONES EN EL LOGIN */
+/* LOGIN HEARTS */
 const loginHearts = document.getElementById('loginHearts');
-for(let i=0; i<20; i++){
-    const s = document.createElement('span');
-    s.innerHTML = "💖";
-    s.style.position = "absolute";
-    s.style.color = "#ff4da6";
-    s.style.left = Math.random() * 100 + "vw";
-    s.style.top = Math.random() * 100 + "vh";
-    s.style.fontSize = (10 + Math.random() * 20) + "px";
-    s.style.opacity = Math.random();
-    s.style.animation = `float ${3 + Math.random() * 3}s ease-in-out infinite`;
+for(let i=0; i<15; i++){
+    const s = document.createElement('span'); s.innerHTML = "💖";
+    s.style.position = "absolute"; s.style.left = Math.random() * 100 + "vw";
+    s.style.top = Math.random() * 100 + "vh"; s.style.fontSize = "20px";
+    s.style.opacity = "0.4"; s.style.animation = `rise ${5+Math.random()*5}s linear infinite`;
     loginHearts.appendChild(s);
 }
 
@@ -170,19 +154,17 @@ function enter(){
     if(document.getElementById('pass').value === "Jerry"){
         document.getElementById('login').style.display="none";
         document.getElementById('bgMusic').play().catch(()=>{});
-        startTyping();
-    } else { alert("Contraseña incorrecta 💔"); }
+    } else { alert("Incorrecto 💔"); }
 }
 
 function toggleSong(){
-    const s = document.getElementById('ourSong'), bg = document.getElementById('bgMusic'), b = document.getElementById('btnPlay'), d = document.getElementById('disco');
-    if(s.paused){ bg.pause(); s.play(); b.innerHTML="⏸️ Pausar"; d.style.animation="spin 5s linear infinite"; }
-    else { s.pause(); bg.play(); b.innerHTML="▶️ Reproducir"; d.style.animation="none"; }
+    const s = document.getElementById('ourSong'), bg = document.getElementById('bgMusic'), b = document.getElementById('btnPlay');
+    if(s.paused){ bg.pause(); s.play(); b.innerHTML="⏸️ Pausar"; }
+    else { s.pause(); bg.play(); b.innerHTML="▶️ Reproducir"; }
 }
-document.styleSheets[0].insertRule("@keyframes spin { from {transform:rotate(0deg)} to {transform:rotate(360deg)} }", 0);
 
-/* POEMA CORREGIDO */
-const texto = `Aún recuerdo cuando te vi en el gym… siempre me robabas la barra 😝.
+/* CARTA CON EFECTO LENTO */
+const poema = `Aún recuerdo cuando te vi en el gym… siempre me robabas la barra 😝.
 
 "Si te apagas, te prometo amarte con más fuerza.
 
@@ -190,55 +172,54 @@ Prometo devolverte la luz que te caracteriza, regar tu jardín con el amor que m
 
 Porque, mi amor, si hay algo que le pido a Dios es que, si alguna vez llega a ser necesario, me permita ser aquello que te haga falta, como tú lo fuiste conmigo".
 
+Cuando me enamoré de ti...
+
+"Cuando me enamoré de ti, entendí que no era que todas aquellas personas que me hablaron del amor estuvieran mal, sino que nunca me hablaron de ti".
+
 Te amo mi cebollín 🤎`;
 
-let charIdx = 0;
-function startTyping() {
-    const target = document.getElementById('typedText');
-    if (charIdx < texto.length) {
-        target.innerHTML += texto.charAt(charIdx);
-        charIdx++;
-        if(charIdx % 12 === 0) dropEmoji();
-        setTimeout(startTyping, 40);
-    }
+function abrirCarta(){
+    document.getElementById('cartaModal').style.display="block";
+    const box = document.getElementById('cartaBox'); box.innerHTML = ""; let i=0;
+    const interval = setInterval(() => {
+        if(i < poema.length){
+            box.innerHTML += poema[i++];
+            if(i % 8 === 0) dropEmoji(); // Caen emoticones cada 8 caracteres
+        } else clearInterval(interval);
+    }, 45);
 }
 
+function cerrarCarta(){ document.getElementById('cartaModal').style.display="none"; }
+
 function dropEmoji() {
-    const emojis = ["🤎", "✨", "🥰", "🧸", "💖"];
+    const emojis = ["🤎", "🧸", "🌷", "✨", "🥰", "💖", "☁️"];
     const e = document.createElement("div");
     e.className = "fallingEmoji";
     e.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
-    e.style.left = Math.random() * 95 + "vw";
-    e.style.animationDuration = (Math.random() * 3 + 2) + "s";
+    e.style.left = Math.random() * 92 + "vw";
+    e.style.animationDuration = (5 + Math.random() * 3) + "s"; // MÁS LENTO (5-8 segundos)
     document.body.appendChild(e);
-    setTimeout(() => e.remove(), 5000);
+    setTimeout(() => e.remove(), 8000);
 }
 
-/* CONTADOR */
 const start = new Date("2024-09-11");
 setInterval(() => {
     const d = Math.floor((Date.now() - start) / 86400000);
     document.getElementById('counter').innerHTML = d + " días juntos 🤎";
 }, 1000);
 
-/* ZOOM */
 document.querySelectorAll(".grid img, .carousel img").forEach(img => {
-    img.onclick = () => {
-        document.getElementById('zoom').style.display = "flex";
-        document.getElementById('zoomImg').src = img.src;
-    }
+    img.onclick = () => { document.getElementById('zoom').style.display = "flex"; document.getElementById('zoomImg').src = img.src; }
 });
 
-/* FRASES TOUCH */
-const frases=["Te amo 🤎","Siempre tú","Mi amor","Eres mi paz"];
+/* FRASES TOUCH CON EMOJIS */
+const frases=["Te amo 🤎","Siempre tú ✨","Mi amor 🥰","Eres mi paz 🌷","Mi persona favorita 🧸"];
 document.addEventListener("click", e => {
     if(document.getElementById('login').style.display === "none") {
-        const el = document.createElement("div");
-        el.className = "touchText";
+        const el = document.createElement("div"); el.className = "touchText";
         el.innerHTML = frases[Math.floor(Math.random() * frases.length)];
         el.style.left = e.clientX + "px"; el.style.top = e.clientY + "px";
-        document.body.appendChild(el);
-        setTimeout(() => el.remove(), 1400);
+        document.body.appendChild(el); setTimeout(()=>el.remove(), 1400);
     }
 });
 </script>
