@@ -15,7 +15,7 @@ body{
  overflow-x:hidden;
 }
 
-/* BOTONES BONITOS */
+/* BOTONES */
 button{
  background:linear-gradient(45deg,#ff4da6,#ff85c2);
  border:none;
@@ -40,7 +40,6 @@ button::after{
 button:hover::after{transform:translateX(100%)}
 button:hover{transform:scale(1.07)}
 
-/* TITULOS */
 .card h2{
  text-align:center;
  background:linear-gradient(45deg,#ff4da6,#ffd1e8);
@@ -75,7 +74,7 @@ input{
  width:210px;
 }
 
-/* LLUVIA */
+/* lluvia corazones */
 .rain{
  position:fixed;
  top:-40px;
@@ -110,10 +109,15 @@ input{
 }
 
 /* CAROUSEL */
-.carousel{display:flex;gap:14px;overflow:hidden}
+.carousel{
+ display:flex;
+ gap:14px;
+ overflow:hidden;
+}
 .carousel img{
  width:180px;height:140px;
- object-fit:cover;border-radius:16px;
+ object-fit:cover;
+ border-radius:16px;
  animation:slide 18s linear infinite;
 }
 @keyframes slide{
@@ -129,7 +133,8 @@ input{
 }
 .grid img{
  width:100%;height:120px;
- object-fit:cover;border-radius:12px;
+ object-fit:cover;
+ border-radius:12px;
  cursor:pointer;
 }
 
@@ -160,11 +165,11 @@ input{
  to{opacity:0;transform:translateY(-60px)}
 }
 
-/* CARTA REAL */
+/* CARTA */
 #cartaOverlay{
  position:fixed;
  inset:0;
- background:rgba(0,0,0,.7);
+ background:rgba(0,0,0,.75);
  display:none;
  justify-content:center;
  align-items:center;
@@ -172,40 +177,34 @@ input{
 }
 
 .carta{
- background:
- repeating-linear-gradient(
- 0deg,
- #fff8ee,
- #fff8ee 28px,
- #f3e6d8 29px
- );
+ background:#fff8ee;
  color:#3a1a00;
- padding:42px;
+ padding:40px;
  border-radius:18px;
  width:92%;
- max-width:620px;
+ max-width:600px;
  font-size:18px;
  line-height:1.7;
- box-shadow:0 0 50px rgba(0,0,0,.6);
+ box-shadow:0 0 40px rgba(0,0,0,.5);
  white-space:pre-line;
- min-height:260px;
- position:relative;
+ animation:respirar 6s ease-in-out infinite alternate;
 }
 
-/* sello */
-.sello{
- position:absolute;
- right:20px;
- bottom:18px;
- font-size:42px;
- opacity:0;
- transform:scale(.3) rotate(-20deg);
+@keyframes respirar{
+ from{transform:scale(1)}
+ to{transform:scale(1.02)}
 }
-.sello.show{
- animation:sellar .6s ease-out forwards;
+
+.resaltar{
+ color:#b06a00;
+ font-weight:bold;
+ font-size:20px;
 }
-@keyframes sellar{
- to{opacity:1;transform:scale(1) rotate(0)}
+
+.firma{
+ font-family:cursive;
+ font-size:22px;
+ margin-top:12px;
 }
 </style>
 </head>
@@ -232,10 +231,6 @@ input{
 <audio id="ourSong">
 <source src="https://files.catbox.moe/egr68n.mp3">
 </audio>
-
-<!-- sonidos carta -->
-<audio id="writeSound" src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3"></audio>
-<audio id="stampSound" src="https://assets.mixkit.co/active_storage/sfx/212/212-preview.mp3"></audio>
 
 <div class="card">
 <h2>💞 Nuestro tiempo juntos 💞</h2>
@@ -284,15 +279,12 @@ input{
 </div>
 
 <div id="cartaOverlay" onclick="this.style.display='none'">
-<div class="carta">
-<div id="cartaTexto"></div>
-<div id="sello" class="sello">💌</div>
-</div>
+<div class="carta" id="cartaTexto"></div>
 </div>
 
 <script>
 
-/* lluvia login */
+/* lluvia login infinita */
 setInterval(()=>{
  const h=document.createElement("div");
  h.className="rain";
@@ -356,45 +348,38 @@ document.addEventListener("click",e=>{
  setTimeout(()=>el.remove(),1400);
 });
 
-/* carta con poemas completos */
-const textoCarta=`Esta carta es para ti…
+/* POEMAS COMPLETOS — aparición por párrafos */
+const bloques = [
+`<span class="resaltar">Cuando me enamoré de ti</span>
 
-Cuando me enamoré de ti
+"Cuando me enamoré de ti, entendí que no era que todas aquellas personas que me hablaron del amor estuvieran mal, sino que nunca me hablaron de ti."`,
 
-"Cuando me enamoré de ti, entendí que no era que todas aquellas personas que me hablaron del amor estuvieran mal, sino que nunca me hablaron de ti."
+`<span class="resaltar">Te prometo</span>
 
-Te prometo
-
-"si te apagas, te prometo amarte con más fuerza.
+"Si te apagas, te prometo amarte con más fuerza.
 
 Prometo devolverte la luz que te caracteriza, regar tu jardín con el amor que me brindaste cuando estaba marchito. Te prometo cuidarte cuando enfermes y hacer lo que haga falta para asegurarme de que vuelvas a florecer.
 
-Porque, mi amor, si hay algo que le pido a Dios es que, si alguna vez llega a ser necesario, me permita ser aquello que te haga falta, como tú lo fuiste conmigo."
+Porque, mi amor, si hay algo que le pido a Dios es que, si alguna vez llega a ser necesario, me permita ser aquello que te haga falta, como tú lo fuiste conmigo."`,
 
-Te amo mi cebollín 🤎
-Espero compartir más cosas juntos 🥰🧸
-
-— Con amor`;
+`Te amo mi cebollín 🤎
+<span class="firma">— Siempre contigo 🧸</span>`
+];
 
 function openCarta(){
  cartaOverlay.style.display="flex";
  cartaTexto.innerHTML="";
- sello.classList.remove("show");
  let i=0;
- function escribir(){
-  if(i<textoCarta.length){
-   cartaTexto.innerHTML+=textoCarta[i++];
-   writeSound.currentTime=0;
-   writeSound.play().catch(()=>{});
-   setTimeout(escribir,32);
-  }else{
-   stampSound.play().catch(()=>{});
-   sello.classList.add("show");
+ function next(){
+  if(i<bloques.length){
+   cartaTexto.innerHTML += bloques[i] + "\n\n";
+   i++;
+   setTimeout(next, 1400);
   }
  }
- escribir();
+ next();
 }
-</script>
 
+</script>
 </body>
 </html>
