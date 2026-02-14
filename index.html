@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <title>Para mi cebollín 🤎</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- TRUCO MAESTRO: Esto obliga a Imgur a mostrar las fotos siempre -->
 <meta name="referrer" content="no-referrer">
 
 <style>
@@ -12,56 +11,47 @@
 body{
  margin:0;
  font-family: 'Segoe UI', sans-serif;
- background:#1a0015; /* Tu color original */
+ background: radial-gradient(circle at center, #2d0025 0%, #0a0008 100%);
  color:#fff;
  overflow-x:hidden;
 }
 
-/* LOGIN ORIGINAL RECUPERADO */
+/* LOGIN CON CORAZONES ROSAS */
 #login{
  position:fixed; inset:0;
  display:flex; justify-content:center; align-items:center;
- background:#0a0008;
- z-index:10000;
+ background:#0a0008; z-index:10000;
 }
-#loginHearts { position: absolute; inset: 0; pointer-events: none; }
+.loginHearts { position: absolute; inset: 0; pointer-events: none; }
 .loginCard{
- position:relative; background:rgba(255,255,255,.12);
- backdrop-filter:blur(12px); padding:40px; border-radius:25px;
+ position:relative; background:rgba(255,255,255,.1);
+ backdrop-filter:blur(15px); padding:40px; border-radius:25px;
  text-align:center; border: 1px solid #ff4da6;
  box-shadow:0 0 40px rgba(255,0,120,.4);
 }
 input{ padding:12px; border-radius:15px; border:none; text-align:center; font-size:16px; width:200px; }
 .btnLogin{ padding:12px 22px; border:none; border-radius:20px; background:#ff4da6; color:white; font-size:16px; margin-top:12px; cursor:pointer; }
 
-/* CARTA MODAL (Ventana que se abre) */
-#cartaModal {
- position:fixed; inset:0; background:rgba(0,0,0,0.95);
- display:none; z-index:10001; padding:30px 15px; overflow:auto;
-}
-#cartaBox {
- max-width:600px; margin:40px auto; background:#fff8f0;
- color:#3a1a00; border-radius:25px; padding:35px;
- font-size:18px; line-height:1.7; white-space:pre-line;
- border: 3px solid #8b5a2b; text-align: center;
- box-shadow: 0 0 30px #8b5a2b;
-}
-
-/* CARDS ROSA CLARO ORIGINALES */
+/* CARDS ELEGANTES */
 .card{
- background:#ffe6f2; color:#5a0033;
- margin:22px auto; padding:22px; width:92%; max-width:520px;
- border-radius:22px; box-shadow:0 8px 30px rgba(0,0,0,.4);
- border:3px dashed #ff99cc; position: relative; z-index: 10;
+ background:rgba(255, 255, 255, 0.92); 
+ color:#4a0030;
+ margin:22px auto; padding:25px;
+ width:92%; max-width:540px;
+ border-radius:28px;
+ box-shadow:0 12px 40px rgba(0,0,0,0.5);
+ border:1px solid rgba(255,255,255,0.3);
+ position: relative; z-index: 10;
 }
-.card h2{ text-align:center; margin-top:0; }
+.card h2{ text-align:center; margin-top:0; color: #8b5a2b; }
 
 .circleImg, .musicCover {
  width:170px; height:170px; border-radius:50%;
- object-fit:cover; display:block; margin:14px auto; border:6px solid #ffb3d9;
+ object-fit:cover; display:block; margin:14px auto;
+ border:6px solid #ffb3d9;
 }
 
-/* CARRUSEL ANIMADO */
+/* CARRUSEL */
 .carousel { display:flex; gap:14px; overflow:hidden; padding: 10px 0; }
 .carousel img { width:180px; height:140px; object-fit:cover; border-radius:16px; animation:slide 40s linear infinite; border: 2px solid #ffb3d9; }
 @keyframes slide{ from{transform:translateX(0)} to{transform:translateX(-100%)} }
@@ -70,39 +60,35 @@ input{ padding:12px; border-radius:15px; border:none; text-align:center; font-si
 .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(100px,1fr)); gap:10px; }
 .grid img { width:100%; height:120px; object-fit:cover; border-radius:12px; cursor:pointer; border: 2px solid #ffb3d9; }
 
-/* EFECTOS */
+/* FRASES TOUCH */
 .touchText { position:fixed; color:#ff77bb; font-size:18px; font-weight: bold; pointer-events:none; animation:fadeUp 1.4s ease-out forwards; z-index: 999; }
 @keyframes fadeUp { from{opacity:1; transform:translateY(0)} to{opacity:0; transform:translateY(-60px)} }
-.fallingEmoji { position:fixed; animation: fallEmoji linear forwards; font-size: 26px; top: -50px; z-index: 10002; pointer-events: none; }
+
+/* LLUVIA DE EMOTICONOS LENTOS */
+.fallingEmoji { position:fixed; animation: fallEmoji linear forwards; font-size: 26px; top: -50px; z-index: 1; pointer-events: none; }
 @keyframes fallEmoji { to { transform: translateY(110vh) rotate(360deg); } }
 
 #zoom{ position:fixed; inset:0; background:rgba(0,0,0,.9); display:none; justify-content:center; align-items:center; z-index:10005; }
 #zoom img{ max-width:90%; max-height:90%; border-radius:15px; }
 
-.btnCarta { background:#8b5a2b; color:white; border:none; padding:15px 30px; border-radius:25px; cursor:pointer; font-size:18px; font-weight:bold; }
+.poemaBox { font-size: 18px; line-height: 1.8; text-align: center; white-space: pre-line; color: #3a1a00; }
 </style>
 </head>
 <body>
 
 <!-- LOGIN -->
 <div id="login">
-    <div id="loginHearts"></div>
+    <div class="loginHearts" id="loginHearts"></div>
     <div class="loginCard">
         <h2 style="color: #ff4da6">Contraseña 💖</h2>
-        <input id="pass" type="password">
+        <input id="pass" type="password" placeholder="Escribe aquí...">
         <br><button class="btnLogin" onclick="enter()">Entrar</button>
     </div>
 </div>
 
-<!-- VENTANA CARTA -->
-<div id="cartaModal">
-    <div style="text-align:center;"><button onclick="cerrarCarta()" style="background:#4a0030; color:white; border:none; padding:10px 20px; border-radius:20px; cursor:pointer;">Cerrar ✉️</button></div>
-    <div id="cartaBox"></div>
-</div>
-
 <div id="zoom" onclick="this.style.display='none'"><img id="zoomImg"></div>
 
-<!-- AUDIOS -->
+<!-- AUDIOS ORIGINALES -->
 <audio id="bgMusic" loop preload="auto"><source src="https://files.catbox.moe"></audio>
 <audio id="ourSong" preload="auto"><source src="https://files.catbox.moe"></audio>
 
@@ -110,14 +96,14 @@ input{ padding:12px; border-radius:15px; border:none; text-align:center; font-si
 <div class="card">
     <h2>💞 Nuestro tiempo juntos 💞</h2>
     <img class="circleImg" src="https://i.imgur.com" referrerpolicy="no-referrer">
-    <div id="counter" style="text-align:center; font-size:20px; font-weight:bold;"></div>
+    <div id="counter" style="text-align:center; font-size:22px; font-weight:bold;"></div>
 </div>
 
 <div class="card">
     <h2>🎵 Nuestra canción 🎵</h2>
     <img class="musicCover" src="https://i.imgur.com" referrerpolicy="no-referrer">
     <div style="text-align:center">
-        <button onclick="toggleSong()" style="background:#ff4da6; color:white; border:none; padding:10px 20px; border-radius:20px; cursor:pointer;">▶️ Reproducir / Pausar</button>
+        <button onclick="toggleSong()" style="background:#ff4da6; color:white; border:none; padding:12px 25px; border-radius:25px; cursor:pointer; font-weight:bold;">▶️ Reproducir Especial</button>
     </div>
 </div>
 
@@ -138,24 +124,27 @@ input{ padding:12px; border-radius:15px; border:none; text-align:center; font-si
     </div>
 </div>
 
-<div class="card" style="text-align:center">
-    <h2>💌 Sorpresa Final 💌</h2>
-    <button class="btnCarta" onclick="abrirCarta()">Abrir carta ✉️</button>
+<div class="card">
+    <h2>💌 Mensaje para ti 💌</h2>
+    <div id="typedPoema" class="poemaBox"></div>
 </div>
 
 <script>
 /* CORAZONES ROSAS EN LOGIN */
-for(let i=0; i<15; i++){
+const loginHearts = document.getElementById('loginHearts');
+for(let i=0; i<20; i++){
     const s = document.createElement('span'); s.innerHTML = "💖";
     s.style.position = "absolute"; s.style.left = Math.random()*100+"vw";
-    s.style.top = Math.random()*100+"vh"; s.style.color="#ff4da6"; s.style.opacity="0.5";
-    document.getElementById('loginHearts').appendChild(s);
+    s.style.top = Math.random()*100+"vh"; s.style.fontSize="20px"; s.style.opacity="0.4";
+    loginHearts.appendChild(s);
 }
 
 function enter(){
     if(document.getElementById('pass').value === "Jerry"){
         document.getElementById('login').style.display="none";
         document.getElementById('bgMusic').play().catch(()=>{});
+        startPoema();
+        setInterval(dropEmoji, 1000); // Emoticonos lentos cada segundo
     } else { alert("Incorrecto 💔"); }
 }
 
@@ -164,19 +153,8 @@ function toggleSong(){
     if(s.paused){ bg.pause(); s.play(); } else { s.pause(); bg.play(); }
 }
 
-/* FRASES TOUCH CON EMOJIS */
-const frases=["Te amo 🤎","Siempre tú ✨","Mi amor 🥰","Eres mi paz 🌷"];
-document.addEventListener("click", e => {
-    if(document.getElementById('login').style.display === "none") {
-        const el = document.createElement("div"); el.className = "touchText";
-        el.innerHTML = frases[Math.floor(Math.random() * frases.length)];
-        el.style.left = e.clientX + "px"; el.style.top = e.clientY + "px";
-        document.body.appendChild(el); setTimeout(()=>el.remove(), 1400);
-    }
-});
-
-/* CARTA */
-const poema = `Aún recuerdo cuando te vi en el gym… siempre me robabas la barra 😝.
+/* POEMA CON ESCRITURA AUTOMÁTICA */
+const textoPoema = `Aún recuerdo cuando te vi en el gym… siempre me robabas la barra 😝.
 
 "Si te apagas, te prometo amarte con más fuerza.
 
@@ -190,25 +168,22 @@ Cuando me enamoré de ti...
 
 Te amo mi cebollín 🤎`;
 
-function abrirCarta(){
-    document.getElementById('cartaModal').style.display="block";
-    const box = document.getElementById('cartaBox'); box.innerHTML = ""; let i=0;
-    const interval = setInterval(() => {
-        if(i < poema.length){ 
-            box.innerHTML += poema[i++]; 
-            if(i % 10 === 0) dropEmoji(); 
-        } else clearInterval(interval);
-    }, 50);
+let charIdx = 0;
+function startPoema() {
+    const box = document.getElementById('typedPoema');
+    if (charIdx < textoPoema.length) {
+        box.innerHTML += textoPoema.charAt(charIdx);
+        charIdx++;
+        setTimeout(startPoema, 45);
+    }
 }
 
-function cerrarCarta(){ document.getElementById('cartaModal').style.display="none"; }
-
 function dropEmoji() {
-    const emojis = ["🤎", "🧸", "🌷", "✨", "🥰"];
+    const emojis = ["🤎", "🧸", "🌷", "✨", "🥰", "💖"];
     const e = document.createElement("div"); e.className = "fallingEmoji";
     e.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
-    e.style.left = Math.random() * 90 + "vw"; e.style.animationDuration = "6s";
-    document.body.appendChild(e); setTimeout(() => e.remove(), 7000);
+    e.style.left = Math.random() * 95 + "vw"; e.style.animationDuration = "7s"; // Caída lenta
+    document.body.appendChild(e); setTimeout(() => e.remove(), 8000);
 }
 
 const start = new Date("2024-09-11");
@@ -219,6 +194,16 @@ setInterval(() => {
 
 document.querySelectorAll(".grid img, .carousel img").forEach(img => {
     img.onclick = () => { document.getElementById('zoom').style.display = "flex"; document.getElementById('zoomImg').src = img.src; }
+});
+
+const frases=["Te amo 🤎","Siempre tú ✨","Mi amor 🥰","Eres mi paz 🌷"];
+document.addEventListener("click", e => {
+    if(document.getElementById('login').style.display === "none") {
+        const el = document.createElement("div"); el.className = "touchText";
+        el.innerHTML = frases[Math.floor(Math.random() * frases.length)];
+        el.style.left = e.clientX + "px"; el.style.top = e.clientY + "px";
+        document.body.appendChild(el); setTimeout(()=>el.remove(), 1400);
+    }
 });
 </script>
 </body>
