@@ -24,9 +24,10 @@ body{
  align-items:center;
  background:#0a0008;
  z-index:999;
+ overflow:hidden;
 }
+
 .loginCard{
- position:relative;
  background:rgba(255,255,255,.15);
  backdrop-filter:blur(14px);
  padding:40px;
@@ -34,7 +35,9 @@ body{
  text-align:center;
  box-shadow:0 0 40px rgba(255,0,120,.4);
  animation:float 4s ease-in-out infinite;
+ z-index:2;
 }
+
 @keyframes float{
 0%,100%{transform:translateY(0)}
 50%{transform:translateY(-12px)}
@@ -58,9 +61,15 @@ button{
  font-size:16px;
  margin-top:12px;
  cursor:pointer;
+ transition:.25s;
 }
 
-/* HEARTS BACKGROUND */
+button:hover{
+ transform:scale(1.08);
+ box-shadow:0 0 12px #ff80bf;
+}
+
+/* HEARTS BG */
 .bgHearts span{
  position:fixed;
  color:#ff4da6;
@@ -68,27 +77,25 @@ button{
  opacity:.25;
  pointer-events:none;
 }
+
 @keyframes rise{
  from{transform:translateY(100vh)}
  to{transform:translateY(-10vh)}
 }
 
-/* LLUVIA CORAZONES ROSAS */
-.rainHeart{
- position:fixed;
+/* LLUVIA LOGIN CONTINUA */
+.loginRain{
+ position:absolute;
  top:-20px;
- font-size:20px;
- animation:heartRain linear forwards;
- pointer-events:none;
-}
-@keyframes heartRain{
- to{
-  transform:translateY(110vh);
-  opacity:.3;
- }
+ animation:loginFall linear forwards;
+ opacity:.6;
 }
 
-/* FRASES TOQUE */
+@keyframes loginFall{
+ to{ transform:translateY(110vh); opacity:.2; }
+}
+
+/* FRASES */
 .tapPhrase{
  position:fixed;
  color:#ffd6eb;
@@ -97,11 +104,9 @@ button{
  pointer-events:none;
  text-shadow:0 0 8px #ff66aa;
 }
+
 @keyframes floatUp{
- to{
-  transform:translateY(-60px);
-  opacity:0;
- }
+ to{ transform:translateY(-60px); opacity:0; }
 }
 
 /* CARDS */
@@ -118,7 +123,7 @@ button{
 }
 
 /* IMAGES */
-.circleImg,.musicCover{
+.circleImg{
  width:170px;
  height:170px;
  border-radius:50%;
@@ -134,6 +139,7 @@ button{
  grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
  gap:10px;
 }
+
 .grid img{
  width:100%;
  height:140px;
@@ -152,6 +158,7 @@ button{
  align-items:center;
  z-index:9999;
 }
+
 #zoom img{
  max-width:90%;
  max-height:90%;
@@ -164,6 +171,7 @@ button{
  border-right:2px solid #ff4da6;
  animation:blink .8s infinite;
 }
+
 @keyframes blink{
 50%{border-color:transparent}
 }
@@ -175,12 +183,15 @@ button{
  border-radius:18px;
  background:linear-gradient(45deg,#ffe0f0,#ffd1ea);
  display:none;
+ white-space:pre-wrap;
 }
+
 .seal{
  font-size:42px;
  cursor:pointer;
  animation:pulse 1.5s infinite;
 }
+
 @keyframes pulse{
 50%{transform:scale(1.15)}
 }
@@ -191,18 +202,11 @@ button{
  margin-top:15px;
  opacity:0;
 }
-
-.memoryBox{
- text-align:center;
- margin-top:12px;
- font-size:18px;
-}
 </style>
 </head>
 
 <body>
 
-<!-- LOGIN -->
 <div id="login">
 <div class="loginCard">
 <h2>Ingresa la contraseña 💖</h2>
@@ -236,7 +240,7 @@ button{
 <!-- FOTOS -->
 <div class="card">
 <h2>📸 Recuerdos 📸</h2>
-<div class="grid">
+<div class="grid" id="gallery">
 <img src="https://i.imgur.com/tpH81jp.jpeg">
 <img src="https://i.imgur.com/mOQ2xhz.jpeg">
 <img src="https://i.imgur.com/ra5P475.jpeg">
@@ -252,7 +256,7 @@ button{
 </div>
 </div>
 
-<!-- POEMAS COMPLETOS -->
+<!-- POEMAS -->
 <div class="card">
 <h2>📜 Poemas especiales 📜</h2>
 <div id="poema" class="typewriter"></div>
@@ -266,38 +270,31 @@ button{
 <div id="sign" class="signature">Con amor — siempre tú 🤎</div>
 </div>
 
-<!-- MEMORIA -->
-<div class="card">
-<h2>📅 Recuerdo del día</h2>
-<button onclick="showMemory()">Mostrar</button>
-<div id="memoryBox" class="memoryBox"></div>
-</div>
-
 <script>
 
-/* LOGIN + LLUVIA CORAZONES */
+/* LOGIN LLUVIA CONTINUA */
+setInterval(()=>{
+ if(document.getElementById("login").style.display!=="none"){
+  const h=document.createElement("div");
+  h.className="loginRain";
+  h.innerHTML="💗";
+  h.style.left=Math.random()*100+"vw";
+  h.style.fontSize=(16+Math.random()*18)+"px";
+  h.style.animationDuration=(3+Math.random()*3)+"s";
+  login.appendChild(h);
+  setTimeout(()=>h.remove(),6000);
+ }
+},300);
+
+/* ENTER */
 function enter(){
  if(pass.value==="Jerry"){
   login.style.display="none";
   bgMusic.play().catch(()=>{});
-  heartRainBurst();
  }
 }
 
-/* LLUVIA ROSA */
-function heartRainBurst(){
- for(let i=0;i<40;i++){
-  const h=document.createElement("div");
-  h.className="rainHeart";
-  h.innerHTML="💗";
-  h.style.left=Math.random()*100+"vw";
-  h.style.animationDuration=(3+Math.random()*3)+"s";
-  document.body.appendChild(h);
-  setTimeout(()=>h.remove(),6000);
- }
-}
-
-/* FRASES AL TOCAR */
+/* FRASES */
 const frases=[
 "Eres mi lugar favorito 🤎",
 "Contigo todo es mejor 💞",
@@ -308,7 +305,7 @@ const frases=[
 ];
 
 document.addEventListener("click",e=>{
- if(e.target.tagName==="BUTTON" || e.target.tagName==="INPUT") return;
+ if(e.target.tagName==="BUTTON"||e.target.tagName==="INPUT") return;
  const f=document.createElement("div");
  f.className="tapPhrase";
  f.innerText=frases[Math.floor(Math.random()*frases.length)];
@@ -319,11 +316,11 @@ document.addEventListener("click",e=>{
 });
 
 /* ZOOM */
-document.querySelectorAll(".grid img").forEach(img=>{
+document.querySelectorAll("#gallery img").forEach(img=>{
  img.onclick=()=>{ zoom.style.display="flex"; zoomImg.src=img.src; }
 });
 
-/* CORAZONES FONDO */
+/* HEARTS BG */
 for(let i=0;i<25;i++){
  const s=document.createElement("span");
  s.innerHTML="❤";
@@ -335,16 +332,17 @@ for(let i=0;i<25;i++){
 
 /* CONTADOR */
 const start=new Date("2024-09-11");
-setInterval(()=>{
+function updateCounter(){
  const d=Math.floor((Date.now()-start)/86400000);
  counter.innerHTML=d+" días juntos 💗";
-},60000);
+}
+updateCounter();
+setInterval(updateCounter,60000);
 
-/* POEMAS EXACTOS COMPLETOS */
+/* POEMAS COMPLETOS */
 const poemaTexto=`Cuando me enamoré de ti
 
 "Cuando me enamoré de ti, entendí que no era que todas aquellas personas que me hablaron del amor estuvieran mal, sino que nunca me hablaron de ti.
-
 
 Te prometo
 
@@ -354,7 +352,8 @@ regar tu jardín con el amor que me brindaste cuando estaba marchito.
 Te prometo cuidarte cuando enfermes
 y hacer lo que haga falta para asegurarme de que vuelvas a florecer.
 
-Porque, mi amor, si hay algo que le pido a Dios es que, si alguna vez llega a ser necesario,
+Porque, mi amor, si hay algo que le pido a Dios es que,
+si alguna vez llega a ser necesario,
 me permita ser aquello que te haga falta,
 como tú lo fuiste conmigo."`;
 
@@ -363,7 +362,7 @@ function typeText(t, el){
  function w(){
   if(i<t.length){
    el.textContent+=t[i++];
-   setTimeout(w,25);
+   setTimeout(w,22);
   }
  }
  w();
@@ -376,23 +375,15 @@ function openLetter(){
  const txt=`No eres solo mi persona favorita.
 Eres mi calma, mi risa,
 mi coincidencia más bonita,
-mi lugar seguro.`;
+mi lugar seguro.
+
+Esta carta es para ti.
+Te amo mi cebollín 🤎
+Espero compartir más cosas juntos 🥰🧸`;
  letter.style.display="block";
- typeText(txt, letter);
- setTimeout(()=>sign.style.opacity=1,3500);
+ typeText(txt,letter);
+ setTimeout(()=>sign.style.opacity=1,4200);
 }
-
-/* MEMORIAS */
-const memories=[
-"El día de los jitomates 🍅",
-"La risa en el gym 😂",
-"Nuestro primer hola 🤎",
-"Cuando no queríamos despedirnos"
-];
-function showMemory(){
- memoryBox.innerText=memories[Math.floor(Math.random()*memories.length)];
-}
-
 </script>
 
 </body>
