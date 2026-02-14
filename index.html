@@ -30,7 +30,14 @@ body{
  box-shadow: 0 0 30px rgba(139, 90, 43, 0.3);
 }
 
-/* CORAZONES CAFÉ CAYENDO */
+/* FRASES TOUCH (EFECTO RECUPERADO) */
+.touchText {
+ position:fixed; color:#ff77bb; font-size:18px; font-weight: bold;
+ pointer-events:none; animation:fadeUp 1.4s ease-out forwards; z-index: 999;
+}
+@keyframes fadeUp { from{opacity:1; transform:translateY(0)} to{opacity:0; transform:translateY(-60px)} }
+
+/* CORAZONES CAFÉ */
 .fallingHeart {
  position:fixed; pointer-events:none; z-index: 10001;
  color: #8b5a2b; font-size: 26px; top: -50px;
@@ -47,7 +54,7 @@ body{
  border:1px solid rgba(139, 90, 43, 0.4);
  position: relative; z-index: 10;
 }
-.card h2{ text-align:center; color: #8b5a2b; font-size: 22px; }
+.card h2{ text-align:center; color: #8b5a2b; }
 
 .circleImg, .musicCover {
  width:170px; height:170px; border-radius:50%;
@@ -55,10 +62,17 @@ body{
  border:6px solid #8b5a2b;
 }
 
-/* GRID DE RECUERDOS */
+/* CAROUSEL (EFECTO RECUPERADO) */
+.carousel { display:flex; gap:14px; overflow:hidden; padding: 10px 0; }
+.carousel img { 
+ width:180px; height:140px; object-fit:cover; border-radius:16px; 
+ animation:slide 40s linear infinite; border: 2px solid #8b5a2b;
+}
+@keyframes slide{ from{transform:translateX(0)} to{transform:translateX(-100%)} }
+
+/* GRID */
 .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(100px,1fr)); gap:10px; }
-.grid img { width:100%; height:120px; object-fit:cover; border-radius:12px; cursor:pointer; transition: 0.3s; }
-.grid img:hover { transform: scale(1.03); }
+.grid img { width:100%; height:120px; object-fit:cover; border-radius:12px; cursor:pointer; }
 
 /* CARTA MODAL */
 #cartaModal {
@@ -73,18 +87,12 @@ body{
  text-align: center;
 }
 
-/* ZOOM IMAGEN */
+/* ZOOM */
 #zoom{ position:fixed; inset:0; background:rgba(0,0,0,.9); display:none; justify-content:center; align-items:center; z-index:10001; }
-#zoom img{ max-width:95%; max-height:90%; border-radius:15px; border: 2px solid #fff; }
+#zoom img{ max-width:95%; max-height:90%; border-radius:15px; }
 
-button {
- padding:14px 28px; border-radius:25px; border:none;
- background:#8b5a2b; color:white; cursor:pointer; font-weight:bold;
- transition: 0.3s;
-}
-button:hover { background: #6d4622; transform: translateY(-2px); }
-
-input { padding:12px; border-radius:15px; border:none; text-align:center; outline:none; }
+button { padding:14px 28px; border-radius:25px; border:none; background:#8b5a2b; color:white; cursor:pointer; font-weight:bold; }
+input { padding:12px; border-radius:15px; border:none; text-align:center; }
 </style>
 </head>
 <body>
@@ -94,26 +102,21 @@ input { padding:12px; border-radius:15px; border:none; text-align:center; outlin
  <div class="loginCard">
   <h2 style="color: #8b5a2b">Ingresa la contraseña 💖</h2>
   <input id="pass" type="password">
-  <br><br><button onclick="enter()">Entrar al Álbum</button>
+  <br><br><button onclick="enter()">Entrar</button>
  </div>
 </div>
 
-<!-- VENTANA DE LA CARTA -->
 <div id="cartaModal">
- <div style="text-align:center;">
-  <button onclick="cerrarCarta()" style="background:#4a0030;">Cerrar Carta ✉️</button>
- </div>
+ <div style="text-align:center;"><button onclick="cerrarCarta()" style="background:#4a0030;">Cerrar Carta ✉️</button></div>
  <div id="cartaBox"></div>
 </div>
 
-<!-- ZOOM -->
 <div id="zoom" onclick="this.style.display='none'"><img id="zoomImg"></div>
 
-<!-- AUDIOS -->
 <audio id="bgMusic" loop preload="auto"><source src="https://files.catbox.moe"></audio>
 <audio id="ourSong" preload="auto"><source src="https://files.catbox.moe"></audio>
 
-<!-- CONTENIDO PRINCIPAL -->
+<!-- CONTENIDO -->
 <div class="card">
  <h2>💞 Nuestro tiempo juntos 💞</h2>
  <img class="circleImg" src="https://i.imgur.com">
@@ -122,9 +125,21 @@ input { padding:12px; border-radius:15px; border:none; text-align:center; outlin
 
 <div class="card">
  <h2>🎵 Nuestra canción 🎵</h2>
- <img class="musicCover" src="https://i.imgur.com" id="disco">
- <div style="text-align:center">
-    <button id="btnPlay" onclick="toggleSong()">▶️ Reproducir Especial</button>
+ <img class="musicCover" src="https://i.imgur.com">
+ <div style="text-align:center"><button id="btnPlay" onclick="toggleSong()">▶️ Reproducir Especial</button></div>
+</div>
+
+<div class="card">
+ <h2>🎞️ Momentos especiales 🎞️</h2>
+ <div class="carousel">
+  <img src="https://i.imgur.com">
+  <img src="https://i.imgur.com">
+  <img src="https://i.imgur.com">
+  <img src="https://i.imgur.com">
+  <img src="https://i.imgur.com">
+  <img src="https://i.imgur.com">
+  <img src="https://i.imgur.com">
+  <img src="https://i.imgur.com">
  </div>
 </div>
 
@@ -148,7 +163,7 @@ input { padding:12px; border-radius:15px; border:none; text-align:center; outlin
 
 <div class="card" style="text-align:center">
  <h2>💌 Sorpresa Final 💌</h2>
- <button onclick="abrirCarta()" style="font-size:20px; padding:15px 45px;">Abrir carta ✉️</button>
+ <button onclick="abrirCarta()" style="font-size:20px; padding:15px 40px;">Abrir carta ✉️</button>
 </div>
 
 <script>
@@ -157,17 +172,30 @@ function enter(){
  if(document.getElementById('pass').value === "Jerry"){
   document.getElementById('login').style.display="none";
   document.getElementById('bgMusic').play().catch(()=>{});
- } else { alert("Contraseña incorrecta 💔"); }
+ } else { alert("Incorrecto 💔"); }
 }
 
-/* AUDIO INTELIGENTE */
+/* AUDIO */
 function toggleSong(){
  const s=document.getElementById('ourSong'), bg=document.getElementById('bgMusic'), b=document.getElementById('btnPlay');
- if(s.paused){ bg.pause(); s.play(); b.innerHTML="⏸️ Pausar Especial"; }
- else { s.pause(); bg.play(); b.innerHTML="▶️ Reproducir Especial"; }
+ if(s.paused){ bg.pause(); s.play(); b.innerHTML="⏸️ Pausar"; }
+ else { s.pause(); bg.play(); b.innerHTML="▶️ Reproducir"; }
 }
 
-/* TEXTO DE LA CARTA ACTUALIZADO */
+/* FRASES TOUCH */
+const frases=["Te amo 🤎","Siempre tú","Mi amor","Eres mi paz","Mi persona favorita"];
+document.addEventListener("click",e=>{
+ if(document.getElementById('login').style.display === "none") {
+  const el=document.createElement("div");
+  el.className="touchText";
+  el.innerHTML=frases[Math.floor(Math.random()*frases.length)];
+  el.style.left=e.clientX+"px"; el.style.top=e.clientY+"px";
+  document.body.appendChild(el);
+  setTimeout(()=>el.remove(),1400);
+ }
+});
+
+/* CARTA */
 const poema = `Aún recuerdo cuando te vi en el gym… siempre me robabas la barra 😝. Nuestra primera cita fue por jitomates — perfecta.
 
 Esta carta es para ti…
@@ -187,27 +215,22 @@ Te amo mi cebollín 🤎`;
 function abrirCarta(){
  document.getElementById('cartaModal').style.display="block";
  const box = document.getElementById('cartaBox');
- box.innerHTML = "";
- let i=0;
+ box.innerHTML = ""; let i=0;
  const interval = setInterval(() => {
   if(i < poema.length){
    box.innerHTML += poema[i++];
    if(i % 5 === 0) dropHeart();
-  } else {
-   clearInterval(interval);
-  }
- }, 45); // Velocidad de escritura
+  } else clearInterval(interval);
+ }, 45);
 }
 
 function cerrarCarta(){ document.getElementById('cartaModal').style.display="none"; }
 
-/* LLUVIA DE CORAZONES CAFÉ */
 function dropHeart(){
  const h = document.createElement("div");
- h.className = "fallingHeart";
- h.innerHTML = "🤎";
+ h.className = "fallingHeart"; h.innerHTML = "🤎";
  h.style.left = Math.random() * 92 + "vw";
- h.style.animationDuration = (Math.random() * 3 + 2.5) + "s";
+ h.style.animationDuration = (Math.random() * 3 + 2) + "s";
  document.body.appendChild(h);
  setTimeout(() => h.remove(), 4000);
 }
@@ -220,7 +243,7 @@ setInterval(() => {
 }, 1000);
 
 /* ZOOM */
-document.querySelectorAll(".grid img").forEach(img => {
+document.querySelectorAll(".grid img, .carousel img").forEach(img => {
  img.onclick = () => {
   document.getElementById('zoom').style.display = "flex";
   document.getElementById('zoomImg').src = img.src;
