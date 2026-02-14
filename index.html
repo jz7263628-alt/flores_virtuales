@@ -212,6 +212,12 @@ button:hover{
 @keyframes floatUp{
  to{ transform:translateY(-60px); opacity:0; }
 }
+
+/* ANIMACIÓN CONTADOR */
+@keyframes pulseCounter{
+ from{transform:scale(1)}
+ to{transform:scale(1.05)}
+}
 </style>
 </head>
 
@@ -380,8 +386,8 @@ for(let i=0;i<25;i++){
  bgHearts.appendChild(s);
 }
 
-/* CONTADOR MEJORADO */
-const start = new Date("2024-09-11T00:00:00");
+/* CONTADOR ULTRA COMPATIBLE IPHONE */
+const start = new Date(2024, 8, 11, 0, 0, 0);
 
 function updateCounter(){
  const now = new Date();
@@ -393,8 +399,10 @@ function updateCounter(){
  const seconds = Math.floor((diff / 1000) % 60);
 
  counter.innerHTML = `
-  <h3>${days} días</h3>
-  ${hours} horas ${minutes} minutos ${seconds} segundos 💗
+  <h3 style="margin:0;font-size:28px;animation:pulseCounter 1s infinite alternate;">
+   ${days} días 💗
+  </h3>
+  ${hours} horas ${minutes} minutos ${seconds} segundos
  `;
 }
 
