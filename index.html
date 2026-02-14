@@ -15,7 +15,7 @@ body{
  overflow-x:hidden;
 }
 
-/* BOTONES */
+/* BOTONES BONITOS */
 button{
  background:linear-gradient(45deg,#ff4da6,#ff85c2);
  border:none;
@@ -40,17 +40,7 @@ button::after{
 button:hover::after{transform:translateX(100%)}
 button:hover{transform:scale(1.07)}
 
-/* CARDS */
-.card{
- background:rgba(255,255,255,.94);
- color:#4a0030;
- margin:22px auto;
- padding:25px;
- width:92%;
- max-width:560px;
- border-radius:28px;
- box-shadow:0 12px 40px rgba(0,0,0,.5);
-}
+/* TITULOS */
 .card h2{
  text-align:center;
  background:linear-gradient(45deg,#ff4da6,#ffd1e8);
@@ -98,6 +88,18 @@ input{
  to{transform:translateY(110vh);}
 }
 
+/* CARDS */
+.card{
+ background:rgba(255,255,255,.94);
+ color:#4a0030;
+ margin:22px auto;
+ padding:25px;
+ width:92%;
+ max-width:560px;
+ border-radius:28px;
+ box-shadow:0 12px 40px rgba(0,0,0,.5);
+}
+
 /* IMAGENES */
 .circleImg,.musicCover{
  width:170px;height:170px;
@@ -108,15 +110,10 @@ input{
 }
 
 /* CAROUSEL */
-.carousel{
- display:flex;
- gap:14px;
- overflow:hidden;
-}
+.carousel{display:flex;gap:14px;overflow:hidden}
 .carousel img{
  width:180px;height:140px;
- object-fit:cover;
- border-radius:16px;
+ object-fit:cover;border-radius:16px;
  animation:slide 18s linear infinite;
 }
 @keyframes slide{
@@ -132,8 +129,7 @@ input{
 }
 .grid img{
  width:100%;height:120px;
- object-fit:cover;
- border-radius:12px;
+ object-fit:cover;border-radius:12px;
  cursor:pointer;
 }
 
@@ -164,7 +160,7 @@ input{
  to{opacity:0;transform:translateY(-60px)}
 }
 
-/* CARTA */
+/* CARTA REAL */
 #cartaOverlay{
  position:fixed;
  inset:0;
@@ -174,25 +170,48 @@ input{
  align-items:center;
  z-index:30000;
 }
+
 .carta{
- background:#fff8ee;
+ background:
+ repeating-linear-gradient(
+ 0deg,
+ #fff8ee,
+ #fff8ee 28px,
+ #f3e6d8 29px
+ );
  color:#3a1a00;
- padding:40px;
+ padding:42px;
  border-radius:18px;
  width:92%;
- max-width:600px;
+ max-width:620px;
  font-size:18px;
  line-height:1.7;
- box-shadow:0 0 40px rgba(0,0,0,.5);
+ box-shadow:0 0 50px rgba(0,0,0,.6);
  white-space:pre-line;
  min-height:260px;
+ position:relative;
+}
+
+/* sello */
+.sello{
+ position:absolute;
+ right:20px;
+ bottom:18px;
+ font-size:42px;
+ opacity:0;
+ transform:scale(.3) rotate(-20deg);
+}
+.sello.show{
+ animation:sellar .6s ease-out forwards;
+}
+@keyframes sellar{
+ to{opacity:1;transform:scale(1) rotate(0)}
 }
 </style>
 </head>
 
 <body>
 
-<!-- LOGIN -->
 <div id="login">
 <div class="loginCard">
 <h2>Contraseña 💖</h2>
@@ -206,7 +225,6 @@ input{
 <img id="zoomImg">
 </div>
 
-<!-- AUDIO -->
 <audio id="bgMusic" loop>
 <source src="https://files.catbox.moe/4nrc17.mp3">
 </audio>
@@ -215,14 +233,16 @@ input{
 <source src="https://files.catbox.moe/egr68n.mp3">
 </audio>
 
-<!-- TIEMPO -->
+<!-- sonidos carta -->
+<audio id="writeSound" src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3"></audio>
+<audio id="stampSound" src="https://assets.mixkit.co/active_storage/sfx/212/212-preview.mp3"></audio>
+
 <div class="card">
 <h2>💞 Nuestro tiempo juntos 💞</h2>
 <img class="circleImg" src="https://i.imgur.com/m2rqpiu.jpeg">
 <div id="counter" style="text-align:center;font-size:22px;font-weight:bold;"></div>
 </div>
 
-<!-- MUSICA -->
 <div class="card">
 <h2>🎵 Nuestra canción 🎵</h2>
 <img class="musicCover" src="https://i.imgur.com/jbyIzFT.jpeg">
@@ -231,7 +251,6 @@ input{
 </div>
 </div>
 
-<!-- CAROUSEL -->
 <div class="card">
 <h2>🎞️ Momentos especiales 🎞️</h2>
 <div class="carousel">
@@ -246,7 +265,6 @@ input{
 </div>
 </div>
 
-<!-- GRID -->
 <div class="card">
 <h2>📸 Todos nuestros recuerdos 📸</h2>
 <div class="grid">
@@ -261,19 +279,20 @@ input{
 </div>
 </div>
 
-<!-- BOTON CARTA -->
 <div class="card" style="text-align:center">
-<button onclick="openCarta()">💌 Abrir carta especial</button>
+<button onclick="openCarta()">💌 Abrir carta</button>
 </div>
 
-<!-- CARTA -->
 <div id="cartaOverlay" onclick="this.style.display='none'">
-<div class="carta" id="cartaTexto"></div>
+<div class="carta">
+<div id="cartaTexto"></div>
+<div id="sello" class="sello">💌</div>
+</div>
 </div>
 
 <script>
 
-/* LLUVIA LOGIN */
+/* lluvia login */
 setInterval(()=>{
  const h=document.createElement("div");
  h.className="rain";
@@ -284,7 +303,6 @@ setInterval(()=>{
  setTimeout(()=>h.remove(),8000);
 },350);
 
-/* ENTRAR */
 function enter(){
  if(pass.value==="Jerry"){
   login.style.display="none";
@@ -293,7 +311,6 @@ function enter(){
  }
 }
 
-/* LLUVIA FONDO */
 function lluviaFondo(){
  setInterval(()=>{
   const e=document.createElement("div");
@@ -306,20 +323,17 @@ function lluviaFondo(){
  },1100);
 }
 
-/* CONTADOR */
 const start=new Date("2024-09-11");
 setInterval(()=>{
  const d=Math.floor((Date.now()-start)/86400000);
  counter.innerHTML=d+" días juntos 🤎";
 },1000);
 
-/* MUSICA */
 function toggleSong(){
  if(ourSong.paused){bgMusic.pause();ourSong.play();}
  else{ourSong.pause();bgMusic.play();}
 }
 
-/* ZOOM */
 document.querySelectorAll(".grid img,.carousel img").forEach(img=>{
  img.onclick=()=>{
   zoom.style.display="flex";
@@ -327,14 +341,7 @@ document.querySelectorAll(".grid img,.carousel img").forEach(img=>{
  }
 });
 
-/* FRASES TOUCH */
-const frases=[
-"Te amo 🤎",
-"Siempre tú 🥰",
-"Mi amor ✨",
-"Eres mi lugar seguro 💫",
-"Contigo todo es mejor 🤎"
-];
+const frases=["Te amo 🤎","Siempre tú 🥰","Mi amor ✨"];
 let last=0;
 document.addEventListener("click",e=>{
  if(login.style.display!=="none") return;
@@ -349,28 +356,40 @@ document.addEventListener("click",e=>{
  setTimeout(()=>el.remove(),1400);
 });
 
-/* CARTA + POEMAS */
+/* carta con poemas completos */
 const textoCarta=`Esta carta es para ti…
 
-Cuando me enamoré de ti, entendí que no era que todas aquellas personas que me hablaron del amor estuvieran mal, sino que nunca me hablaron de ti.
+Cuando me enamoré de ti
 
-Si te apagas, te prometo amarte con más fuerza.
-Prometo devolverte la luz que te caracteriza, regar tu jardín con el amor que me brindaste cuando estaba marchito.
-Te prometo cuidarte cuando enfermes y hacer lo que haga falta para asegurarme de que vuelvas a florecer.
+"Cuando me enamoré de ti, entendí que no era que todas aquellas personas que me hablaron del amor estuvieran mal, sino que nunca me hablaron de ti."
 
-Porque, mi amor, si hay algo que le pido a Dios es que, si alguna vez llega a ser necesario, me permita ser aquello que te haga falta, como tú lo fuiste conmigo.
+Te prometo
+
+"si te apagas, te prometo amarte con más fuerza.
+
+Prometo devolverte la luz que te caracteriza, regar tu jardín con el amor que me brindaste cuando estaba marchito. Te prometo cuidarte cuando enfermes y hacer lo que haga falta para asegurarme de que vuelvas a florecer.
+
+Porque, mi amor, si hay algo que le pido a Dios es que, si alguna vez llega a ser necesario, me permita ser aquello que te haga falta, como tú lo fuiste conmigo."
 
 Te amo mi cebollín 🤎
-Espero compartir más cosas juntos 🥰🧸`;
+Espero compartir más cosas juntos 🥰🧸
+
+— Con amor`;
 
 function openCarta(){
  cartaOverlay.style.display="flex";
  cartaTexto.innerHTML="";
+ sello.classList.remove("show");
  let i=0;
  function escribir(){
   if(i<textoCarta.length){
    cartaTexto.innerHTML+=textoCarta[i++];
-   setTimeout(escribir,35);
+   writeSound.currentTime=0;
+   writeSound.play().catch(()=>{});
+   setTimeout(escribir,32);
+  }else{
+   stampSound.play().catch(()=>{});
+   sello.classList.add("show");
   }
  }
  escribir();
