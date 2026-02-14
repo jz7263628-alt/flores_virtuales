@@ -2,152 +2,154 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Para mi cebollín 🤎</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- TRUCO MAESTRO: Esto obliga a Imgur a mostrar las fotos siempre -->
 <meta name="referrer" content="no-referrer">
 
 <style>
 *{box-sizing:border-box}
 body{
  margin:0;
- font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
- background: radial-gradient(circle at center, #2d0025 0%, #0a0008 100%);
+ font-family: 'Segoe UI', sans-serif;
+ background:#1a0015; /* Tu color original */
  color:#fff;
  overflow-x:hidden;
 }
 
-/* LOGIN CON CORAZONES ROSAS */
+/* LOGIN ORIGINAL RECUPERADO */
 #login{
  position:fixed; inset:0;
  display:flex; justify-content:center; align-items:center;
- background:#000; z-index:9999;
+ background:#0a0008;
+ z-index:10000;
 }
-.loginHearts { position: absolute; width: 100%; height: 100%; pointer-events: none; }
+#loginHearts { position: absolute; inset: 0; pointer-events: none; }
 .loginCard{
- position:relative; background:rgba(255,255,255,.1); backdrop-filter:blur(20px);
- padding:40px; border-radius:30px; text-align:center;
- border: 1px solid rgba(255, 77, 166, 0.4); box-shadow:0 0 50px rgba(255,0,120,.3);
+ position:relative; background:rgba(255,255,255,.12);
+ backdrop-filter:blur(12px); padding:40px; border-radius:25px;
+ text-align:center; border: 1px solid #ff4da6;
+ box-shadow:0 0 40px rgba(255,0,120,.4);
 }
+input{ padding:12px; border-radius:15px; border:none; text-align:center; font-size:16px; width:200px; }
+.btnLogin{ padding:12px 22px; border:none; border-radius:20px; background:#ff4da6; color:white; font-size:16px; margin-top:12px; cursor:pointer; }
 
-/* CARTA MODAL */
+/* CARTA MODAL (Ventana que se abre) */
 #cartaModal {
- position:fixed; inset:0; background:rgba(0,0,0,0.92);
- display:none; z-index:10000; padding:30px 15px; overflow:auto;
+ position:fixed; inset:0; background:rgba(0,0,0,0.95);
+ display:none; z-index:10001; padding:30px 15px; overflow:auto;
 }
 #cartaBox {
  max-width:600px; margin:40px auto; background:#fff8f0;
  color:#3a1a00; border-radius:25px; padding:35px;
  font-size:18px; line-height:1.7; white-space:pre-line;
- border: 3px solid #8b5a2b; box-shadow: 0 0 50px rgba(139,90,43,0.4);
- text-align: center; position: relative;
+ border: 3px solid #8b5a2b; text-align: center;
+ box-shadow: 0 0 30px #8b5a2b;
 }
 
-/* CARDS */
+/* CARDS ROSA CLARO ORIGINALES */
 .card{
- background:rgba(255,255,255,.92);
- color:#4a0030; margin:22px auto; padding:25px;
- width:95%; max-width:560px; border-radius:28px;
- backdrop-filter:blur(10px); box-shadow:0 15px 45px rgba(0,0,0,0.3);
- border:1px solid rgba(255,255,255,0.3); position: relative; z-index: 10;
+ background:#ffe6f2; color:#5a0033;
+ margin:22px auto; padding:22px; width:92%; max-width:520px;
+ border-radius:22px; box-shadow:0 8px 30px rgba(0,0,0,.4);
+ border:3px dashed #ff99cc; position: relative; z-index: 10;
 }
-.card h2{ text-align:center; margin-top:0; color: #8b5a2b; }
+.card h2{ text-align:center; margin-top:0; }
 
-/* IMAGENES */
 .circleImg, .musicCover {
  width:170px; height:170px; border-radius:50%;
  object-fit:cover; display:block; margin:14px auto; border:6px solid #ffb3d9;
 }
 
-/* CARRUSEL Y GRID */
+/* CARRUSEL ANIMADO */
 .carousel { display:flex; gap:14px; overflow:hidden; padding: 10px 0; }
 .carousel img { width:180px; height:140px; object-fit:cover; border-radius:16px; animation:slide 40s linear infinite; border: 2px solid #ffb3d9; }
 @keyframes slide{ from{transform:translateX(0)} to{transform:translateX(-100%)} }
-.grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(100px,1fr)); gap:10px; }
-.grid img { width:100%; height:120px; object-fit:cover; border-radius:12px; cursor:pointer; }
 
-/* ZOOM */
-#zoom{ position:fixed; inset:0; background:rgba(0,0,0,.9); display:none; justify-content:center; align-items:center; z-index:10001; }
-#zoom img{ max-width:90%; max-height:90%; border-radius:15px; }
+/* GRID */
+.grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(100px,1fr)); gap:10px; }
+.grid img { width:100%; height:120px; object-fit:cover; border-radius:12px; cursor:pointer; border: 2px solid #ffb3d9; }
 
 /* EFECTOS */
 .touchText { position:fixed; color:#ff77bb; font-size:18px; font-weight: bold; pointer-events:none; animation:fadeUp 1.4s ease-out forwards; z-index: 999; }
 @keyframes fadeUp { from{opacity:1; transform:translateY(0)} to{opacity:0; transform:translateY(-60px)} }
-.fallingEmoji { position:fixed; animation: fallEmoji linear forwards; font-size: 26px; top: -50px; z-index: 10001; pointer-events: none; }
+.fallingEmoji { position:fixed; animation: fallEmoji linear forwards; font-size: 26px; top: -50px; z-index: 10002; pointer-events: none; }
 @keyframes fallEmoji { to { transform: translateY(110vh) rotate(360deg); } }
 
-button { padding:14px 25px; border-radius:25px; border:none; background:#8b5a2b; color:white; cursor:pointer; font-weight:bold; }
-input { padding:12px; border-radius:15px; border:none; text-align:center; }
+#zoom{ position:fixed; inset:0; background:rgba(0,0,0,.9); display:none; justify-content:center; align-items:center; z-index:10005; }
+#zoom img{ max-width:90%; max-height:90%; border-radius:15px; }
+
+.btnCarta { background:#8b5a2b; color:white; border:none; padding:15px 30px; border-radius:25px; cursor:pointer; font-size:18px; font-weight:bold; }
 </style>
 </head>
-
 <body>
 
+<!-- LOGIN -->
 <div id="login">
-    <div class="loginHearts" id="loginHearts"></div>
+    <div id="loginHearts"></div>
     <div class="loginCard">
         <h2 style="color: #ff4da6">Contraseña 💖</h2>
         <input id="pass" type="password">
-        <br><br><button onclick="enter()">Entrar</button>
+        <br><button class="btnLogin" onclick="enter()">Entrar</button>
     </div>
 </div>
 
+<!-- VENTANA CARTA -->
 <div id="cartaModal">
- <div style="text-align:center;"><button onclick="cerrarCarta()" style="background:#4a0030;">Cerrar ✉️</button></div>
- <div id="cartaBox"></div>
+    <div style="text-align:center;"><button onclick="cerrarCarta()" style="background:#4a0030; color:white; border:none; padding:10px 20px; border-radius:20px; cursor:pointer;">Cerrar ✉️</button></div>
+    <div id="cartaBox"></div>
 </div>
 
 <div id="zoom" onclick="this.style.display='none'"><img id="zoomImg"></div>
 
+<!-- AUDIOS -->
 <audio id="bgMusic" loop preload="auto"><source src="https://files.catbox.moe"></audio>
 <audio id="ourSong" preload="auto"><source src="https://files.catbox.moe"></audio>
 
 <!-- CONTENIDO -->
 <div class="card">
-    <h2>💞 Nuestro tiempo 💞</h2>
+    <h2>💞 Nuestro tiempo juntos 💞</h2>
     <img class="circleImg" src="https://i.imgur.com" referrerpolicy="no-referrer">
-    <div id="counter" style="text-align:center; font-size:22px; font-weight:bold;"></div>
+    <div id="counter" style="text-align:center; font-size:20px; font-weight:bold;"></div>
 </div>
 
 <div class="card">
     <h2>🎵 Nuestra canción 🎵</h2>
-    <img class="musicCover" src="https://i.imgur.com" id="disco" referrerpolicy="no-referrer">
-    <div style="text-align:center"><button id="btnPlay" onclick="toggleSong()">▶️ Reproducir Especial</button></div>
+    <img class="musicCover" src="https://i.imgur.com" referrerpolicy="no-referrer">
+    <div style="text-align:center">
+        <button onclick="toggleSong()" style="background:#ff4da6; color:white; border:none; padding:10px 20px; border-radius:20px; cursor:pointer;">▶️ Reproducir / Pausar</button>
+    </div>
 </div>
 
 <div class="card">
     <h2>🎞️ Momentos especiales 🎞️</h2>
     <div class="carousel">
-        <img src="https://i.imgur.com" referrerpolicy="no-referrer"><img src="https://i.imgur.com" referrerpolicy="no-referrer">
-        <img src="https://i.imgur.com" referrerpolicy="no-referrer"><img src="https://i.imgur.com" referrerpolicy="no-referrer">
-        <img src="https://i.imgur.com" referrerpolicy="no-referrer"><img src="https://i.imgur.com" referrerpolicy="no-referrer">
+        <img src="https://i.imgur.com" referrerpolicy="no-referrer"><img src="https://i.imgur.com" referrerpolicy="no-referrer"><img src="https://i.imgur.com" referrerpolicy="no-referrer"><img src="https://i.imgur.com" referrerpolicy="no-referrer">
+        <img src="https://i.imgur.com" referrerpolicy="no-referrer"><img src="https://i.imgur.com" referrerpolicy="no-referrer"><img src="https://i.imgur.com" referrerpolicy="no-referrer"><img src="https://i.imgur.com" referrerpolicy="no-referrer">
     </div>
 </div>
 
 <div class="card">
     <h2>📸 Todos nuestros recuerdos 📸</h2>
     <div class="grid">
-        <img src="https://i.imgur.com" referrerpolicy="no-referrer"><img src="https://i.imgur.com" referrerpolicy="no-referrer">
-        <img src="https://i.imgur.com" referrerpolicy="no-referrer"><img src="https://i.imgur.com" referrerpolicy="no-referrer">
-        <img src="https://i.imgur.com" referrerpolicy="no-referrer"><img src="https://i.imgur.com" referrerpolicy="no-referrer">
-        <img src="https://i.imgur.com" referrerpolicy="no-referrer"><img src="https://i.imgur.com" referrerpolicy="no-referrer">
-        <img src="https://i.imgur.com" referrerpolicy="no-referrer"><img src="https://i.imgur.com" referrerpolicy="no-referrer">
+        <img src="https://i.imgur.com" referrerpolicy="no-referrer"><img src="https://i.imgur.com" referrerpolicy="no-referrer"><img src="https://i.imgur.com" referrerpolicy="no-referrer"><img src="https://i.imgur.com" referrerpolicy="no-referrer">
+        <img src="https://i.imgur.com" referrerpolicy="no-referrer"><img src="https://i.imgur.com" referrerpolicy="no-referrer"><img src="https://i.imgur.com" referrerpolicy="no-referrer"><img src="https://i.imgur.com" referrerpolicy="no-referrer">
+        <img src="https://i.imgur.com" referrerpolicy="no-referrer"><img src="https://i.imgur.com" referrerpolicy="no-referrer"><img src="https://i.imgur.com" referrerpolicy="no-referrer"><img src="https://i.imgur.com" referrerpolicy="no-referrer">
     </div>
 </div>
 
 <div class="card" style="text-align:center">
     <h2>💌 Sorpresa Final 💌</h2>
-    <button onclick="abrirCarta()" style="font-size:18px; padding:15px 40px;">Abrir carta ✉️</button>
+    <button class="btnCarta" onclick="abrirCarta()">Abrir carta ✉️</button>
 </div>
 
 <script>
-/* LOGIN HEARTS */
-const loginHearts = document.getElementById('loginHearts');
+/* CORAZONES ROSAS EN LOGIN */
 for(let i=0; i<15; i++){
     const s = document.createElement('span'); s.innerHTML = "💖";
-    s.style.position = "absolute"; s.style.left = Math.random() * 100 + "vw";
-    s.style.top = Math.random() * 100 + "vh"; s.style.fontSize = "20px";
-    s.style.opacity = "0.4"; s.style.animation = `rise ${5+Math.random()*5}s linear infinite`;
-    loginHearts.appendChild(s);
+    s.style.position = "absolute"; s.style.left = Math.random()*100+"vw";
+    s.style.top = Math.random()*100+"vh"; s.style.color="#ff4da6"; s.style.opacity="0.5";
+    document.getElementById('loginHearts').appendChild(s);
 }
 
 function enter(){
@@ -158,12 +160,22 @@ function enter(){
 }
 
 function toggleSong(){
-    const s = document.getElementById('ourSong'), bg = document.getElementById('bgMusic'), b = document.getElementById('btnPlay');
-    if(s.paused){ bg.pause(); s.play(); b.innerHTML="⏸️ Pausar"; }
-    else { s.pause(); bg.play(); b.innerHTML="▶️ Reproducir"; }
+    const s=document.getElementById('ourSong'), bg=document.getElementById('bgMusic');
+    if(s.paused){ bg.pause(); s.play(); } else { s.pause(); bg.play(); }
 }
 
-/* CARTA CON EFECTO LENTO */
+/* FRASES TOUCH CON EMOJIS */
+const frases=["Te amo 🤎","Siempre tú ✨","Mi amor 🥰","Eres mi paz 🌷"];
+document.addEventListener("click", e => {
+    if(document.getElementById('login').style.display === "none") {
+        const el = document.createElement("div"); el.className = "touchText";
+        el.innerHTML = frases[Math.floor(Math.random() * frases.length)];
+        el.style.left = e.clientX + "px"; el.style.top = e.clientY + "px";
+        document.body.appendChild(el); setTimeout(()=>el.remove(), 1400);
+    }
+});
+
+/* CARTA */
 const poema = `Aún recuerdo cuando te vi en el gym… siempre me robabas la barra 😝.
 
 "Si te apagas, te prometo amarte con más fuerza.
@@ -182,24 +194,21 @@ function abrirCarta(){
     document.getElementById('cartaModal').style.display="block";
     const box = document.getElementById('cartaBox'); box.innerHTML = ""; let i=0;
     const interval = setInterval(() => {
-        if(i < poema.length){
-            box.innerHTML += poema[i++];
-            if(i % 8 === 0) dropEmoji(); // Caen emoticones cada 8 caracteres
+        if(i < poema.length){ 
+            box.innerHTML += poema[i++]; 
+            if(i % 10 === 0) dropEmoji(); 
         } else clearInterval(interval);
-    }, 45);
+    }, 50);
 }
 
 function cerrarCarta(){ document.getElementById('cartaModal').style.display="none"; }
 
 function dropEmoji() {
-    const emojis = ["🤎", "🧸", "🌷", "✨", "🥰", "💖", "☁️"];
-    const e = document.createElement("div");
-    e.className = "fallingEmoji";
+    const emojis = ["🤎", "🧸", "🌷", "✨", "🥰"];
+    const e = document.createElement("div"); e.className = "fallingEmoji";
     e.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
-    e.style.left = Math.random() * 92 + "vw";
-    e.style.animationDuration = (5 + Math.random() * 3) + "s"; // MÁS LENTO (5-8 segundos)
-    document.body.appendChild(e);
-    setTimeout(() => e.remove(), 8000);
+    e.style.left = Math.random() * 90 + "vw"; e.style.animationDuration = "6s";
+    document.body.appendChild(e); setTimeout(() => e.remove(), 7000);
 }
 
 const start = new Date("2024-09-11");
@@ -210,17 +219,6 @@ setInterval(() => {
 
 document.querySelectorAll(".grid img, .carousel img").forEach(img => {
     img.onclick = () => { document.getElementById('zoom').style.display = "flex"; document.getElementById('zoomImg').src = img.src; }
-});
-
-/* FRASES TOUCH CON EMOJIS */
-const frases=["Te amo 🤎","Siempre tú ✨","Mi amor 🥰","Eres mi paz 🌷","Mi persona favorita 🧸"];
-document.addEventListener("click", e => {
-    if(document.getElementById('login').style.display === "none") {
-        const el = document.createElement("div"); el.className = "touchText";
-        el.innerHTML = frases[Math.floor(Math.random() * frases.length)];
-        el.style.left = e.clientX + "px"; el.style.top = e.clientY + "px";
-        document.body.appendChild(el); setTimeout(()=>el.remove(), 1400);
-    }
 });
 </script>
 </body>
