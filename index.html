@@ -3,109 +3,177 @@
 <head>
 <meta charset="UTF-8">
 <title>Para mi cebollín 🤎</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
 *{box-sizing:border-box}
 body{
  margin:0;
- font-family:'Segoe UI',sans-serif;
- background:radial-gradient(circle,#2d0025,#0a0008);
+ font-family:Segoe UI, sans-serif;
+ background:linear-gradient(180deg,#140010,#2a0030);
  color:#fff;
  overflow-x:hidden;
 }
 
-/* BOTONES */
-button{
- background:linear-gradient(45deg,#ff4da6,#ff85c2);
- border:none;
- padding:12px 24px;
- border-radius:28px;
- color:white;
- font-weight:bold;
- cursor:pointer;
- transition:.25s;
- box-shadow:0 0 18px rgba(255,77,166,.6);
- position:relative;
- overflow:hidden;
-}
-button::after{
- content:"";
- position:absolute;
- inset:0;
- background:linear-gradient(120deg,transparent,rgba(255,255,255,.4),transparent);
- transform:translateX(-100%);
- transition:.6s;
-}
-button:hover::after{transform:translateX(100%)}
-button:hover{transform:scale(1.07)}
-
-.card h2{
- text-align:center;
- background:linear-gradient(45deg,#ff4da6,#ffd1e8);
- -webkit-background-clip:text;
- -webkit-text-fill-color:transparent;
- margin-top:0;
-}
-
 /* LOGIN */
 #login{
- position:fixed; inset:0;
- display:flex; justify-content:center; align-items:center;
+ position:fixed;
+ inset:0;
+ display:flex;
+ justify-content:center;
+ align-items:center;
  background:#0a0008;
- overflow:hidden;
- z-index:10000;
+ z-index:999;
 }
+#heartsCanvas{position:absolute; inset:0;}
+
 .loginCard{
- background:rgba(255,255,255,.12);
+ position:relative;
+ background:rgba(255,255,255,.15);
  backdrop-filter:blur(14px);
  padding:40px;
- border-radius:26px;
+ border-radius:25px;
  text-align:center;
- border:1px solid #ff4da6;
- z-index:5;
+ box-shadow:0 0 40px rgba(255,0,120,.4);
+ animation:float 4s ease-in-out infinite;
 }
+@keyframes float{
+0%,100%{transform:translateY(0)}
+50%{transform:translateY(-12px)}
+}
+
 input{
  padding:14px;
- border-radius:16px;
+ border-radius:14px;
  border:none;
  text-align:center;
  font-size:16px;
- width:210px;
+ width:200px;
 }
 
-/* lluvia corazones */
-.rain{
+button{
+ padding:12px 20px;
+ border:none;
+ border-radius:20px;
+ background:linear-gradient(45deg,#ff4da6,#ff80bf);
+ color:white;
+ font-size:16px;
+ margin-top:12px;
+ cursor:pointer;
+ transition:.3s;
+}
+button:hover{transform:scale(1.05)}
+
+/* HEART BG */
+.bgHearts span{
  position:fixed;
- top:-40px;
- font-size:22px;
- animation:fall linear forwards;
- opacity:.65;
+ color:#ff4da6;
+ animation:rise linear infinite;
+ opacity:.25;
  pointer-events:none;
 }
+@keyframes rise{
+ from{transform:translateY(100vh) scale(.6)}
+ to{transform:translateY(-10vh) scale(1.2)}
+}
+
+/* PETALOS */
+.petal{
+ position:fixed;
+ top:-20px;
+ font-size:18px;
+ pointer-events:none;
+ animation:fall linear forwards;
+ opacity:.85;
+}
 @keyframes fall{
- to{transform:translateY(110vh);}
+ to{transform:translateY(110vh) rotate(360deg);opacity:.3;}
+}
+
+/* ESTRELLAS */
+.star{
+ position:fixed;
+ width:3px;
+ height:3px;
+ background:white;
+ border-radius:50%;
+ opacity:.5;
+ animation:twinkle 2s infinite alternate;
+}
+@keyframes twinkle{
+ from{opacity:.2}
+ to{opacity:.9}
 }
 
 /* CARDS */
 .card{
- background:rgba(255,255,255,.94);
+ background:#fff;
  color:#4a0030;
  margin:22px auto;
- padding:25px;
- width:92%;
+ padding:22px;
+ width:95%;
  max-width:560px;
- border-radius:28px;
- box-shadow:0 12px 40px rgba(0,0,0,.5);
+ border-radius:24px;
+ box-shadow:0 12px 40px rgba(0,0,0,.25);
+ border:3px solid #ffd6eb;
+ transition:.35s;
+}
+.card:hover{
+ transform:translateY(-6px);
+ box-shadow:0 22px 60px rgba(0,0,0,.35);
 }
 
-/* IMAGENES */
+.card h2{
+ text-align:center;
+ margin-top:0;
+ font-size:22px;
+ background:linear-gradient(45deg,#ff2f92,#ff85c2);
+ -webkit-background-clip:text;
+ -webkit-text-fill-color:transparent;
+}
+
+/* IMAGES */
 .circleImg,.musicCover{
- width:170px;height:170px;
+ width:170px;
+ height:170px;
  border-radius:50%;
  object-fit:cover;
- display:block;margin:auto;
+ display:block;
+ margin:14px auto;
  border:6px solid #ffb3d9;
+ box-shadow:0 10px 25px rgba(0,0,0,.25);
+}
+
+/* GRID */
+.grid{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+ gap:10px;
+}
+.grid img{
+ width:100%;
+ height:140px;
+ object-fit:cover;
+ border-radius:16px;
+ cursor:pointer;
+ transition:.3s;
+}
+.grid img:hover{transform:scale(1.06);}
+
+/* ZOOM */
+#zoom{
+ position:fixed;
+ inset:0;
+ background:rgba(0,0,0,.85);
+ display:none;
+ justify-content:center;
+ align-items:center;
+ z-index:9999;
+}
+#zoom img{
+ max-width:90%;
+ max-height:90%;
+ border-radius:18px;
 }
 
 /* CAROUSEL */
@@ -115,95 +183,38 @@ input{
  overflow:hidden;
 }
 .carousel img{
- width:180px;height:140px;
+ width:180px;
+ height:140px;
  object-fit:cover;
  border-radius:16px;
- animation:slide 18s linear infinite;
+ animation:slide 30s linear infinite;
 }
 @keyframes slide{
  from{transform:translateX(0)}
  to{transform:translateX(-50%)}
 }
 
-/* GRID */
-.grid{
- display:grid;
- grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
- gap:10px;
+/* TYPEWRITER */
+.typewriter{
+ border-right:2px solid #ff4da6;
+ white-space:pre-wrap;
+ animation:blink .8s infinite;
 }
-.grid img{
- width:100%;height:120px;
- object-fit:cover;
- border-radius:12px;
- cursor:pointer;
+@keyframes blink{
+ 0%,100%{border-color:transparent}
+ 50%{border-color:#ff4da6}
 }
 
-/* ZOOM */
-#zoom{
- position:fixed; inset:0;
- background:rgba(0,0,0,.9);
- display:none;
- justify-content:center;
- align-items:center;
- z-index:20000;
-}
-#zoom img{
- max-width:92%;
- max-height:92%;
+.secretLetter{
+ margin-top:15px;
+ padding:18px;
  border-radius:18px;
-}
-
-/* FRASES TOUCH */
-.touchText{
- position:fixed;
- color:#ff77bb;
- font-weight:bold;
- animation:fadeUp 1.3s forwards;
- pointer-events:none;
-}
-@keyframes fadeUp{
- to{opacity:0;transform:translateY(-60px)}
-}
-
-/* CARTA */
-#cartaOverlay{
- position:fixed;
- inset:0;
- background:rgba(0,0,0,.75);
+ background:linear-gradient(45deg,#ffe0f0,#ffd1ea);
  display:none;
- justify-content:center;
- align-items:center;
- z-index:30000;
 }
 
-.carta{
- background:#fff8ee;
- color:#3a1a00;
- padding:40px;
- border-radius:18px;
- width:92%;
- max-width:600px;
- font-size:18px;
- line-height:1.7;
- box-shadow:0 0 40px rgba(0,0,0,.5);
- white-space:pre-line;
- animation:respirar 6s ease-in-out infinite alternate;
-}
-
-@keyframes respirar{
- from{transform:scale(1)}
- to{transform:scale(1.02)}
-}
-
-.resaltar{
- color:#b06a00;
- font-weight:bold;
- font-size:20px;
-}
-
-.firma{
- font-family:cursive;
- font-size:22px;
+.memoryBox{
+ text-align:center;
  margin-top:12px;
 }
 </style>
@@ -212,10 +223,11 @@ input{
 <body>
 
 <div id="login">
+<canvas id="heartsCanvas"></canvas>
 <div class="loginCard">
-<h2>Contraseña 💖</h2>
-<input id="pass" type="password">
-<br><br>
+<h2>Ingresa la contraseña 💖</h2>
+<input id="pass">
+<br>
 <button onclick="enter()">Entrar</button>
 </div>
 </div>
@@ -232,37 +244,28 @@ input{
 <source src="https://files.catbox.moe/egr68n.mp3">
 </audio>
 
+<div class="bgHearts" id="bgHearts"></div>
+
+<!-- TIEMPO -->
 <div class="card">
 <h2>💞 Nuestro tiempo juntos 💞</h2>
 <img class="circleImg" src="https://i.imgur.com/m2rqpiu.jpeg">
-<div id="counter" style="text-align:center;font-size:22px;font-weight:bold;"></div>
+<div id="counter"></div>
 </div>
 
+<!-- CANCIÓN -->
 <div class="card">
 <h2>🎵 Nuestra canción 🎵</h2>
 <img class="musicCover" src="https://i.imgur.com/jbyIzFT.jpeg">
 <div style="text-align:center">
-<button onclick="toggleSong()">▶️ Reproducir</button>
+<button id="btnPlay" onclick="toggleSong()">▶️ Reproducir</button>
 </div>
 </div>
 
+<!-- CAROUSEL -->
 <div class="card">
 <h2>🎞️ Momentos especiales 🎞️</h2>
 <div class="carousel">
-<img src="https://i.imgur.com/tpH81jp.jpeg">
-<img src="https://i.imgur.com/mOQ2xhz.jpeg">
-<img src="https://i.imgur.com/ra5P475.jpeg">
-<img src="https://i.imgur.com/0xnanwq.jpeg">
-<img src="https://i.imgur.com/2Xh4XhC.jpeg">
-<img src="https://i.imgur.com/UX4FUgZ.jpeg">
-<img src="https://i.imgur.com/tpH81jp.jpeg">
-<img src="https://i.imgur.com/mOQ2xhz.jpeg">
-</div>
-</div>
-
-<div class="card">
-<h2>📸 Todos nuestros recuerdos 📸</h2>
-<div class="grid">
 <img src="https://i.imgur.com/tpH81jp.jpeg">
 <img src="https://i.imgur.com/mOQ2xhz.jpeg">
 <img src="https://i.imgur.com/ra5P475.jpeg">
@@ -274,112 +277,143 @@ input{
 </div>
 </div>
 
-<div class="card" style="text-align:center">
-<button onclick="openCarta()">💌 Abrir carta</button>
+<!-- GRID -->
+<div class="card">
+<h2>📸 Todos nuestros recuerdos 📸</h2>
+<div class="grid">
+<img src="https://i.imgur.com/tpH81jp.jpeg">
+<img src="https://i.imgur.com/mOQ2xhz.jpeg">
+<img src="https://i.imgur.com/ra5P475.jpeg">
+<img src="https://i.imgur.com/0xnanwq.jpeg">
+<img src="https://i.imgur.com/2Xh4XhC.jpeg">
+<img src="https://i.imgur.com/UX4FUgZ.jpeg">
+<img src="https://i.imgur.com/3h5EZdw.jpeg">
+<img src="https://i.imgur.com/8yDYtN4.jpeg">
+<img src="https://i.imgur.com/1IveqjS.jpeg">
+<img src="https://i.imgur.com/D2fqpOe.jpeg">
+<img src="https://i.imgur.com/cqMYyp1.jpeg">
+<img src="https://i.imgur.com/S888hKj.jpeg">
+</div>
 </div>
 
-<div id="cartaOverlay" onclick="this.style.display='none'">
-<div class="carta" id="cartaTexto"></div>
+<!-- POEMAS -->
+<div class="card">
+<h2>📜 Poemas especiales 📜</h2>
+<div id="poemaTexto" class="typewriter"></div>
+</div>
+
+<!-- CARTA SECRETA -->
+<div class="card">
+<h2>💌 Mensaje secreto 💌</h2>
+<button onclick="revealLetter()">Abrir carta</button>
+<div class="secretLetter" id="secretLetter">
+No eres solo mi persona favorita —
+eres mi lugar seguro,
+mi calma,
+mi alegría diaria,
+mi coincidencia más bonita.
+</div>
+</div>
+
+<!-- RECUERDO -->
+<div class="card">
+<h2>📅 Recuerdo del día</h2>
+<button onclick="showMemory()">Mostrar</button>
+<div class="memoryBox" id="memoryBox"></div>
 </div>
 
 <script>
-
-/* lluvia login infinita */
-setInterval(()=>{
- const h=document.createElement("div");
- h.className="rain";
- h.innerHTML="💖";
- h.style.left=Math.random()*100+"vw";
- h.style.animationDuration=(5+Math.random()*3)+"s";
- login.appendChild(h);
- setTimeout(()=>h.remove(),8000);
-},350);
-
 function enter(){
  if(pass.value==="Jerry"){
   login.style.display="none";
   bgMusic.play().catch(()=>{});
-  lluviaFondo();
  }
 }
 
-function lluviaFondo(){
- setInterval(()=>{
-  const e=document.createElement("div");
-  e.className="rain";
-  e.innerHTML="🤎";
-  e.style.left=Math.random()*100+"vw";
-  e.style.animationDuration="8s";
-  document.body.appendChild(e);
-  setTimeout(()=>e.remove(),9000);
- },1100);
+/* AUDIO */
+function toggleSong(){
+ if(ourSong.paused){
+  bgMusic.pause();
+  ourSong.play();
+  btnPlay.innerHTML="⏸️ Pausar";
+ } else {
+  ourSong.pause();
+  bgMusic.play();
+  btnPlay.innerHTML="▶️ Reproducir";
+ }
 }
 
+/* ZOOM */
+document.querySelectorAll(".grid img").forEach(img=>{
+ img.onclick=()=>{ zoom.style.display="flex"; zoomImg.src=img.src; }
+});
+
+/* HEARTS BG */
+for(let i=0;i<20;i++){
+ const s=document.createElement("span");
+ s.innerHTML="❤";
+ s.style.left=Math.random()*100+"vw";
+ s.style.fontSize=(16+Math.random()*26)+"px";
+ s.style.animationDuration=(8+Math.random()*10)+"s";
+ bgHearts.appendChild(s);
+}
+
+/* PETALOS */
+setInterval(()=>{
+ const p=document.createElement("div");
+ p.className="petal";
+ p.innerText="🌸";
+ p.style.left=Math.random()*100+"vw";
+ p.style.animationDuration=(5+Math.random()*5)+"s";
+ document.body.appendChild(p);
+ setTimeout(()=>p.remove(),9000);
+},900);
+
+/* ESTRELLAS */
+for(let i=0;i<60;i++){
+ const s=document.createElement("div");
+ s.className="star";
+ s.style.left=Math.random()*100+"vw";
+ s.style.top=Math.random()*100+"vh";
+ document.body.appendChild(s);
+}
+
+/* COUNTER */
 const start=new Date("2024-09-11");
 setInterval(()=>{
  const d=Math.floor((Date.now()-start)/86400000);
- counter.innerHTML=d+" días juntos 🤎";
-},1000);
+ counter.innerHTML=d+" días 💗";
+},60000);
 
-function toggleSong(){
- if(ourSong.paused){bgMusic.pause();ourSong.play();}
- else{ourSong.pause();bgMusic.play();}
-}
+/* TYPEWRITER */
+const poemaCompleto=`Cuando me enamoré de ti, entendí que nunca me hablaron de ti.
 
-document.querySelectorAll(".grid img,.carousel img").forEach(img=>{
- img.onclick=()=>{
-  zoom.style.display="flex";
-  zoomImg.src=img.src;
- }
-});
+Si te apagas, te amaré con más fuerza.
+Si caes, te levanto.
+Si dudas, te recuerdo quién eres.`;
 
-const frases=["Te amo 🤎","Siempre tú 🥰","Mi amor ✨"];
-let last=0;
-document.addEventListener("click",e=>{
- if(login.style.display!=="none") return;
- if(Date.now()-last<900) return;
- last=Date.now();
- const el=document.createElement("div");
- el.className="touchText";
- el.innerHTML=frases[Math.floor(Math.random()*frases.length)];
- el.style.left=e.clientX+"px";
- el.style.top=e.clientY+"px";
- document.body.appendChild(el);
- setTimeout(()=>el.remove(),1400);
-});
-
-/* POEMAS COMPLETOS — aparición por párrafos */
-const bloques = [
-`<span class="resaltar">Cuando me enamoré de ti</span>
-
-"Cuando me enamoré de ti, entendí que no era que todas aquellas personas que me hablaron del amor estuvieran mal, sino que nunca me hablaron de ti."`,
-
-`<span class="resaltar">Te prometo</span>
-
-"Si te apagas, te prometo amarte con más fuerza.
-
-Prometo devolverte la luz que te caracteriza, regar tu jardín con el amor que me brindaste cuando estaba marchito. Te prometo cuidarte cuando enfermes y hacer lo que haga falta para asegurarme de que vuelvas a florecer.
-
-Porque, mi amor, si hay algo que le pido a Dios es que, si alguna vez llega a ser necesario, me permita ser aquello que te haga falta, como tú lo fuiste conmigo."`,
-
-`Te amo mi cebollín 🤎
-<span class="firma">— Siempre contigo 🧸</span>`
-];
-
-function openCarta(){
- cartaOverlay.style.display="flex";
- cartaTexto.innerHTML="";
+function typeWriter(text, el){
  let i=0;
- function next(){
-  if(i<bloques.length){
-   cartaTexto.innerHTML += bloques[i] + "\n\n";
-   i++;
-   setTimeout(next, 1400);
-  }
- }
- next();
+ function w(){ if(i<text.length){ el.textContent+=text[i++]; setTimeout(w,28);} }
+ w();
+}
+setTimeout(()=>typeWriter(poemaCompleto,poemaTexto),1200);
+
+/* RECUERDOS */
+const memories=[
+"El día de los jitomates",
+"El gym y la barra 😝",
+"Nuestro primer Holaaa :)"
+];
+function showMemory(){
+ memoryBox.innerText=memories[Math.floor(Math.random()*memories.length)];
 }
 
+/* CARTA */
+function revealLetter(){
+ secretLetter.style.display="block";
+}
 </script>
+
 </body>
 </html>
