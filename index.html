@@ -28,7 +28,6 @@ body{
 }
 
 .loginCard{
- position:relative;
  background:rgba(255,255,255,.15);
  backdrop-filter:blur(14px);
  padding:40px;
@@ -62,41 +61,38 @@ button{
  margin-top:12px;
  cursor:pointer;
  transition:.25s;
- box-shadow:0 8px 18px rgba(0,0,0,.3);
 }
 
 button:hover{
  transform:translateY(-3px) scale(1.05);
 }
 
-/* FONDO CORAZONES */
+/* FONDO CORAZONES CAFÉ */
 
 .bgHearts span{
  position:fixed;
- color:#ff4da6;
- opacity:.25;
+ color:#8b5a2b;
+ opacity:.35;
  pointer-events:none;
- animation:rise linear infinite;
+ animation:fall linear infinite;
 }
 
-@keyframes rise{
- from{transform:translateY(110vh) scale(.6)}
- to{transform:translateY(-10vh) scale(1.2)}
+@keyframes fall{
+ from{transform:translateY(-10vh)}
+ to{transform:translateY(110vh)}
 }
 
-/* CARDS */
+/* CARD */
 
 .card{
- background:rgba(255,255,255,.88);
+ background:rgba(255,255,255,.9);
  color:#4a0030;
  margin:22px auto;
  padding:22px;
  width:95%;
  max-width:560px;
  border-radius:24px;
- backdrop-filter:blur(10px);
  box-shadow:0 12px 40px rgba(0,0,0,.25);
- border:2px solid rgba(255,182,210,.6);
 }
 
 .card h2{
@@ -104,25 +100,13 @@ button:hover{
  margin-top:0;
 }
 
-/* IMAGES */
-
-.circleImg{
+.circleImg,.musicCover{
  width:170px;
  height:170px;
  border-radius:50%;
  object-fit:cover;
  display:block;
  margin:14px auto;
- border:6px solid #ffb3d9;
-}
-
-.musicCover{
- width:170px;
- height:170px;
- border-radius:50%;
- object-fit:cover;
- margin:auto;
- display:block;
  border:6px solid #ffb3d9;
 }
 
@@ -181,13 +165,6 @@ button:hover{
  border-radius:18px;
 }
 
-/* TEXTO */
-
-.finalText{
- white-space:pre-line;
- line-height:1.7;
-}
-
 /* FRASES TOUCH */
 
 .touchText{
@@ -203,10 +180,43 @@ button:hover{
  to{opacity:0; transform:translateY(-40px)}
 }
 
+/* CARTA MODAL */
+
+#cartaModal{
+ position:fixed;
+ inset:0;
+ background:#fff;
+ color:#3a1a00;
+ display:none;
+ z-index:10000;
+ padding:40px 22px;
+ overflow:auto;
+}
+
+#cartaBox{
+ max-width:700px;
+ margin:auto;
+ background:#fff8f0;
+ border-radius:20px;
+ padding:30px;
+ box-shadow:0 0 30px rgba(0,0,0,.2);
+ font-size:18px;
+ line-height:1.7;
+ white-space:pre-line;
+}
+
+.btnCarta{
+ font-size:20px;
+ padding:16px 28px;
+ border-radius:30px;
+}
+
 </style>
 </head>
 
 <body>
+
+<!-- LOGIN -->
 
 <div id="login">
 <div class="loginCard">
@@ -217,8 +227,17 @@ button:hover{
 </div>
 </div>
 
+<!-- ZOOM -->
+
 <div id="zoom" onclick="this.style.display='none'">
 <img id="zoomImg">
+</div>
+
+<!-- CARTA MODAL -->
+
+<div id="cartaModal">
+<button onclick="cerrarCarta()">Cerrar ✉️</button>
+<div id="cartaBox"></div>
 </div>
 
 <audio id="bgMusic" loop>
@@ -232,6 +251,7 @@ button:hover{
 <div class="bgHearts" id="bgHearts"></div>
 
 <!-- CONTADOR -->
+
 <div class="card">
 <h2>💞 Nuestro tiempo juntos 💞</h2>
 <img class="circleImg" src="https://i.imgur.com/m2rqpiu.jpeg">
@@ -239,6 +259,7 @@ button:hover{
 </div>
 
 <!-- CANCIÓN -->
+
 <div class="card">
 <h2>🎵 Nuestra canción 🎵</h2>
 <img class="musicCover" src="https://i.imgur.com/jbyIzFT.jpeg">
@@ -248,6 +269,7 @@ button:hover{
 </div>
 
 <!-- CAROUSEL -->
+
 <div class="card">
 <h2>🎞️ Momentos especiales 🎞️</h2>
 <div class="carousel">
@@ -257,12 +279,11 @@ button:hover{
 <img src="https://i.imgur.com/0xnanwq.jpeg">
 <img src="https://i.imgur.com/2Xh4XhC.jpeg">
 <img src="https://i.imgur.com/UX4FUgZ.jpeg">
-<img src="https://i.imgur.com/3h5EZdw.jpeg">
-<img src="https://i.imgur.com/8yDYtN4.jpeg">
 </div>
 </div>
 
 <!-- GRID -->
+
 <div class="card">
 <h2>📸 Todos nuestros recuerdos 📸</h2>
 <div class="grid">
@@ -272,17 +293,15 @@ button:hover{
 <img src="https://i.imgur.com/0xnanwq.jpeg">
 <img src="https://i.imgur.com/2Xh4XhC.jpeg">
 <img src="https://i.imgur.com/UX4FUgZ.jpeg">
-<img src="https://i.imgur.com/3h5EZdw.jpeg">
-<img src="https://i.imgur.com/8yDYtN4.jpeg">
-<img src="https://i.imgur.com/1IveqjS.jpeg">
-<img src="https://i.imgur.com/D2fqpOe.jpeg">
-<img src="https://i.imgur.com/cqMYyp1.jpeg">
-<img src="https://i.imgur.com/S888hKj.jpeg">
 </div>
 </div>
 
-<!-- CARTA + POEMAS -->
-<div class="card finalText" id="typedText"></div>
+<!-- BOTÓN CARTA -->
+
+<div class="card" style="text-align:center">
+<h2>💌 Sorpresa final 💌</h2>
+<button class="btnCarta" onclick="abrirCarta()">Abrir carta ✉️</button>
+</div>
 
 <script>
 
@@ -311,16 +330,16 @@ function toggleSong(){
 const start=new Date("2024-09-11");
 setInterval(()=>{
  const d=Math.floor((Date.now()-start)/86400000);
- counter.innerHTML=d+" días juntos 💗";
+ counter.innerHTML=d+" días juntos 🤎";
 },1000);
 
-/* CORAZONES BG — LIGERO */
-for(let i=0;i<18;i++){
+/* CORAZONES CAFÉ */
+for(let i=0;i<24;i++){
  const s=document.createElement("span");
  s.innerHTML="🤎";
  s.style.left=Math.random()*100+"vw";
  s.style.fontSize=(16+Math.random()*22)+"px";
- s.style.animationDuration=(8+Math.random()*8)+"s";
+ s.style.animationDuration=(6+Math.random()*6)+"s";
  bgHearts.appendChild(s);
 }
 
@@ -332,37 +351,31 @@ document.querySelectorAll(".grid img").forEach(img=>{
  }
 });
 
-/* FRASES TOUCH — CONTROLADAS */
+/* FRASES TOUCH */
 let lastTap=0;
-const frases=["Te amo 🤎","Siempre tú","Mi amor","Eres mi paz","Mi persona favorita"];
+const frases=["Te amo 🤎","Siempre tú","Mi amor","Eres mi paz"];
 document.addEventListener("click",e=>{
  const now=Date.now();
  if(now-lastTap<700) return;
  lastTap=now;
-
  const el=document.createElement("div");
  el.className="touchText";
  el.innerHTML=frases[Math.floor(Math.random()*frases.length)];
- el.style.left=e.clientX+"px";
- el.style.top=e.clientY+"px";
+ el.style.left=e.clientX+"px;
+ el.style.top=e.clientY+"px;
  document.body.appendChild(el);
  setTimeout(()=>el.remove(),1400);
 });
 
-/* TEXTO AUTO + POEMAS SIN IV */
+/* CARTA ESCRITURA AUTOMÁTICA */
 
-const texto=`
-Aún recuerdo cuando te vi en el gym…
-Siempre me robabas la barra 😝
+const cartaTexto = `
+si te apagas, te prometo amarte con más fuerza.
 
-Nuestra primera cita fue por jitomates — perfecta.
-
-Te prometo:
-si te apagas, te amaré con más fuerza.
 Prometo devolverte la luz que te caracteriza,
 regar tu jardín con el amor que me brindaste,
 cuidarte cuando enfermes
-y hacer lo que haga falta para verte florecer.
+y hacer lo necesario para verte florecer.
 
 Cuando me enamoré de ti,
 entendí que nadie me habló mal del amor —
@@ -374,14 +387,22 @@ Te amo mi cebollín 🤎
 Espero compartir más cosas juntos 🥰🧸
 `;
 
-let i=0;
-function type(){
- if(i<texto.length){
-  typedText.innerHTML+=texto[i++];
-  setTimeout(type,28);
+function abrirCarta(){
+ cartaModal.style.display="block";
+ cartaBox.innerHTML="";
+ let i=0;
+ function escribir(){
+  if(i<cartaTexto.length){
+   cartaBox.innerHTML+=cartaTexto[i++];
+   setTimeout(escribir,30);
+  }
  }
+ escribir();
 }
-type();
+
+function cerrarCarta(){
+ cartaModal.style.display="none";
+}
 
 </script>
 </body>
