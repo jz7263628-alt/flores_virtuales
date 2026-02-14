@@ -7,33 +7,35 @@
 
 <style>
 *{box-sizing:border-box}
-html,body{margin:0;min-height:100%;overflow-x:hidden;font-family:Segoe UI,sans-serif}
-
 body{
-background:linear-gradient(180deg,#140010,#2a0030);
-color:#fff;
+ margin:0;
+ font-family:Segoe UI,sans-serif;
+ background:#140010;
+ color:#fff;
+ overflow-x:hidden;
 }
 
 /* LOGIN */
 
 #login{
-position:fixed; inset:0;
-display:flex; justify-content:center; align-items:center;
-background:#0a0008;
-z-index:999;
+ position:fixed;
+ inset:0;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ background:#0a0008;
+ z-index:999;
 }
 
-#heartsCanvas{position:absolute; inset:0;}
-
 .loginCard{
-position:relative;
-background:rgba(255,255,255,.15);
-backdrop-filter:blur(14px);
-padding:40px;
-border-radius:25px;
-text-align:center;
-box-shadow:0 0 40px rgba(255,0,120,.4);
-animation:float 4s ease-in-out infinite;
+ position:relative;
+ background:rgba(255,255,255,.15);
+ backdrop-filter:blur(14px);
+ padding:40px;
+ border-radius:25px;
+ text-align:center;
+ box-shadow:0 0 40px rgba(255,0,120,.4);
+ animation:float 4s ease-in-out infinite;
 }
 
 @keyframes float{
@@ -42,169 +44,163 @@ animation:float 4s ease-in-out infinite;
 }
 
 input{
-padding:14px;border-radius:14px;border:none;
-text-align:center;font-size:16px;width:200px;
+ padding:14px;
+ border-radius:14px;
+ border:none;
+ text-align:center;
+ font-size:16px;
+ width:200px;
 }
 
 button{
-padding:12px 20px;
-border:none;border-radius:20px;
-background:linear-gradient(45deg,#ff4da6,#ff80bf);
-color:white;font-size:15px;
-cursor:pointer;
-transition:.3s;
-box-shadow:0 0 12px rgba(255,0,120,.5);
+ padding:12px 22px;
+ border:none;
+ border-radius:20px;
+ background:linear-gradient(45deg,#ff4da6,#ff80bf);
+ color:white;
+ font-size:16px;
+ margin-top:12px;
+ cursor:pointer;
+ transition:.25s;
+ box-shadow:0 8px 18px rgba(0,0,0,.3);
 }
 
-button:hover{transform:scale(1.08)}
+button:hover{
+ transform:translateY(-3px) scale(1.05);
+}
 
-/* HEART BG */
+/* FONDO CORAZONES */
 
 .bgHearts span{
-position:fixed;
-color:#ff4da6;
-animation:rise linear infinite;
-opacity:.25;
-pointer-events:none;
+ position:fixed;
+ color:#ff4da6;
+ opacity:.25;
+ pointer-events:none;
+ animation:rise linear infinite;
 }
 
 @keyframes rise{
-from{transform:translateY(100vh)}
-to{transform:translateY(-10vh)}
+ from{transform:translateY(110vh) scale(.6)}
+ to{transform:translateY(-10vh) scale(1.2)}
 }
 
 /* CARDS */
 
 .card{
-background:rgba(255,255,255,.78);
-color:#4a0030;
-margin:22px auto;
-padding:22px;
-width:95%;
-max-width:560px;
-border-radius:24px;
-backdrop-filter:blur(12px);
-border:2px solid rgba(255,182,210,.6);
-box-shadow:0 12px 40px rgba(0,0,0,.25);
+ background:rgba(255,255,255,.88);
+ color:#4a0030;
+ margin:22px auto;
+ padding:22px;
+ width:95%;
+ max-width:560px;
+ border-radius:24px;
+ backdrop-filter:blur(10px);
+ box-shadow:0 12px 40px rgba(0,0,0,.25);
+ border:2px solid rgba(255,182,210,.6);
 }
 
 .card h2{
-text-align:center;
-margin-top:0;
-font-size:22px;
-background:linear-gradient(45deg,#ff2f92,#ff85c2);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
+ text-align:center;
+ margin-top:0;
 }
 
 /* IMAGES */
 
-.circleImg,.musicCover{
-width:170px;height:170px;border-radius:50%;
-object-fit:cover;display:block;margin:14px auto;
-border:6px solid #ffb3d9;
-box-shadow:0 10px 25px rgba(0,0,0,.25);
+.circleImg{
+ width:170px;
+ height:170px;
+ border-radius:50%;
+ object-fit:cover;
+ display:block;
+ margin:14px auto;
+ border:6px solid #ffb3d9;
+}
+
+.musicCover{
+ width:170px;
+ height:170px;
+ border-radius:50%;
+ object-fit:cover;
+ margin:auto;
+ display:block;
+ border:6px solid #ffb3d9;
 }
 
 /* CAROUSEL */
 
 .carousel{
-display:flex;
-gap:14px;
-overflow:hidden;
+ display:flex;
+ gap:14px;
+ overflow:hidden;
 }
 
 .carousel img{
-width:180px;height:140px;
-object-fit:cover;
-border-radius:16px;
-animation:slide 25s linear infinite;
+ width:180px;
+ height:140px;
+ object-fit:cover;
+ border-radius:16px;
+ animation:slide 60s linear infinite;
 }
 
 @keyframes slide{
-from{transform:translateX(0)}
-to{transform:translateX(-50%)}
+ from{transform:translateX(0)}
+ to{transform:translateX(-50%)}
 }
 
 /* GRID */
 
 .grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
-gap:10px;
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+ gap:10px;
 }
 
 .grid img{
-width:100%;
-height:140px;
-object-fit:cover;
-border-radius:16px;
-cursor:pointer;
-transition:.3s;
+ width:100%;
+ height:140px;
+ object-fit:cover;
+ border-radius:16px;
+ cursor:pointer;
 }
-.grid img:hover{transform:scale(1.05)}
 
 /* ZOOM */
 
 #zoom{
-position:fixed; inset:0;
-background:rgba(0,0,0,.85);
-display:none;
-justify-content:center;
-align-items:center;
-z-index:9999;
-}
-#zoom img{
-max-width:92%;max-height:92%;
-border-radius:18px;
+ position:fixed;
+ inset:0;
+ background:rgba(0,0,0,.85);
+ display:none;
+ justify-content:center;
+ align-items:center;
+ z-index:9999;
 }
 
-/* TEXT */
+#zoom img{
+ max-width:92%;
+ max-height:92%;
+ border-radius:18px;
+}
+
+/* TEXTO */
 
 .finalText{
-line-height:1.7;
-font-size:16px;
-white-space:pre-line;
+ white-space:pre-line;
+ line-height:1.7;
 }
 
-/* BOTON SORPRESA */
+/* FRASES TOUCH */
 
-#btnSorpresa3D{
-position:fixed;
-bottom:20px;left:20px;
-z-index:60;
-animation:pulseBtn 2.5s infinite;
-}
-
-@keyframes pulseBtn{
-0%{transform:scale(1)}
-50%{transform:scale(1.12)}
-100%{transform:scale(1)}
-}
-
-/* SATURNO */
-
-#saturnoWrap{
-position:fixed; inset:0;
-background:black;
-display:none;
-z-index:9999;
-}
-
-#saturnoCanvas{
-width:100%;height:100%;
-display:block;
-}
-
-#cerrarSaturno{
-position:absolute;
-top:20px;right:20px;
-z-index:10;
+.touchText{
+ position:fixed;
+ color:#ff77bb;
+ font-size:18px;
+ pointer-events:none;
+ animation:fadeUp 1.4s ease-out forwards;
 }
 
 @keyframes fadeUp{
-from{opacity:1; transform:translateY(0)}
-to{opacity:0; transform:translateY(-40px)}
+ from{opacity:1; transform:translateY(0)}
+ to{opacity:0; transform:translateY(-40px)}
 }
 
 </style>
@@ -213,11 +209,10 @@ to{opacity:0; transform:translateY(-40px)}
 <body>
 
 <div id="login">
-<canvas id="heartsCanvas"></canvas>
 <div class="loginCard">
 <h2>Ingresa la contraseña 💖</h2>
 <input id="pass">
-<br><br>
+<br>
 <button onclick="enter()">Entrar</button>
 </div>
 </div>
@@ -236,14 +231,14 @@ to{opacity:0; transform:translateY(-40px)}
 
 <div class="bgHearts" id="bgHearts"></div>
 
-<!-- TIEMPO -->
+<!-- CONTADOR -->
 <div class="card">
 <h2>💞 Nuestro tiempo juntos 💞</h2>
 <img class="circleImg" src="https://i.imgur.com/m2rqpiu.jpeg">
 <div id="counter"></div>
 </div>
 
-<!-- CANCION -->
+<!-- CANCIÓN -->
 <div class="card">
 <h2>🎵 Nuestra canción 🎵</h2>
 <img class="musicCover" src="https://i.imgur.com/jbyIzFT.jpeg">
@@ -286,196 +281,107 @@ to{opacity:0; transform:translateY(-40px)}
 </div>
 </div>
 
-<!-- HISTORIA -->
+<!-- CARTA + POEMAS -->
 <div class="card finalText" id="typedText"></div>
-
-<button id="btnSorpresa3D">🪐 Sorpresa</button>
-
-<div id="saturnoWrap">
-<button id="cerrarSaturno">Salir</button>
-<canvas id="saturnoCanvas"></canvas>
-</div>
-
-<script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
 
 <script>
 
 /* LOGIN */
 function enter(){
-if(pass.value==="Jerry"){
-login.style.display="none";
-bgMusic.play().catch(()=>{});
-}
+ if(pass.value==="Jerry"){
+  login.style.display="none";
+  bgMusic.play().catch(()=>{});
+ }
 }
 
 /* AUDIO */
 function toggleSong(){
-if(ourSong.paused){
-bgMusic.pause();
-ourSong.play();
-btnPlay.innerHTML="⏸️ Pausar";
-}else{
-ourSong.pause();
-bgMusic.play();
-btnPlay.innerHTML="▶️ Reproducir";
-}
+ if(ourSong.paused){
+  bgMusic.pause();
+  ourSong.play();
+  btnPlay.innerHTML="⏸️ Pausar";
+ } else {
+  ourSong.pause();
+  bgMusic.play();
+  btnPlay.innerHTML="▶️ Reproducir";
+ }
 }
 
-/* COUNTER */
+/* CONTADOR */
 const start=new Date("2024-09-11");
 setInterval(()=>{
-const diff=Date.now()-start;
-const d=Math.floor(diff/86400000);
-counter.innerHTML=d+" días juntos 💗";
+ const d=Math.floor((Date.now()-start)/86400000);
+ counter.innerHTML=d+" días juntos 💗";
 },1000);
 
-/* HEART BG */
-for(let i=0;i<20;i++){
-const s=document.createElement("span");
-s.innerHTML="❤";
-s.style.left=Math.random()*100+"vw";
-s.style.fontSize=(16+Math.random()*26)+"px";
-s.style.animationDuration=(8+Math.random()*10)+"s";
-bgHearts.appendChild(s);
+/* CORAZONES BG — LIGERO */
+for(let i=0;i<18;i++){
+ const s=document.createElement("span");
+ s.innerHTML="🤎";
+ s.style.left=Math.random()*100+"vw";
+ s.style.fontSize=(16+Math.random()*22)+"px";
+ s.style.animationDuration=(8+Math.random()*8)+"s";
+ bgHearts.appendChild(s);
 }
-
-/* LOGIN HEARTS */
-setInterval(()=>{
-if(login.style.display==="none") return;
-const h=document.createElement("span");
-h.innerHTML="💗";
-h.style.position="fixed";
-h.style.left=Math.random()*100+"vw";
-h.style.bottom="-20px";
-h.style.animation="rise 6s linear";
-document.body.appendChild(h);
-setTimeout(()=>h.remove(),6000);
-},900);
 
 /* ZOOM */
 document.querySelectorAll(".grid img").forEach(img=>{
-img.onclick=()=>{
-zoom.style.display="flex";
-zoomImg.src=img.src;
-}
+ img.onclick=()=>{
+  zoom.style.display="flex";
+  zoomImg.src=img.src;
+ }
 });
 
-/* FRASES TOUCH CONTROLADAS */
-const frasesTouch=["Te amo 🤎","Siempre tú 💞","Mi cebollín 🧅","Besos 😘"];
-let lastTouch=0;
-
+/* FRASES TOUCH — CONTROLADAS */
+let lastTap=0;
+const frases=["Te amo 🤎","Siempre tú","Mi amor","Eres mi paz","Mi persona favorita"];
 document.addEventListener("click",e=>{
-const now=Date.now();
-if(now-lastTouch<900) return;
-lastTouch=now;
+ const now=Date.now();
+ if(now-lastTap<700) return;
+ lastTap=now;
 
-const el=document.createElement("div");
-el.innerHTML=frasesTouch[Math.floor(Math.random()*frasesTouch.length)];
-el.style.position="fixed";
-el.style.left=e.clientX+"px";
-el.style.top=e.clientY+"px";
-el.style.color="#ff77bb";
-el.style.animation="fadeUp 1.4s forwards";
-document.body.appendChild(el);
-setTimeout(()=>el.remove(),1400);
+ const el=document.createElement("div");
+ el.className="touchText";
+ el.innerHTML=frases[Math.floor(Math.random()*frases.length)];
+ el.style.left=e.clientX+"px";
+ el.style.top=e.clientY+"px";
+ document.body.appendChild(el);
+ setTimeout(()=>el.remove(),1400);
 });
 
-/* TEXTO AUTO */
-const texto=`Aún recuerdo cuando vi al ratón Jerry en el gym...
+/* TEXTO AUTO + POEMAS SIN IV */
+
+const texto=`
+Aún recuerdo cuando te vi en el gym…
 Siempre me robabas la barra 😝
-Pero había algo en ti que me llamaba la atención.
 
-Nuestra primera cita fue ir por jitomates — y fue perfecta.
+Nuestra primera cita fue por jitomates — perfecta.
 
-Nuestro primer mensaje fue el 11 de septiembre de 2024:
-“Holaaa :)”
+Te prometo:
+si te apagas, te amaré con más fuerza.
+Prometo devolverte la luz que te caracteriza,
+regar tu jardín con el amor que me brindaste,
+cuidarte cuando enfermes
+y hacer lo que haga falta para verte florecer.
 
-Quiero viajar contigo,
-que nos corretien los borregos,
-reírnos como loquitos,
-cuidarte siempre,
-verte cumplir tus metas.
+Cuando me enamoré de ti,
+entendí que nadie me habló mal del amor —
+solo nunca me hablaron de ti.
 
-Amo tu forma de ver a las personas,
-tu ternura,
-tus rufles,
-tu motito cool,
-tus piesitos de ratón,
-tus dientitos de ratoncito.
+Esta carta es para ti…
 
-Hay muchos momentos hermosos en la vida…
-pero el más especial fue cuando te conocí.
+Te amo mi cebollín 🤎
+Espero compartir más cosas juntos 🥰🧸
+`;
 
-Te amo mucho mi cebollín 🥰`;
-
-let ti=0;
+let i=0;
 function type(){
-if(ti<texto.length){
-typedText.innerHTML+=texto[ti++];
-setTimeout(type,25);
-}
+ if(i<texto.length){
+  typedText.innerHTML+=texto[i++];
+  setTimeout(type,28);
+ }
 }
 type();
-
-/* SATURNO 3D */
-
-let sScene,sCamera,sRenderer,planet,ring,stars3D;
-
-btnSorpresa3D.onclick=()=>{
-saturnoWrap.style.display="block";
-initSaturno();
-};
-
-cerrarSaturno.onclick=()=>{
-saturnoWrap.style.display="none";
-if(sRenderer) sRenderer.dispose();
-};
-
-function initSaturno(){
-sScene=new THREE.Scene();
-sCamera=new THREE.PerspectiveCamera(60,innerWidth/innerHeight,1,2000);
-sCamera.position.z=160;
-
-sRenderer=new THREE.WebGLRenderer({canvas:saturnoCanvas,antialias:true});
-sRenderer.setSize(innerWidth,innerHeight);
-
-const starGeo=new THREE.BufferGeometry();
-const starCount=4000;
-const pos=new Float32Array(starCount*3);
-for(let i=0;i<starCount*3;i++){
-pos[i]=(Math.random()-0.5)*1200;
-}
-starGeo.setAttribute('position',new THREE.BufferAttribute(pos,3));
-stars3D=new THREE.Points(starGeo,new THREE.PointsMaterial({size:1.2}));
-sScene.add(stars3D);
-
-planet=new THREE.Mesh(
-new THREE.SphereGeometry(32,48,48),
-new THREE.MeshStandardMaterial({color:0xffb3d9})
-);
-sScene.add(planet);
-
-ring=new THREE.Mesh(
-new THREE.TorusGeometry(55,6,16,100),
-new THREE.MeshBasicMaterial({color:0xff77bb})
-);
-ring.rotation.x=1.2;
-sScene.add(ring);
-
-const light=new THREE.PointLight(0xffffff,1.5);
-light.position.set(120,120,120);
-sScene.add(light);
-
-animateSaturno();
-}
-
-function animateSaturno(){
-requestAnimationFrame(animateSaturno);
-planet.rotation.y+=0.004;
-ring.rotation.z+=0.003;
-stars3D.rotation.y+=0.0006;
-sRenderer.render(sScene,sCamera);
-}
 
 </script>
 </body>
