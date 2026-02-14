@@ -2,232 +2,378 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Carta</title>
+<title>Para mi cebollín 🤎</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+*{box-sizing:border-box}
 body{
-margin:0;
-font-family: 'Georgia', serif;
-background:#2b1d1a;
-color:#fff;
-overflow-x:hidden;
+ margin:0;
+ font-family:'Segoe UI',sans-serif;
+ background:radial-gradient(circle,#2d0025,#0a0008);
+ color:#fff;
+ overflow-x:hidden;
 }
 
-/* lluvia corazones */
-.corazon{
-position:fixed;
-top:-20px;
-color:#6b3e2e;
-font-size:18px;
-animation:caer linear infinite;
-opacity:.7;
-pointer-events:none;
-}
-@keyframes caer{
-to{
-transform:translateY(110vh);
-}
-}
-
-/* pantalla contraseña */
-#lock{
-position:fixed;
-inset:0;
-background:#2b1d1a;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-z-index:10;
-}
-
-.lock-box{
-background:#3a2621;
-padding:30px;
-border-radius:16px;
-box-shadow:0 0 30px rgba(0,0,0,.5);
-text-align:center;
-}
-
-input{
-padding:12px;
-border-radius:10px;
-border:none;
-font-size:18px;
-margin-top:10px;
-}
-
+/* BOTONES */
 button{
-background:linear-gradient(45deg,#8b5a4a,#c49a8a);
-border:none;
-padding:12px 22px;
-border-radius:14px;
-color:white;
-font-size:16px;
-cursor:pointer;
-margin-top:14px;
-box-shadow:0 4px 12px rgba(0,0,0,.4);
-transition:.2s;
+ background:linear-gradient(45deg,#ff4da6,#ff85c2);
+ border:none;
+ padding:12px 24px;
+ border-radius:28px;
+ color:white;
+ font-weight:bold;
+ cursor:pointer;
+ transition:.25s;
+ box-shadow:0 0 18px rgba(255,77,166,.6);
+ position:relative;
+ overflow:hidden;
 }
-button:hover{
-transform:scale(1.05);
+button::after{
+ content:"";
+ position:absolute;
+ inset:0;
+ background:linear-gradient(120deg,transparent,rgba(255,255,255,.4),transparent);
+ transform:translateX(-100%);
+ transition:.6s;
+}
+button:hover::after{transform:translateX(100%)}
+button:hover{transform:scale(1.07)}
+
+/* CARDS */
+.card{
+ background:rgba(255,255,255,.94);
+ color:#4a0030;
+ margin:22px auto;
+ padding:25px;
+ width:92%;
+ max-width:560px;
+ border-radius:28px;
+ box-shadow:0 12px 40px rgba(0,0,0,.5);
+}
+.card h2{
+ text-align:center;
+ background:linear-gradient(45deg,#ff4da6,#ffd1e8);
+ -webkit-background-clip:text;
+ -webkit-text-fill-color:transparent;
+ margin-top:0;
 }
 
-/* contenido */
-.section{
-padding:60px 20px;
-text-align:center;
+/* LOGIN */
+#login{
+ position:fixed; inset:0;
+ display:flex; justify-content:center; align-items:center;
+ background:#0a0008;
+ overflow:hidden;
+ z-index:10000;
+}
+.loginCard{
+ background:rgba(255,255,255,.12);
+ backdrop-filter:blur(14px);
+ padding:40px;
+ border-radius:26px;
+ text-align:center;
+ border:1px solid #ff4da6;
+ z-index:5;
+}
+input{
+ padding:14px;
+ border-radius:16px;
+ border:none;
+ text-align:center;
+ font-size:16px;
+ width:210px;
 }
 
-/* carta */
-#cartaBox{
-display:none;
-margin:60px auto;
-max-width:700px;
-background:url("https://www.transparenttextures.com/patterns/paper.png"), #f5e9dc;
-color:#3a2a20;
-padding:50px;
-border-radius:10px;
-box-shadow:0 10px 40px rgba(0,0,0,.5);
-position:relative;
+/* LLUVIA */
+.rain{
+ position:fixed;
+ top:-40px;
+ font-size:22px;
+ animation:fall linear forwards;
+ opacity:.65;
+ pointer-events:none;
+}
+@keyframes fall{
+ to{transform:translateY(110vh);}
 }
 
-#textoCarta{
-white-space:pre-line;
-font-size:20px;
-line-height:1.7;
+/* IMAGENES */
+.circleImg,.musicCover{
+ width:170px;height:170px;
+ border-radius:50%;
+ object-fit:cover;
+ display:block;margin:auto;
+ border:6px solid #ffb3d9;
 }
 
-.sello{
-position:absolute;
-bottom:20px;
-right:20px;
-background:#8b0000;
-color:white;
-padding:10px 14px;
-border-radius:50%;
-opacity:0;
-transform:scale(0);
-animation:sello 1s forwards;
-animation-delay:1s;
+/* CAROUSEL */
+.carousel{
+ display:flex;
+ gap:14px;
+ overflow:hidden;
 }
-@keyframes sello{
-to{opacity:1; transform:scale(1);}
+.carousel img{
+ width:180px;height:140px;
+ object-fit:cover;
+ border-radius:16px;
+ animation:slide 18s linear infinite;
+}
+@keyframes slide{
+ from{transform:translateX(0)}
+ to{transform:translateX(-50%)}
 }
 
-.firma{
-margin-top:40px;
-font-family:cursive;
-font-size:28px;
-opacity:0;
-animation:firmar 2s forwards;
-animation-delay:2s;
+/* GRID */
+.grid{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+ gap:10px;
 }
-@keyframes firmar{
-to{opacity:1;}
+.grid img{
+ width:100%;height:120px;
+ object-fit:cover;
+ border-radius:12px;
+ cursor:pointer;
+}
+
+/* ZOOM */
+#zoom{
+ position:fixed; inset:0;
+ background:rgba(0,0,0,.9);
+ display:none;
+ justify-content:center;
+ align-items:center;
+ z-index:20000;
+}
+#zoom img{
+ max-width:92%;
+ max-height:92%;
+ border-radius:18px;
+}
+
+/* FRASES TOUCH */
+.touchText{
+ position:fixed;
+ color:#ff77bb;
+ font-weight:bold;
+ animation:fadeUp 1.3s forwards;
+ pointer-events:none;
+}
+@keyframes fadeUp{
+ to{opacity:0;transform:translateY(-60px)}
+}
+
+/* CARTA */
+#cartaOverlay{
+ position:fixed;
+ inset:0;
+ background:rgba(0,0,0,.7);
+ display:none;
+ justify-content:center;
+ align-items:center;
+ z-index:30000;
+}
+.carta{
+ background:#fff8ee;
+ color:#3a1a00;
+ padding:40px;
+ border-radius:18px;
+ width:92%;
+ max-width:600px;
+ font-size:18px;
+ line-height:1.7;
+ box-shadow:0 0 40px rgba(0,0,0,.5);
+ white-space:pre-line;
+ min-height:260px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- pantalla contraseña -->
-<div id="lock">
-<div class="lock-box">
-<h2>Ingresa la contraseña</h2>
-<input type="password" id="pass">
-<br>
-<button onclick="check()">Entrar</button>
+<!-- LOGIN -->
+<div id="login">
+<div class="loginCard">
+<h2>Contraseña 💖</h2>
+<input id="pass" type="password">
+<br><br>
+<button onclick="enter()">Entrar</button>
 </div>
 </div>
 
-<!-- CONTENIDO ORIGINAL — NO SE TOCA -->
-<div id="contenido">
-
-<div class="section">
-<h1>Tus textos e imágenes siguen aquí intactos</h1>
-<p>No se elimina nada.</p>
-<!-- deja tus imágenes originales -->
+<div id="zoom" onclick="this.style.display='none'">
+<img id="zoomImg">
 </div>
 
-<div class="section">
-<button onclick="abrirCarta()">💌 Abrir carta</button>
+<!-- AUDIO -->
+<audio id="bgMusic" loop>
+<source src="https://files.catbox.moe/4nrc17.mp3">
+</audio>
+
+<audio id="ourSong">
+<source src="https://files.catbox.moe/egr68n.mp3">
+</audio>
+
+<!-- TIEMPO -->
+<div class="card">
+<h2>💞 Nuestro tiempo juntos 💞</h2>
+<img class="circleImg" src="https://i.imgur.com/m2rqpiu.jpeg">
+<div id="counter" style="text-align:center;font-size:22px;font-weight:bold;"></div>
 </div>
 
-<div id="cartaBox">
-<div id="textoCarta"></div>
-<div class="firma">Con amor</div>
-<div class="sello">Sellado</div>
+<!-- MUSICA -->
+<div class="card">
+<h2>🎵 Nuestra canción 🎵</h2>
+<img class="musicCover" src="https://i.imgur.com/jbyIzFT.jpeg">
+<div style="text-align:center">
+<button onclick="toggleSong()">▶️ Reproducir</button>
+</div>
 </div>
 
+<!-- CAROUSEL -->
+<div class="card">
+<h2>🎞️ Momentos especiales 🎞️</h2>
+<div class="carousel">
+<img src="https://i.imgur.com/tpH81jp.jpeg">
+<img src="https://i.imgur.com/mOQ2xhz.jpeg">
+<img src="https://i.imgur.com/ra5P475.jpeg">
+<img src="https://i.imgur.com/0xnanwq.jpeg">
+<img src="https://i.imgur.com/2Xh4XhC.jpeg">
+<img src="https://i.imgur.com/UX4FUgZ.jpeg">
+<img src="https://i.imgur.com/tpH81jp.jpeg">
+<img src="https://i.imgur.com/mOQ2xhz.jpeg">
+</div>
 </div>
 
-<audio id="typeSound" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3"></audio>
+<!-- GRID -->
+<div class="card">
+<h2>📸 Todos nuestros recuerdos 📸</h2>
+<div class="grid">
+<img src="https://i.imgur.com/tpH81jp.jpeg">
+<img src="https://i.imgur.com/mOQ2xhz.jpeg">
+<img src="https://i.imgur.com/ra5P475.jpeg">
+<img src="https://i.imgur.com/0xnanwq.jpeg">
+<img src="https://i.imgur.com/2Xh4XhC.jpeg">
+<img src="https://i.imgur.com/UX4FUgZ.jpeg">
+<img src="https://i.imgur.com/3h5EZdw.jpeg">
+<img src="https://i.imgur.com/8yDYtN4.jpeg">
+</div>
+</div>
+
+<!-- BOTON CARTA -->
+<div class="card" style="text-align:center">
+<button onclick="openCarta()">💌 Abrir carta especial</button>
+</div>
+
+<!-- CARTA -->
+<div id="cartaOverlay" onclick="this.style.display='none'">
+<div class="carta" id="cartaTexto"></div>
+</div>
 
 <script>
-/* contraseña */
-function check(){
-if(document.getElementById("pass").value==="1234"){
-document.getElementById("lock").style.display="none";
+
+/* LLUVIA LOGIN */
+setInterval(()=>{
+ const h=document.createElement("div");
+ h.className="rain";
+ h.innerHTML="💖";
+ h.style.left=Math.random()*100+"vw";
+ h.style.animationDuration=(5+Math.random()*3)+"s";
+ login.appendChild(h);
+ setTimeout(()=>h.remove(),8000);
+},350);
+
+/* ENTRAR */
+function enter(){
+ if(pass.value==="Jerry"){
+  login.style.display="none";
+  bgMusic.play().catch(()=>{});
+  lluviaFondo();
+ }
 }
+
+/* LLUVIA FONDO */
+function lluviaFondo(){
+ setInterval(()=>{
+  const e=document.createElement("div");
+  e.className="rain";
+  e.innerHTML="🤎";
+  e.style.left=Math.random()*100+"vw";
+  e.style.animationDuration="8s";
+  document.body.appendChild(e);
+  setTimeout(()=>e.remove(),9000);
+ },1100);
 }
 
-/* lluvia infinita */
-function crearCorazon(){
-const c=document.createElement("div");
-c.className="corazon";
-c.innerHTML="❤";
-c.style.left=Math.random()*100+"vw";
-c.style.animationDuration=(5+Math.random()*5)+"s";
-document.body.appendChild(c);
-setTimeout(()=>c.remove(),10000);
+/* CONTADOR */
+const start=new Date("2024-09-11");
+setInterval(()=>{
+ const d=Math.floor((Date.now()-start)/86400000);
+ counter.innerHTML=d+" días juntos 🤎";
+},1000);
+
+/* MUSICA */
+function toggleSong(){
+ if(ourSong.paused){bgMusic.pause();ourSong.play();}
+ else{ourSong.pause();bgMusic.play();}
 }
-setInterval(crearCorazon,300);
 
-/* texto carta completo */
-const textoCarta=`Cuando me enamoré de ti
+/* ZOOM */
+document.querySelectorAll(".grid img,.carousel img").forEach(img=>{
+ img.onclick=()=>{
+  zoom.style.display="flex";
+  zoomImg.src=img.src;
+ }
+});
 
-“Cuando me enamoré de ti, entendí
-que no era que todas aquellas
-personas que me hablaron del amor
-estuvieran mal, sino que
-nunca me hablaron de ti.”
+/* FRASES TOUCH */
+const frases=[
+"Te amo 🤎",
+"Siempre tú 🥰",
+"Mi amor ✨",
+"Eres mi lugar seguro 💫",
+"Contigo todo es mejor 🤎"
+];
+let last=0;
+document.addEventListener("click",e=>{
+ if(login.style.display!=="none") return;
+ if(Date.now()-last<900) return;
+ last=Date.now();
+ const el=document.createElement("div");
+ el.className="touchText";
+ el.innerHTML=frases[Math.floor(Math.random()*frases.length)];
+ el.style.left=e.clientX+"px";
+ el.style.top=e.clientY+"px";
+ document.body.appendChild(el);
+ setTimeout(()=>el.remove(),1400);
+});
 
-— Ricardo Camacho
+/* CARTA + POEMAS */
+const textoCarta=`Esta carta es para ti…
 
+Cuando me enamoré de ti, entendí que no era que todas aquellas personas que me hablaron del amor estuvieran mal, sino que nunca me hablaron de ti.
 
-Te prometo
+Si te apagas, te prometo amarte con más fuerza.
+Prometo devolverte la luz que te caracteriza, regar tu jardín con el amor que me brindaste cuando estaba marchito.
+Te prometo cuidarte cuando enfermes y hacer lo que haga falta para asegurarme de que vuelvas a florecer.
 
-“si te apagas, te prometo amarte con más fuerza.
+Porque, mi amor, si hay algo que le pido a Dios es que, si alguna vez llega a ser necesario, me permita ser aquello que te haga falta, como tú lo fuiste conmigo.
 
-Prometo devolverte la luz que te caracteriza,
-regar tu jardín con el amor que me brindaste
-cuando estaba marchito.
-Te prometo cuidarte cuando enfermes
-y hacer lo que haga falta para asegurarme
-de que vuelvas a florecer.
+Te amo mi cebollín 🤎
+Espero compartir más cosas juntos 🥰🧸`;
 
-Porque, mi amor, si hay algo que le pido a Dios es que,
-si alguna vez llega a ser necesario,
-me permita ser aquello que te haga falta,
-como tú lo fuiste conmigo.”
-
-— Ricardo Camacho`;
-
-/* escribir solo */
-function abrirCarta(){
-document.getElementById("cartaBox").style.display="block";
-let i=0;
-const box=document.getElementById("textoCarta");
-const sound=document.getElementById("typeSound");
-box.innerHTML="";
-const t=setInterval(()=>{
-box.innerHTML+=textoCarta[i];
-sound.currentTime=0;
-sound.play();
-i++;
-if(i>=textoCarta.length) clearInterval(t);
-},35);
+function openCarta(){
+ cartaOverlay.style.display="flex";
+ cartaTexto.innerHTML="";
+ let i=0;
+ function escribir(){
+  if(i<textoCarta.length){
+   cartaTexto.innerHTML+=textoCarta[i++];
+   setTimeout(escribir,35);
+  }
+ }
+ escribir();
 }
 </script>
 
