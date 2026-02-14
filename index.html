@@ -69,7 +69,18 @@ button:hover{
  box-shadow:0 0 12px #ff80bf;
 }
 
-/* HEARTS BG */
+/* LLUVIA LOGIN */
+.loginRain{
+ position:absolute;
+ top:-20px;
+ animation:loginFall linear forwards;
+ opacity:.6;
+}
+@keyframes loginFall{
+ to{ transform:translateY(110vh); opacity:.2; }
+}
+
+/* HEART BG */
 .bgHearts span{
  position:fixed;
  color:#ff4da6;
@@ -77,36 +88,9 @@ button:hover{
  opacity:.25;
  pointer-events:none;
 }
-
 @keyframes rise{
  from{transform:translateY(100vh)}
  to{transform:translateY(-10vh)}
-}
-
-/* LLUVIA LOGIN CONTINUA */
-.loginRain{
- position:absolute;
- top:-20px;
- animation:loginFall linear forwards;
- opacity:.6;
-}
-
-@keyframes loginFall{
- to{ transform:translateY(110vh); opacity:.2; }
-}
-
-/* FRASES */
-.tapPhrase{
- position:fixed;
- color:#ffd6eb;
- font-size:18px;
- animation:floatUp 2s forwards;
- pointer-events:none;
- text-shadow:0 0 8px #ff66aa;
-}
-
-@keyframes floatUp{
- to{ transform:translateY(-60px); opacity:0; }
 }
 
 /* CARDS */
@@ -123,7 +107,7 @@ button:hover{
 }
 
 /* IMAGES */
-.circleImg{
+.circleImg,.musicCover{
  width:170px;
  height:170px;
  border-radius:50%;
@@ -139,7 +123,6 @@ button:hover{
  grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
  gap:10px;
 }
-
 .grid img{
  width:100%;
  height:140px;
@@ -158,7 +141,6 @@ button:hover{
  align-items:center;
  z-index:9999;
 }
-
 #zoom img{
  max-width:90%;
  max-height:90%;
@@ -171,7 +153,6 @@ button:hover{
  border-right:2px solid #ff4da6;
  animation:blink .8s infinite;
 }
-
 @keyframes blink{
 50%{border-color:transparent}
 }
@@ -191,7 +172,6 @@ button:hover{
  cursor:pointer;
  animation:pulse 1.5s infinite;
 }
-
 @keyframes pulse{
 50%{transform:scale(1.15)}
 }
@@ -202,11 +182,24 @@ button:hover{
  margin-top:15px;
  opacity:0;
 }
+
+/* FRASES */
+.tapPhrase{
+ position:fixed;
+ color:#ffd6eb;
+ font-size:18px;
+ animation:floatUp 2s forwards;
+ pointer-events:none;
+}
+@keyframes floatUp{
+ to{ transform:translateY(-60px); opacity:0; }
+}
 </style>
 </head>
 
 <body>
 
+<!-- LOGIN -->
 <div id="login">
 <div class="loginCard">
 <h2>Ingresa la contraseña 💖</h2>
@@ -220,8 +213,13 @@ button:hover{
 <img id="zoomImg">
 </div>
 
+<!-- MÚSICA (DEL INDEX VIEJO — COMPLETA) -->
 <audio id="bgMusic" loop>
 <source src="https://files.catbox.moe/4nrc17.mp3">
+</audio>
+
+<audio id="ourSong">
+<source src="https://files.catbox.moe/egr68n.mp3">
 </audio>
 
 <audio id="writeSound">
@@ -237,7 +235,16 @@ button:hover{
 <div id="counter"></div>
 </div>
 
-<!-- FOTOS -->
+<!-- CANCIÓN (DEL INDEX VIEJO) -->
+<div class="card">
+<h2>🎵 Nuestra canción 🎵</h2>
+<img class="musicCover" src="https://i.imgur.com/jbyIzFT.jpeg">
+<div style="text-align:center">
+<button id="btnPlay" onclick="toggleSong()">▶️ Reproducir</button>
+</div>
+</div>
+
+<!-- GALERÍA -->
 <div class="card">
 <h2>📸 Recuerdos 📸</h2>
 <div class="grid" id="gallery">
@@ -272,21 +279,19 @@ button:hover{
 
 <script>
 
-/* LOGIN LLUVIA CONTINUA */
+/* LOGIN LLUVIA */
 setInterval(()=>{
- if(document.getElementById("login").style.display!=="none"){
+ if(login.style.display!=="none"){
   const h=document.createElement("div");
   h.className="loginRain";
   h.innerHTML="💗";
   h.style.left=Math.random()*100+"vw";
-  h.style.fontSize=(16+Math.random()*18)+"px";
   h.style.animationDuration=(3+Math.random()*3)+"s";
   login.appendChild(h);
   setTimeout(()=>h.remove(),6000);
  }
 },300);
 
-/* ENTER */
 function enter(){
  if(pass.value==="Jerry"){
   login.style.display="none";
@@ -294,14 +299,26 @@ function enter(){
  }
 }
 
-/* FRASES */
+/* CANCIÓN — DEL INDEX VIEJO */
+function toggleSong(){
+ if(ourSong.paused){
+  bgMusic.pause();
+  ourSong.currentTime=0;
+  ourSong.play().catch(()=>{});
+  btnPlay.innerHTML="⏸️ Pausar";
+ } else {
+  ourSong.pause();
+  bgMusic.play().catch(()=>{});
+  btnPlay.innerHTML="▶️ Reproducir";
+ }
+}
+
+/* FRASES AL TOCAR */
 const frases=[
 "Eres mi lugar favorito 🤎",
 "Contigo todo es mejor 💞",
 "Mi coincidencia más bonita ✨",
-"Tu sonrisa es mi paz",
-"Siempre tú 💗",
-"Mi persona especial"
+"Tu sonrisa es mi paz"
 ];
 
 document.addEventListener("click",e=>{
@@ -320,7 +337,7 @@ document.querySelectorAll("#gallery img").forEach(img=>{
  img.onclick=()=>{ zoom.style.display="flex"; zoomImg.src=img.src; }
 });
 
-/* HEARTS BG */
+/* CORAZONES */
 for(let i=0;i<25;i++){
  const s=document.createElement("span");
  s.innerHTML="❤";
@@ -332,12 +349,10 @@ for(let i=0;i<25;i++){
 
 /* CONTADOR */
 const start=new Date("2024-09-11");
-function updateCounter(){
+setInterval(()=>{
  const d=Math.floor((Date.now()-start)/86400000);
  counter.innerHTML=d+" días juntos 💗";
-}
-updateCounter();
-setInterval(updateCounter,60000);
+},60000);
 
 /* POEMAS COMPLETOS */
 const poemaTexto=`Cuando me enamoré de ti
@@ -372,19 +387,14 @@ setTimeout(()=>typeText(poemaTexto,poema),1200);
 /* CARTA */
 function openLetter(){
  writeSound.play();
- const txt=`No eres solo mi persona favorita.
-Eres mi calma, mi risa,
-mi coincidencia más bonita,
-mi lugar seguro.
-
-Esta carta es para ti.
+ const txt=`Esta carta es para ti.
 Te amo mi cebollín 🤎
 Espero compartir más cosas juntos 🥰🧸`;
  letter.style.display="block";
  typeText(txt,letter);
  setTimeout(()=>sign.style.opacity=1,4200);
 }
-</script>
 
+</script>
 </body>
 </html>
