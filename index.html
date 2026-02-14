@@ -25,8 +25,6 @@ body{
  background:#0a0008;
  z-index:999;
 }
-#heartsCanvas{position:absolute; inset:0;}
-
 .loginCard{
  position:relative;
  background:rgba(255,255,255,.15);
@@ -60,11 +58,9 @@ button{
  font-size:16px;
  margin-top:12px;
  cursor:pointer;
- transition:.3s;
 }
-button:hover{transform:scale(1.05)}
 
-/* HEART BG */
+/* HEARTS BACKGROUND */
 .bgHearts span{
  position:fixed;
  color:#ff4da6;
@@ -73,36 +69,39 @@ button:hover{transform:scale(1.05)}
  pointer-events:none;
 }
 @keyframes rise{
- from{transform:translateY(100vh) scale(.6)}
- to{transform:translateY(-10vh) scale(1.2)}
+ from{transform:translateY(100vh)}
+ to{transform:translateY(-10vh)}
 }
 
-/* PETALOS */
-.petal{
+/* LLUVIA CORAZONES ROSAS */
+.rainHeart{
  position:fixed;
  top:-20px;
- font-size:18px;
+ font-size:20px;
+ animation:heartRain linear forwards;
  pointer-events:none;
- animation:fall linear forwards;
- opacity:.85;
 }
-@keyframes fall{
- to{transform:translateY(110vh) rotate(360deg);opacity:.3;}
+@keyframes heartRain{
+ to{
+  transform:translateY(110vh);
+  opacity:.3;
+ }
 }
 
-/* ESTRELLAS */
-.star{
+/* FRASES TOQUE */
+.tapPhrase{
  position:fixed;
- width:3px;
- height:3px;
- background:white;
- border-radius:50%;
- opacity:.5;
- animation:twinkle 2s infinite alternate;
+ color:#ffd6eb;
+ font-size:18px;
+ animation:floatUp 2s forwards;
+ pointer-events:none;
+ text-shadow:0 0 8px #ff66aa;
 }
-@keyframes twinkle{
- from{opacity:.2}
- to{opacity:.9}
+@keyframes floatUp{
+ to{
+  transform:translateY(-60px);
+  opacity:0;
+ }
 }
 
 /* CARDS */
@@ -116,20 +115,6 @@ button:hover{transform:scale(1.05)}
  border-radius:24px;
  box-shadow:0 12px 40px rgba(0,0,0,.25);
  border:3px solid #ffd6eb;
- transition:.35s;
-}
-.card:hover{
- transform:translateY(-6px);
- box-shadow:0 22px 60px rgba(0,0,0,.35);
-}
-
-.card h2{
- text-align:center;
- margin-top:0;
- font-size:22px;
- background:linear-gradient(45deg,#ff2f92,#ff85c2);
- -webkit-background-clip:text;
- -webkit-text-fill-color:transparent;
 }
 
 /* IMAGES */
@@ -141,7 +126,6 @@ button:hover{transform:scale(1.05)}
  display:block;
  margin:14px auto;
  border:6px solid #ffb3d9;
- box-shadow:0 10px 25px rgba(0,0,0,.25);
 }
 
 /* GRID */
@@ -156,9 +140,7 @@ button:hover{transform:scale(1.05)}
  object-fit:cover;
  border-radius:16px;
  cursor:pointer;
- transition:.3s;
 }
-.grid img:hover{transform:scale(1.06);}
 
 /* ZOOM */
 #zoom{
@@ -176,54 +158,52 @@ button:hover{transform:scale(1.05)}
  border-radius:18px;
 }
 
-/* CAROUSEL */
-.carousel{
- display:flex;
- gap:14px;
- overflow:hidden;
-}
-.carousel img{
- width:180px;
- height:140px;
- object-fit:cover;
- border-radius:16px;
- animation:slide 30s linear infinite;
-}
-@keyframes slide{
- from{transform:translateX(0)}
- to{transform:translateX(-50%)}
-}
-
-/* TYPEWRITER */
+/* TYPE */
 .typewriter{
- border-right:2px solid #ff4da6;
  white-space:pre-wrap;
+ border-right:2px solid #ff4da6;
  animation:blink .8s infinite;
 }
 @keyframes blink{
- 0%,100%{border-color:transparent}
- 50%{border-color:#ff4da6}
+50%{border-color:transparent}
 }
 
+/* CARTA */
 .secretLetter{
  margin-top:15px;
- padding:18px;
+ padding:20px;
  border-radius:18px;
  background:linear-gradient(45deg,#ffe0f0,#ffd1ea);
  display:none;
+}
+.seal{
+ font-size:42px;
+ cursor:pointer;
+ animation:pulse 1.5s infinite;
+}
+@keyframes pulse{
+50%{transform:scale(1.15)}
+}
+
+.signature{
+ font-family:cursive;
+ font-size:22px;
+ margin-top:15px;
+ opacity:0;
 }
 
 .memoryBox{
  text-align:center;
  margin-top:12px;
+ font-size:18px;
 }
 </style>
 </head>
 
 <body>
 
+<!-- LOGIN -->
 <div id="login">
-<canvas id="heartsCanvas"></canvas>
 <div class="loginCard">
 <h2>Ingresa la contraseña 💖</h2>
 <input id="pass">
@@ -240,8 +220,8 @@ button:hover{transform:scale(1.05)}
 <source src="https://files.catbox.moe/4nrc17.mp3">
 </audio>
 
-<audio id="ourSong">
-<source src="https://files.catbox.moe/egr68n.mp3">
+<audio id="writeSound">
+<source src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3">
 </audio>
 
 <div class="bgHearts" id="bgHearts"></div>
@@ -253,33 +233,9 @@ button:hover{transform:scale(1.05)}
 <div id="counter"></div>
 </div>
 
-<!-- CANCIÓN -->
+<!-- FOTOS -->
 <div class="card">
-<h2>🎵 Nuestra canción 🎵</h2>
-<img class="musicCover" src="https://i.imgur.com/jbyIzFT.jpeg">
-<div style="text-align:center">
-<button id="btnPlay" onclick="toggleSong()">▶️ Reproducir</button>
-</div>
-</div>
-
-<!-- CAROUSEL -->
-<div class="card">
-<h2>🎞️ Momentos especiales 🎞️</h2>
-<div class="carousel">
-<img src="https://i.imgur.com/tpH81jp.jpeg">
-<img src="https://i.imgur.com/mOQ2xhz.jpeg">
-<img src="https://i.imgur.com/ra5P475.jpeg">
-<img src="https://i.imgur.com/0xnanwq.jpeg">
-<img src="https://i.imgur.com/2Xh4XhC.jpeg">
-<img src="https://i.imgur.com/UX4FUgZ.jpeg">
-<img src="https://i.imgur.com/3h5EZdw.jpeg">
-<img src="https://i.imgur.com/8yDYtN4.jpeg">
-</div>
-</div>
-
-<!-- GRID -->
-<div class="card">
-<h2>📸 Todos nuestros recuerdos 📸</h2>
+<h2>📸 Recuerdos 📸</h2>
 <div class="grid">
 <img src="https://i.imgur.com/tpH81jp.jpeg">
 <img src="https://i.imgur.com/mOQ2xhz.jpeg">
@@ -296,60 +252,79 @@ button:hover{transform:scale(1.05)}
 </div>
 </div>
 
-<!-- POEMAS -->
+<!-- POEMAS COMPLETOS -->
 <div class="card">
 <h2>📜 Poemas especiales 📜</h2>
-<div id="poemaTexto" class="typewriter"></div>
+<div id="poema" class="typewriter"></div>
 </div>
 
-<!-- CARTA SECRETA -->
+<!-- CARTA -->
 <div class="card">
-<h2>💌 Mensaje secreto 💌</h2>
-<button onclick="revealLetter()">Abrir carta</button>
-<div class="secretLetter" id="secretLetter">
-No eres solo mi persona favorita —
-eres mi lugar seguro,
-mi calma,
-mi alegría diaria,
-mi coincidencia más bonita.
-</div>
+<h2>💌 Carta sellada 💌</h2>
+<div class="seal" onclick="openLetter()">💗</div>
+<div id="letter" class="secretLetter"></div>
+<div id="sign" class="signature">Con amor — siempre tú 🤎</div>
 </div>
 
-<!-- RECUERDO -->
+<!-- MEMORIA -->
 <div class="card">
 <h2>📅 Recuerdo del día</h2>
 <button onclick="showMemory()">Mostrar</button>
-<div class="memoryBox" id="memoryBox"></div>
+<div id="memoryBox" class="memoryBox"></div>
 </div>
 
 <script>
+
+/* LOGIN + LLUVIA CORAZONES */
 function enter(){
  if(pass.value==="Jerry"){
   login.style.display="none";
   bgMusic.play().catch(()=>{});
+  heartRainBurst();
  }
 }
 
-/* AUDIO */
-function toggleSong(){
- if(ourSong.paused){
-  bgMusic.pause();
-  ourSong.play();
-  btnPlay.innerHTML="⏸️ Pausar";
- } else {
-  ourSong.pause();
-  bgMusic.play();
-  btnPlay.innerHTML="▶️ Reproducir";
+/* LLUVIA ROSA */
+function heartRainBurst(){
+ for(let i=0;i<40;i++){
+  const h=document.createElement("div");
+  h.className="rainHeart";
+  h.innerHTML="💗";
+  h.style.left=Math.random()*100+"vw";
+  h.style.animationDuration=(3+Math.random()*3)+"s";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),6000);
  }
 }
+
+/* FRASES AL TOCAR */
+const frases=[
+"Eres mi lugar favorito 🤎",
+"Contigo todo es mejor 💞",
+"Mi coincidencia más bonita ✨",
+"Tu sonrisa es mi paz",
+"Siempre tú 💗",
+"Mi persona especial"
+];
+
+document.addEventListener("click",e=>{
+ if(e.target.tagName==="BUTTON" || e.target.tagName==="INPUT") return;
+ const f=document.createElement("div");
+ f.className="tapPhrase";
+ f.innerText=frases[Math.floor(Math.random()*frases.length)];
+ f.style.left=e.clientX+"px";
+ f.style.top=e.clientY+"px";
+ document.body.appendChild(f);
+ setTimeout(()=>f.remove(),2000);
+});
 
 /* ZOOM */
 document.querySelectorAll(".grid img").forEach(img=>{
  img.onclick=()=>{ zoom.style.display="flex"; zoomImg.src=img.src; }
 });
 
-/* HEARTS BG */
-for(let i=0;i<20;i++){
+/* CORAZONES FONDO */
+for(let i=0;i<25;i++){
  const s=document.createElement("span");
  s.innerHTML="❤";
  s.style.left=Math.random()*100+"vw";
@@ -358,61 +333,66 @@ for(let i=0;i<20;i++){
  bgHearts.appendChild(s);
 }
 
-/* PETALOS */
-setInterval(()=>{
- const p=document.createElement("div");
- p.className="petal";
- p.innerText="🌸";
- p.style.left=Math.random()*100+"vw";
- p.style.animationDuration=(5+Math.random()*5)+"s";
- document.body.appendChild(p);
- setTimeout(()=>p.remove(),9000);
-},900);
-
-/* ESTRELLAS */
-for(let i=0;i<60;i++){
- const s=document.createElement("div");
- s.className="star";
- s.style.left=Math.random()*100+"vw";
- s.style.top=Math.random()*100+"vh";
- document.body.appendChild(s);
-}
-
-/* COUNTER */
+/* CONTADOR */
 const start=new Date("2024-09-11");
 setInterval(()=>{
  const d=Math.floor((Date.now()-start)/86400000);
- counter.innerHTML=d+" días 💗";
+ counter.innerHTML=d+" días juntos 💗";
 },60000);
 
-/* TYPEWRITER */
-const poemaCompleto=`Cuando me enamoré de ti, entendí que nunca me hablaron de ti.
+/* POEMAS EXACTOS COMPLETOS */
+const poemaTexto=`Cuando me enamoré de ti
 
-Si te apagas, te amaré con más fuerza.
-Si caes, te levanto.
-Si dudas, te recuerdo quién eres.`;
+"Cuando me enamoré de ti, entendí que no era que todas aquellas personas que me hablaron del amor estuvieran mal, sino que nunca me hablaron de ti.
 
-function typeWriter(text, el){
+
+Te prometo
+
+"Si te apagas, te prometo amarte con más fuerza.
+Prometo devolverte la luz que te caracteriza,
+regar tu jardín con el amor que me brindaste cuando estaba marchito.
+Te prometo cuidarte cuando enfermes
+y hacer lo que haga falta para asegurarme de que vuelvas a florecer.
+
+Porque, mi amor, si hay algo que le pido a Dios es que, si alguna vez llega a ser necesario,
+me permita ser aquello que te haga falta,
+como tú lo fuiste conmigo."`;
+
+function typeText(t, el){
  let i=0;
- function w(){ if(i<text.length){ el.textContent+=text[i++]; setTimeout(w,28);} }
+ function w(){
+  if(i<t.length){
+   el.textContent+=t[i++];
+   setTimeout(w,25);
+  }
+ }
  w();
 }
-setTimeout(()=>typeWriter(poemaCompleto,poemaTexto),1200);
+setTimeout(()=>typeText(poemaTexto,poema),1200);
 
-/* RECUERDOS */
+/* CARTA */
+function openLetter(){
+ writeSound.play();
+ const txt=`No eres solo mi persona favorita.
+Eres mi calma, mi risa,
+mi coincidencia más bonita,
+mi lugar seguro.`;
+ letter.style.display="block";
+ typeText(txt, letter);
+ setTimeout(()=>sign.style.opacity=1,3500);
+}
+
+/* MEMORIAS */
 const memories=[
-"El día de los jitomates",
-"El gym y la barra 😝",
-"Nuestro primer Holaaa :)"
+"El día de los jitomates 🍅",
+"La risa en el gym 😂",
+"Nuestro primer hola 🤎",
+"Cuando no queríamos despedirnos"
 ];
 function showMemory(){
  memoryBox.innerText=memories[Math.floor(Math.random()*memories.length)];
 }
 
-/* CARTA */
-function revealLetter(){
- secretLetter.style.display="block";
-}
 </script>
 
 </body>
