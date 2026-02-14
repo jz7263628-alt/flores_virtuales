@@ -16,7 +16,6 @@ body{
 }
 
 /* LOGIN */
-
 #login{
  position:fixed;
  inset:0;
@@ -49,6 +48,7 @@ input{
  text-align:center;
  font-size:16px;
  width:200px;
+ color: #000;
 }
 
 button{
@@ -68,7 +68,6 @@ button:hover{
 }
 
 /* FONDO CORAZONES CAFÉ */
-
 .bgHearts span{
  position:fixed;
  color:#8b5a2b;
@@ -83,7 +82,6 @@ button:hover{
 }
 
 /* CARD */
-
 .card{
  background:rgba(255,255,255,.9);
  color:#4a0030;
@@ -111,7 +109,6 @@ button:hover{
 }
 
 /* CAROUSEL */
-
 .carousel{
  display:flex;
  gap:14px;
@@ -132,7 +129,6 @@ button:hover{
 }
 
 /* GRID */
-
 .grid{
  display:grid;
  grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
@@ -148,7 +144,6 @@ button:hover{
 }
 
 /* ZOOM */
-
 #zoom{
  position:fixed;
  inset:0;
@@ -166,13 +161,13 @@ button:hover{
 }
 
 /* FRASES TOUCH */
-
 .touchText{
  position:fixed;
  color:#ff77bb;
  font-size:18px;
  pointer-events:none;
  animation:fadeUp 1.4s ease-out forwards;
+ z-index: 9999;
 }
 
 @keyframes fadeUp{
@@ -181,7 +176,6 @@ button:hover{
 }
 
 /* CARTA MODAL */
-
 #cartaModal{
  position:fixed;
  inset:0;
@@ -210,33 +204,31 @@ button:hover{
  padding:16px 28px;
  border-radius:30px;
 }
-
 </style>
 </head>
 
 <body>
 
 <!-- LOGIN -->
-
 <div id="login">
 <div class="loginCard">
 <h2>Ingresa la contraseña 💖</h2>
-<input id="pass">
+<input id="pass" type="password">
 <br>
 <button onclick="enter()">Entrar</button>
 </div>
 </div>
 
 <!-- ZOOM -->
-
 <div id="zoom" onclick="this.style.display='none'">
 <img id="zoomImg">
 </div>
 
 <!-- CARTA MODAL -->
-
 <div id="cartaModal">
-<button onclick="cerrarCarta()">Cerrar ✉️</button>
+<div style="text-align:center; margin-bottom: 20px;">
+    <button onclick="cerrarCarta()">Cerrar ✉️</button>
+</div>
 <div id="cartaBox"></div>
 </div>
 
@@ -251,15 +243,13 @@ button:hover{
 <div class="bgHearts" id="bgHearts"></div>
 
 <!-- CONTADOR -->
-
 <div class="card">
 <h2>💞 Nuestro tiempo juntos 💞</h2>
 <img class="circleImg" src="https://i.imgur.com/m2rqpiu.jpeg">
-<div id="counter"></div>
+<div id="counter" style="text-align:center; font-size: 20px; font-weight: bold;"></div>
 </div>
 
 <!-- CANCIÓN -->
-
 <div class="card">
 <h2>🎵 Nuestra canción 🎵</h2>
 <img class="musicCover" src="https://i.imgur.com/jbyIzFT.jpeg">
@@ -269,7 +259,6 @@ button:hover{
 </div>
 
 <!-- CAROUSEL -->
-
 <div class="card">
 <h2>🎞️ Momentos especiales 🎞️</h2>
 <div class="carousel">
@@ -283,7 +272,6 @@ button:hover{
 </div>
 
 <!-- GRID -->
-
 <div class="card">
 <h2>📸 Todos nuestros recuerdos 📸</h2>
 <div class="grid">
@@ -297,24 +285,28 @@ button:hover{
 </div>
 
 <!-- BOTÓN CARTA -->
-
 <div class="card" style="text-align:center">
 <h2>💌 Sorpresa final 💌</h2>
 <button class="btnCarta" onclick="abrirCarta()">Abrir carta ✉️</button>
 </div>
 
 <script>
-
 /* LOGIN */
 function enter(){
- if(pass.value==="Jerry"){
-  login.style.display="none";
-  bgMusic.play().catch(()=>{});
+ const inputPass = document.getElementById('pass').value;
+ if(inputPass === "Jerry"){
+  document.getElementById('login').style.display="none";
+  document.getElementById('bgMusic').play().catch(()=>{});
+ } else {
+  alert("Contraseña incorrecta 💔");
  }
 }
 
 /* AUDIO */
 function toggleSong(){
+ const ourSong = document.getElementById('ourSong');
+ const bgMusic = document.getElementById('bgMusic');
+ const btnPlay = document.getElementById('btnPlay');
  if(ourSong.paused){
   bgMusic.pause();
   ourSong.play();
@@ -330,10 +322,11 @@ function toggleSong(){
 const start=new Date("2024-09-11");
 setInterval(()=>{
  const d=Math.floor((Date.now()-start)/86400000);
- counter.innerHTML=d+" días juntos 🤎";
+ document.getElementById('counter').innerHTML=d+" días juntos 🤎";
 },1000);
 
 /* CORAZONES CAFÉ */
+const bgHearts = document.getElementById('bgHearts');
 for(let i=0;i<24;i++){
  const s=document.createElement("span");
  s.innerHTML="🤎";
@@ -346,6 +339,8 @@ for(let i=0;i<24;i++){
 /* ZOOM */
 document.querySelectorAll(".grid img").forEach(img=>{
  img.onclick=()=>{
+  const zoom = document.getElementById('zoom');
+  const zoomImg = document.getElementById('zoomImg');
   zoom.style.display="flex";
   zoomImg.src=img.src;
  }
@@ -355,22 +350,23 @@ document.querySelectorAll(".grid img").forEach(img=>{
 let lastTap=0;
 const frases=["Te amo 🤎","Siempre tú","Mi amor","Eres mi paz"];
 document.addEventListener("click",e=>{
- const now=Date.now();
- if(now-lastTap<700) return;
- lastTap=now;
- const el=document.createElement("div");
- el.className="touchText";
- el.innerHTML=frases[Math.floor(Math.random()*frases.length)];
- el.style.left=e.clientX+"px;
- el.style.top=e.clientY+"px;
- document.body.appendChild(el);
- setTimeout(()=>el.remove(),1400);
+ // Evitar que salga al hacer click en el botón de entrar
+ if(document.getElementById('login').style.display === "none") {
+     const now=Date.now();
+     if(now-lastTap<300) return;
+     lastTap=now;
+     const el=document.createElement("div");
+     el.className="touchText";
+     el.innerHTML=frases[Math.floor(Math.random()*frases.length)];
+     el.style.left = e.clientX + "px";
+     el.style.top = e.clientY + "px";
+     document.body.appendChild(el);
+     setTimeout(()=>el.remove(),1400);
+ }
 });
 
 /* CARTA ESCRITURA AUTOMÁTICA */
-
-const cartaTexto = `
-si te apagas, te prometo amarte con más fuerza.
+const cartaTexto = `si te apagas, te prometo amarte con más fuerza.
 
 Prometo devolverte la luz que te caracteriza,
 regar tu jardín con el amor que me brindaste,
@@ -384,10 +380,11 @@ solo nunca me hablaron de ti.
 Esta carta es para ti…
 
 Te amo mi cebollín 🤎
-Espero compartir más cosas juntos 🥰🧸
-`;
+Espero compartir más cosas juntos 🥰🧸`;
 
 function abrirCarta(){
+ const cartaModal = document.getElementById('cartaModal');
+ const cartaBox = document.getElementById('cartaBox');
  cartaModal.style.display="block";
  cartaBox.innerHTML="";
  let i=0;
@@ -401,9 +398,8 @@ function abrirCarta(){
 }
 
 function cerrarCarta(){
- cartaModal.style.display="none";
+ document.getElementById('cartaModal').style.display="none";
 }
-
 </script>
 </body>
 </html>
