@@ -4,330 +4,228 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Para mi cebollín 🤎</title>
+<meta name="referrer" content="no-referrer">
 
 <style>
 *{box-sizing:border-box}
 body{
  margin:0;
  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
- background: radial-gradient(circle at center, #2d0025 0%, #0a0008 100%);
+ background: radial-gradient(circle at center, #2d1a10 0%, #0a0008 100%);
  color:#fff;
  overflow-x:hidden;
 }
 
 /* LOGIN */
 #login{
- position:fixed;
- inset:0;
- display:flex;
- justify-content:center;
- align-items:center;
- background:#000;
- z-index:9999;
+ position:fixed; inset:0;
+ display:flex; justify-content:center; align-items:center;
+ background:#000; z-index:10000;
 }
-
 .loginCard{
  background:rgba(255,255,255,.1);
  backdrop-filter:blur(20px);
- padding:40px;
- border-radius:30px;
- text-align:center;
- border: 1px solid rgba(255, 77, 166, 0.3);
- box-shadow:0 0 50px rgba(255,0,120,.2);
- animation:float 4s ease-in-out infinite;
+ padding:40px; border-radius:30px;
+ text-align:center; border: 1px solid #8b5a2b;
+ box-shadow: 0 0 30px rgba(139, 90, 43, 0.3);
 }
 
-@keyframes float{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
-
-input{ padding:14px; border-radius:14px; border:none; text-align:center; font-size:16px; width:200px; color: #000; }
-button{
- padding:12px 22px; border:none; border-radius:20px;
- background:linear-gradient(45deg,#ff4da6,#ff80bf);
- color:white; font-size:16px; margin-top:12px; cursor:pointer;
- transition:.25s; box-shadow:0 8px 18px rgba(0,0,0,.3);
+/* CORAZONES CAFÉ CAYENDO */
+.fallingHeart {
+ position:fixed; pointer-events:none; z-index: 10001;
+ color: #8b5a2b; font-size: 26px; top: -50px;
+ animation: fallEmoji linear forwards;
 }
-button:hover{ transform:translateY(-3px) scale(1.05); }
-
-/* FONDO CORAZONES / EMOTICONES */
-.bgHearts span, .fallingEmoji {
- position:fixed;
- pointer-events:none;
- z-index: 1;
-}
-
-.bgHearts span { color:#ff4da6; opacity:.25; animation:rise linear infinite; }
-@keyframes rise{ from{transform:translateY(110vh) scale(.6)} to{transform:translateY(-10vh) scale(1.2)} }
+@keyframes fallEmoji { to { transform: translateY(110vh) rotate(360deg); } }
 
 /* CARDS */
 .card{
  background:rgba(255,255,255,.92);
- color:#4a0030;
- margin:22px auto;
- padding:25px;
- width:95%;
- max-width:560px;
- border-radius:28px;
- backdrop-filter:blur(10px);
- box-shadow:0 15px 45px rgba(0,0,0,0.3);
- border:1px solid rgba(255,255,255,0.3);
- position: relative;
- z-index: 10;
+ color:#4a0030; margin:22px auto; padding:25px;
+ width:95%; max-width:560px; border-radius:28px;
+ box-shadow:0 15px 45px rgba(0,0,0,0.5);
+ border:1px solid rgba(139, 90, 43, 0.4);
+ position: relative; z-index: 10;
 }
-.card h2{ text-align:center; margin-top:0; color: #8b5a2b; }
+.card h2{ text-align:center; color: #8b5a2b; font-size: 22px; }
 
-/* IMAGES */
 .circleImg, .musicCover {
  width:170px; height:170px; border-radius:50%;
  object-fit:cover; display:block; margin:14px auto;
- border:6px solid #ffb3d9; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+ border:6px solid #8b5a2b;
 }
 
-/* CAROUSEL ANIMADO */
-.carousel { display:flex; gap:14px; overflow:hidden; padding: 10px 0; }
-.carousel img {
- width:180px; height:140px; object-fit:cover;
- border-radius:16px; animation:slide 40s linear infinite;
- border: 2px solid #ffb3d9;
-}
-@keyframes slide{ from{transform:translateX(0)} to{transform:translateX(-100%)} }
-
-/* GRID */
+/* GRID DE RECUERDOS */
 .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(100px,1fr)); gap:10px; }
 .grid img { width:100%; height:120px; object-fit:cover; border-radius:12px; cursor:pointer; transition: 0.3s; }
-.grid img:hover { transform: scale(1.05); }
+.grid img:hover { transform: scale(1.03); }
 
-/* ZOOM */
-#zoom{
- position:fixed; inset:0; background:rgba(0,0,0,.9);
- display:none; justify-content:center; align-items:center; z-index:10000;
+/* CARTA MODAL */
+#cartaModal {
+ position:fixed; inset:0; background:rgba(0,0,0,0.92);
+ display:none; z-index:10000; padding:30px 15px; overflow:auto;
 }
-#zoom img{ max-width:90%; max-height:90%; border-radius:15px; border: 3px solid #fff; }
-
-/* TEXTO CARTA */
-.finalText { white-space:pre-line; line-height:1.8; font-size: 18px; font-weight: 500; text-align: center; }
-
-/* FRASES TOUCH */
-.touchText {
- position:fixed; color:#ff77bb; font-size:18px; font-weight: bold;
- pointer-events:none; animation:fadeUp 1.4s ease-out forwards; z-index: 999;
+#cartaBox {
+ max-width:600px; margin:40px auto; background:#fff8f0;
+ color:#3a1a00; border-radius:25px; padding:35px;
+ font-size:18px; line-height:1.7; white-space:pre-line;
+ border: 3px solid #8b5a2b; box-shadow: 0 0 50px rgba(139,90,43,0.4);
+ text-align: center;
 }
-@keyframes fadeUp { from{opacity:1; transform:translateY(0)} to{opacity:0; transform:translateY(-60px)} }
 
-/* EMOJIS CAYENDO */
-.fallingEmoji {
- animation: fallEmoji linear forwards;
- font-size: 24px;
- top: -50px;
+/* ZOOM IMAGEN */
+#zoom{ position:fixed; inset:0; background:rgba(0,0,0,.9); display:none; justify-content:center; align-items:center; z-index:10001; }
+#zoom img{ max-width:95%; max-height:90%; border-radius:15px; border: 2px solid #fff; }
+
+button {
+ padding:14px 28px; border-radius:25px; border:none;
+ background:#8b5a2b; color:white; cursor:pointer; font-weight:bold;
+ transition: 0.3s;
 }
-@keyframes fallEmoji { to { transform: translateY(110vh) rotate(360deg); } }
+button:hover { background: #6d4622; transform: translateY(-2px); }
 
+input { padding:12px; border-radius:15px; border:none; text-align:center; outline:none; }
 </style>
 </head>
-
 <body>
 
 <!-- LOGIN -->
 <div id="login">
-    <div class="loginCard">
-        <h2 style="color: #ff4da6; margin-top:0;">Bienvenida 💖</h2>
-        <p style="color: #fff; font-size: 14px;">Ingresa la contraseña para entrar</p>
-        <input id="pass" type="password" placeholder="Tu nombre...">
-        <br>
-        <button onclick="enter()">Entrar</button>
-    </div>
+ <div class="loginCard">
+  <h2 style="color: #8b5a2b">Ingresa la contraseña 💖</h2>
+  <input id="pass" type="password">
+  <br><br><button onclick="enter()">Entrar al Álbum</button>
+ </div>
+</div>
+
+<!-- VENTANA DE LA CARTA -->
+<div id="cartaModal">
+ <div style="text-align:center;">
+  <button onclick="cerrarCarta()" style="background:#4a0030;">Cerrar Carta ✉️</button>
+ </div>
+ <div id="cartaBox"></div>
 </div>
 
 <!-- ZOOM -->
-<div id="zoom" onclick="this.style.display='none'">
-    <img id="zoomImg">
-</div>
+<div id="zoom" onclick="this.style.display='none'"><img id="zoomImg"></div>
 
 <!-- AUDIOS -->
-<audio id="bgMusic" loop>
-    <source src="https://files.catbox.moe/4nrc17.mp3">
-</audio>
-<audio id="ourSong">
-    <source src="https://files.catbox.moe/egr68n.mp3">
-</audio>
+<audio id="bgMusic" loop preload="auto"><source src="https://files.catbox.moe"></audio>
+<audio id="ourSong" preload="auto"><source src="https://files.catbox.moe"></audio>
 
-<div class="bgHearts" id="bgHearts"></div>
-
-<!-- CONTENIDO -->
+<!-- CONTENIDO PRINCIPAL -->
 <div class="card">
-    <h2>💞 Nuestro tiempo 💞</h2>
-    <img class="circleImg" src="https://i.imgur.com/m2rqpiu.jpeg">
-    <div id="counter" style="text-align:center; font-size:22px; font-weight:bold;"></div>
+ <h2>💞 Nuestro tiempo juntos 💞</h2>
+ <img class="circleImg" src="https://i.imgur.com">
+ <div id="counter" style="text-align:center; font-size:22px; font-weight:bold;"></div>
 </div>
 
 <div class="card">
-    <h2>🎵 Nuestra canción 🎵</h2>
-    <img class="musicCover" src="https://i.imgur.com/jbyIzFT.jpeg" id="disco">
-    <div style="text-align:center">
-        <button id="btnPlay" onclick="toggleSong()">▶️ Reproducir Especial</button>
-    </div>
+ <h2>🎵 Nuestra canción 🎵</h2>
+ <img class="musicCover" src="https://i.imgur.com" id="disco">
+ <div style="text-align:center">
+    <button id="btnPlay" onclick="toggleSong()">▶️ Reproducir Especial</button>
+ </div>
 </div>
 
 <div class="card">
-    <h2>🎞️ Momentos especiales 🎞️</h2>
-    <div class="carousel">
-        <img src="https://i.imgur.com/tpH81jp.jpeg">
-        <img src="https://i.imgur.com/mOQ2xhz.jpeg">
-        <img src="https://i.imgur.com/ra5P475.jpeg">
-        <img src="https://i.imgur.com/0xnanwq.jpeg">
-        <img src="https://i.imgur.com/2Xh4XhC.jpeg">
-        <img src="https://i.imgur.com/UX4FUgZ.jpeg">
-        <img src="https://i.imgur.com/3h5EZdw.jpeg">
-        <img src="https://i.imgur.com/8yDYtN4.jpeg">
-    </div>
+ <h2>📸 Todos nuestros recuerdos 📸</h2>
+ <div class="grid">
+  <img src="https://i.imgur.com">
+  <img src="https://i.imgur.com">
+  <img src="https://i.imgur.com">
+  <img src="https://i.imgur.com">
+  <img src="https://i.imgur.com">
+  <img src="https://i.imgur.com">
+  <img src="https://i.imgur.com">
+  <img src="https://i.imgur.com">
+  <img src="https://i.imgur.com">
+  <img src="https://i.imgur.com">
+  <img src="https://i.imgur.com">
+  <img src="https://i.imgur.com">
+ </div>
 </div>
 
-<div class="card">
-    <h2>📸 Todos nuestros recuerdos 📸</h2>
-    <div class="grid">
-        <img src="https://i.imgur.com/tpH81jp.jpeg">
-        <img src="https://i.imgur.com/mOQ2xhz.jpeg">
-        <img src="https://i.imgur.com/ra5P475.jpeg">
-        <img src="https://i.imgur.com/0xnanwq.jpeg">
-        <img src="https://i.imgur.com/2Xh4XhC.jpeg">
-        <img src="https://i.imgur.com/UX4FUgZ.jpeg">
-        <img src="https://i.imgur.com/3h5EZdw.jpeg">
-        <img src="https://i.imgur.com/8yDYtN4.jpeg">
-        <img src="https://i.imgur.com/1IveqjS.jpeg">
-        <img src="https://i.imgur.com/D2fqpOe.jpeg">
-        <img src="https://i.imgur.com/cqMYyp1.jpeg">
-        <img src="https://i.imgur.com/S888hKj.jpeg">
-    </div>
-</div>
-
-<div class="card">
-    <h2>💌 Mensaje para ti 💌</h2>
-    <div class="finalText" id="typedText"></div>
+<div class="card" style="text-align:center">
+ <h2>💌 Sorpresa Final 💌</h2>
+ <button onclick="abrirCarta()" style="font-size:20px; padding:15px 45px;">Abrir carta ✉️</button>
 </div>
 
 <script>
 /* LOGIN */
 function enter(){
-    const input = document.getElementById('pass').value;
-    if(input === "Jerry"){
-        document.getElementById('login').style.display="none";
-        document.getElementById('bgMusic').play().catch(()=>{});
-        startTyping();
-        initHearts();
-    } else {
-        alert("Contraseña incorrecta 💔");
-    }
+ if(document.getElementById('pass').value === "Jerry"){
+  document.getElementById('login').style.display="none";
+  document.getElementById('bgMusic').play().catch(()=>{});
+ } else { alert("Contraseña incorrecta 💔"); }
 }
 
 /* AUDIO INTELIGENTE */
 function toggleSong(){
-    const ourSong = document.getElementById('ourSong');
-    const bgMusic = document.getElementById('bgMusic');
-    const btnPlay = document.getElementById('btnPlay');
-    const disco = document.getElementById('disco');
-
-    if(ourSong.paused){
-        bgMusic.pause();
-        ourSong.play();
-        btnPlay.innerHTML="⏸️ Pausar Especial";
-        disco.style.animation = "spin 5s linear infinite";
-    } else {
-        ourSong.pause();
-        bgMusic.play();
-        btnPlay.innerHTML="▶️ Reproducir Especial";
-        disco.style.animation = "none";
-    }
-}
-document.styleSheets[0].insertRule("@keyframes spin { from {transform:rotate(0deg)} to {transform:rotate(360deg)} }", 0);
-
-/* CONTADOR */
-const start = new Date("2024-09-11");
-setInterval(()=>{
-    const d = Math.floor((Date.now() - start) / 86400000);
-    document.getElementById('counter').innerHTML = d + " días de puro amor 🤎";
-}, 1000);
-
-/* CORAZONES DE FONDO */
-function initHearts() {
-    const container = document.getElementById('bgHearts');
-    for(let i=0; i<15; i++){
-        const s = document.createElement("span");
-        s.innerHTML = "❤";
-        s.style.left = Math.random() * 100 + "vw";
-        s.style.fontSize = (16 + Math.random() * 20) + "px";
-        s.style.animationDuration = (6 + Math.random() * 6) + "s";
-        s.style.top = "-50px";
-        container.appendChild(s);
-    }
+ const s=document.getElementById('ourSong'), bg=document.getElementById('bgMusic'), b=document.getElementById('btnPlay');
+ if(s.paused){ bg.pause(); s.play(); b.innerHTML="⏸️ Pausar Especial"; }
+ else { s.pause(); bg.play(); b.innerHTML="▶️ Reproducir Especial"; }
 }
 
-/* ZOOM */
-document.querySelectorAll(".grid img, .carousel img").forEach(img => {
-    img.onclick = () => {
-        document.getElementById('zoom').style.display = "flex";
-        document.getElementById('zoomImg').src = img.src;
-    }
-});
-
-/* FRASES AL CLIC */
-const frases = ["Te amo 🤎", "Siempre tú", "Mi amor", "Eres mi paz", "Mi persona favorita", "Eres hermosa ✨"];
-document.addEventListener("click", e => {
-    if(document.getElementById('login').style.display === "none") {
-        const el = document.createElement("div");
-        el.className = "touchText";
-        el.innerHTML = frases[Math.floor(Math.random() * frases.length)];
-        el.style.left = e.clientX + "px";
-        el.style.top = e.clientY + "px";
-        document.body.appendChild(el);
-        setTimeout(() => el.remove(), 1400);
-    }
-});
-
-/* CARTA CON LLUVIA DE EMOTICONES */
-const texto = `Aún recuerdo cuando te vi en el gym…
-Siempre me robabas la barra 😝
-
-Nuestra primera cita fue por jitomates — perfecta.
-
-Te prometo:
-si te apagas, te amaré con más fuerza.
-Prometo devolverte la luz que te caracteriza,
-regar tu jardín con el amor que me brindaste,
-cuidarte cuando enfermes
-y hacer lo que haga falta para verte florecer.
-
-Cuando me enamoré de ti,
-entendí que nadie me habló mal del amor —
-solo nunca me hablaron de ti.
+/* TEXTO DE LA CARTA ACTUALIZADO */
+const poema = `Aún recuerdo cuando te vi en el gym… siempre me robabas la barra 😝. Nuestra primera cita fue por jitomates — perfecta.
 
 Esta carta es para ti…
 
-Te amo mi cebollín 🤎
-Espero compartir más cosas juntos 🥰🧸`;
+"Si te apagas, te prometo amarte con más fuerza.
 
-let charIdx = 0;
-function startTyping() {
-    const target = document.getElementById('typedText');
-    if (charIdx < texto.length) {
-        target.innerHTML += texto.charAt(charIdx);
-        charIdx++;
-        
-        // Cada vez que escribe un poco, lanza un emoticón aleatorio
-        if(charIdx % 15 === 0) dropLoveEmoji();
-        
-        setTimeout(startTyping, 35);
-    }
+Prometo devolverte la luz que te caracteriza, regar tu jardín con el amor que me brindaste cuando estaba marchito. Te prometo cuidarte cuando enfermes y hacer lo que haga falta para asegurarme de que vuelvas a florecer.
+
+Porque, mi amor, si hay algo que le pido a Dios es que, si alguna vez llega a ser necesario, me permita ser aquello que te haga falta, como tú lo fuiste conmigo".
+
+Cuando me enamoré de ti...
+
+"Cuando me enamoré de ti, entendí que no era que todas aquellas personas que me hablaron del amor estuvieran mal, sino que nunca me hablaron de ti".
+
+Te amo mi cebollín 🤎`;
+
+function abrirCarta(){
+ document.getElementById('cartaModal').style.display="block";
+ const box = document.getElementById('cartaBox');
+ box.innerHTML = "";
+ let i=0;
+ const interval = setInterval(() => {
+  if(i < poema.length){
+   box.innerHTML += poema[i++];
+   if(i % 5 === 0) dropHeart();
+  } else {
+   clearInterval(interval);
+  }
+ }, 45); // Velocidad de escritura
 }
 
-function dropLoveEmoji() {
-    const emojis = ["🤎", "✨", "🥰", "🧸", "💖", "🌷"];
-    const e = document.createElement("div");
-    e.className = "fallingEmoji";
-    e.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
-    e.style.left = Math.random() * 95 + "vw";
-    e.style.animationDuration = (Math.random() * 3 + 2) + "s";
-    document.body.appendChild(e);
-    setTimeout(() => e.remove(), 5000);
+function cerrarCarta(){ document.getElementById('cartaModal').style.display="none"; }
+
+/* LLUVIA DE CORAZONES CAFÉ */
+function dropHeart(){
+ const h = document.createElement("div");
+ h.className = "fallingHeart";
+ h.innerHTML = "🤎";
+ h.style.left = Math.random() * 92 + "vw";
+ h.style.animationDuration = (Math.random() * 3 + 2.5) + "s";
+ document.body.appendChild(h);
+ setTimeout(() => h.remove(), 4000);
 }
+
+/* CONTADOR */
+const start = new Date("2024-09-11");
+setInterval(() => {
+ const d = Math.floor((Date.now() - start) / 86400000);
+ document.getElementById('counter').innerHTML = d + " días juntos 🤎";
+}, 1000);
+
+/* ZOOM */
+document.querySelectorAll(".grid img").forEach(img => {
+ img.onclick = () => {
+  document.getElementById('zoom').style.display = "flex";
+  document.getElementById('zoomImg').src = img.src;
+ }
+});
 </script>
 </body>
 </html>
