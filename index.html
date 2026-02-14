@@ -380,12 +380,26 @@ for(let i=0;i<25;i++){
  bgHearts.appendChild(s);
 }
 
-/* CONTADOR */
-const start=new Date("2024-09-11");
-setInterval(()=>{
- const d=Math.floor((Date.now()-start)/86400000);
- counter.innerHTML=d+" días juntos 💗";
-},60000);
+/* CONTADOR MEJORADO */
+const start = new Date("2024-09-11T00:00:00");
+
+function updateCounter(){
+ const now = new Date();
+ const diff = now - start;
+
+ const days = Math.floor(diff / (1000*60*60*24));
+ const hours = Math.floor((diff / (1000*60*60)) % 24);
+ const minutes = Math.floor((diff / (1000*60)) % 60);
+ const seconds = Math.floor((diff / 1000) % 60);
+
+ counter.innerHTML = `
+  <h3>${days} días</h3>
+  ${hours} horas ${minutes} minutos ${seconds} segundos 💗
+ `;
+}
+
+updateCounter();
+setInterval(updateCounter,1000);
 
 /* POEMA */
 const poemaTexto=`Cuando me enamoré de ti
@@ -405,7 +419,6 @@ si alguna vez llega a ser necesario,
 me permita ser aquello que te haga falta,
 como tú lo fuiste conmigo."`;
 
-/* TYPEWRITER CORREGIDO */
 function typeText(t, el){
  el.textContent="";
  const chars=[...t];
