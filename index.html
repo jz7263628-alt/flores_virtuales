@@ -238,7 +238,7 @@ button:hover{
 </div>
 
 <!-- MÚSICA -->
-<audio id="bgMusic" loop>
+<audio id="bgMusic" loop preload="auto">
 <source src="https://files.catbox.moe/4nrc17.mp3">
 </audio>
 
@@ -331,10 +331,11 @@ setInterval(()=>{
  }
 },300);
 
+let musicPlayed = false;
+
 function enter(){
  if(pass.value==="Jerry"){
   login.style.display="none";
-  bgMusic.play().catch(()=>{});
  }
 }
 
@@ -362,6 +363,10 @@ const frases=[
 
 document.addEventListener("click",e=>{
  if(e.target.tagName==="BUTTON"||e.target.tagName==="INPUT") return;
+ if (!musicPlayed) {
+  bgMusic.play().catch(() => {});
+  musicPlayed = true;
+ }
  const f=document.createElement("div");
  f.className="tapPhrase";
  f.innerText=frases[Math.floor(Math.random()*frases.length)];
