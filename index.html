@@ -218,6 +218,18 @@ button:hover{
  from{transform:scale(1)}
  to{transform:scale(1.05)}
 }
+
+/* TORTUGA ANIMADA */
+.turtle{
+ font-size:48px;
+ display:block;
+ text-align:center;
+ animation:floatTurtle 3s ease-in-out infinite;
+}
+@keyframes floatTurtle{
+0%,100%{transform:translateY(0)}
+50%{transform:translateY(-10px)}
+}
 </style>
 </head>
 
@@ -314,6 +326,13 @@ button:hover{
 <div class="seal" onclick="openLetter()">💗</div>
 <div id="letter" class="secretLetter"></div>
 <div id="sign" class="signature">Con amor — siempre tú 🤎</div>
+</div>
+
+<!-- TORTUGA ANIMADA -->
+<div class="card">
+<h2>🐢 Faltó el Jerry..❤️🐢</h2>
+<div class="turtle">🐢</div>
+<p style="text-align:center; font-size:18px;">¡Aquí está la tortuga animada que faltaba! 🐢❤️</p>
 </div>
 
 <script>
