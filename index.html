@@ -219,34 +219,34 @@ button:hover{
  to{transform:scale(1.05)}
 }
 
-/* MINI ACUARIO 10/10 */
+/* ACUARIO ULTRA NATURAL */
 .aquarium{
  position:relative;
  width:100%;
- height:180px;
- background:linear-gradient(180deg, #1a3a5c 0%, #0d2137 50%, #061424 100%);
+ height:200px;
+ background:linear-gradient(180deg, #0a4a6e 0%, #063a5c 40%, #021d32 100%);
  border-radius:20px;
  overflow:hidden;
- border:4px solid #2d5a7b;
- box-shadow:inset 0 0 30px rgba(0,150,200,0.3), 0 0 20px rgba(100,200,255,0.2);
+ border:4px solid #1a7a9e;
+ box-shadow:inset 0 0 60px rgba(0,100,150,0.4), 0 0 30px rgba(0,150,200,0.2);
  margin-top:15px;
 }
 
 .aquarium::before{
  content:'';
  position:absolute;
- top:-20px;
- left:20%;
- width:60%;
- height:100%;
- background:linear-gradient(180deg, rgba(150,220,255,0.15) 0%, transparent 60%);
+ top:-30px;
+ left:15%;
+ width:70%;
+ height:120%;
+ background:linear-gradient(180deg, rgba(200,240,255,0.12) 0%, transparent 50%);
  pointer-events:none;
- animation:lightRay 8s ease-in-out infinite;
+ animation:lightRay 10s ease-in-out infinite;
 }
 
 @keyframes lightRay{
-0%,100%{opacity:0.3; transform:scaleX(1);}
-50%{opacity:0.6; transform:scaleX(1.2);}
+0%,100%{opacity:0.2; transform:scaleX(1) translateX(0);}
+50%{opacity:0.4; transform:scaleX(1.3) translateX(20px);}
 }
 
 .aquarium-sand{
@@ -254,61 +254,65 @@ button:hover{
  bottom:0;
  left:0;
  width:100%;
- height:25px;
- background:linear-gradient(180deg, #c2956e 0%, #8b6b4a 100%);
- border-radius:0 0 15px 15px;
+ height:30px;
+ background:linear-gradient(180deg, #d4a76a 0%, #a67c4e 50%, #8b6340 100%);
+ border-radius:0 0 18px 18px;
 }
 
 .aquarium-sand::before{
  content:'〰️〰️';
  position:absolute;
- top:-8px;
+ top:-10px;
  left:0;
  width:100%;
- font-size:10px;
- color:#a08060;
+ font-size:12px;
+ color:#b8956a;
  text-align:center;
- letter-spacing:5px;
+ letter-spacing:8px;
+ opacity:0.7;
 }
 
 .seaweed{
  position:absolute;
- bottom:20px;
- font-size:35px;
- animation:sway 3s ease-in-out infinite;
+ bottom:25px;
+ font-size:38px;
+ animation:sway 4s ease-in-out infinite;
  transform-origin:bottom center;
+ filter:drop-shadow(0 0 5px rgba(50,150,80,0.3));
 }
 
-.seaweed:nth-child(1){left:10%;animation-delay:0s;}
-.seaweed:nth-child(2){left:25%;animation-delay:0.5s;font-size:40px;}
-.seaweed:nth-child(3){left:75%;animation-delay:1s;font-size:38px;}
-.seaweed:nth-child(4){left:90%;animation-delay:0.3s;}
+.seaweed:nth-child(1){left:8%;animation-delay:0s;font-size:42px;}
+.seaweed:nth-child(2){left:22%;animation-delay:0.7s;font-size:46px;}
+.seaweed:nth-child(3){left:78%;animation-delay:1.4s;font-size:44px;}
+.seaweed:nth-child(4){left:92%;animation-delay:0.4s;font-size:40px;}
 
 @keyframes sway{
-0%,100%{transform:rotate(-5deg);}
-50%{transform:rotate(5deg);}
+0%,100%{transform:rotate(-3deg) scaleY(1);}
+50%{transform:rotate(4deg) scaleY(1.02);}
 }
 
 .turtle-swim{
  position:absolute;
- font-size:42px;
- animation:swimAround 12s linear infinite;
- filter:drop-shadow(0 0 10px rgba(100,200,255,0.7));
+ font-size:44px;
+ animation:swimAround 15s linear infinite;
+ filter:drop-shadow(0 0 12px rgba(100,200,255,0.6));
+ z-index:10;
 }
 
 @keyframes swimAround{
-0%{left:10%;top:30%;transform:rotate(0deg) scaleX(1);}
-10%{left:20%;top:15%;transform:rotate(15deg) scaleX(1);}
-20%{left:40%;top:10%;transform:rotate(30deg) scaleX(1);}
-30%{left:60%;top:20%;transform:rotate(45deg) scaleX(1);}
-35%{left:75%;top:35%;transform:rotate(0deg) scaleX(-1);}
-40%{left:80%;top:50%;transform:rotate(-20deg) scaleX(-1);}
-50%{left:70%;top:65%;transform:rotate(-40deg) scaleX(-1);}
-60%{left:50%;top:70%;transform:rotate(-20deg) scaleX(-1);}
-70%{left:30%;top:60%;transform:rotate(0deg) scaleX(1);}
-80%{left:15%;top:45%;transform:rotate(20deg) scaleX(1);}
-90%{left:5%;top:35%;transform:rotate(10deg) scaleX(1);}
-100%{left:10%;top:30%;transform:rotate(0deg) scaleX(1);}
+0%{left:5%;top:25%;transform:rotate(5deg) scaleX(1);}
+8%{left:15%;top:15%;transform:rotate(20deg) scaleX(1);}
+15%{left:30%;top:12%;transform:rotate(35deg) scaleX(1);}
+25%{left:50%;top:18%;transform:rotate(50deg) scaleX(1);}
+30%{left:60%;top:25%;transform:rotate(30deg) scaleX(1);}
+35%{left:65%;top:35%;transform:rotate(0deg) scaleX(-1);}
+45%{left:70%;top:45%;transform:rotate(-15deg) scaleX(-1);}
+55%{left:65%;top:55%;transform:rotate(-35deg) scaleX(-1);}
+65%{left:50%;top:60%;transform:rotate(-50deg) scaleX(-1);}
+75%{left:35%;top:55%;transform:rotate(-30deg) scaleX(-1);}
+80%{left:25%;top:45%;transform:rotate(0deg) scaleX(1);}
+90%{left:15%;top:35%;transform:rotate(15deg) scaleX(1);}
+100%{left:5%;top:25%;transform:rotate(5deg) scaleX(1);}
 }
 
 .aquarium-surface{
@@ -316,14 +320,93 @@ button:hover{
  top:0;
  left:0;
  width:100%;
- height:15px;
- background:linear-gradient(180deg, rgba(150,220,255,0.4) 0%, transparent 100%);
- animation:waterSurface 3s ease-in-out infinite;
+ height:20px;
+ background:linear-gradient(180deg, rgba(150,220,255,0.5) 0%, rgba(100,180,220,0.3) 40%, transparent 100%);
+ animation:waterSurface 4s ease-in-out infinite;
+ z-index:5;
 }
 
 @keyframes waterSurface{
-0%,100%{opacity:0.6;}
-50%{opacity:1;}
+0%,100%{opacity:0.7; transform:translateY(0);}
+25%{opacity:0.9; transform:translateY(-2px) scaleY(1.1);}
+50%{opacity:0.6; transform:translateY(1px) scaleY(0.95);}
+75%{opacity:0.85; transform:translateY(-1px) scaleY(1.05);}
+}
+
+.small-fish{
+ position:absolute;
+ font-size:18px;
+ animation:fishSwim 20s linear infinite;
+ opacity:0.8;
+}
+
+.small-fish:nth-of-type(1){top:40%;animation-duration:25s;animation-delay:0s;}
+.small-fish:nth-of-type(2){top:55%;animation-duration:22s;animation-delay:-5s;}
+
+@keyframes fishSwim{
+0%{left:-10%;transform:scaleX(1);}
+45%{transform:scaleX(1);}
+50%{left:110%;transform:scaleX(-1);}
+50.1%{left:-10%;transform:scaleX(-1);}
+95%{transform:scaleX(1);}
+100%{left:110%;transform:scaleX(1);}
+}
+
+.starfish{
+ position:absolute;
+ bottom:8px;
+ left:40%;
+ font-size:22px;
+ animation:starMove 6s ease-in-out infinite;
+}
+
+@keyframes starMove{
+0%,100%{transform:rotate(0deg) scale(1);}
+50%{transform:rotate(10deg) scale(1.1);}
+}
+
+.crab{
+ position:absolute;
+ bottom:5px;
+ left:70%;
+ font-size:20px;
+ animation:crabWalk 8s ease-in-out infinite;
+}
+
+@keyframes crabWalk{
+0%,100%{transform:translateX(0) scaleX(1);}
+25%{transform:translateX(10px) scaleX(1);}
+50%{transform:translateX(5px) scaleX(-1);}
+75%{transform:translateX(-5px) scaleX(-1);}
+100%{transform:translateX(0) scaleX(1);}
+}
+
+.aqua-bubble{
+ position:absolute;
+ background:radial-gradient(circle at 35% 35%, rgba(255,255,255,0.9), rgba(150,200,255,0.3));
+ border-radius:50%;
+ animation:riseBubble 4s linear infinite;
+}
+
+@keyframes riseBubble{
+0%{transform:translateY(0) scale(0.3); opacity:0;}
+5%{opacity:0.8;}
+95%{opacity:0.2;}
+100%{transform:translateY(-200px) scale(1); opacity:0;}
+}
+
+.aqua-particle{
+ position:absolute;
+ width:3px;
+ height:3px;
+ background:rgba(200,240,255,0.7);
+ border-radius:50%;
+ animation:floatParticle 7s ease-in-out infinite;
+}
+
+@keyframes floatParticle{
+0%,100%{transform:translateY(0) translateX(0); opacity:0.2;}
+50%{transform:translateY(-40px) translateX(15px); opacity:0.8;}
 }
 </style>
 </head>
@@ -423,12 +506,16 @@ button:hover{
 <div id="sign" class="signature">Con amor — siempre tú 🤎</div>
 </div>
 
-<!-- MINI ACUARIO -->
+<!-- ACUARIO ULTRA NATURAL -->
 <div class="card">
 <h2>🐢 Faltó el Jerry..❤️🐢</h2>
 <div class="aquarium" id="aquarium">
  <div class="aquarium-surface"></div>
  <div class="turtle-swim">🐢</div>
+ <div class="small-fish">🐟</div>
+ <div class="small-fish">🐠</div>
+ <div class="starfish">⭐</div>
+ <div class="crab">🦀</div>
  <div class="seaweed">🌿</div>
  <div class="seaweed">🌿</div>
  <div class="seaweed">🌿</div>
