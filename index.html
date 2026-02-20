@@ -15,7 +15,6 @@ body{
  overflow-x:hidden;
 }
 
-/* LOGIN */
 #login{
  position:fixed;
  inset:0;
@@ -69,7 +68,6 @@ button:hover{
  box-shadow:0 0 12px #ff80bf;
 }
 
-/* LLUVIA LOGIN */
 .loginRain{
  position:absolute;
  top:-20px;
@@ -80,7 +78,6 @@ button:hover{
  to{ transform:translateY(110vh); opacity:.2; }
 }
 
-/* HEART BG */
 .bgHearts span{
  position:fixed;
  color:#ff4da6;
@@ -93,7 +90,6 @@ button:hover{
  to{transform:translateY(-10vh)}
 }
 
-/* CARDS */
 .card{
  background:#fff;
  color:#4a0030;
@@ -106,7 +102,6 @@ button:hover{
  border:3px solid #ffd6eb;
 }
 
-/* IMAGES */
 .circleImg,.musicCover{
  width:170px;
  height:170px;
@@ -117,7 +112,6 @@ button:hover{
  border:6px solid #ffb3d9;
 }
 
-/* GRID */
 .grid{
  display:grid;
  grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
@@ -131,7 +125,6 @@ button:hover{
  cursor:pointer;
 }
 
-/* CARRUSEL */
 .carousel{
  display:flex;
  gap:14px;
@@ -149,7 +142,6 @@ button:hover{
  to{transform:translateX(-50%)}
 }
 
-/* ZOOM */
 #zoom{
  position:fixed;
  inset:0;
@@ -165,7 +157,6 @@ button:hover{
  border-radius:18px;
 }
 
-/* TYPE */
 .typewriter{
  white-space:pre-wrap;
  border-right:2px solid #ff4da6;
@@ -175,7 +166,6 @@ button:hover{
 50%{border-color:transparent}
 }
 
-/* CARTA */
 .secretLetter{
  margin-top:15px;
  padding:20px;
@@ -201,7 +191,6 @@ button:hover{
  opacity:0;
 }
 
-/* FRASES */
 .tapPhrase{
  position:fixed;
  color:#ffd6eb;
@@ -213,207 +202,15 @@ button:hover{
  to{ transform:translateY(-60px); opacity:0; }
 }
 
-/* CONTADOR */
 @keyframes pulseCounter{
  from{transform:scale(1)}
  to{transform:scale(1.05)}
-}
-
-/* ACUARIO ULTRA NATURAL */
-.aquarium{
- position:relative;
- width:100%;
- height:200px;
- background:linear-gradient(180deg, #0a4a6e 0%, #063a5c 40%, #021d32 100%);
- border-radius:20px;
- overflow:hidden;
- border:4px solid #1a7a9e;
- box-shadow:inset 0 0 60px rgba(0,100,150,0.4), 0 0 30px rgba(0,150,200,0.2);
- margin-top:15px;
-}
-
-.aquarium::before{
- content:'';
- position:absolute;
- top:-30px;
- left:15%;
- width:70%;
- height:120%;
- background:linear-gradient(180deg, rgba(200,240,255,0.12) 0%, transparent 50%);
- pointer-events:none;
- animation:lightRay 10s ease-in-out infinite;
-}
-
-@keyframes lightRay{
-0%,100%{opacity:0.2; transform:scaleX(1) translateX(0);}
-50%{opacity:0.4; transform:scaleX(1.3) translateX(20px);}
-}
-
-.aquarium-sand{
- position:absolute;
- bottom:0;
- left:0;
- width:100%;
- height:30px;
- background:linear-gradient(180deg, #d4a76a 0%, #a67c4e 50%, #8b6340 100%);
- border-radius:0 0 18px 18px;
-}
-
-.aquarium-sand::before{
- content:'〰️〰️';
- position:absolute;
- top:-10px;
- left:0;
- width:100%;
- font-size:12px;
- color:#b8956a;
- text-align:center;
- letter-spacing:8px;
- opacity:0.7;
-}
-
-.seaweed{
- position:absolute;
- bottom:25px;
- font-size:38px;
- animation:sway 4s ease-in-out infinite;
- transform-origin:bottom center;
- filter:drop-shadow(0 0 5px rgba(50,150,80,0.3));
-}
-
-.seaweed:nth-child(1){left:8%;animation-delay:0s;font-size:42px;}
-.seaweed:nth-child(2){left:22%;animation-delay:0.7s;font-size:46px;}
-.seaweed:nth-child(3){left:78%;animation-delay:1.4s;font-size:44px;}
-.seaweed:nth-child(4){left:92%;animation-delay:0.4s;font-size:40px;}
-
-@keyframes sway{
-0%,100%{transform:rotate(-3deg) scaleY(1);}
-50%{transform:rotate(4deg) scaleY(1.02);}
-}
-
-.turtle-swim{
- position:absolute;
- font-size:44px;
- animation:swimAround 15s linear infinite;
- filter:drop-shadow(0 0 12px rgba(100,200,255,0.6));
- z-index:10;
-}
-
-@keyframes swimAround{
-0%{left:5%;top:25%;transform:rotate(5deg) scaleX(1);}
-8%{left:15%;top:15%;transform:rotate(20deg) scaleX(1);}
-15%{left:30%;top:12%;transform:rotate(35deg) scaleX(1);}
-25%{left:50%;top:18%;transform:rotate(50deg) scaleX(1);}
-30%{left:60%;top:25%;transform:rotate(30deg) scaleX(1);}
-35%{left:65%;top:35%;transform:rotate(0deg) scaleX(-1);}
-45%{left:70%;top:45%;transform:rotate(-15deg) scaleX(-1);}
-55%{left:65%;top:55%;transform:rotate(-35deg) scaleX(-1);}
-65%{left:50%;top:60%;transform:rotate(-50deg) scaleX(-1);}
-75%{left:35%;top:55%;transform:rotate(-30deg) scaleX(-1);}
-80%{left:25%;top:45%;transform:rotate(0deg) scaleX(1);}
-90%{left:15%;top:35%;transform:rotate(15deg) scaleX(1);}
-100%{left:5%;top:25%;transform:rotate(5deg) scaleX(1);}
-}
-
-.aquarium-surface{
- position:absolute;
- top:0;
- left:0;
- width:100%;
- height:20px;
- background:linear-gradient(180deg, rgba(150,220,255,0.5) 0%, rgba(100,180,220,0.3) 40%, transparent 100%);
- animation:waterSurface 4s ease-in-out infinite;
- z-index:5;
-}
-
-@keyframes waterSurface{
-0%,100%{opacity:0.7; transform:translateY(0);}
-25%{opacity:0.9; transform:translateY(-2px) scaleY(1.1);}
-50%{opacity:0.6; transform:translateY(1px) scaleY(0.95);}
-75%{opacity:0.85; transform:translateY(-1px) scaleY(1.05);}
-}
-
-.small-fish{
- position:absolute;
- font-size:18px;
- animation:fishSwim 20s linear infinite;
- opacity:0.8;
-}
-
-.small-fish:nth-of-type(1){top:40%;animation-duration:25s;animation-delay:0s;}
-.small-fish:nth-of-type(2){top:55%;animation-duration:22s;animation-delay:-5s;}
-
-@keyframes fishSwim{
-0%{left:-10%;transform:scaleX(1);}
-45%{transform:scaleX(1);}
-50%{left:110%;transform:scaleX(-1);}
-50.1%{left:-10%;transform:scaleX(-1);}
-95%{transform:scaleX(1);}
-100%{left:110%;transform:scaleX(1);}
-}
-
-.starfish{
- position:absolute;
- bottom:8px;
- left:40%;
- font-size:22px;
- animation:starMove 6s ease-in-out infinite;
-}
-
-@keyframes starMove{
-0%,100%{transform:rotate(0deg) scale(1);}
-50%{transform:rotate(10deg) scale(1.1);}
-}
-
-.crab{
- position:absolute;
- bottom:5px;
- left:70%;
- font-size:20px;
- animation:crabWalk 8s ease-in-out infinite;
-}
-
-@keyframes crabWalk{
-0%,100%{transform:translateX(0) scaleX(1);}
-25%{transform:translateX(10px) scaleX(1);}
-50%{transform:translateX(5px) scaleX(-1);}
-75%{transform:translateX(-5px) scaleX(-1);}
-100%{transform:translateX(0) scaleX(1);}
-}
-
-.aqua-bubble{
- position:absolute;
- background:radial-gradient(circle at 35% 35%, rgba(255,255,255,0.9), rgba(150,200,255,0.3));
- border-radius:50%;
- animation:riseBubble 4s linear infinite;
-}
-
-@keyframes riseBubble{
-0%{transform:translateY(0) scale(0.3); opacity:0;}
-5%{opacity:0.8;}
-95%{opacity:0.2;}
-100%{transform:translateY(-200px) scale(1); opacity:0;}
-}
-
-.aqua-particle{
- position:absolute;
- width:3px;
- height:3px;
- background:rgba(200,240,255,0.7);
- border-radius:50%;
- animation:floatParticle 7s ease-in-out infinite;
-}
-
-@keyframes floatParticle{
-0%,100%{transform:translateY(0) translateX(0); opacity:0.2;}
-50%{transform:translateY(-40px) translateX(15px); opacity:0.8;}
 }
 </style>
 </head>
 
 <body>
 
-<!-- LOGIN -->
 <div id="login">
 <div class="loginCard">
 <h2>Ingresa la contraseña 💖</h2>
@@ -427,7 +224,6 @@ button:hover{
 <img id="zoomImg">
 </div>
 
-<!-- MÚSICA -->
 <audio id="bgMusic" loop preload="auto">
 <source src="https://files.catbox.moe/4nrc17.mp3">
 </audio>
@@ -442,14 +238,12 @@ button:hover{
 
 <div class="bgHearts" id="bgHearts"></div>
 
-<!-- TIEMPO -->
 <div class="card">
 <h2>💞 Nuestro tiempo juntos 💞</h2>
 <img class="circleImg" src="https://i.imgur.com/m2rqpiu.jpeg">
 <div id="counter"></div>
 </div>
 
-<!-- CANCIÓN -->
 <div class="card">
 <h2>🎵 Nuestra canción 🎵</h2>
 <img class="musicCover" src="https://i.imgur.com/jbyIzFT.jpeg">
@@ -458,7 +252,6 @@ button:hover{
 </div>
 </div>
 
-<!-- CARRUSEL -->
 <div class="card">
 <h2>🎞️ Momentos especiales 🎞</h2>
 <div class="carousel">
@@ -473,7 +266,6 @@ button:hover{
 </div>
 </div>
 
-<!-- GALERÍA -->
 <div class="card">
 <h2>📸 Recuerdos 📸</h2>
 <div class="grid" id="gallery">
@@ -492,34 +284,325 @@ button:hover{
 </div>
 </div>
 
-<!-- POEMAS -->
 <div class="card">
 <h2>📜 Poemas especiales 📜</h2>
 <div id="poema" class="typewriter"></div>
 </div>
 
-<!-- CARTA -->
 <div class="card">
 <h2>💌 Carta sellada 💌</h2>
 <div class="seal" onclick="openLetter()">💗</div>
 <div id="letter" class="secretLetter"></div>
 <div id="sign" class="signature">Con amor — siempre tú 🤎</div>
 </div>
+<style>
+.aquarium{
+ position:relative;
+ width:100%;
+ height:240px;
+ background:linear-gradient(180deg, #0a4a6a 0%, #063a55 25%, #032a40 60%, #021a2a 100%);
+ border-radius:25px;
+ overflow:hidden;
+ border:6px solid #1a9abf;
+ box-shadow:inset 0 0 100px rgba(0,140,200,0.6), 0 0 50px rgba(0,180,240,0.4), inset 0 -30px 40px rgba(0,0,0,0.5);
+ margin-top:15px;
+}
 
-<!-- ACUARIO ULTRA NATURAL -->
+.aquarium::before{
+ content:'';
+ position:absolute;
+ top:-50px;
+ left:5%;
+ width:90%;
+ height:140%;
+ background:linear-gradient(180deg, rgba(255,200,100,0.2) 0%, rgba(255,180,80,0.1) 30%, transparent 70%);
+ pointer-events:none;
+ animation:goldenRays 15s ease-in-out infinite;
+}
+
+@keyframes goldenRays{
+0%,100%{opacity:0.1; transform:scale(1) translateX(0) rotate(0deg);}
+25%{opacity:0.25; transform:scale(1.15) translateX(20px) rotate(2deg);}
+50%{opacity:0.15; transform:scale(1.05) translateX(-10px) rotate(-1deg);}
+75%{opacity:0.3; transform:scale(1.2) translateX(15px) rotate(1deg);}
+}
+
+.aquarium::after{
+ content:'';
+ position:absolute;
+ bottom:0;
+ left:0;
+ width:100%;
+ height:60px;
+ background:linear-gradient(180deg, transparent 0%, rgba(10,30,40,0.9) 100%);
+ pointer-events:none;
+ border-radius:0 0 18px 18px;
+}
+
+.aquarium-sand{
+ position:absolute;
+ bottom:0;
+ left:0;
+ width:100%;
+ height:40px;
+ background:linear-gradient(180deg, #d4b080 0%, #c9a060 30%, #a88040 70%, #8b6940 100%);
+ border-radius:0 0 20px 20px;
+ box-shadow:0 -8px 20px rgba(0,0,0,0.4), inset 0 5px 15px rgba(255,255,255,0.1);
+}
+
+.aquarium-sand::before{
+ content:'·······';
+ position:absolute;
+ top:-14px;
+ left:0;
+ width:100%;
+ font-size:16px;
+ color:#b89060;
+ text-align:center;
+ letter-spacing:14px;
+ opacity:0.5;
+}
+
+.seaweed{
+ position:absolute;
+ bottom:35px;
+ font-size:44px;
+ animation:sway 6s ease-in-out infinite;
+ transform-origin:bottom center;
+ filter:drop-shadow(0 0 10px rgba(60,200,120,0.5)) brightness(1.1);
+}
+
+.seaweed:nth-child(1){left:2%;animation-delay:0s;font-size:50px;}
+.seaweed:nth-child(2){left:15%;animation-delay:1s;font-size:56px;}
+.seaweed:nth-child(3){left:85%;animation-delay:2s;font-size:52px;}
+.seaweed:nth-child(4){left:98%;animation-delay:0.5s;font-size:48px;}
+
+@keyframes sway{
+0%,100%{transform:rotate(-1deg) scaleY(1) scaleX(1) skewX(0deg);}
+15%{transform:rotate(2deg) scaleY(1.04) scaleX(0.98) skewX(1deg);}
+35%{transform:rotate(-2deg) scaleY(0.98) scaleX(1.02) skewX(-1deg);}
+50%{transform:rotate(1deg) scaleY(1.02) scaleX(0.99);}
+65%{transform:rotate(-1deg) scaleY(1) scaleX(1.01);}
+85%{transform:rotate(2deg) scaleY(0.99) scaleX(1.02);}
+}
+
+.turtle-swim{
+ position:absolute;
+ font-size:52px;
+ animation:swimAround 22s linear infinite;
+ filter:drop-shadow(0 0 20px rgba(140,240,255,0.8)) drop-shadow(0 8px 15px rgba(0,0,0,0.4));
+ z-index:20;
+}
+
+@keyframes swimAround{
+0%{left:2%;top:15%;transform:rotate(10deg) scaleX(1) rotate(0deg);}
+8%{left:12%;top:8%;transform:rotate(28deg) scaleX(1) rotate(5deg);}
+18%{left:30%;top:5%;transform:rotate(45deg) scaleX(1) rotate(-5deg);}
+28%{left:50%;top:10%;transform:rotate(60deg) scaleX(1) rotate(5deg);}
+35%{left:65%;top:18%;transform:rotate(40deg) scaleX(1) rotate(-5deg);}
+42%{left:75%;top:28%;transform:rotate(10deg) scaleX(-1) rotate(0deg);}
+52%{left:72%;top:40%;transform:rotate(-20deg) scaleX(-1) rotate(5deg);}
+62%{left:55%;top:50%;transform:rotate(-40deg) scaleX(-1) rotate(-5deg);}
+72%{left:35%;top:45%;transform:rotate(-25deg) scaleX(-1) rotate(5deg);}
+82%{left:18%;top:35%;transform:rotate(0deg) scaleX(1) rotate(0deg);}
+92%{left:8%;top:25%;transform:rotate(15deg) scaleX(1) rotate(-5deg);}
+100%{left:2%;top:15%;transform:rotate(10deg) scaleX(1) rotate(0deg);}
+}
+
+.aquarium-surface{
+ position:absolute;
+ top:0;
+ left:0;
+ width:100%;
+ height:30px;
+ background:linear-gradient(180deg, rgba(200,240,255,0.7) 0%, rgba(150,220,255,0.5) 25%, rgba(100,180,240,0.3) 60%, transparent 100%);
+ animation:waterWaves 6s ease-in-out infinite;
+ z-index:25;
+}
+
+@keyframes waterWaves{
+0%,100%{opacity:0.85; transform:translateY(0) scaleY(1) skewX(0deg);}
+20%{opacity:1; transform:translateY(-4px) scaleY(1.18) skewX(2deg);}
+40%{opacity:0.75; transform:translateY(3px) scaleY(0.92) skewX(-2deg);}
+60%{opacity:0.95; transform:translateY(-2px) scaleY(1.1) skewX(1deg);}
+80%{opacity:0.8; transform:translateY(2px) scaleY(0.95) skewX(-1deg);}
+}
+
+.small-fish{
+ position:absolute;
+ font-size:22px;
+ animation:fishSwim 30s linear infinite;
+ opacity:0.9;
+ z-index:15;
+ filter:drop-shadow(0 0 8px rgba(255,220,120,0.5)) brightness(1.15);
+}
+
+.small-fish:nth-of-type(1){top:30%;animation-duration:32s;animation-delay:0s;}
+.small-fish:nth-of-type(2){top:45%;animation-duration:28s;animation-delay:-10s;}
+
+@keyframes fishSwim{
+0%{left:-18%;transform:scaleX(1) rotate(0deg) skewY(0deg);}
+30%{transform:scaleX(1) rotate(5deg) skewY(2deg);}
+49%{transform:scaleX(1) rotate(-3deg) skewY(-2deg);}
+50%{left:118%;transform:scaleX(-1) rotate(0deg) skewY(0deg);}
+50.1%{left:-18%;transform:scaleX(-1) rotate(5deg) skewY(-2deg);}
+80%{transform:scaleX(-1) rotate(-5deg) skewY(2deg);}
+99%{transform:scaleX(-1) rotate(3deg) skewY(-2deg);}
+100%{left:118%;transform:scaleX(1) rotate(0deg) skewY(0deg);}
+}
+
+.starfish{
+ position:absolute;
+ bottom:12px;
+ left:30%;
+ font-size:30px;
+ animation:starBounce 8s ease-in-out infinite;
+ z-index:18;
+ filter:drop-shadow(0 0 12px rgba(255,180,80,0.7)) brightness(1.2);
+}
+
+@keyframes starBounce{
+0%,100%{transform:translateY(0) rotate(0deg) scale(1) skewX(0deg);}
+25%{transform:translateY(-4px) rotate(6deg) scale(1.1) skewX(2deg);}
+50%{transform:translateY(-2px) rotate(-4deg) scale(0.95) skewX(-2deg);}
+75%{transform:translateY(-5px) rotate(8deg) scale(1.08) skewX(3deg);}
+}
+
+.crab{
+ position:absolute;
+ bottom:10px;
+ left:70%;
+ font-size:28px;
+ animation:crabMove 12s ease-in-out infinite;
+ z-index:18;
+ filter:drop-shadow(0 0 10px rgba(255,120,120,0.6)) brightness(1.1);
+}
+
+@keyframes crabMove{
+0%,100%{transform:translateX(0) scaleX(1) rotate(0deg);}
+15%{transform:translateX(18px) scaleX(1) rotate(-5deg);}
+30%{transform:translateXX(10px) scaleX(-1) rotate(5deg);}
+45%{transform:translateX(-5px) scaleX(-1) rotate(-3deg);}
+60%{transform:translateX(-15px) scaleX(1) rotate(5deg);}
+75%{transform:translateX(-8px) scaleX(1) rotate(-5deg);}
+90%{transform:translateX(5px) scaleX(-1) rotate(3deg);}
+}
+
+.aqua-bubble{
+ position:absolute;
+ background:radial-gradient(circle at 35% 35%, rgba(255,255,255,0.98), rgba(200,240,255,0.5), rgba(150,210,255,0.2));
+ border-radius:50%;
+ animation:bubbleRise 6s linear infinite;
+ box-shadow:inset -3px -3px 6px rgba(0,0,0,0.1), 0 0 8px rgba(255,255,255,0.3);
+}
+
+@keyframes bubbleRise{
+0%{transform:translateY(0) scale(0.15) rotate(0deg); opacity:0;}
+2%{opacity:0.95;}
+30%{transform:translateY(-80px) scale(0.6) rotate(90deg); opacity:0.8;}
+60%{transform:translateY(-150px) scale(0.85) rotate(180deg); opacity:0.5;}
+98%{opacity:0.05;}
+100%{transform:translateY(-250px) scale(1.05) rotate(270deg); opacity:0;}
+}
+
+.aqua-particle{
+ position:absolute;
+ width:5px;
+ height:5px;
+ background:radial-gradient(circle, rgba(255,255,200,0.95), rgba(200,250,255,0.6), transparent);
+ border-radius:50%;
+ animation:particleFloat 10s ease-in-out infinite;
+ box-shadow:0 0 6px rgba(255,255,255,0.5);
+}
+
+@keyframes particleFloat{
+0%,100%{transform:translateY(0) translateX(0) scale(0.3) rotate(0deg); opacity:0.1;}
+20%{transform:translateY(-40px) translateX(15px) scale(1) rotate(72deg); opacity:0.8;}
+40%{transform:translateY(-80px) translateX(-10px) scale(0.7) rotate(144deg); opacity:0.4;}
+60%{transform:translateY(-120px) translateX(20px) scale(1.2) rotate(216deg); opacity:0.7;}
+80%{transform:translateY(-160px) translateX(-15px) scale(0.5) rotate(288deg); opacity:0.3;}
+}
+
+.rock{
+ position:absolute;
+ bottom:30px;
+ font-size:38px;
+ z-index:12;
+ filter:drop-shadow(0 0 5px rgba(0,0,0,0.3));
+}
+
+.snail{
+ position:absolute;
+ bottom:15px;
+ left:50%;
+ font-size:24px;
+ animation:snailMove 15s ease-in-out infinite;
+ z-index:17;
+ filter:drop-shadow(0 0 8px rgba(255,180,100,0.5));
+}
+
+@keyframes snailMove{
+0%,100%{transform:translateX(0) rotate(0deg);}
+25%{transform:translateX(20px) rotate(5deg);}
+50%{transform:translateX(10px) rotate(-3deg);}
+75%{transform:translateX(-10px) rotate(5deg);}
+}
+
+.jellyfish{
+ position:absolute;
+ font-size:28px;
+ animation:swimJelly 25s ease-in-out infinite;
+ opacity:0.85;
+ z-index:14;
+ filter:drop-shadow(0 0 15px rgba(255,180,255,0.7));
+}
+
+@keyframes swimJelly{
+0%{left:80%;top:60%;transform:scaleX(1) rotate(0deg);}
+20%{left:70%;top:45%;transform:scaleX(1.1) rotate(10deg);}
+40%{left:55%;top:30%;transform:scaleX(0.95) rotate(-5deg);}
+60%{left:40%;top:45%;transform:scaleX(1.05) rotate(8deg);}
+80%{left:55%;top:60%;transform:scaleX(1) rotate(-3deg);}
+100%{left:80%;top:60%;transform:scaleX(1) rotate(0deg);}
+}
+
+.water-current{
+ position:absolute;
+ width:3px;
+ height:60px;
+ background:linear-gradient(180deg, transparent, rgba(255,255,255,0.15), transparent);
+ border-radius:50%;
+ animation:currentFlow 8s linear infinite;
+}
+
+@keyframes currentFlow{
+0%{transform:translateY(0) translateX(0); opacity:0;}
+20%{opacity:0.6;}
+80%{opacity:0.4;}
+100%{transform:translateY(-100px) translateX(30px); opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
 <div class="card">
 <h2>🐢 Faltó el Jerry..❤️🐢</h2>
 <div class="aquarium" id="aquarium">
  <div class="aquarium-surface"></div>
  <div class="turtle-swim">🐢</div>
  <div class="small-fish">🐟</div>
- <div class="small-fish">🐠</div>
+ <div class="small-fish" style="animation-delay:-10s">🐠</div>
+ <div class="jellyfish">🪼</div>
  <div class="starfish">⭐</div>
  <div class="crab">🦀</div>
- <div class="seaweed">🌿</div>
- <div class="seaweed">🌿</div>
- <div class="seaweed">🌿</div>
- <div class="seaweed">🌿</div>
+ <div class="snail">🐌</div>
+ <div class="seaweed" style="left:2%">🌿</div>
+ <div class="seaweed" style="left:15%">🌿</div>
+ <div class="seaweed" style="left:85%">🌿</div>
+ <div class="seaweed" style="left:98%">🌿</div>
+ <div class="rock" style="left:3%">🪨</div>
+ <div class="rock" style="left:92%">🪨</div>
  <div class="aquarium-sand"></div>
 </div>
 </div>
@@ -599,18 +682,11 @@ const start = new Date(2024, 8, 11, 0, 0, 0);
 function updateCounter(){
  const now = new Date();
  const diff = now - start;
-
  const days = Math.floor(diff / (1000*60*60*24));
  const hours = Math.floor((diff / (1000*60*60)) % 24);
  const minutes = Math.floor((diff / (1000*60)) % 60);
  const seconds = Math.floor((diff / 1000) % 60);
-
- counter.innerHTML = `
-  <h3 style="margin:0;font-size:28px;animation:pulseCounter 1s infinite alternate;">
-   ${days} días 💗
-  </h3>
-  ${hours} horas ${minutes} minutos ${seconds} segundos
- `;
+ counter.innerHTML = `<h3 style="margin:0;font-size:28px;animation:pulseCounter 1s infinite alternate;">${days} días 💗</h3>${hours} horas ${minutes} minutos ${seconds} segundos`;
 }
 
 updateCounter();
@@ -632,7 +708,6 @@ function typeText(t, el){
 }
 
 setTimeout(()=>typeText(poemaTexto,poema),1200);
-
 function openLetter(){
  writeSound.play();
  const txt="Esta carta es para ti.\nTe amo mi cebollín 🤎\nEspero compartir más cosas juntos 🥰🧸";
@@ -640,6 +715,50 @@ function openLetter(){
  typeText(txt,letter);
  setTimeout(()=>sign.style.opacity=1,4200);
 }
+
+/* BURBUJAS Y PARTÍCULAS DEL ACUARIO 10/10 */
+function createAquariumEffects(){
+ const aquarium = document.getElementById("aquarium");
+ if(!aquarium) return;
+ 
+ setInterval(()=>{
+  const bubble = document.createElement("div");
+  bubble.className = "aqua-bubble";
+  const size = 4 + Math.random() * 14;
+  bubble.style.width = size + "px";
+  bubble.style.height = size + "px";
+  bubble.style.left = (Math.random() * 94 + 3) + "%";
+  bubble.style.bottom = "40px";
+  bubble.style.animationDuration = (5 + Math.random() * 5) + "s";
+  bubble.style.animationDelay = (Math.random() * 2) + "s";
+  aquarium.appendChild(bubble);
+  setTimeout(()=>{ if(bubble.parentNode) bubble.remove(); }, 10000);
+ }, 600);
+ 
+ setInterval(()=>{
+  const particle = document.createElement("div");
+  particle.className = "aqua-particle";
+  particle.style.left = (Math.random() * 96 + 2) + "%";
+  particle.style.bottom = (Math.random() * 180 + 50) + "px";
+  particle.style.animationDuration = (8 + Math.random() * 6) + "s";
+  particle.style.animationDelay = (Math.random() * 4) + "s";
+  aquarium.appendChild(particle);
+  setTimeout(()=>{ if(particle.parentNode) particle.remove(); }, 15000);
+ }, 1500);
+ 
+ setInterval(()=>{
+  const current = document.createElement("div");
+  current.className = "water-current";
+  current.style.left = (Math.random() * 80 + 10) + "%";
+  current.style.bottom = "30px";
+  current.style.animationDuration = (6 + Math.random() * 4) + "s";
+  current.style.animationDelay = (Math.random() * 3) + "s";
+  aquarium.appendChild(current);
+  setTimeout(()=>{ if(current.parentNode) current.remove(); }, 12000);
+ }, 2500);
+}
+
+setTimeout(createAquariumEffects, 700);
 
 </script>
 </body>
