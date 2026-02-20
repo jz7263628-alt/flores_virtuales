@@ -219,16 +219,45 @@ button:hover{
  to{transform:scale(1.05)}
 }
 
-/* TORTUGA ANIMADA */
+/* TORTUGA ANIMADA - VERSIÓN PREMIUM */
+.turtle-container{
+ position:relative;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ height:100px;
+}
+
 .turtle{
  font-size:48px;
- display:block;
- text-align:center;
- animation:floatTurtle 3s ease-in-out infinite;
+ animation:swimTurtle 5s ease-in-out infinite;
+ filter:drop-shadow(0 0 15px rgba(100, 200, 255, 0.6));
 }
-@keyframes floatTurtle{
-0%,100%{transform:translateY(0)}
-50%{transform:translateY(-10px)}
+
+@keyframes swimTurtle{
+0%{transform:translate(0, 0) rotate(0deg) scale(1);}
+15%{transform:translate(20px, -20px) rotate(8deg) scale(1.05);}
+30%{transform:translate(10px, -35px) rotate(3deg) scale(1.1);}
+45%{transform:translate(-10px, -25px) rotate(-5deg) scale(1.05);}
+60%{transform:translate(-25px, -10px) rotate(-10deg) scale(1);}
+75%{transform:translate(-15px, 5px) rotate(-5deg) scale(1.05);}
+90%{transform:translate(5px, 5px) rotate(3deg) scale(1);}
+100%{transform:translate(0, 0) rotate(0deg) scale(1);}
+}
+
+/* Burbujas */
+.bubble{
+ position:absolute;
+ background:radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8), rgba(100,200,255,0.3));
+ border-radius:50%;
+ animation:bubbleFloat 3s ease-in-out infinite;
+}
+
+@keyframes bubbleFloat{
+0%{transform:translateY(0) scale(0.5); opacity:0;}
+20%{opacity:0.8;}
+80%{opacity:0.4;}
+100%{transform:translateY(-80px) scale(1); opacity:0;}
 }
 </style>
 </head>
@@ -282,7 +311,7 @@ button:hover{
 
 <!-- CARRUSEL AGREGADO -->
 <div class="card">
-<h2>🎞️ Momentos especiales 🎞️</h2>
+<h2>🎞️ Momentos especiales 🎞</h2>
 <div class="carousel">
 <img src="https://i.imgur.com/tpH81jp.jpeg">
 <img src="https://i.imgur.com/mOQ2xhz.jpeg">
@@ -331,7 +360,9 @@ button:hover{
 <!-- TORTUGA ANIMADA -->
 <div class="card">
 <h2>🐢 Faltó el Jerry..❤️🐢</h2>
+<div class="turtle-container" id="turtleContainer">
 <div class="turtle">🐢</div>
+</div>
 </div>
 
 <script>
@@ -475,6 +506,33 @@ Espero compartir más cosas juntos 🥰🧸`;
  typeText(txt,letter);
  setTimeout(()=>sign.style.opacity=1,4200);
 }
+
+/* BUBUJAS DE LA TORTUGA */
+function createBubbles(){
+ const container = document.getElementById("turtleContainer");
+ if(!container) return;
+ 
+ setInterval(()=>{
+  const bubble = document.createElement("div");
+  bubble.className = "bubble";
+  
+  const size = 8 + Math.random() * 12;
+  bubble.style.width = size + "px";
+  bubble.style.height = size + "px";
+  bubble.style.left = (Math.random() * 80 + 10) + "px";
+  bubble.style.bottom = "0px";
+  bubble.style.animationDuration = (2 + Math.random() * 2) + "s";
+  bubble.style.animationDelay = (Math.random() * 2) + "s";
+  
+  container.appendChild(bubble);
+  
+  setTimeout(()=>{
+   if(bubble.parentNode) bubble.remove();
+  }, 4000);
+ }, 800);
+}
+
+createBubbles();
 
 </script>
 </body>
