@@ -209,7 +209,6 @@ button:hover{
  to{transform:scale(1.05)}
 }
 
-/* --- ESTILOS DEL ACUARIO CORREGIDOS AQUÍ --- */
 .aquarium{
  position:relative;
  width:100%;
@@ -503,7 +502,7 @@ button:hover{
 <div id="login">
 <div class="loginCard">
 <h2>Ingresa la contraseña 💖</h2>
-<input id="pass" type="text">
+<input id="pass" type="text" placeholder="Contraseña...">
 <br>
 <button onclick="enter()">Entrar</button>
 </div>
@@ -513,16 +512,16 @@ button:hover{
 <img id="zoomImg">
 </div>
 
-<audio id="bgMusic" loop preload="auto">
-<source src="https://files.catbox.moe/4nrc17.mp3">
+<audio id="bgMusic" loop preload="auto" playsinline>
+<source src="https://files.catbox.moe/4nrc17.mp3" type="audio/mpeg">
 </audio>
 
-<audio id="ourSong">
-<source src="https://files.catbox.moe/egr68n.mp3">
+<audio id="ourSong" preload="auto" playsinline>
+<source src="https://files.catbox.moe/egr68n.mp3" type="audio/mpeg">
 </audio>
 
-<audio id="writeSound">
-<source src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3">
+<audio id="writeSound" preload="auto" playsinline>
+<source src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3" type="audio/mpeg">
 </audio>
 
 <div class="bgHearts" id="bgHearts"></div>
@@ -621,28 +620,41 @@ setInterval(()=>{
  }
 },300);
 
-let musicPlayed = false;
+// Controladores globales de audio fijados
+const audioBG = document.getElementById("bgMusic");
+const audioSong = document.getElementById("ourSong");
+const audioWrite = document.getElementById("writeSound");
+let firstInteractionDone = false;
 
 function enter(){
  const inputPass = document.getElementById("pass");
  const loginContainer = document.getElementById("login");
  if(inputPass && loginContainer){
   if(inputPass.value==="Jerry"){
+   
+   // SOLUCIÓN CLAVE PARA IPHONE: Desbloquear y activar audios mediante el botón de login
+   if(!firstInteractionDone){
+    audioBG.play().catch(err => console.log("iOS bloqueó audio inicial:", err));
+    audioSong.load(); // Desbloquea silenciosamente la segunda pista
+    audioWrite.load(); // Desbloquea la pista de la carta
+    firstInteractionDone = true;
+   }
+   
    loginContainer.style.display="none";
   }
  }
 }
 
 function toggleSong(){
- if(ourSong.paused){
-  bgMusic.pause();
-  ourSong.currentTime=0;
-  ourSong.play().catch(()=>{});
-  btnPlay.innerHTML="⏸️ Pausar";
+ if(audioSong.paused){
+  audioBG.pause();
+  audioSong.currentTime=0;
+  audioSong.play().catch(()=>{});
+  document.getElementById("btnPlay").innerHTML="⏸️ Pausar";
  } else {
-  ourSong.pause();
-  bgMusic.play().catch(()=>{});
-  btnPlay.innerHTML="▶️ Reproducir";
+  audioSong.pause();
+  audioBG.play().catch(()=>{});
+  document.getElementById("btnPlay").innerHTML="▶️ Reproducir";
  }
 }
 
@@ -655,10 +667,13 @@ const frases=[
 
 document.addEventListener("click",e=>{
  if(e.target.tagName==="BUTTON"||e.target.tagName==="INPUT") return;
- if (!musicPlayed) {
-  bgMusic.play().catch(() => {});
-  musicPlayed = true;
+ 
+ // Si por alguna razón el audio no arrancó en el login (Android antiguo/PC), arranca aquí
+ if (!firstInteractionDone) {
+  audioBG.play().catch(() => {});
+  firstInteractionDone = true;
  }
+ 
  const f=document.createElement("div");
  f.className="tapPhrase";
  f.innerText=frases[Math.floor(Math.random()*frases.length)];
@@ -717,67 +732,4 @@ function typeText(t, el){
  w();
 }
 
-const poemaEl = document.getElementById("poema");
-if(poemaEl) {
- setTimeout(()=>typeText(poemaTexto,poemaEl),1200);
-}
-
-function openLetter(){
- writeSound.play();
- const txt="Esta carta es para ti.\nTe amo mi cebollín 🤎\nEspero compartir más cosas juntos 🥰🧸";
- const letterEl = document.getElementById("letter");
- const signEl = document.getElementById("sign");
- if(letterEl && signEl){
-  letterEl.style.display="block";
-  typeText(txt,letterEl);
-  setTimeout(()=>signEl.style.opacity=1,4200);
- }
-}
-
-/* BURBUJAS Y PARTÍCULAS DEL ACUARIO */
-function createAquariumEffects(){
- const aquarium = document.getElementById("aquarium");
- if(!aquarium) return;
- 
- setInterval(()=>{
-  const bubble = document.createElement("div");
-  bubble.className = "aqua-bubble";
-  const size = 4 + Math.random() * 14;
-  bubble.style.width = size + "px";
-  bubble.style.height = size + "px";
-  bubble.style.left = (Math.random() * 94 + 3) + "%";
-  bubble.style.bottom = "40px";
-  bubble.style.animationDuration = (5 + Math.random() * 5) + "s";
-  bubble.style.animationDelay = (Math.random() * 2) + "s";
-  aquarium.appendChild(bubble);
-  setTimeout(()=>{ if(bubble.parentNode) bubble.remove(); }, 10000);
- }, 600);
- 
- setInterval(()=>{
-  const particle = document.createElement("div");
-  particle.className = "aqua-particle";
-  particle.style.left = (Math.random() * 96 + 2) + "%";
-  particle.style.bottom = (Math.random() * 180 + 50) + "px";
-  particle.style.animationDuration = (8 + Math.random() * 6) + "s";
-  particle.style.animationDelay = (Math.random() * 4) + "s";
-  aquarium.appendChild(particle);
-  setTimeout(()=>{ if(particle.parentNode) particle.remove(); }, 15000);
- }, 1500);
- 
- setInterval(()=>{
-  const current = document.createElement("div");
-  current.className = "water-current";
-  current.style.left = (Math.random() * 80 + 10) + "%";
-  current.style.bottom = "30px";
-  current.style.animationDuration = (6 + Math.random() * 4) + "s";
-  current.style.animationDelay = (Math.random() * 3) + "s";
-  aquarium.appendChild(current);
-  setTimeout(()=>{ if(current.parentNode) current.remove(); }, 12000);
- }, 2500);
-}
-
-setTimeout(createAquariumEffects, 700);
-
-</script>
-</body>
-</html>
+cons
