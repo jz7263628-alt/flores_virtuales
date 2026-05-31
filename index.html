@@ -571,7 +571,6 @@ button:hover{
 <img src="https://i.imgur.com/S888hKj.jpeg">
 </div>
 </div>
-
 <div class="card">
 <h2>📜 Poemas especiales 📜</h2>
 <div id="poema" class="typewriter"></div>
@@ -606,7 +605,6 @@ button:hover{
 </div>
 
 <script>
-/* LOGIN LLUVIA */
 setInterval(()=>{
  const loginContainer = document.getElementById("login");
  if(loginContainer && loginContainer.style.display!=="none"){
@@ -620,7 +618,6 @@ setInterval(()=>{
  }
 },300);
 
-// Controladores globales de audio fijados
 const audioBG = document.getElementById("bgMusic");
 const audioSong = document.getElementById("ourSong");
 const audioWrite = document.getElementById("writeSound");
@@ -631,15 +628,12 @@ function enter(){
  const loginContainer = document.getElementById("login");
  if(inputPass && loginContainer){
   if(inputPass.value==="Jerry"){
-   
-   // SOLUCIÓN CLAVE PARA IPHONE: Desbloquear y activar audios mediante el botón de login
    if(!firstInteractionDone){
     audioBG.play().catch(err => console.log("iOS bloqueó audio inicial:", err));
-    audioSong.load(); // Desbloquea silenciosamente la segunda pista
-    audioWrite.load(); // Desbloquea la pista de la carta
+    audioSong.load();
+    audioWrite.load();
     firstInteractionDone = true;
    }
-   
    loginContainer.style.display="none";
   }
  }
@@ -667,13 +661,10 @@ const frases=[
 
 document.addEventListener("click",e=>{
  if(e.target.tagName==="BUTTON"||e.target.tagName==="INPUT") return;
- 
- // Si por alguna razón el audio no arrancó en el login (Android antiguo/PC), arranca aquí
  if (!firstInteractionDone) {
   audioBG.play().catch(() => {});
   firstInteractionDone = true;
  }
- 
  const f=document.createElement("div");
  f.className="tapPhrase";
  f.innerText=frases[Math.floor(Math.random()*frases.length)];
@@ -713,7 +704,6 @@ function updateCounter(){
   counterEl.innerHTML = `<h3 style="margin:0;font-size:28px;animation:pulseCounter 1s infinite alternate;">${days} días 💗</h3>${hours} horas ${minutes} minutos ${seconds} segundos`;
  }
 }
-
 updateCounter();
 setInterval(updateCounter,1000);
 
@@ -732,4 +722,52 @@ function typeText(t, el){
  w();
 }
 
-cons
+const poemaEl = document.getElementById("poema");
+if(poemaEl) {
+ setTimeout(()=>typeText(poemaTexto,poemaEl),1200);
+}
+
+function openLetter(){
+ audioWrite.play().catch(()=>{});
+ const txt="Esta carta es para ti.\nTe amo mi cebollín 🤎\nEspero compartir más cosas juntos 🥰🧸";
+ const letterEl = document.getElementById("letter");
+ const signEl = document.getElementById("sign");
+ if(letterEl && signEl){
+  letterEl.style.display="block";
+  typeText(txt,letterEl);
+  setTimeout(()=>signEl.style.opacity=1,4200);
+ }
+}
+
+function createAquariumEffects(){
+ const aquarium = document.getElementById("aquarium");
+ if(!aquarium) return;
+ 
+ setInterval(()=>{
+  const bubble = document.createElement("div");
+  bubble.className = "aqua-bubble";
+  const size = 4 + Math.random() * 14;
+  bubble.style.width = size + "px";
+  bubble.style.height = size + "px";
+  bubble.style.left = (Math.random() * 94 + 3) + "%";
+  bubble.style.bottom = "40px";
+  bubble.style.animationDuration = (5 + Math.random() * 5) + "s";
+  aquarium.appendChild(bubble);
+  setTimeout(()=>{ if(bubble.parentNode) bubble.remove(); }, 10000);
+ }, 600);
+ 
+ setInterval(()=>{
+  const particle = document.createElement("div");
+  particle.className = "aqua-particle";
+  particle.style.left = (Math.random() * 96 + 2) + "%";
+  particle.style.bottom = (Math.random() * 180 + 50) + "px";
+  particle.style.animationDuration = (8 + Math.random() * 6) + "s";
+  aquarium.appendChild(particle);
+  setTimeout(()=>{ if(particle.parentNode) particle.remove(); }, 15000);
+ }, 1500);
+}
+setTimeout(createAquariumEffects, 700);
+</script>
+
+</body>
+</html>
