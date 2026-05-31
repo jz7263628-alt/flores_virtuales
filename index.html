@@ -83,53 +83,268 @@ button:hover{transform:scale(1.08);box-shadow:0 0 12px #ff80bf}
 @keyframes ballBounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 .foreground-grass { position: absolute; bottom: 5px; width: 100%; text-align: center; font-size: 20px; letter-spacing: 2px; }
 
-/* === CANELITO FULL ANIMADO Y PREMIUM === */
-.canelito-pup-container { position: absolute; bottom: 30px; left: 30px; cursor: pointer; z-index: 10; transition: transform 0.1s; }
-.pup-shadow { position: absolute; bottom: -5px; left: 5px; width: 50px; height: 10px; background: rgba(0,0,0,0.3); border-radius: 50%; }
+/*
+/* === CANELITO REALISTA V2 === */
 
-/* Cuerpo con sombras, gradientes y rebote al caminar */
-.pup-body-wrapper { width: 62px; height: 42px; background: linear-gradient(135deg, #8B4513, #6b340e); border-radius: 20px; position: relative; box-shadow: inset -4px -4px 10px rgba(0,0,0,0.4); animation: trot 0.25s infinite alternate; }
-@keyframes trot { 0% { transform: translateY(0); } 100% { transform: translateY(-4px); } }
+.canelito-pup-container{
+position:absolute;
+bottom:30px;
+left:30px;
+cursor:pointer;
+z-index:10;
+transition:transform .1s;
+}
 
-/* Cabeza en 3D */
-.pup-head { width: 46px; height: 42px; background: linear-gradient(135deg, #A0522D, #8B4513); border-radius: 20px; position: absolute; top: -20px; right: -15px; box-shadow: inset -2px -2px 6px rgba(0,0,0,0.3); } 
+.pup-shadow{
+position:absolute;
+bottom:-8px;
+left:12px;
+width:65px;
+height:12px;
+background:rgba(0,0,0,.25);
+border-radius:50%;
+filter:blur(3px);
+}
 
-/* Orejas que rebotan al caminar */
-.pup-ear { width: 16px; height: 26px; background: #5C4033; border-radius: 50%; position: absolute; top: -5px; transform-origin: top center; }
-.ear-left { left: -5px; animation: flopL 0.3s infinite alternate; }
-.ear-right { right: 5px; animation: flopR 0.3s infinite alternate; }
-@keyframes flopL { from { transform: rotate(-15deg); } to { transform: rotate(-25deg); } }
-@keyframes flopR { from { transform: rotate(15deg); } to { transform: rotate(25deg); } }
+.pup-body-wrapper{
+width:78px;
+height:52px;
+position:relative;
+animation:trot .25s infinite alternate;
+}
 
-/* Ojos que parpadean */
-.pup-eye { width: 6px; height: 9px; background: black; border-radius: 50%; position: absolute; top: 12px; animation: blinkEye 4s infinite; }
-.eye-left { left: 14px; } .eye-right { right: 12px; }
-.pupil { width: 2px; height: 2px; background: white; border-radius: 50%; position: absolute; top: 2px; right: 2px; }
-@keyframes blinkEye { 0%, 95%, 100% { transform: scaleY(1); } 97% { transform: scaleY(0.1); } }
+@keyframes trot{
+0%{transform:translateY(0)}
+100%{transform:translateY(-3px)}
+}
 
-/* Hocico y collar */
-.pup-snout { width: 20px; height: 15px; background: #DEB887; border-radius: 10px; position: absolute; bottom: 5px; left: 12px; }
-.pup-nose { width: 8px; height: 5px; background: black; border-radius: 5px; position: absolute; top: 2px; left: 6px; }
-.pup-tongue { width: 6px; height: 10px; background: #FF69B4; border-radius: 0 0 5px 5px; position: absolute; bottom: -5px; left: 7px; display: none; }
-.pup-collar { position: absolute; bottom: 0px; left: 8px; width: 34px; height: 7px; background: #ff0000; border-radius: 3px; z-index: 5; }
-.pup-tag { position: absolute; bottom: -6px; left: 20px; width: 10px; height: 10px; background: gold; border-radius: 50%; z-index: 6; animation: dangle 0.5s infinite alternate; box-shadow: 0 0 4px rgba(255,215,0,0.8); }
-@keyframes dangle { from { transform: rotate(-15deg); } to { transform: rotate(15deg); } }
+/* CUERPO ESPONJOSO */
 
-/* Patitas y cola */
-.pup-leg { width: 12px; height: 20px; background: #8B4513; border-radius: 6px; position: absolute; bottom: -10px; }
-.leg-fl { right: 10px; } .leg-fr { right: 25px; background: #A0522D; }
-.leg-bl { left: 10px; } .leg-br { left: 25px; background: #A0522D; }
-.pup-tail { width: 20px; height: 8px; background: #8B4513; border-radius: 4px; position: absolute; top: 5px; left: -15px; transform-origin: right center; animation: wag 0.2s infinite alternate; }
+.pup-body-wrapper::before{
+content:"";
+position:absolute;
+left:10px;
+top:18px;
+width:58px;
+height:36px;
+background:radial-gradient(circle at 30% 30%,#d8b184,#b8834f 70%);
+border-radius:50%;
+box-shadow:
+0 0 0 4px rgba(235,200,160,.25),
+inset -6px -6px 10px rgba(0,0,0,.15);
+}
 
-@keyframes wag { from { transform: rotate(-20deg); } to { transform: rotate(20deg); } }
-.pup-jump-active { animation: pupJump 0.75s ease !important; }
-@keyframes pupJump { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-60px) rotate(-10deg); } }
+/* CABEZA */
 
-.canelito-bark { position: absolute; top: -60px; left: 0; font-weight: bold; color: #ff4da6; font-size: 18px; text-shadow: 1px 1px 0px white; white-space: nowrap; animation: barkFade 0.6s forwards; z-index: 20; }
-@keyframes barkFade { 0% { opacity: 1; transform: translateY(0); } 100% { opacity: 0; transform: translateY(-30px); } }
-.trail-particle { position: absolute; font-size: 16px; animation: fadeParticle 0.9s forwards; z-index: 5; pointer-events: none; }
-@keyframes fadeParticle { 0% { opacity: 1; transform: translateY(0) scale(1); } 100% { opacity: 0; transform: translateY(-10px) scale(0.5); } }
+.pup-head{
+width:48px;
+height:44px;
+background:radial-gradient(circle at 35% 35%,#e1bf94,#b37a45 70%);
+border-radius:50%;
+position:absolute;
+right:0;
+top:2px;
+box-shadow:inset -4px -4px 8px rgba(0,0,0,.15);
+}
 
+/* OREJAS */
+
+.pup-ear{
+width:16px;
+height:22px;
+background:#8b5a2b;
+position:absolute;
+top:-8px;
+border-radius:60% 60% 10% 10%;
+}
+
+.ear-left{
+left:5px;
+transform:rotate(-20deg);
+animation:flopL .3s infinite alternate;
+}
+
+.ear-right{
+right:5px;
+transform:rotate(20deg);
+animation:flopR .3s infinite alternate;
+}
+
+@keyframes flopL{
+from{transform:rotate(-18deg)}
+to{transform:rotate(-28deg)}
+}
+
+@keyframes flopR{
+from{transform:rotate(18deg)}
+to{transform:rotate(28deg)}
+}
+
+/* OJOS GRANDES COMO EN LA FOTO */
+
+.pup-eye{
+width:8px;
+height:10px;
+background:#111;
+border-radius:50%;
+position:absolute;
+top:15px;
+animation:blinkEye 4s infinite;
+}
+
+.eye-left{left:12px;}
+.eye-right{right:12px;}
+
+.pupil{
+width:3px;
+height:3px;
+background:white;
+border-radius:50%;
+position:absolute;
+top:2px;
+left:2px;
+}
+
+@keyframes blinkEye{
+0%,95%,100%{transform:scaleY(1)}
+97%{transform:scaleY(.1)}
+}
+
+/* HOCICO */
+
+.pup-snout{
+width:22px;
+height:16px;
+background:#efd3ae;
+border-radius:20px;
+position:absolute;
+bottom:6px;
+left:13px;
+}
+
+.pup-nose{
+width:8px;
+height:6px;
+background:#111;
+border-radius:50px;
+position:absolute;
+top:2px;
+left:7px;
+}
+
+.pup-tongue{
+display:none;
+}
+
+/* COLLAR */
+
+.pup-collar{
+position:absolute;
+top:38px;
+left:22px;
+width:34px;
+height:6px;
+background:#d90000;
+border-radius:20px;
+}
+
+.pup-tag{
+position:absolute;
+top:40px;
+left:36px;
+width:10px;
+height:10px;
+background:gold;
+border-radius:50%;
+animation:dangle .5s infinite alternate;
+}
+
+@keyframes dangle{
+from{transform:rotate(-10deg)}
+to{transform:rotate(10deg)}
+}
+
+/* PATAS */
+
+.pup-leg{
+width:8px;
+height:18px;
+background:#a56a3a;
+position:absolute;
+bottom:-2px;
+border-radius:10px;
+}
+
+.leg-fl{right:18px;}
+.leg-fr{right:32px;}
+.leg-bl{left:18px;}
+.leg-br{left:32px;}
+
+/* COLA ESPONJOSA */
+
+.pup-tail{
+width:18px;
+height:18px;
+background:#c18a55;
+border-radius:50%;
+position:absolute;
+left:0;
+top:12px;
+box-shadow:0 0 0 4px rgba(255,220,180,.2);
+animation:wag .2s infinite alternate;
+transform-origin:right center;
+}
+
+@keyframes wag{
+from{transform:rotate(-20deg)}
+to{transform:rotate(20deg)}
+}
+
+/* SALTO */
+
+.pup-jump-active{
+animation:pupJump .75s ease!important;
+}
+
+@keyframes pupJump{
+0%,100%{transform:translateY(0)}
+50%{transform:translateY(-60px) rotate(-10deg)}
+}
+
+/* LADRIDO */
+
+.canelito-bark{
+position:absolute;
+top:-60px;
+left:0;
+font-weight:bold;
+color:#ff4da6;
+font-size:18px;
+text-shadow:1px 1px 0 white;
+white-space:nowrap;
+animation:barkFade .6s forwards;
+z-index:20;
+}
+
+@keyframes barkFade{
+0%{opacity:1;transform:translateY(0)}
+100%{opacity:0;transform:translateY(-30px)}
+}
+
+/* HUELLAS */
+
+.trail-particle{
+position:absolute;
+font-size:16px;
+animation:fadeParticle .9s forwards;
+z-index:5;
+pointer-events:none;
+}
+
+@keyframes fadeParticle{
+0%{opacity:1;transform:translateY(0) scale(1)}
+100%{opacity:0;transform:translateY(-10px) scale(.5)}
+}
 </style>
 </head>
 
