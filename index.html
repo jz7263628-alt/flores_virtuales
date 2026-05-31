@@ -6,25 +6,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
-/* --- ESTILOS BASE Y FONDO --- */
+/* --- CONFIGURACIÓN BASE Y FONDO --- */
 * { box-sizing: border-box; }
 body {
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(180deg, #140010 0%, #2a0030 100%);
+  background: linear-gradient(180deg, #140010 0%, #2a0030 100%) !important; /* Forzado para que no se vuelva negro */
   color: #fff;
   overflow-x: hidden;
   min-height: 100vh;
 }
 
-/* --- PANTALLA DE CONTRASEÑA (FIXED SOBRE TODO EL CONTENIDO) --- */
+/* --- PANTALLA DE CONTRASEÑA --- */
 #login {
   position: fixed;
   inset: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #0a0008;
+  background: linear-gradient(180deg, #140010 0%, #2a0030 100%) !important; /* Mismo fondo morado hermoso */
   z-index: 99999;
   overflow: hidden;
 }
@@ -37,7 +37,7 @@ body {
   text-align: center;
   box-shadow: 0 0 40px rgba(255, 0, 120, 0.4);
   animation: float 4s ease-in-out infinite;
-  z-index: 2;
+  z-index: 10; /* Por encima de la lluvia */
   width: 90%;
   max-width: 340px;
 }
@@ -59,7 +59,7 @@ body {
   width: 100%;
   color: #000;
   background: #fff;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 #login button {
   padding: 12px 24px;
@@ -76,36 +76,28 @@ body {
   transform: scale(1.05);
   box-shadow: 0 0 15px #ff80bf;
 }
-.loginRain {
-  position: absolute;
-  top: -20px;
-  animation: loginFall linear forwards;
-  opacity: .6;
-  z-index: 1;
-  user-select: none;
-}
-@keyframes loginFall {
-  to { transform: translateY(110vh); opacity: .2; }
-}
 
-/* --- CORAZONES FLOTANTES DE FONDO --- */
+/* --- LLUVIA DE CORAZONES ROSADOS GLOBAL (FIJA EN EL FONDO) --- */
 .bgHearts {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: -1;
+  z-index: 1; /* Visible en login y detrás de las tarjetas al entrar */
+  overflow: hidden;
 }
 .bgHearts span {
   position: absolute;
-  color: #ff4da6;
+  color: #ff4da6; /* Rosado intenso */
+  text-shadow: 0 0 5px rgba(255, 77, 166, 0.6);
   animation: rise linear infinite;
-  opacity: .25;
+  bottom: -50px;
 }
 @keyframes rise {
-  from { transform: translateY(105vh); }
-  to { transform: translateY(-10vh); }
+  from { transform: translateY(0); opacity: 0.8; }
+  to { transform: translateY(-110vh); opacity: 0; }
 }
-
+</style>
+<style>
 /* --- TARJETAS CONTENEDORAS BLANCAS --- */
 .card {
   background: #fff;
@@ -118,6 +110,8 @@ body {
   box-shadow: 0 12px 40px rgba(0,0,0,.3);
   border: 3px solid #ffd6eb;
   text-align: center;
+  position: relative;
+  z-index: 5; /* Por encima de los corazones flotantes */
 }
 .card h2 {
   margin-top: 0;
@@ -125,7 +119,7 @@ body {
   color: #4a0030;
 }
 
-/* --- ELEMENTOS DE CONTENIDO --- */
+/* --- ELEMENTOS MULTIMEDIA --- */
 .circleImg, .musicCover {
   width: 170px;
   height: 170px;
@@ -153,7 +147,7 @@ body {
   transform: scale(1.06);
 }
 
-/* --- MAQUETACIÓN DE FOTOS (CARRUSEL Y CUADRÍCULA) --- */
+/* --- ARREGLO DE FOTOS PARA QUE SE VEAN PERFECTAS --- */
 .carousel {
   display: flex;
   gap: 14px;
@@ -185,7 +179,7 @@ body {
   transform: scale(1.03);
 }
 
-/* --- EFECTOS EXTRAS (ZOOM, TEXTO, CARTA) --- */
+/* --- EFECTOS EXTRAS --- */
 #zoom {
   position: fixed;
   inset: 0;
@@ -226,14 +220,19 @@ body {
 .signature { font-family: cursive; font-size: 20px; margin-top: 15px; opacity: 0; transition: opacity 1s; color: #ff4da6; }
 .tapPhrase { position: fixed; color: #ffd6eb; font-size: 16px; font-weight: bold; animation: floatUp 2s forwards; pointer-events: none; z-index: 9999; text-shadow: 0 2px 5px rgba(0,0,0,0.5); }
 @keyframes floatUp { to { transform: translateY(-70px); opacity: 0; } }
-</style>
-<style>
-/* --- ACUARIO DE JERRY --- */
+  </style>
+  <style>
+/* --- EL ACUARIO DE JERRY (CORREGIDO A AZUL PROFUNDO) --- */
 .aquarium {
-  position: relative; width: 100%; height: 240px;
-  background: linear-gradient(180deg, #0a4a6a 0%, #063a55 25%, #032a40 60%, #021a2a 100%);
-  border-radius: 25px; overflow: hidden; border: 6px solid #1a9abf;
-  box-shadow: inset 0 0 80px rgba(0,140,200,0.6), 0 4px 15px rgba(0,0,0,0.2); margin-top: 15px;
+  position: relative; 
+  width: 100%; 
+  height: 240px;
+  background: linear-gradient(180deg, #0a4a6a 0%, #063a55 25%, #032a40 60%, #021a2a 100%) !important; /* Azul agua profundo garantizado */
+  border-radius: 25px; 
+  overflow: hidden; 
+  border: 6px solid #1a9abf;
+  box-shadow: inset 0 0 80px rgba(0,140,200,0.6), 0 4px 15px rgba(0,0,0,0.2); 
+  margin-top: 15px;
 }
 .aquarium::before {
   content:''; position:absolute; top:-50px; left:5%; width:90%; height:140%;
@@ -264,22 +263,18 @@ body {
 @keyframes crabMove { 0%,100% { transform: translateX(0); } 50% { transform: translateX(-20px); } }
 .snail { position: absolute; bottom: 10px; left: 15%; font-size: 20px; z-index: 12; }
 .rock { position: absolute; bottom: 25px; font-size: 32px; z-index: 9; }
-.aqua-bubble { position: absolute; background: rgba(255,255,255,0.4); border-radius: 50%; animation: bubbleRise 5s linear infinite; z-index: 5; }
+.aqua-bubble { position: absolute; background: rgba(255,255,255,0.45); border-radius: 50%; animation: bubbleRise 4.5s linear infinite; z-index: 5; }
 @keyframes bubbleRise { 0% { transform: translateY(0) scale(0.2); opacity: 0; } 10% { opacity: 0.8; } 100% { transform: translateY(-220px) scale(1.1); opacity: 0; } }
 
-/* --- JARDÍN DE CANELITO --- */
-.garden-card { background: #fff; color: #4a0030; margin: 25px auto; padding: 22px; width: 92%; max-width: 540px; border-radius: 24px; box-shadow: 0 12px 40px rgba(0,0,0,.3); border: 3px solid #ffd6eb; text-align: center; }
+/* --- JARDÍN INTERACTIVO DE CANELITO --- */
+.garden-card { background: #fff; color: #4a0030; margin: 25px auto; padding: 22px; width: 92%; max-width: 540px; border-radius: 24px; box-shadow: 0 12px 40px rgba(0,0,0,.3); border: 3px solid #ffd6eb; text-align: center; position: relative; z-index: 5; }
 .garden-premium {
   position: relative; width: 100%; height: 260px;
   background: linear-gradient(180deg, #bde0fe 0%, #f1faee 45%, #d8f3dc 46%, #74c69d 100%);
   border-radius: 20px; overflow: hidden; border: 5px solid #95d5b2;
   box-shadow: inset 0 0 30px rgba(0,0,0,0.1); margin-top: 15px;
 }
-.sun-premium {
-  position: absolute; top: 15px; right: 25px; width: 40px; height: 40px;
-  background: #ffb703; border-radius: 50%; box-shadow: 0 0 20px #ffb703;
-  animation: sunGlow 3s ease-in-out infinite alternate; z-index: 5;
-}
+.sun-premium { position: absolute; top: 15px; right: 25px; width: 40px; height: 40px; background: #ffb703; border-radius: 50%; box-shadow: 0 0 20px #ffb703; animation: sunGlow 3s ease-in-out infinite alternate; z-index: 5; }
 @keyframes sunGlow { from { transform: scale(1); } to { transform: scale(1.12); } }
 .hill-back { position: absolute; bottom: 30px; width: 120%; height: 65px; left: -10%; background: #95d5b2; border-radius: 50% 50% 0 0; opacity: 0.6; z-index: 10; }
 .hill-front { position: absolute; bottom: 0; width: 130%; height: 45px; left: -15%; background: #52b788; border-radius: 40% 60% 0 0; z-index: 15; }
@@ -291,15 +286,11 @@ body {
 .toy-ball { position: absolute; bottom: 12px; font-size: 20px; z-index: 18; right: 25%; animation: ballBounce 2.5s ease-in-out infinite alternate; }
 @keyframes ballBounce { 0% { transform: translateY(0) rotate(0deg); } 100% { transform: translateY(-40px) rotate(360deg); } }
 
-/* --- CONSTRUCCIÓN CSS DE CANELITO --- */
-.canelito-pup-container {
-  position: absolute; bottom: 10px; left: 40px; width: 85px; height: 80px; z-index: 45;
-  cursor: pointer; transition: left 0.1s linear; -webkit-tap-highlight-color: transparent;
-}
+/* --- CONSTRUCCIÓN ESTRUCTURAL DE CANELITO --- */
+.canelito-pup-container { position: absolute; bottom: 10px; left: 40px; width: 85px; height: 80px; z-index: 45; cursor: pointer; transition: left 0.1s linear; -webkit-tap-highlight-color: transparent; }
 .pup-shadow { position: absolute; bottom: -1px; left: 10px; width: 62px; height: 7px; background: rgba(0,0,0,0.2); border-radius: 50%; z-index: 40; transition: all 0.1s; }
 .pup-body-wrapper { position: relative; width: 100%; height: 100%; transform-origin: bottom center; animation: pupWalk 0.4s ease-in-out infinite alternate; }
 @keyframes pupWalk { 0% { transform: translateY(0); } 100% { transform: translateY(-6px); } }
-
 .pup-torso { position: absolute; bottom: 15px; left: 10px; width: 54px; height: 38px; background: #c68a4c; border-radius: 20px; z-index: 42; }
 .pup-head { position: absolute; top: 8px; left: 35px; width: 42px; height: 42px; background: #b0753c; border-radius: 50%; z-index: 46; }
 .pup-eye { position: absolute; top: 12px; width: 7px; height: 7px; background: #fff; border-radius: 50%; }
@@ -313,23 +304,18 @@ body {
 .ear-left { left: 3px; transform: rotate(10deg); } .ear-right { right: 3px; transform: rotate(-10deg); }
 .pup-tail { position: absolute; bottom: 28px; left: 0px; width: 16px; height: 11px; background: #b0753c; border-radius: 10px 0 0 10px; transform-origin: right center; animation: tailWag 0.1s linear infinite alternate; }
 @keyframes tailWag { from { transform: rotate(-20deg); } to { transform: rotate(20deg); } }
-
-/* Patas */
 .pup-leg { position: absolute; bottom: 2px; width: 10px; height: 16px; background: #9a5f2a; border-radius: 4px; transform-origin: top center; }
 .leg-fl { left: 42px; animation: legMove 0.4s linear infinite alternate; }
 .leg-fr { left: 50px; animation: legMove 0.4s linear infinite -0.2s alternate; }
 .leg-bl { left: 14px; animation: legMove 0.4s linear infinite -0.2s alternate; }
 .leg-br { left: 22px; animation: legMove 0.4s linear infinite alternate; }
 @keyframes legMove { from { transform: rotate(-25deg); } to { transform: rotate(25deg); } }
-
-/* Salto Mortal */
 .pup-jump-active { animation: backflip 0.7s cubic-bezier(0.25, 1, 0.5, 1) forwards !important; }
 @keyframes backflip {
   0% { transform: translateY(0) rotate(0deg); }
   40% { transform: translateY(-90px) rotate(-160deg); }
   100% { transform: translateY(0) rotate(-360deg); }
 }
-
 .canelito-bark { position: absolute; top: -30px; left: 50%; transform: translateX(-50%); background: #fff; color: #ff4da6; font-weight: bold; font-size: 12px; padding: 3px 8px; border-radius: 10px; border: 2px solid #ffd6eb; animation: barkPop 0.5s ease-out forwards; pointer-events: none; z-index: 100; }
 @keyframes barkPop { 0% { transform: translateX(-50%) scale(0); opacity: 0; } 50% { transform: translateX(-50%) scale(1.1); opacity: 1; } 100% { transform: translateX(-50%) scale(0.8) translateY(-15px); opacity: 0; } }
 .trail-particle { position: absolute; font-size: 14px; pointer-events: none; z-index: 38; animation: trailFade 1s ease-out forwards; }
@@ -338,7 +324,10 @@ body {
 </head>
 <body>
 
-<!-- PANTALLA DE BLOQUEO (SE VE ANTES QUE TODO) -->
+<!-- LLUVIA DE CORAZONES EN SEGUNDO PLANO (NUNCA DESAPARECE) -->
+<div class="bgHearts" id="bgHearts"></div>
+
+<!-- PANTALLA DE BLOQUEO (SE VE AL INICIO) -->
 <div id="login">
   <div class="loginCard">
     <h2>Ingresa la contraseña 💖</h2>
@@ -364,9 +353,6 @@ body {
 <audio id="writeSound" preload="auto" playsinline>
   <source src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3" type="audio/mpeg">
 </audio>
-
-<!-- ESPACIO DONDE FLOTAN LOS CORAZONES EN EL FONDO -->
-<div class="bgHearts" id="bgHearts"></div>
 
 <!-- TARJETA 1: CONTADOR -->
 <div class="card">
@@ -450,7 +436,7 @@ body {
   </div>
 </div>
 
-<!-- TARJETA 8: EL NUEVO JARDÍN PREMIUM CON CANELITO CSS -->
+<!-- TARJETA 8: JARDÍN PREMIUM CON CANELITO -->
 <div class="garden-card">
   <h2>¡Toca a Canelito! 🐾❤️</h2>
   <div class="garden-premium" id="canelitoGarden">
@@ -462,7 +448,6 @@ body {
     <div class="butterfly-premium">🦋</div>
     <div class="toy-ball">⚽</div>
 
-    <!-- OBJETO INTERACTIVO JUGABLE DE CANELITO -->
     <div class="canelito-pup-container" id="canelitoObj" onclick="canelitoTrick()">
       <div class="pup-shadow" id="pupShadow"></div>
       <div class="pup-body-wrapper" id="pupBody">
@@ -501,8 +486,7 @@ function enter(){
   if(inputPass && loginContainer){
     if(inputPass.value === "Jerry"){
       if(!firstInteractionDone){
-        // Activa la música de fondo al validar con éxito
-        audioBG.play().catch(err => console.log("Permiso de audio pendiente:", err));
+        audioBG.play().catch(err => console.log("Audio diferido:", err));
         audioSong.load(); audioWrite.load();
         firstInteractionDone = true;
       }
@@ -527,7 +511,7 @@ function toggleSong(){
   }
 }
 
-// --- FRASES DIVERTIDAS EN PANTALLA ---
+// --- FRASES FLOTANTES ---
 const frases = ["Eres mi lugar favorito 🤎", "Contigo todo es mejor 💞", "Mi coincidencia más bonita ✨", "Tu sonrisa es mi paz"];
 document.addEventListener("click", e => {
   if(e.target.closest("#canelitoObj") || e.target.closest("#login") || e.target.tagName === "BUTTON" || e.target.tagName === "IMG") return;
@@ -540,7 +524,7 @@ document.addEventListener("click", e => {
   setTimeout(() => f.remove(), 2000);
 });
 
-// --- ZOOM DE FOTOS ---
+// --- ZOOM DE IMÁGENES ---
 document.querySelectorAll("#gallery img, .carousel img").forEach(img => {
   img.onclick = () => { 
     const zoom = document.getElementById("zoom");
@@ -550,22 +534,22 @@ document.querySelectorAll("#gallery img, .carousel img").forEach(img => {
   }
 });
 
-// --- LLUVIA DE CORAZONES EN EL FONDO ---
+// --- GENERACIÓN INTEGRAL DE LA LLUVIA DE CORAZONES ROSADOS ---
 const bgHeartsContainer = document.getElementById("bgHearts");
 if(bgHeartsContainer){
-  for(let i = 0; i < 20; i++){
+  for(let i = 0; i < 28; i++){
     const s = document.createElement("span"); 
     s.innerHTML = "❤";
     s.style.left = Math.random() * 100 + "vw"; 
-    s.style.fontSize = (16 + Math.random() * 20) + "px";
-    s.style.animationDuration = (6 + Math.random() * 8) + "s"; 
-    s.style.animationDelay = (Math.random() * 5) + "s";
+    s.style.fontSize = (16 + Math.random() * 22) + "px";
+    s.style.animationDuration = (5 + Math.random() * 7) + "s"; 
+    s.style.animationDelay = (Math.random() * 6) + "s";
     bgHeartsContainer.appendChild(s);
   }
 }
 
-// --- CONTADOR DE TIEMPO REAL ---
-const start = new Date(2024, 8, 11, 0, 0, 0); // Ajusta año, mes (8=Septiembre), día si cambia
+// --- CONTADOR ORIGINAL DE TIEMPO REAL ---
+const start = new Date(2024, 8, 11, 0, 0, 0); 
 function updateCounter(){
   const now = new Date(); 
   const diff = now - start;
@@ -629,25 +613,22 @@ function createBubbles(){
     b.style.bottom = "35px";
     b.style.animationDuration = (4 + Math.random() * 4) + "s"; 
     aquarium.appendChild(b);
-    setTimeout(() => b.remove(), 7000);
+    setTimeout(() => b.remove(), 6000);
   }, 800);
 }
 setTimeout(createBubbles, 1000);
 
-// --- INTELIGENCIA DE MOVIMIENTO DE CANELITO ---
+// --- MOVIMIENTO DE CANELITO ---
 let canelitoJumping = false;
 
 function canelitoTrick() {
   if (canelitoJumping) return;
   canelitoJumping = true;
-  
   const body = document.getElementById("pupBody");
   const container = document.getElementById("canelitoObj");
   if(!body || !container) return;
-  
   body.className = "pup-body-wrapper pup-jump-active";
   
-  // Agregar un cartel de ladrido tierno arriba de él
   const bark = document.createElement("div");
   bark.className = "canelito-bark";
   bark.innerText = ["¡Guau! 🐾", "¡Arf! ❤️", "¡Yap! ✨"][Math.floor(Math.random() * 3)];
@@ -664,32 +645,25 @@ function startCanelitoPatrol() {
   const container = document.getElementById("canelitoObj");
   const garden = document.getElementById("canelitoGarden");
   if (!container || !garden) return;
-  
-  let pos = 30; 
-  let dir = 1;
+  let pos = 30; let dir = 1;
   
   setInterval(() => {
     if (canelitoJumping) return;
     const maxW = garden.clientWidth - 90;
     pos += 1.6 * dir;
-    
     if (pos >= maxW) { dir = -1; container.style.transform = "scaleX(-1)"; }
     if (pos <= 10) { dir = 1; container.style.transform = "scaleX(1)"; }
     container.style.left = pos + "px";
   }, 35);
 
-  // Deja rastros de huellas mágicas al correr
   setInterval(() => {
     if (canelitoJumping) return;
     const p = document.createElement("div"); 
     p.className = "trail-particle";
     p.innerText = "🐾";
-    const gRect = garden.getBoundingClientRect(); 
-    const cRect = container.getBoundingClientRect();
-    p.style.left = (cRect.left - gRect.left + 22) + "px"; 
-    p.style.bottom = "20px";
-    garden.appendChild(p); 
-    setTimeout(() => p.remove(), 900);
+    const gRect = garden.getBoundingClientRect(); const cRect = container.getBoundingClientRect();
+    p.style.left = (cRect.left - gRect.left + 22) + "px"; p.style.bottom = "20px";
+    garden.appendChild(p); setTimeout(() => p.remove(), 900);
   }, 350);
 }
 setTimeout(startCanelitoPatrol, 1000);
