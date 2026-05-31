@@ -7,7 +7,7 @@
 <style>
 *{box-sizing:border-box}
 body{margin:0;font-family:Segoe UI, sans-serif;background:linear-gradient(180deg,#140010,#2a0030);color:#fff;overflow-x:hidden}
-#login{position:fixed;inset:0;display:flex;justify-content:center;align-items:center;background:#0a0008;z-index:999;overflow:hidden}
+#login{position:fixed;inset:0;display:flex;justify-content:center;align-items:center;background:#0a0008;z-index:9999;overflow:hidden}
 .loginCard{background:rgba(255,255,255,.15);backdrop-filter:blur(14px);padding:40px;border-radius:25px;text-align:center;box-shadow:0 0 40px rgba(255,0,120,.4);animation:float 4s ease-in-out infinite;z-index:2}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
 input{padding:14px;border-radius:14px;border:none;text-align:center;font-size:16px;width:200px;color:#000}
@@ -15,16 +15,20 @@ button{padding:12px 20px;border:none;border-radius:20px;background:linear-gradie
 button:hover{transform:scale(1.08);box-shadow:0 0 12px #ff80bf}
 .loginRain{position:absolute;top:-20px;animation:loginFall linear forwards;opacity:.6;z-index:1}
 @keyframes loginFall{to{transform:translateY(110vh);opacity:.2}}
-.bgHearts span{position:fixed;color:#ff4da6;animation:fall linear infinite;opacity:.25;pointer-events:none}
-@keyframes fall{from{transform:translateY(-10vh)}to{transform:translateY(110vh)}}
-.card{background:#fff;color:#4a0030;margin:22px auto;padding:22px;width:95%;max-width:560px;border-radius:24px;box-shadow:0 12px 40px rgba(0,0,0,.25);border:3px solid #ffd6eb}
+
+/* CORRECCIÓN DE LOS CORAZONES AQUÍ */
+#bgHearts { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 1; pointer-events: none; overflow: hidden; }
+#bgHearts span { position: absolute; color: #ff4da6; animation: fall linear infinite; opacity: 0.45; }
+@keyframes fall { 0% { transform: translateY(-10vh); } 100% { transform: translateY(110vh); } }
+
+.card{background:#fff;color:#4a0030;margin:22px auto;padding:22px;width:95%;max-width:560px;border-radius:24px;box-shadow:0 12px 40px rgba(0,0,0,.25);border:3px solid #ffd6eb; position: relative; z-index: 5;}
 .circleImg,.musicCover{width:170px;height:170px;border-radius:50%;object-fit:cover;display:block;margin:14px auto;border:6px solid #ffb3d9}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px}
 .grid img{width:100%;height:140px;object-fit:cover;border-radius:16px;cursor:pointer}
 .carousel{display:flex;gap:14px;overflow:hidden}
 .carousel img{width:180px;height:140px;object-fit:cover;border-radius:16px;animation:slide 30s linear infinite}
 @keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-#zoom{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;justify-content:center;align-items:center;z-index:9999}
+#zoom{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;justify-content:center;align-items:center;z-index:99999}
 #zoom img{max-width:90%;max-height:90%;border-radius:18px}
 .typewriter{white-space:pre-wrap;border-right:2px solid #ff4da6;animation:blink .8s infinite}
 @keyframes blink{50%{border-color:transparent}}
@@ -32,7 +36,7 @@ button:hover{transform:scale(1.08);box-shadow:0 0 12px #ff80bf}
 .seal{font-size:42px;cursor:pointer;animation:pulse 1.5s infinite}
 @keyframes pulse{50%{transform:scale(1.15)}}
 .signature{font-family:cursive;font-size:22px;margin-top:15px;opacity:0}
-.tapPhrase{position:fixed;color:#ffd6eb;font-size:18px;animation:floatUp 2s forwards;pointer-events:none}
+.tapPhrase{position:fixed;color:#ffd6eb;font-size:18px;animation:floatUp 2s forwards;pointer-events:none; z-index: 9999;}
 @keyframes floatUp{to{transform:translateY(-60px);opacity:0}}
 @keyframes pulseCounter{from{transform:scale(1)}to{transform:scale(1.05)}}
 .aquarium{position:relative;width:100%;height:240px;background:linear-gradient(180deg,#0a4a6a 0%,#063a55 25%,#032a40 60%,#021a2a 100%);border-radius:25px;overflow:hidden;border:6px solid #1a9abf;box-shadow:inset 0 0 100px rgba(0,140,200,0.6),0 0 50px rgba(0,180,240,0.4),inset 0 -30px 40px rgba(0,0,0,0.5);margin-top:15px}
@@ -64,7 +68,7 @@ button:hover{transform:scale(1.08);box-shadow:0 0 12px #ff80bf}
 @keyframes snailMove{0%,100%{transform:translateX(0) rotate(0deg)}25%{transform:translateX(20px) rotate(5deg)}50%{transform:translateX(10px) rotate(-3deg)}75%{transform:translateX(-10px) rotate(5deg)}}
 .jellyfish{position:absolute;font-size:28px;animation:swimJelly 25s ease-in-out infinite;opacity:0.85;z-index:14;filter:drop-shadow(0 0 15px rgba(255,180,255,0.7))}
 @keyframes swimJelly{0%{left:80%;top:60%;transform:scaleX(1) rotate(0deg)}20%{left:70%;top:45%;transform:scaleX(1.1) rotate(10deg)}40%{left:55%;top:30%;transform:scaleX(0.95) rotate(-5deg)}60%{left:40%;top:45%;transform:scaleX(1.05) rotate(8deg)}80%{left:55%;top:60%;transform:scaleX(1) rotate(-3deg)}100%{left:80%;top:60%;transform:scaleX(1) rotate(0deg)}}
-.garden-card{background:#fff;color:#4a0030;margin:25px auto;padding:22px;width:95%;max-width:560px;border-radius:24px;box-shadow:0 12px 40px rgba(0,0,0,.25);border:3px solid #ffd6eb;text-align:center}
+.garden-card{background:#fff;color:#4a0030;margin:25px auto;padding:22px;width:95%;max-width:560px;border-radius:24px;box-shadow:0 12px 40px rgba(0,0,0,.25);border:3px solid #ffd6eb;text-align:center; position: relative; z-index: 5;}
 
 /* === JARDÍN PREMIUM DE CANELITO === */
 .garden-premium { position: relative; height: 220px; background: linear-gradient(to bottom, #87CEEB 0%, #E0F7FA 60%, #98FB98 100%); border-radius: 15px; overflow: hidden; margin-top: 10px; border: 3px solid #81d4fa; }
@@ -110,12 +114,22 @@ button:hover{transform:scale(1.08);box-shadow:0 0 12px #ff80bf}
 </style>
 </head>
 <body>
-<div id="login"><div class="loginCard"><h2>Ingresa la contraseña 💖</h2><input id="pass" type="text" placeholder="Contraseña..."><br><button onclick="enter()">Entrar</button></div></div>
+<div id="login">
+  <div class="loginCard">
+    <h2>Ingresa la contraseña 💖</h2>
+    <input id="pass" type="text" placeholder="Contraseña...">
+    <br>
+    <button onclick="enter()">Entrar</button>
+  </div>
+</div>
+
 <div id="zoom" onclick="this.style.display='none'"><img id="zoomImg"></div>
 <audio id="bgMusic" loop preload="auto" playsinline><source src="https://files.catbox.moe/4nrc17.mp3" type="audio/mpeg"></audio>
 <audio id="ourSong" preload="auto" playsinline><source src="https://files.catbox.moe/egr68n.mp3" type="audio/mpeg"></audio>
 <audio id="writeSound" preload="auto" playsinline><source src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3" type="audio/mpeg"></audio>
+
 <div class="bgHearts" id="bgHearts"></div>
+
 <div class="card"><h2>💞 Nuestro tiempo juntos 💞</h2><img class="circleImg" src="https://i.imgur.com/m2rqpiu.jpeg"><div id="counter"></div></div>
 <div class="card"><h2>🎵 Nuestra canción 🎵</h2><img class="musicCover" src="https://i.imgur.com/jbyIzFT.jpeg"><div style="text-align:center"><button id="btnPlay" onclick="toggleSong()">▶️ Reproducir</button></div></div>
 <div class="card"><h2>🎞️ Momentos especiales 🎞</h2><div class="carousel"><img src="https://i.imgur.com/tpH81jp.jpeg"><img src="https://i.imgur.com/mOQ2xhz.jpeg"><img src="https://i.imgur.com/ra5P475.jpeg"><img src="https://i.imgur.com/0xnanwq.jpeg"><img src="https://i.imgur.com/2Xh4XhC.jpeg"><img src="https://i.imgur.com/UX4FUgZ.jpeg"><img src="https://i.imgur.com/3h5EZdw.jpeg"><img src="https://i.imgur.com/8yDYtN4.jpeg"></div></div>
@@ -124,7 +138,6 @@ button:hover{transform:scale(1.08);box-shadow:0 0 12px #ff80bf}
 <div class="card"><h2>💌 Carta sellada 💌</h2><div class="seal" onclick="openLetter()">💗</div><div id="letter" class="secretLetter"></div><div id="sign" class="signature">Con amor — siempre tú 🤎</div></div>
 <div class="card"><h2>🐢 Faltó el Jerry..❤️🐢</h2><div class="aquarium" id="aquarium"><div class="aquarium-surface"></div><div class="turtle-swim">🐢</div><div class="small-fish">🐟</div><div class="small-fish" style="animation-delay:-10s">🐠</div><div class="jellyfish">🪼</div><div class="starfish">⭐</div><div class="crab">🦀</div><div class="snail">🐌</div><div class="seaweed" style="left:2%">🌿</div><div class="seaweed" style="left:15%">🌿</div><div class="seaweed" style="left:85%">🌿</div><div class="seaweed" style="left:98%">🌿</div><div class="rock" style="left:3%">🪨</div><div class="rock" style="left:92%">🪨</div><div class="aquarium-sand"></div></div></div>
 
-<!-- AQUÍ ESTÁ LA NUEVA TARJETA PREMIUM DE CANELITO -->
 <div class="garden-card">
   <h2>¡Toca a Canelito! 🐾❤️</h2>
   <div class="garden-premium" id="canelitoGarden">
@@ -148,4 +161,160 @@ button:hover{transform:scale(1.08);box-shadow:0 0 12px #ff80bf}
           <div class="pup-ear ear-left"></div>
           <div class="pup-ear ear-right"></div>
           <div class="pup-eye eye-left"><div class="pupil"></div></div>
-          <div class="pup-eye eye-righ
+          <div class="pup-eye eye-right"><div class="pupil"></div></div>
+          <div class="pup-snout">
+            <div class="pup-nose"></div>
+            <div class="pup-tongue"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="foreground-grass">🌿🌱🌸🌱🌿🌼🌱🌻🌱🌿</div>
+  </div>
+</div>
+<script>
+/* CORRECCIÓN: FUNCIÓN ENTER SÚPER SEGURA */
+let fI = false;
+const aB = document.getElementById("bgMusic");
+const aS = document.getElementById("ourSong");
+const aW = document.getElementById("writeSound");
+
+function enter() {
+  const p = document.getElementById("pass");
+  const l = document.getElementById("login");
+  
+  if (!p || !l) return;
+  
+  const val = p.value.trim().toLowerCase();
+  
+  if (val === "jerry") {
+    try {
+      if (!fI) {
+        if(aB) aB.play().catch(e => console.log("Audio bloqueado por navegador"));
+        if(aS) aS.load();
+        if(aW) aW.load();
+        fI = true;
+      }
+    } catch(e) {}
+    l.style.display = "none";
+  } else {
+    alert("¡Ups! Esa no es la contraseña correcta. Escribe: Jerry ❤️");
+  }
+}
+
+/* Permitir entrar con teclado en celulares */
+const passInput = document.getElementById("pass");
+if (passInput) {
+  passInput.addEventListener("keypress", function(e) {
+    if (e.key === "Enter" || e.keyCode === 13) {
+      enter();
+    }
+  });
+}
+
+/* Lluvia en el login */
+setInterval(() => {
+  const l = document.getElementById("login");
+  if (l && l.style.display !== "none") {
+    const h = document.createElement("div");
+    h.className = "loginRain";
+    h.innerHTML = "💗";
+    h.style.left = Math.random() * 100 + "vw";
+    h.style.animationDuration = (3 + Math.random() * 3) + "s";
+    l.appendChild(h);
+    setTimeout(() => h.remove(), 6000);
+  }
+}, 300);
+
+/* CREACIÓN SEGURA DE LOS CORAZONES DE FONDO */
+const hC = document.getElementById("bgHearts");
+if (hC) {
+  for (let i = 0; i < 28; i++) {
+    const s = document.createElement("span");
+    s.innerHTML = "❤";
+    s.style.left = Math.random() * 100 + "vw";
+    s.style.fontSize = (16 + Math.random() * 26) + "px";
+    s.style.animationDuration = (7 + Math.random() * 12) + "s";
+    s.style.animationDelay = (Math.random() * 5) + "s";
+    hC.appendChild(s);
+  }
+}
+
+function toggleSong(){if(aS.paused){aB.pause();aS.currentTime=0;aS.play().catch(()=>{});document.getElementById("btnPlay").innerHTML="⏸️ Pausar"}else{aS.pause();aB.play().catch(()=>{});document.getElementById("btnPlay").innerHTML="▶️ Reproducir"}}
+const fr=["Eres mi lugar favorito 🤎","Contigo todo es mejor 💞","Mi coincidencia más bonita ✨","Tu sonrisa es mi paz"];
+document.addEventListener("click",e=>{if(e.target.tagName==="BUTTON"||e.target.tagName==="INPUT")return;if(!fI){aB.play().catch(()=>{});fI=true}const f=document.createElement("div");f.className="tapPhrase";f.innerText=fr[Math.floor(Math.random()*fr.length)];f.style.left=e.clientX+"px";f.style.top=e.clientY+"px";document.body.appendChild(f);setTimeout(()=>f.remove(),2000)});
+
+/* CORRECCIÓN DE LA GALERÍA PARA MÓVILES */
+document.querySelectorAll("#gallery img").forEach(i => {
+  i.onclick = () => {
+    const zoomDiv = document.getElementById("zoom");
+    const zoomImg = document.getElementById("zoomImg");
+    if(zoomDiv && zoomImg) {
+      zoomDiv.style.display = "flex";
+      zoomImg.src = i.src;
+    }
+  };
+});
+
+const st=new Date(2024,8,11,0,0,0);function uC(){const n=new Date(),d=n-st,da=Math.floor(d/(1000*60*60*24)),ho=Math.floor((d/(1000*60*60))%24),mi=Math.floor((d/(1000*60))%60),se=Math.floor((d/1000)%60),c=document.getElementById("counter");if(c)c.innerHTML=`<h3 style="margin:0;font-size:28px;animation:pulseCounter 1s infinite alternate;">${da} días 💗</h3>${ho} horas ${mi} minutos ${se} segundos`}
+uC();setInterval(uC,1000);const pT="Cuando me enamoré de ti\n\n\"Cuando me enamoré de ti, entendí que no era que todas aquellas personas que me hablaron del amor estuvieran mal, sino que nunca me hablaron de ti.\n\nTe prometo\n\n\"Si te apagas, te prometo amarte con más fuerza.\nPrometo devolverte la luz que te caracteriza,\nregar tu jardín con el amor que me brindaste cuando estaba marchito.\nTe prometo cuidarte cuando enfermes\ny hacer lo que haga falta para asegurarme de que vuelvas a florecer.\n\nPorque, mi amor, si hay algo que le pido a Dios es que,\nsi alguna vez llega a ser necesario,\nme permita ser aquello que te haga falta,\ncomo tú lo fuiste conmigo.\"";
+function tT(t,el){el.textContent="";const c=[...t];let i=0;function w(){if(i<c.length){el.textContent+=c[i++];setTimeout(w,28)}}w()}
+const pE=document.getElementById("poema");if(pE)setTimeout(()=>tT(pT,pE),1200);
+function openLetter(){aW.play().catch(()=>{});const txt="Esta carta es para ti.\nTe amo mi cebollín 🤎\nEspero compartir más cosas juntos 🥰🧸",l=document.getElementById("letter"),s=document.getElementById("sign");if(l&&s){l.style.display="block";tT(txt,l);setTimeout(()=>s.style.opacity=1,4200)}}
+function cAE(){const a=document.getElementById("aquarium");if(!a)return;setInterval(()=>{const b=document.createElement("div");b.className="aqua-bubble";const s=4+Math.random()*14;b.style.width=s+"px";b.style.height=s+"px";b.style.left=(Math.random()*94+3)+"%";b.style.bottom="40px";b.style.animationDuration=(5+Math.random()*5)+"s";a.appendChild(b);setTimeout(()=>b.remove(),10000)},600);setInterval(()=>{const p=document.createElement("div");p.className="aqua-particle";p.style.left=(Math.random()*96+2)+"%";p.style.bottom=(Math.random()*180+50)+"px";p.style.animationDuration=(8+Math.random()*6)+"s";a.appendChild(p);setTimeout(()=>p.remove(),15000)},1500)}
+setTimeout(cAE,700);
+
+let canelitoJumping = false;
+function canelitoTrick() {
+  if (canelitoJumping) return;
+  canelitoJumping = true;
+  const body = document.getElementById("pupBody");
+  const container = document.getElementById("canelitoObj");
+  if(!body || !container) return;
+  
+  body.className = "pup-body-wrapper pup-jump-active";
+  
+  const barkAudio = new Audio('https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3');
+  barkAudio.play().catch(()=>{});
+  
+  const bark = document.createElement("div");
+  bark.className = "canelito-bark";
+  bark.innerText = ["¡Guau! 🐾", "¡Arf! ❤️", "¡Yap! ✨"][Math.floor(Math.random() * 3)];
+  container.appendChild(bark);
+  setTimeout(() => bark.remove(), 500);
+  
+  setTimeout(() => {
+    body.className = "pup-body-wrapper";
+    canelitoJumping = false;
+  }, 750);
+}
+
+function startCanelitoPatrol() {
+  const container = document.getElementById("canelitoObj");
+  const garden = document.getElementById("canelitoGarden");
+  if (!container || !garden) return;
+  let pos = 30; let dir = 1;
+  
+  setInterval(() => {
+    if (canelitoJumping) return;
+    const maxW = garden.clientWidth - 90;
+    pos += 1.6 * dir;
+    if (pos >= maxW) { dir = -1; container.style.transform = "scaleX(-1)"; }
+    if (pos <= 10) { dir = 1; container.style.transform = "scaleX(1)"; }
+    container.style.left = pos + "px";
+  }, 35);
+
+  setInterval(() => {
+    if (canelitoJumping) return;
+    const p = document.createElement("div"); 
+    p.className = "trail-particle";
+    p.innerText = "🐾";
+    const gRect = garden.getBoundingClientRect(); const cRect = container.getBoundingClientRect();
+    p.style.left = (cRect.left - gRect.left + 22) + "px"; p.style.bottom = "20px";
+    garden.appendChild(p); setTimeout(() => p.remove(), 900);
+  }, 350);
+}
+setTimeout(startCanelitoPatrol, 1000);
+</script>
+</body>
+</html>
