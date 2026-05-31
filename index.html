@@ -6,25 +6,45 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
-/* --- CONFIGURACIÓN BASE Y FONDO --- */
+/* --- ESTILOS DE TU CÓDIGO BASE ORIGINAL --- */
 * { box-sizing: border-box; }
 body {
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(180deg, #140010 0%, #2a0030 100%) !important; /* Forzado para que no se vuelva negro */
+  background: linear-gradient(180deg, #140010 0%, #2a0030 100%); /* Tu fondo morado original */
   color: #fff;
   overflow-x: hidden;
   min-height: 100vh;
 }
 
-/* --- PANTALLA DE CONTRASEÑA --- */
+/* --- LA LLUVIA DE CORAZONES ORIGINAL (VISIBLE SIEMPRE) --- */
+.bgHearts {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1; /* Detrás de las tarjetas pero visible en el login */
+  overflow: hidden;
+}
+.bgHearts span {
+  position: absolute;
+  color: #ff4da6;
+  text-shadow: 0 0 5px rgba(255, 77, 166, 0.6);
+  animation: rise linear infinite;
+  bottom: -50px;
+}
+@keyframes rise {
+  from { transform: translateY(0); opacity: 0.8; }
+  to { transform: translateY(-110vh); opacity: 0; }
+}
+
+/* --- PANTALLA DE LOGIN CON TU FONDO ORIGINAL --- */
 #login {
   position: fixed;
   inset: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(180deg, #140010 0%, #2a0030 100%) !important; /* Mismo fondo morado hermoso */
+  background: linear-gradient(180deg, #140010 0%, #2a0030 100%); /* Fondo morado idéntico al entrar */
   z-index: 99999;
   overflow: hidden;
 }
@@ -37,7 +57,7 @@ body {
   text-align: center;
   box-shadow: 0 0 40px rgba(255, 0, 120, 0.4);
   animation: float 4s ease-in-out infinite;
-  z-index: 10; /* Por encima de la lluvia */
+  z-index: 100000;
   width: 90%;
   max-width: 340px;
 }
@@ -76,29 +96,9 @@ body {
   transform: scale(1.05);
   box-shadow: 0 0 15px #ff80bf;
 }
-
-/* --- LLUVIA DE CORAZONES ROSADOS GLOBAL (FIJA EN EL FONDO) --- */
-.bgHearts {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1; /* Visible en login y detrás de las tarjetas al entrar */
-  overflow: hidden;
-}
-.bgHearts span {
-  position: absolute;
-  color: #ff4da6; /* Rosado intenso */
-  text-shadow: 0 0 5px rgba(255, 77, 166, 0.6);
-  animation: rise linear infinite;
-  bottom: -50px;
-}
-@keyframes rise {
-  from { transform: translateY(0); opacity: 0.8; }
-  to { transform: translateY(-110vh); opacity: 0; }
-}
 </style>
 <style>
-/* --- TARJETAS CONTENEDORAS BLANCAS --- */
+/* --- LAS TARJETAS BLANCAS ORIGINALES --- */
 .card {
   background: #fff;
   color: #4a0030;
@@ -111,7 +111,7 @@ body {
   border: 3px solid #ffd6eb;
   text-align: center;
   position: relative;
-  z-index: 5; /* Por encima de los corazones flotantes */
+  z-index: 10; /* Queda sobre el fondo morado y la lluvia */
 }
 .card h2 {
   margin-top: 0;
@@ -119,7 +119,7 @@ body {
   color: #4a0030;
 }
 
-/* --- ELEMENTOS MULTIMEDIA --- */
+/* --- ELEMENTOS DE LAS TARJETAS --- */
 .circleImg, .musicCover {
   width: 170px;
   height: 170px;
@@ -147,7 +147,7 @@ body {
   transform: scale(1.06);
 }
 
-/* --- ARREGLO DE FOTOS PARA QUE SE VEAN PERFECTAS --- */
+/* --- MAQUETACIÓN DE FOTOS ORIGINALES --- */
 .carousel {
   display: flex;
   gap: 14px;
@@ -179,7 +179,7 @@ body {
   transform: scale(1.03);
 }
 
-/* --- EFECTOS EXTRAS --- */
+/* --- TEXTOS, ZOOM Y EFECTOS ORIGINALES --- */
 #zoom {
   position: fixed;
   inset: 0;
@@ -220,14 +220,14 @@ body {
 .signature { font-family: cursive; font-size: 20px; margin-top: 15px; opacity: 0; transition: opacity 1s; color: #ff4da6; }
 .tapPhrase { position: fixed; color: #ffd6eb; font-size: 16px; font-weight: bold; animation: floatUp 2s forwards; pointer-events: none; z-index: 9999; text-shadow: 0 2px 5px rgba(0,0,0,0.5); }
 @keyframes floatUp { to { transform: translateY(-70px); opacity: 0; } }
-  </style>
-  <style>
-/* --- EL ACUARIO DE JERRY (CORREGIDO A AZUL PROFUNDO) --- */
+</style>
+<style>
+/* --- EL ACUARIO DE JERRY (RESTALURADO AL CÓDIGO BASE ORIGINAL EXACTO) --- */
 .aquarium {
   position: relative; 
   width: 100%; 
   height: 240px;
-  background: linear-gradient(180deg, #0a4a6a 0%, #063a55 25%, #032a40 60%, #021a2a 100%) !important; /* Azul agua profundo garantizado */
+  background: linear-gradient(180deg, #0a4a6a 0%, #063a55 25%, #032a40 60%, #021a2a 100%) !important;
   border-radius: 25px; 
   overflow: hidden; 
   border: 6px solid #1a9abf;
@@ -266,8 +266,8 @@ body {
 .aqua-bubble { position: absolute; background: rgba(255,255,255,0.45); border-radius: 50%; animation: bubbleRise 4.5s linear infinite; z-index: 5; }
 @keyframes bubbleRise { 0% { transform: translateY(0) scale(0.2); opacity: 0; } 10% { opacity: 0.8; } 100% { transform: translateY(-220px) scale(1.1); opacity: 0; } }
 
-/* --- JARDÍN INTERACTIVO DE CANELITO --- */
-.garden-card { background: #fff; color: #4a0030; margin: 25px auto; padding: 22px; width: 92%; max-width: 540px; border-radius: 24px; box-shadow: 0 12px 40px rgba(0,0,0,.3); border: 3px solid #ffd6eb; text-align: center; position: relative; z-index: 5; }
+/* --- NUEVO JARDÍN DE CANELITO (AÑADIDO COMO NUEVA TARJETA) --- */
+.garden-card { background: #fff; color: #4a0030; margin: 25px auto; padding: 22px; width: 92%; max-width: 540px; border-radius: 24px; box-shadow: 0 12px 40px rgba(0,0,0,.3); border: 3px solid #ffd6eb; text-align: center; position: relative; z-index: 10; }
 .garden-premium {
   position: relative; width: 100%; height: 260px;
   background: linear-gradient(180deg, #bde0fe 0%, #f1faee 45%, #d8f3dc 46%, #74c69d 100%);
@@ -286,7 +286,7 @@ body {
 .toy-ball { position: absolute; bottom: 12px; font-size: 20px; z-index: 18; right: 25%; animation: ballBounce 2.5s ease-in-out infinite alternate; }
 @keyframes ballBounce { 0% { transform: translateY(0) rotate(0deg); } 100% { transform: translateY(-40px) rotate(360deg); } }
 
-/* --- CONSTRUCCIÓN ESTRUCTURAL DE CANELITO --- */
+/* ESTRUCTURA CSS DE CANELITO */
 .canelito-pup-container { position: absolute; bottom: 10px; left: 40px; width: 85px; height: 80px; z-index: 45; cursor: pointer; transition: left 0.1s linear; -webkit-tap-highlight-color: transparent; }
 .pup-shadow { position: absolute; bottom: -1px; left: 10px; width: 62px; height: 7px; background: rgba(0,0,0,0.2); border-radius: 50%; z-index: 40; transition: all 0.1s; }
 .pup-body-wrapper { position: relative; width: 100%; height: 100%; transform-origin: bottom center; animation: pupWalk 0.4s ease-in-out infinite alternate; }
@@ -324,10 +324,10 @@ body {
 </head>
 <body>
 
-<!-- LLUVIA DE CORAZONES EN SEGUNDO PLANO (NUNCA DESAPARECE) -->
+<!-- LLUVIA DE CORAZONES (SIEMPRE ACTIVA ABAJO) -->
 <div class="bgHearts" id="bgHearts"></div>
 
-<!-- PANTALLA DE BLOQUEO (SE VE AL INICIO) -->
+<!-- PANTALLA DE BLOQUEO CON TU DISEÑO ORIGINAL -->
 <div id="login">
   <div class="loginCard">
     <h2>Ingresa la contraseña 💖</h2>
@@ -336,12 +336,12 @@ body {
   </div>
 </div>
 
-<!-- CONTENEDOR PARA VER FOTOS AMPLIADAS -->
+<!-- CAPA ZOOM ORIGINAL -->
 <div id="zoom" onclick="this.style.display='none'">
   <img id="zoomImg" src="">
 </div>
 
-<!-- REPRODUCTORES DE AUDIO CON TUS ENLACES ORIGINALES -->
+<!-- AUDIOS CON TUS REPRODUCTORES ORIGINALES -->
 <audio id="bgMusic" loop preload="auto" playsinline>
   <source src="https://files.catbox.moe/4nrc17.mp3" type="audio/mpeg">
 </audio>
@@ -418,7 +418,7 @@ body {
   <div id="sign" class="signature">Con amor — siempre tú 🤎</div>
 </div>
 
-<!-- TARJETA 7: EL ACUARIO DE JERRY -->
+<!-- TARJETA 7: EL ACUARIO DE JERRY (COMPLETO E INTACTO) -->
 <div class="card">
   <h2>🐢 Faltó el Jerry..❤️🐢</h2>
   <div class="aquarium" id="aquarium">
@@ -436,7 +436,7 @@ body {
   </div>
 </div>
 
-<!-- TARJETA 8: JARDÍN PREMIUM CON CANELITO -->
+<!-- TARJETA 8: EL NUEVO JARDÍN INTEGRADO DE CANELITO -->
 <div class="garden-card">
   <h2>¡Toca a Canelito! 🐾❤️</h2>
   <div class="garden-premium" id="canelitoGarden">
@@ -474,7 +474,7 @@ body {
   </div>
 </div>
 <script>
-// --- CONTROL DE INGRESO Y CONTRASEÑA ---
+// --- CONTROL DE ACCESO ORIGINAL ---
 const audioBG = document.getElementById("bgMusic");
 const audioSong = document.getElementById("ourSong");
 const audioWrite = document.getElementById("writeSound");
@@ -486,7 +486,7 @@ function enter(){
   if(inputPass && loginContainer){
     if(inputPass.value === "Jerry"){
       if(!firstInteractionDone){
-        audioBG.play().catch(err => console.log("Audio diferido:", err));
+        audioBG.play().catch(err => console.log("Permiso audio deferido:", err));
         audioSong.load(); audioWrite.load();
         firstInteractionDone = true;
       }
@@ -497,7 +497,7 @@ function enter(){
   }
 }
 
-// --- REPRODUCTOR DE MÚSICA ---
+// --- REPRODUCTOR ORIGINAL ---
 function toggleSong(){
   if(audioSong.paused){
     audioBG.pause(); 
@@ -511,7 +511,7 @@ function toggleSong(){
   }
 }
 
-// --- FRASES FLOTANTES ---
+// --- FRASES ORIGINALES AL COPIAR/TOCAR ---
 const frases = ["Eres mi lugar favorito 🤎", "Contigo todo es mejor 💞", "Mi coincidencia más bonita ✨", "Tu sonrisa es mi paz"];
 document.addEventListener("click", e => {
   if(e.target.closest("#canelitoObj") || e.target.closest("#login") || e.target.tagName === "BUTTON" || e.target.tagName === "IMG") return;
@@ -534,10 +534,10 @@ document.querySelectorAll("#gallery img, .carousel img").forEach(img => {
   }
 });
 
-// --- GENERACIÓN INTEGRAL DE LA LLUVIA DE CORAZONES ROSADOS ---
+// --- RECREACIÓN TOTAL DE LA LLUVIA DE CORAZONES ROSADOS ORIGINAL ---
 const bgHeartsContainer = document.getElementById("bgHearts");
 if(bgHeartsContainer){
-  for(let i = 0; i < 28; i++){
+  for(let i = 0; i < 35; i++){ // Aumentado para que se note mucho más
     const s = document.createElement("span"); 
     s.innerHTML = "❤";
     s.style.left = Math.random() * 100 + "vw"; 
@@ -548,7 +548,7 @@ if(bgHeartsContainer){
   }
 }
 
-// --- CONTADOR ORIGINAL DE TIEMPO REAL ---
+// --- CONTADOR ORIGINAL EXACTO ---
 const start = new Date(2024, 8, 11, 0, 0, 0); 
 function updateCounter(){
   const now = new Date(); 
@@ -565,7 +565,7 @@ function updateCounter(){
 updateCounter(); 
 setInterval(updateCounter, 1000);
 
-// --- ESCRITURA AUTOMÁTICA DE POEMAS ---
+// --- TEXTO DE POEMAS AUTOMÁTICOS ORIGINALES ---
 const poemaTexto = "Cuando me enamoré de ti\n\n\"Cuando me enamoré de ti, entendí que no era que todas aquellas personas que me hablaron del amor estuvieran mal, sino que nunca me hablaron de ti.\"\n\nTe prometo\n\n\"Si te apagas, te prometo amarte con más fuerza.\nPrometo devolverte la luz que te caracteriza,\nregar tu jardín con el amor que me brindaste cuando estaba marchito.\nTe prometo cuidarte cuando enfermes\ny hacer lo que haga falta para asegurarme de que vuelvas a florecer.\n\nPorque, mi amor, si hay algo que le pido a Dios es que,\nsi alguna vez llega a ser necesario,\nme permita ser aquello que te haga falta,\ncomo tú lo fuiste conmigo.\"";
 
 function typeText(t, el, callback){
@@ -599,7 +599,7 @@ function openLetter(){
   }
 }
 
-// --- BURBUJAS EN ACUARIO ---
+// --- BURBUJAS AUTOMÁTICAS DEL ACUARIO DE JERRY ---
 function createBubbles(){
   const aquarium = document.getElementById("aquarium"); 
   if(!aquarium) return;
@@ -618,7 +618,7 @@ function createBubbles(){
 }
 setTimeout(createBubbles, 1000);
 
-// --- MOVIMIENTO DE CANELITO ---
+// --- MOVIMIENTO ANIMADO DE CANELITO ---
 let canelitoJumping = false;
 
 function canelitoTrick() {
