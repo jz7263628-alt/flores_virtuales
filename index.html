@@ -1,426 +1,3 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<title>Para mi cebollín 🤎</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<style>
-*{box-sizing:border-box}
-body{
- margin:0;
- font-family:Segoe UI, sans-serif;
- background:linear-gradient(180deg,#140010,#2a0030);
- color:#fff;
- overflow-x:hidden;
-}
-
-#login{
- position:fixed;
- inset:0;
- display:flex;
- justify-content:center;
- align-items:center;
- background:#0a0008;
- z-index:999;
- overflow:hidden;
-}
-
-.loginCard{
- background:rgba(255,255,255,.15);
- backdrop-filter:blur(14px);
- padding:40px;
- border-radius:25px;
- text-align:center;
- box-shadow:0 0 40px rgba(255,0,120,.4);
- animation:float 4s ease-in-out infinite;
- z-index:2;
-}
-
-@keyframes float{
-0%,100%{transform:translateY(0)}
-50%{transform:translateY(-12px)}
-}
-
-input{
- padding:14px;
- border-radius:14px;
- border:none;
- text-align:center;
- font-size:16px;
- width:200px;
- color: #000;
-}
-
-button{
- padding:12px 20px;
- border:none;
- border-radius:20px;
- background:linear-gradient(45deg,#ff4da6,#ff80bf);
- color:white;
- font-size:16px;
- margin-top:12px;
- cursor:pointer;
- transition:.25s;
-}
-
-button:hover{
- transform:scale(1.08);
- box-shadow:0 0 12px #ff80bf;
-}
-
-.loginRain{
- position:absolute;
- top:-20px;
- animation:loginFall linear forwards;
- opacity:.6;
- z-index: 1;
-}
-@keyframes loginFall{
- to{ transform:translateY(110vh); opacity:.2; }
-}
-
-.bgHearts span{
- position:fixed;
- color:#ff4da6;
- animation:rise linear infinite;
- opacity:.25;
- pointer-events:none;
-}
-@keyframes rise{
- from{transform:translateY(100vh)}
- to{transform:translateY(-10vh)}
-}
-
-.card{
- background:#fff;
- color:#4a0030;
- margin:22px auto;
- padding:22px;
- width:95%;
- max-width:560px;
- border-radius:24px;
- box-shadow:0 12px 40px rgba(0,0,0,.25);
- border:3px solid #ffd6eb;
-}
-
-.circleImg,.musicCover{
- width:170px;
- height:170px;
- border-radius:50%;
- object-fit:cover;
- display:block;
- margin:14px auto;
- border:6px solid #ffb3d9;
-}
-
-.grid{
- display:grid;
- grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
- gap:10px;
-}
-.grid img{
- width:100%;
- height:140px;
- object-fit:cover;
- border-radius:16px;
- cursor:pointer;
-}
-
-.carousel{
- display:flex;
- gap:14px;
- overflow:hidden;
-}
-.carousel img{
- width:180px;
- height:140px;
- object-fit:cover;
- border-radius:16px;
- animation:slide 30s linear infinite;
-}
-@keyframes slide{
- from{transform:translateX(0)}
- to{transform:translateX(-50%)}
-}
-
-#zoom{
- position:fixed;
- inset:0;
- background:rgba(0,0,0,.85);
- display:none;
- justify-content:center;
- align-items:center;
- z-index:9999;
-}
-#zoom img{
- max-width:90%;
- max-height:90%;
- border-radius:18px;
-}
-
-.typewriter{
- white-space:pre-wrap;
- border-right:2px solid #ff4da6;
- animation:blink .8s infinite;
-}
-@keyframes blink{
-50%{border-color:transparent}
-}
-
-.secretLetter{
- margin-top:15px;
- padding:20px;
- border-radius:18px;
- background:linear-gradient(45deg,#ffe0f0,#ffd1ea);
- display:none;
- white-space:pre-wrap;
-}
-
-.seal{
- font-size:42px;
- cursor:pointer;
- animation:pulse 1.5s infinite;
-}
-@keyframes pulse{
-50%{transform:scale(1.15)}
-}
-
-.signature{
- font-family:cursive;
- font-size:22px;
- margin-top:15px;
- opacity:0;
-}
-
-.tapPhrase{
- position:fixed;
- color:#ffd6eb;
- font-size:18px;
- animation:floatUp 2s forwards;
- pointer-events:none;
-}
-@keyframes floatUp{
- to{ transform:translateY(-60px); opacity:0; }
-}
-
-@keyframes pulseCounter{
- from{transform:scale(1)}
- to{transform:scale(1.05)}
-}
-</style>
-<style>
-/* Estilos del Acuario de Jerry */
-.aquarium{
- position:relative;
- width:100%;
- height:240px;
- background:linear-gradient(180deg, #0a4a6a 0%, #063a55 25%, #032a40 60%, #021a2a 100%);
- border-radius:25px;
- overflow:hidden;
- border:6px solid #1a9abf;
- box-shadow:inset 0 0 100px rgba(0,140,200,0.6), 0 0 50px rgba(0,180,240,0.4), inset 0 -30px 40px rgba(0,0,0,0.5);
- margin-top:15px;
-}
-.aquarium::before{
- content:''; position:absolute; top:-50px; left:5%; width:90%; height:140%;
- background:linear-gradient(180deg, rgba(255,200,100,0.2) 0%, rgba(255,180,80,0.1) 30%, transparent 70%);
- pointer-events:none; animation:goldenRays 15s ease-in-out infinite;
-}
-@keyframes goldenRays{
-0%,100%{opacity:0.1; transform:scale(1) translateX(0) rotate(0deg);}
-50%{opacity:0.15; transform:scale(1.05) translateX(-10px) rotate(-1deg);}
-}
-.aquarium::after{
- content:''; position:absolute; bottom:0; left:0; width:100%; height:60px;
- background:linear-gradient(180deg, transparent 0%, rgba(10,30,40,0.9) 100%); pointer-events:none; border-radius:0 0 18px 18px;
-}
-.aquarium-sand{
- position:absolute; bottom:0; left:0; width:100%; height:40px;
- background:linear-gradient(180deg, #d4b080 0%, #c9a060 30%, #a88040 70%, #8b6940 100%);
- border-radius:0 0 20px 20px; box-shadow:0 -8px 20px rgba(0,0,0,0.4), inset 0 5px 15px rgba(255,255,255,0.1);
-}
-.aquarium-sand::before{ content:'·······'; position:absolute; top:-14px; left:0; width:100%; font-size:16px; color:#b89060; text-align:center; letter-spacing:14px; opacity:0.5; }
-.seaweed{ position:absolute; bottom:35px; font-size:44px; animation:sway 6s ease-in-out infinite; transform-origin:bottom center; filter:drop-shadow(0 0 10px rgba(60,200,120,0.5)) brightness(1.1); }
-@keyframes sway{ 0%,100%{transform:rotate(-1deg);} 50%{transform:rotate(1deg);} }
-.turtle-swim{ position:absolute; font-size:52px; animation:swimAround 22s linear infinite; filter:drop-shadow(0 0 20px rgba(140,240,255,0.8)); z-index:20; }
-@keyframes swimAround{
-0%{left:2%;top:15%;transform:rotate(10deg) scaleX(1);}
-42%{left:75%;top:28%;transform:rotate(10deg) scaleX(-1);}
-52%{left:72%;top:40%;transform:rotate(-20deg) scaleX(-1);}
-100%{left:2%;top:15%;transform:rotate(10deg) scaleX(1);}
-}
-.aquarium-surface{ position:absolute; top:0; left:0; width:100%; height:30px; background:linear-gradient(180deg, rgba(200,240,255,0.7) 0%, transparent 100%); animation:waterWaves 6s ease-in-out infinite; z-index:25; }
-@keyframes waterWaves{ 0%,100%{transform:translateY(0);} 50%{transform:translateY(-2px);} }
-.small-fish{ position:absolute; font-size:22px; animation:fishSwim 30s linear infinite; opacity:0.9; z-index:15; }
-@keyframes fishSwim{ 0%{left:-18%;transform:scaleX(1);} 50%{left:118%;transform:scaleX(-1);} 100%{left:-18%;transform:scaleX(1);} }
-.starfish{ position:absolute; bottom:12px; left:30%; font-size:30px; animation:starBounce 8s ease-in-out infinite; z-index:18; }
-@keyframes starBounce{ 0%,100%{transform:translateY(0);} 50%{transform:translateY(-4px);} }
-.crab{ position:absolute; bottom:10px; left:70%; font-size:28px; animation:crabMove 12s ease-in-out infinite; z-index:18; }
-@keyframes crabMove{ 0%,100%{transform:translateX(0);} 50%{transform:translateX(-15px);} }
-.aqua-bubble{ position:absolute; background:radial-gradient(circle at 35% 35%, #fff, rgba(200,240,255,0.2)); border-radius:50%; animation:bubbleRise 6s linear infinite; }
-@keyframes bubbleRise{ 0%{transform:translateY(0) scale(0.15); opacity:0;} 2%{opacity:0.95;} 100%{transform:translateY(-250px) scale(1.05); opacity:0;} }
-.aqua-particle{ position:absolute; width:5px; height:5px; background:rgba(255,255,200,0.8); border-radius:50%; animation:particleFloat 10s ease-in-out infinite; }
-@keyframes particleFloat{ 0%,100%{transform:translateY(0); opacity:0.2;} 50%{transform:translateY(-100px); opacity:0.8;} }
-.rock{ position:absolute; bottom:30px; font-size:38px; z-index:12; }
-.snail{ position:absolute; bottom:15px; left:50%; font-size:24px; animation:snailMove 15s ease-in-out infinite; z-index:17; }
-@keyframes snailMove{ 0%,100%{transform:translateX(0);} 50%{transform:translateX(15px);} }
-.jellyfish{ position:absolute; font-size:28px; animation:swimJelly 25s ease-in-out infinite; opacity:0.85; z-index:14; }
-@keyframes swimJelly{ 0%,100%{left:80%;top:60%;} 50%{left:40%;top:45%;} }
-
-/* Estilos Premium del Jardín de Canelito */
-.garden-card { background: #fff; color: #4a0030; margin: 22px auto; padding: 22px; width: 95%; max-width: 560px; border-radius: 24px; box-shadow: 0 12px 40px rgba(0,0,0,.25); border: 3px solid #ffd6eb; text-align: center; }
-.garden { position: relative; width: 100%; height: 260px; background: linear-gradient(180deg, #ffccd5 0%, #fff0f3 40%, #b7e4c7 41%, #74c69d 100%); border-radius: 25px; overflow: hidden; border: 6px solid #95d5b2; box-shadow: inset 0 0 40px rgba(116,198,157,0.4); margin-top: 15px; }
-.canelito-container { position: absolute; bottom: 20px; left: 50px; width: 80px; height: 95px; z-index: 50; transition: left 0.1s linear; }
-.canelito-shadow { position: absolute; bottom: 0; left: 10px; width: 60px; height: 10px; background: rgba(0, 0, 0, 0.25); border-radius: 50%; transition: transform 0.3s, opacity 0.3s; z-index: 49; }
-.canelito-body { position: absolute; top: 0; left: 0; width: 80px; height: 80px; transform-origin: bottom center; }
-.canelito-avatar { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 4px solid #fff; box-shadow: 0 6px 12px rgba(0,0,0,0.15); }
-.anim-walk { animation: puppyWalkBounce 0.5s ease-in-out infinite alternate; }
-@keyframes puppyWalkBounce { 0% { transform: translateY(0) rotate(-2deg); } 100% { transform: translateY(-16px) rotate(4deg); } }
-.anim-sit { animation: puppySitPulse 1.5s ease-in-out infinite alternate; }
-@keyframes puppySitPulse { 0% { transform: scaleY(0.9) scaleX(1.05) translateY(5px); } 100% { transform: scaleY(0.95) scaleX(1) translateY(2px); } }
-.anim-zoomies { animation: puppyZoomies 0.25s ease-in-out infinite alternate; }
-@keyframes puppyZoomies { 0% { transform: translateY(0) scaleY(0.95) rotate(-5deg); } 100% { transform: translateY(-22px) scaleY(1.05) rotate(7deg); } }
-.trail-particle { position: absolute; font-size: 14px; pointer-events: none; z-index: 45; animation: particleFadeUp 1.2s ease-out forwards; }
-@keyframes particleFadeUp { 0% { transform: translateY(0) scale(0.5); opacity: 1; } 100% { transform: translateY(-50px) translateX(var(--x-drift)) scale(1.3); opacity: 0; } }
-.butterfly { position: absolute; font-size: 24px; z-index: 30; animation: flyAround 8s ease-in-out infinite alternate; }
-@keyframes flyAround { 0% { transform: translate(0, 0); } 50% { transform: translate(120px, -30px) rotate(15deg); } 100% { transform: translate(240px, 10px) rotate(-10deg); } }
-.toy-ball { position: absolute; bottom: 15px; font-size: 22px; z-index: 25; animation: ballBounce 2.5s ease-in-out infinite alternate; }
-@keyframes ballBounce { 0% { bottom: 15px; transform: rotate(0deg); } 100% { bottom: 90px; transform: rotate(360deg); } }
-.garden-cloud { position: absolute; top: 10px; font-size: 30px; opacity: 0.4; animation: cloudDrift 20s linear infinite; }
-@keyframes cloudDrift { from { left: -20%; } to { left: 120%; } }
-.garden-flower { position: absolute; bottom: 10px; font-size: 18px; transform-origin: bottom center; animation: flowerSway 3s ease-in-out infinite alternate; }
-@keyframes flowerSway { 0% { transform: rotate(-5deg); } 100% { transform: rotate(5deg); } }
-</style>
-</head>
-<body>
-
-<div id="login">
-<div class="loginCard">
-<h2>Ingresa la contraseña 💖</h2>
-<input id="pass" type="text" placeholder="Contraseña...">
-<br>
-<button onclick="enter()">Entrar</button>
-</div>
-</div>
-
-<div id="zoom" onclick="this.style.display='none'">
-<img id="zoomImg">
-</div>
-
-<audio id="bgMusic" loop preload="auto" playsinline>
-<source src="https://files.catbox.moe/4nrc17.mp3" type="audio/mpeg">
-</audio>
-
-<audio id="ourSong" preload="auto" playsinline>
-<source src="https://files.catbox.moe/egr68n.mp3" type="audio/mpeg">
-</audio>
-
-<audio id="writeSound" preload="auto" playsinline>
-<source src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3" type="audio/mpeg">
-</audio>
-
-<div class="bgHearts" id="bgHearts"></div>
-
-<div class="card">
-<h2>💞 Nuestro tiempo juntos 💞</h2>
-<img class="circleImg" src="https://i.imgur.com/m2rqpiu.jpeg">
-<div id="counter"></div>
-</div>
-
-<div class="card">
-<h2>🎵 Nuestra canción 🎵</h2>
-<img class="musicCover" src="https://i.imgur.com/jbyIzFT.jpeg">
-<div style="text-align:center">
-<button id="btnPlay" onclick="toggleSong()">▶️ Reproducir</button>
-</div>
-</div>
-
-<div class="card">
-<h2>🎞️ Momentos especiales 🎞</h2>
-<div class="carousel">
-<img src="https://i.imgur.com/tpH81jp.jpeg">
-<img src="https://i.imgur.com/mOQ2xhz.jpeg">
-<img src="https://i.imgur.com/ra5P475.jpeg">
-<img src="https://i.imgur.com/0xnanwq.jpeg">
-<img src="https://i.imgur.com/2Xh4XhC.jpeg">
-<img src="https://i.imgur.com/UX4FUgZ.jpeg">
-<img src="https://i.imgur.com/3h5EZdw.jpeg">
-<img src="https://i.imgur.com/8yDYtN4.jpeg">
-</div>
-</div>
-
-<div class="card">
-<h2>📸 Recuerdos 📸</h2>
-<div class="grid" id="gallery">
-<img src="https://i.imgur.com/tpH81jp.jpeg">
-<img src="https://i.imgur.com/mOQ2xhz.jpeg">
-<img src="https://i.imgur.com/ra5P475.jpeg">
-<img src="https://i.imgur.com/0xnanwq.jpeg">
-<img src="https://i.imgur.com/2Xh4XhC.jpeg">
-<img src="https://i.imgur.com/UX4FUgZ.jpeg">
-<img src="https://i.imgur.com/3h5EZdw.jpeg">
-<img src="https://i.imgur.com/8yDYtN4.jpeg">
-<img src="https://i.imgur.com/1IveqjS.jpeg">
-<img src="https://i.imgur.com/D2fqpOe.jpeg">
-<img src="https://i.imgur.com/cqMYyp1.jpeg">
-<img src="https://i.imgur.com/S888hKj.jpeg">
-</div>
-</div>
-
-<div class="card">
-<h2>📜 Poemas especiales 📜</h2>
-<div id="poema" class="typewriter"></div>
-</div>
-
-<div class="card">
-<h2>💌 Carta sellada 💌</h2>
-<div class="seal" onclick="openLetter()">💗</div>
-<div id="letter" class="secretLetter"></div>
-<div id="sign" class="signature">Con amor — siempre tú 🤎</div>
-</div>
-
-<div class="card">
-<h2>🐢 Faltó el Jerry..❤️🐢</h2>
-<div class="aquarium" id="aquarium">
- <div class="aquarium-surface"></div>
- <div class="turtle-swim">🐢</div>
- <div class="small-fish">🐟</div>
- <div class="small-fish" style="animation-delay:-10s">🐠</div>
- <div class="jellyfish">🪼</div>
- <div class="starfish">⭐</div>
- <div class="crab">🦀</div>
- <div class="snail">🐌</div>
- <div class="seaweed" style="left:2%">🌿</div>
- <div class="seaweed" style="left:15%">🌿</div>
- <div class="seaweed" style="left:85%">🌿</div>
- <div class="seaweed" style="left:98%">🌿</div>
- <div class="rock" style="left:3%">🪨</div>
- <div class="rock" style="left:92%">🪨</div>
- <div class="aquarium-sand"></div>
-</div>
-</div>
-
-<div class="garden-card">
-  <h2>Y faltó Canelito... 🐾❤️</h2>
-  <div class="garden" id="canelitoGarden">
-    <div class="garden-cloud" style="top:5px; animation-duration:25s;">☁️</div>
-    <div class="garden-cloud" style="top:25px; animation-duration:15s; animation-delay:-5s;">☁️</div>
-    <div class="butterfly" style="left: 15%; top: 50px; animation-duration: 9s;">🦋</div>
-    <div class="butterfly" style="left: 55%; top: 30px; animation-duration: 7s; animation-delay: -2s;">🦋</div>
-    <div class="garden-flower" style="left: 6%;">🌸</div>
-    <div class="garden-flower" style="left: 22%; animation-delay: -0.5s;">🌼</div>
-    <div class="garden-flower" style="left: 78%; animation-delay: -1s;">🌻</div>
-    <div class="garden-flower" style="left: 92%;">🌸</div>
-    <div class="toy-ball" style="left: 70%;">⚽</div>
-    <div class="canelito-container" id="canelitoObj">
-      <div class="canelito-shadow" id="canelitoShadow"></div>
-      <div class="canelito-body" id="canelitoBody">
-        <img class="canelito-avatar" src="https://files.catbox.moe/pk03iy.jpg" alt="Canelito">
-      </div>
-    </div>
-  </div>
-</div>
 <script>
 setInterval(()=>{
  const loginContainer = document.getElementById("login");
@@ -588,6 +165,502 @@ function initCanelitoBrain() {
   }, 220);
 }
 document.addEventListener("DOMContentLoaded", initCanelitoBrain);
+</script>
+
+</body>
+</html>
+<style>
+/* Estilos del Acuario de Jerry */
+.aquarium{
+ position:relative;
+ width:100%;
+ height:240px;
+ background:linear-gradient(180deg, #0a4a6a 0%, #063a55 25%, #032a40 60%, #021a2a 100%);
+ border-radius:25px;
+ overflow:hidden;
+ border:6px solid #1a9abf;
+ box-shadow:inset 0 0 100px rgba(0,140,200,0.6), 0 0 50px rgba(0,180,240,0.4), inset 0 -30px 40px rgba(0,0,0,0.5);
+ margin-top:15px;
+}
+.aquarium::before{
+ content:''; position:absolute; top:-50px; left:5%; width:90%; height:140%;
+ background:linear-gradient(180deg, rgba(255,200,100,0.2) 0%, rgba(255,180,80,0.1) 30%, transparent 70%);
+ pointer-events:none; animation:goldenRays 15s ease-in-out infinite;
+}
+@keyframes goldenRays{
+0%,100%{opacity:0.1; transform:scale(1) translateX(0) rotate(0deg);}
+50%{opacity:0.15; transform:scale(1.05) translateX(-10px) rotate(-1deg);}
+}
+.aquarium::after{
+ content:''; position:absolute; bottom:0; left:0; width:100%; height:60px;
+ background:linear-gradient(180deg, transparent 0%, rgba(10,30,40,0.9) 100%); pointer-events:none; border-radius:0 0 18px 18px;
+}
+.aquarium-sand{
+ position:absolute; bottom:0; left:0; width:100%; height:40px;
+ background:linear-gradient(180deg, #d4b080 0%, #c9a060 30%, #a88040 70%, #8b6940 100%);
+ border-radius:0 0 20px 20px; box-shadow:0 -8px 20px rgba(0,0,0,0.4), inset 0 5px 15px rgba(255,255,255,0.1);
+}
+.aquarium-sand::before{ content:'·······'; position:absolute; top:-14px; left:0; width:100%; font-size:16px; color:#b89060; text-align:center; letter-spacing:14px; opacity:0.5; }
+.seaweed{ position:absolute; bottom:35px; font-size:44px; animation:sway 6s ease-in-out infinite; transform-origin:bottom center; filter:drop-shadow(0 0 10px rgba(60,200,120,0.5)) brightness(1.1); }
+@keyframes sway{ 0%,100%{transform:rotate(-1deg);} 50%{transform:rotate(1deg);} }
+.turtle-swim{ position:absolute; font-size:52px; animation:swimAround 22s linear infinite; filter:drop-shadow(0 0 20px rgba(140,240,255,0.8)); z-index:20; }
+@keyframes swimAround{
+0%{left:2%;top:15%;transform:rotate(10deg) scaleX(1);}
+42%{left:75%;top:28%;transform:rotate(10deg) scaleX(-1);}
+52%{left:72%;top:40%;transform:rotate(-20deg) scaleX(-1);}
+100%{left:2%;top:15%;transform:rotate(10deg) scaleX(1);}
+}
+.aquarium-surface{ position:absolute; top:0; left:0; width:100%; height:30px; background:linear-gradient(180deg, rgba(200,240,255,0.7) 0%, transparent 100%); animation:waterWaves 6s ease-in-out infinite; z-index:25; }
+@keyframes waterWaves{ 0%,100%{transform:translateY(0);} 50%{transform:translateY(-2px);} }
+.small-fish{ position:absolute; font-size:22px; animation:fishSwim 30s linear infinite; opacity:0.9; z-index:15; }
+@keyframes fishSwim{ 0%{left:-18%;transform:scaleX(1);} 50%{left:118%;transform:scaleX(-1);} 100%{left:-18%;transform:scaleX(1);} }
+.starfish{ position:absolute; bottom:12px; left:30%; font-size:30px; animation:starBounce 8s ease-in-out infinite; z-index:18; }
+@keyframes starBounce{ 0%,100%{transform:translateY(0);} 50%{transform:translateY(-4px);} }
+.crab{ position:absolute; bottom:10px; left:70%; font-size:28px; animation:crabMove 12s ease-in-out infinite; z-index:18; }
+@keyframes crabMove{ 0%,100%{transform:translateX(0);} 50%{transform:translateX(-15px);} }
+.aqua-bubble{ position:absolute; background:radial-gradient(circle at 35% 35%, #fff, rgba(200,240,255,0.2)); border-radius:50%; animation:bubbleRise 6s linear infinite; }
+@keyframes bubbleRise{ 0%{transform:translateY(0) scale(0.15); opacity:0;} 2%{opacity:0.95;} 100%{transform:translateY(-250px) scale(1.05); opacity:0;} }
+.aqua-particle{ position:absolute; width:5px; height:5px; background:rgba(255,255,200,0.8); border-radius:50%; animation:particleFloat 10s ease-in-out infinite; }
+@keyframes particleFloat{ 0%,100%{transform:translateY(0); opacity:0.2;} 50%{transform:translateY(-100px); opacity:0.8;} }
+.rock{ position:absolute; bottom:30px; font-size:38px; z-index:12; }
+.snail{ position:absolute; bottom:15px; left:50%; font-size:24px; animation:snailMove 15s ease-in-out infinite; z-index:17; }
+@keyframes snailMove{ 0%,100%{transform:translateX(0);} 50%{transform:translateX(15px);} }
+.jellyfish{ position:absolute; font-size:28px; animation:swimJelly 25s ease-in-out infinite; opacity:0.85; z-index:14; }
+@keyframes swimJelly{ 0%,100%{left:80%;top:60%;} 50%{left:40%;top:45%;} }
+
+/* --- NUEVO ENTORNO DEL JARDÍN PREMIUM --- */
+.garden-card { background: #fff; color: #4a0030; margin: 22px auto; padding: 22px; width: 95%; max-width: 560px; border-radius: 24px; box-shadow: 0 12px 40px rgba(0,0,0,.25); border: 3px solid #ffd6eb; text-align: center; }
+.garden-premium {
+  position: relative; width: 100%; height: 280px;
+  background: linear-gradient(180deg, #bde0fe 0%, #f1faee 45%, #d8f3dc 46%, #74c69d 100%);
+  border-radius: 25px; overflow: hidden; border: 6px solid #95d5b2;
+  box-shadow: inset 0 0 35px rgba(0,0,0,0.12); margin-top: 15px;
+}
+.sun-premium {
+  position: absolute; top: 15px; right: 25px; width: 42px; height: 42px;
+  background: #ffb703; border-radius: 50%; box-shadow: 0 0 25px #ffb703;
+  animation: sunGlow 3s ease-in-out infinite alternate; z-index: 5;
+}
+@keyframes sunGlow { from { transform: scale(1); opacity: 0.85; } to { transform: scale(1.12); opacity: 1; } }
+.hill-back { position: absolute; bottom: 35px; width: 130%; height: 75px; left: -15%; background: #95d5b2; border-radius: 50% 50% 0 0; opacity: 0.6; z-index: 10; }
+.hill-front { position: absolute; bottom: 0; width: 140%; height: 50px; left: -20%; background: #52b788; border-radius: 40% 60% 0 0; z-index: 15; }
+.foreground-grass { position: absolute; bottom: 3px; width: 100%; text-align: center; font-size: 20px; letter-spacing: 10px; z-index: 60; pointer-events: none; opacity: 0.95; }
+.garden-cloud { position: absolute; font-size: 30px; opacity: 0.4; animation: cloudMove 24s linear infinite; z-index: 6; }
+@keyframes cloudMove { from { left: -25%; } to { left: 125%; } }
+.butterfly-premium { position: absolute; font-size: 22px; z-index: 25; animation: insectFly 6s ease-in-out infinite alternate; }
+@keyframes insectFly { 0% { transform: translate(0,0) scaleX(1); } 50% { transform: translate(110px, -25px) scaleX(1); } 51% { transform: translate(110px, -25px) scaleX(-1); } 100% { transform: translate(220px, 5px) scaleX(-1); } }
+.toy-ball { position: absolute; bottom: 12px; font-size: 20px; z-index: 18; animation: ballBounce 2s ease-in-out infinite alternate; }
+@keyframes ballBounce { 0% { bottom: 12px; transform: rotate(0deg); } 100% { bottom: 75px; transform: rotate(360deg); } }
+
+/* --- DISEÑO GEOMÉTRICO CSS DE CANELITO --- */
+.canelito-pup-container {
+  position: absolute; bottom: 12px; left: 40px; width: 90px; height: 85px; z-index: 45;
+  cursor: pointer; transition: left 0.1s linear; -webkit-tap-highlight-color: transparent;
+}
+.pup-shadow { position: absolute; bottom: -1px; left: 12px; width: 66px; height: 8px; background: rgba(0,0,0,0.25); border-radius: 50%; transition: all 0.12s; z-index: 40; }
+.pup-body-wrapper { position: relative; width: 100%; height: 100%; transform-origin: bottom center; animation: pupWalkCycle 0.45s ease-in-out infinite alternate; }
+
+/* Capas del perrito Pomerania/Canela */
+.pup-torso { position: absolute; bottom: 16px; left: 12px; width: 56px; height: 40px; background: #c68a4c; border-radius: 22px; z-index: 42; box-shadow: inset -4px -4px 10px rgba(0,0,0,0.1); }
+.pup-head { position: absolute; top: 10px; left: 38px; width: 44px; height: 44px; background: #b0753c; border-radius: 50%; z-index: 46; box-shadow: inset -2px -2px 6px rgba(0,0,0,0.15); }
+.pup-eye { position: absolute; top: 12px; width: 8px; height: 8px; background: #fff; border-radius: 50%; }
+.eye-left { left: 12px; } .eye-right { left: 26px; }
+.pupil { position: absolute; top: 1.5px; left: 1.5px; width: 5px; height: 5px; background: #111; border-radius: 50%; }
+.pup-snout { position: absolute; bottom: 6px; left: 14px; width: 18px; height: 14px; background: #e9c46a; border-radius: 8px; }
+.pup-nose { width: 8px; height: 5px; background: #000; border-radius: 4px; margin: 2px auto 0; }
+.pup-tongue { width: 6px; height: 5px; background: #ff4d6d; border-radius: 0 0 3px 3px; margin: 0 auto; animation: dogPant 0.25s infinite alternate; }
+@keyframes dogPant { from { height: 1px; } to { height: 4px; } }
+
+/* Orejas y Cola con físicas dinámicas */
+.pup-ear { position: absolute; top: -5px; width: 13px; height: 20px; background: #9a5f2a; border-radius: 8px 8px 12px 12px; transform-origin: top center; animation: earFlop 0.45s ease-in-out infinite alternate; }
+.ear-left { left: 3px; transform: rotate(12deg); } .ear-right { right: 3px; transform: rotate(-12deg); }
+@keyframes earFlop { from { transform: translateY(0); } to { transform: translateY(2.5px); } }
+.pup-tail { position: absolute; bottom: 30px; left: 0px; width: 18px; height: 12px; background: #b0753c; border-radius: 12px 0 0 12px; transform-origin: right center; animation: tailHappy 0.12s linear infinite alternate; }
+@keyframes tailHappy { from { transform: rotate(-25deg); } to { transform: rotate(25deg); } }
+
+/* Patas */
+.pup-leg { position: absolute; bottom: 2px; width: 11px; height: 18px; background: #9a5f2a; border-radius: 5px; transform-origin: top center; }
+.leg-fl { left: 45px; animation: legRun 0.45s linear infinite alternate; }
+.leg-fr { left: 54px; animation: legRun 0.45s linear infinite -0.22s alternate; }
+.leg-bl { left: 16px; animation: legRun 0.45s linear infinite -0.22s alternate; }
+.leg-br { left: 25px; animation: legRun 0.45s linear infinite alternate; }
+@keyframes legRun { from { transform: rotate(-28deg); } to { transform: rotate(28deg); } }
+
+/* Ciclo base de trote */
+@keyframes pupWalkCycle { 0% { transform: translateY(0) scaleY(1); } 100% { transform: translateY(-7px) scaleY(0.95) scaleX(1.03); } }
+
+/* Animación de Súper Truco (Mortal) */
+.pup-jump-active { animation: backflipMortal 0.75s cubic-bezier(0.25, 1, 0.5, 1) forwards !important; }
+@keyframes backflipMortal {
+  0% { transform: translateY(0) rotate(0deg) scaleY(0.7); }
+  35% { transform: translateY(-105px) rotate(-140deg) scaleY(1.1); }
+  65% { transform: translateY(-125px) rotate(-250deg) scaleY(1); }
+  100% { transform: translateY(0) rotate(-360deg) scaleY(0.8); }
+}
+
+/* Bocadillo de Ladrido */
+.canelito-bark { position: absolute; top: -35px; left: 50%; transform: translateX(-50%); background: #fff; color: #ff4da6; font-weight: bold; font-size: 13px; padding: 4px 9px; border-radius: 12px; border: 2px solid #ffd6eb; animation: barkPop 0.6s ease-out forwards; pointer-events: none; }
+@keyframes barkPop { 0% { transform: translateX(-50%) scale(0) translateY(8px); opacity: 0; } 25% { transform: translateX(-50%) scale(1.2) translateY(-3px); opacity: 1; } 100% { transform: translateX(-50%) scale(0.8) translateY(-22px); opacity: 0; } }
+.trail-particle { position: absolute; font-size: 15px; pointer-events: none; z-index: 38; animation: trailFade 1.1s ease-out forwards; }
+@keyframes trailFade { 0% { transform: translateY(0) scale(0.4); opacity: 1; } 100% { transform: translateY(-60px) translateX(var(--x-drift)) scale(1.4); opacity: 0; } }
+</style>
+</head>
+<body>
+
+<div id="login">
+<div class="loginCard">
+<h2>Ingresa la contraseña 💖</h2>
+<input id="pass" type="text" placeholder="Contraseña...">
+<br>
+<button onclick="enter()">Entrar</button>
+</div>
+</div>
+
+<div id="zoom" onclick="this.style.display='none'">
+<img id="zoomImg">
+</div>
+
+<audio id="bgMusic" loop preload="auto" playsinline>
+<source src="https://files.catbox.moe/4nrc17.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="ourSong" preload="auto" playsinline>
+<source src="https://files.catbox.moe/egr68n.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="writeSound" preload="auto" playsinline>
+<source src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3" type="audio/mpeg">
+</audio>
+
+<div class="bgHearts" id="bgHearts"></div>
+
+<div class="card">
+<h2>💞 Nuestro tiempo juntos 💞</h2>
+<img class="circleImg" src="https://i.imgur.com/m2rqpiu.jpeg">
+<div id="counter"></div>
+</div>
+
+<div class="card">
+<h2>🎵 Nuestra canción 🎵</h2>
+<img class="musicCover" src="https://i.imgur.com/jbyIzFT.jpeg">
+<div style="text-align:center">
+<button id="btnPlay" onclick="toggleSong()">▶️ Reproducir</button>
+</div>
+</div>
+
+<div class="card">
+<h2>🎞️ Momentos especiales 🎞</h2>
+<div class="carousel">
+<img src="https://i.imgur.com/tpH81jp.jpeg">
+<img src="https://i.imgur.com/mOQ2xhz.jpeg">
+<img src="https://i.imgur.com/ra5P475.jpeg">
+<img src="https://i.imgur.com/0xnanwq.jpeg">
+<img src="https://i.imgur.com/2Xh4XhC.jpeg">
+<img src="https://i.imgur.com/UX4FUgZ.jpeg">
+<img src="https://i.imgur.com/3h5EZdw.jpeg">
+<img src="https://i.imgur.com/8yDYtN4.jpeg">
+</div>
+</div>
+
+<div class="card">
+<h2>📸 Recuerdos 📸</h2>
+<div class="grid" id="gallery">
+<img src="https://i.imgur.com/tpH81jp.jpeg">
+<img src="https://i.imgur.com/mOQ2xhz.jpeg">
+<img src="https://i.imgur.com/ra5P475.jpeg">
+<img src="https://i.imgur.com/0xnanwq.jpeg">
+<img src="https://i.imgur.com/2Xh4XhC.jpeg">
+<img src="https://i.imgur.com/UX4FUgZ.jpeg">
+<img src="https://i.imgur.com/3h5EZdw.jpeg">
+<img src="https://i.imgur.com/8yDYtN4.jpeg">
+<img src="https://i.imgur.com/1IveqjS.jpeg">
+<img src="https://i.imgur.com/D2fqpOe.jpeg">
+<img src="https://i.imgur.com/cqMYyp1.jpeg">
+<img src="https://i.imgur.com/S888hKj.jpeg">
+</div>
+</div>
+
+<div class="card">
+<h2>📜 Poemas especiales 📜</h2>
+<div id="poema" class="typewriter"></div>
+</div>
+
+<div class="card">
+<h2>💌 Carta sellada 💌</h2>
+<div class="seal" onclick="openLetter()">💗</div>
+<div id="letter" class="secretLetter"></div>
+<div id="sign" class="signature">Con amor — siempre tú 🤎</div>
+</div>
+
+<div class="card">
+<h2>🐢 Faltó el Jerry..❤️🐢</h2>
+<div class="aquarium" id="aquarium">
+ <div class="aquarium-surface"></div>
+ <div class="turtle-swim">🐢</div>
+ <div class="small-fish">🐟</div>
+ <div class="small-fish" style="animation-delay:-10s">🐠</div>
+ <div class="jellyfish">🪼</div>
+ <div class="starfish">⭐</div>
+ <div class="crab">🦀</div>
+ <div class="snail">🐌</div>
+ <div class="seaweed" style="left:2%">🌿</div>
+ <div class="seaweed" style="left:15%">🌿</div>
+ <div class="seaweed" style="left:85%">🌿</div>
+ <div class="seaweed" style="left:98%">🌿</div>
+ <div class="rock" style="left:3%">🪨</div>
+ <div class="rock" style="left:92%">🪨</div>
+ <div class="aquarium-sand"></div>
+</div>
+</div>
+
+<!-- NUEVA TARJETA REDISEÑADA CON ENTORNO Y CAPAS GRÁFICAS -->
+<div class="garden-card">
+  <h2>¡Toca a Canelito! 🐾❤️</h2>
+  <div class="garden-premium" id="canelitoGarden">
+    <div class="sun-premium"></div>
+    <div class="hill-back"></div>
+    <div class="hill-front"></div>
+    
+    <div class="garden-cloud" style="top:8px; animation-duration:22s;">☁️</div>
+    <div class="garden-cloud" style="top:26px; animation-duration:14s; animation-delay:-4s;">☁️</div>
+    <div class="butterfly-premium" style="left:18%; top:45px; animation-duration:8s;">🦋</div>
+    <div class="butterfly-premium" style="left:65%; top:22px; animation-duration:6s; animation-delay:-2s;">🦋</div>
+    <div class="toy-ball" style="left: 72%;">⚽</div>
+
+    <!-- EL NUEVO CANELITO INTERACTIVO INTEGRAL -->
+    <div class="canelito-pup-container" id="canelitoObj" onclick="canelitoTrick()">
+      <div class="pup-shadow" id="pupShadow"></div>
+      <div class="pup-body-wrapper" id="pupBody">
+        <div class="pup-tail"></div>
+        <div class="pup-torso"></div>
+        <div class="pup-leg leg-fl"></div>
+        <div class="pup-leg leg-fr"></div>
+        <div class="pup-leg leg-bl"></div>
+        <div class="pup-leg leg-br"></div>
+        <div class="pup-head">
+          <div class="pup-ear ear-left"></div>
+          <div class="pup-ear ear-right"></div>
+          <div class="pup-eye eye-left"><div class="pupil"></div></div>
+          <div class="pup-eye eye-right"><div class="pupil"></div></div>
+          <div class="pup-snout">
+            <div class="pup-nose"></div>
+            <div class="pup-tongue"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pasto delantero que otorga profundidad de capas (3D) -->
+    <div class="foreground-grass">🌿🌱🌸🌱🌿🌼🌱🌻🌱🌿</div>
+  </div>
+</div>
+<script>
+setInterval(()=>{
+ const loginContainer = document.getElementById("login");
+ if(loginContainer && loginContainer.style.display!=="none"){
+  const h=document.createElement("div");
+  h.className="loginRain";
+  h.innerHTML="💗";
+  h.style.left=Math.random()*100+"vw";
+  h.style.animationDuration=(3+Math.random()*3)+"s";
+  loginContainer.appendChild(h);
+  setTimeout(()=>h.remove(),6000);
+ }
+},300);
+
+const audioBG = document.getElementById("bgMusic");
+const audioSong = document.getElementById("ourSong");
+const audioWrite = document.getElementById("writeSound");
+let firstInteractionDone = false;
+
+function enter(){
+ const inputPass = document.getElementById("pass");
+ const loginContainer = document.getElementById("login");
+ if(inputPass && loginContainer){
+  if(inputPass.value==="Jerry"){
+   if(!firstInteractionDone){
+    audioBG.play().catch(err => console.log("Audio de fondo bloqueado:", err));
+    audioSong.load(); audioWrite.load();
+    firstInteractionDone = true;
+   }
+   loginContainer.style.display="none";
+  }
+ }
+}
+
+function toggleSong(){
+ if(audioSong.paused){
+  audioBG.pause(); audioSong.currentTime=0; audioSong.play().catch(()=>{});
+  document.getElementById("btnPlay").innerHTML="⏸️ Pausar";
+ } else {
+  audioSong.pause(); audioBG.play().catch(()=>{});
+  document.getElementById("btnPlay").innerHTML="▶️ Reproducir";
+ }
+}
+
+const frases=["Eres mi lugar favorito 🤎","Contigo todo es mejor 💞","Mi coincidencia más bonita ✨","Tu sonrisa es mi paz"];
+document.addEventListener("click",e=>{
+ if(e.target.closest("#canelitoObj")||e.target.tagName==="BUTTON"||e.target.tagName==="INPUT") return;
+ if (!firstInteractionDone) { audioBG.play().catch(() => {}); firstInteractionDone = true; }
+ const f=document.createElement("div"); f.className="tapPhrase";
+ f.innerText=frases[Math.floor(Math.random()*frases.length)];
+ f.style.left=e.clientX+"px"; f.style.top=e.clientY+"px";
+ document.body.appendChild(f); setTimeout(()=>f.remove(),2000);
+});
+
+document.querySelectorAll("#gallery img").forEach(img=>{
+ img.onclick=()=>{ zoom.style.display="flex"; zoomImg.src=img.src; }
+});
+
+const bgHeartsContainer = document.getElementById("bgHearts");
+if(bgHeartsContainer){
+ for(let i=0;i<25;i++){
+  const s=document.createElement("span"); s.innerHTML="❤";
+  s.style.left=Math.random()*100+"vw"; s.style.fontSize=(16+Math.random()*26)+"px";
+  s.style.animationDuration=(8+Math.random()*10)+"s"; bgHeartsContainer.appendChild(s);
+ }
+}
+
+const start = new Date(2024, 8, 11, 0, 0, 0);
+function updateCounter(){
+ const now = new Date(); const diff = now - start;
+ const days = Math.floor(diff / (1000*60*60*24));
+ const hours = Math.floor((diff / (1000*60*60)) % 24);
+ const minutes = Math.floor((diff / (1000*60)) % 60);
+ const seconds = Math.floor((diff / 1000) % 60);
+ const counterEl = document.getElementById("counter");
+ if(counterEl){
+  counterEl.innerHTML = `<h3 style="margin:0;font-size:28px;animation:pulseCounter 1s infinite alternate;">${days} días 💗</h3>${hours} horas ${minutes} minutos ${seconds} segundos`;
+ }
+}
+updateCounter(); setInterval(updateCounter,1000);
+
+const poemaTexto="Cuando me enamoré de ti\n\n\"Cuando me enamoré de ti, entendí que no era que todas aquellas personas que me hablaron del amor estuvieran mal, sino que nunca me hablaron de ti.\n\nTe prometo\n\n\"Si te apagas, te prometo amarte con más fuerza.\nPrometo devolverte la luz que te caracteriza,\nregar tu jardín con el amor que me brindaste cuando estaba marchito.\nTe prometo cuidarte cuando enfermes\ny hacer lo que haga falta para asegurarme de que vuelvas a florecer.\n\nPorque, mi amor, si hay algo que le pido a Dios es que,\nsi alguna vez llega a ser necesario,\nme permita ser aquello que te haga falta,\ncomo tú lo fuiste conmigo.\"";
+
+function typeText(t, el){
+ el.textContent=""; const chars=[...t]; let i=0;
+ function w(){ if(i<chars.length){ el.textContent+=chars[i++]; setTimeout(w,28); } }
+ w();
+}
+const poemaEl = document.getElementById("poema");
+if(poemaEl) { setTimeout(()=>typeText(poemaTexto,poemaEl),1200); }
+
+function openLetter(){
+ audioWrite.play().catch(()=>{});
+ const txt="Esta carta es para ti.\nTe amo mi cebollín 🤎\nEspero compartir más cosas juntos 🥰🧸";
+ const letterEl = document.getElementById("letter"); const signEl = document.getElementById("sign");
+ if(letterEl && signEl){ letterEl.style.display="block"; typeText(txt,letterEl); setTimeout(()=>signEl.style.opacity=1,4200); }
+}
+
+function createAquariumEffects(){
+ const aquarium = document.getElementById("aquarium"); if(!aquarium) return;
+ setInterval(()=>{
+  const bubble = document.createElement("div"); bubble.className = "aqua-bubble";
+  const size = 4 + Math.random() * 14; bubble.style.width = size + "px"; bubble.style.height = size + "px";
+  bubble.style.left = (Math.random() * 94 + 3) + "%"; bubble.style.bottom = "40px";
+  bubble.style.animationDuration = (5 + Math.random() * 5) + "s"; aquarium.appendChild(bubble);
+  setTimeout(()=>{ if(bubble.parentNode) bubble.remove(); }, 10000);
+ }, 600);
+ setInterval(()=>{
+  const particle = document.createElement("div"); particle.className = "aqua-particle";
+  particle.style.left = (Math.random() * 96 + 2) + "%"; particle.style.bottom = (Math.random() * 180 + 50) + "px";
+  particle.style.animationDuration = (8 + Math.random() * 6) + "s"; aquarium.appendChild(particle);
+  setTimeout(()=>{ if(particle.parentNode) particle.remove(); }, 15000);
+ }, 1500);
+}
+setTimeout(createAquariumEffects, 700);
+
+
+/* --- CEREBRO CON FISICAS AVANZADAS PARA CANELITO --- */
+let isJumping = false;
+
+function canelitoTrick() {
+  if (isJumping) return;
+  isJumping = true;
+  
+  const body = document.getElementById("pupBody");
+  const shadow = document.getElementById("pupShadow");
+  const container = document.getElementById("canelitoObj");
+  const garden = document.getElementById("canelitoGarden");
+  if(!body || !shadow || !container || !garden) return;
+  
+  // 1. Ejecutar vuelta mortal
+  body.className = "pup-body-wrapper pup-jump-active";
+  
+  // 2. Desplegar ladrido visual aleatorio
+  const bark = document.createElement("div");
+  bark.className = "canelito-bark";
+  const barks = ["¡Guau! 🐾", "¡Arf! ❤️", "¡Yap! ✨"];
+  bark.innerText = barks[Math.floor(Math.random() * barks.length)];
+  container.appendChild(bark);
+  setTimeout(() => bark.remove(), 600);
+  
+  // 3. Crear ráfaga de brillos mágicos por el salto
+  for(let i=0; i<6; i++){
+    setTimeout(() => {
+      const p = document.createElement("div"); p.className = "trail-particle";
+      p.innerText = ["✨", "💖", "🐾", "⭐"][Math.floor(Math.random()*4)];
+      const rect = container.getBoundingClientRect(); const gRect = garden.getBoundingClientRect();
+      p.style.left = (rect.left - gRect.left + 30 + (Math.random()*16 - 8)) + "px";
+      p.style.bottom = "40px"; p.style.setProperty("--x-drift", (Math.random() * 60 - 30) + "px");
+      garden.appendChild(p); setTimeout(() => p.remove(), 1100);
+    }, i * 70);
+  }
+  
+  // 4. Resetear animaciones normales tras caer
+  setTimeout(() => {
+    body.className = "pup-body-wrapper";
+    isJumping = false;
+  }, 750);
+}
+
+function startPuppyPatrol() {
+  const container = document.getElementById("canelitoObj");
+  const body = document.getElementById("pupBody");
+  const shadow = document.getElementById("pupShadow");
+  const garden = document.getElementById("canelitoGarden");
+  if (!container || !body || !shadow || !garden) return;
+  
+  let pos = 40; let dir = 1;
+  
+  // Ciclo constante para mover y alterar la sombra dinámica según la altura del salto
+  setInterval(() => {
+    const gardenWidth = garden.clientWidth - 95;
+    
+    if (!isJumping) {
+      pos += 1.8 * dir;
+      if (pos >= gardenWidth) { dir = -1; container.style.transform = "scaleX(-1)"; }
+      if (pos <= 10) { dir = 1; container.style.transform = "scaleX(1)"; }
+      container.style.left = pos + "px";
+      
+      shadow.style.transform = "scale(1)"; shadow.style.opacity = "1";
+    } else {
+      // Si está saltando, calcular la altura en tiempo real para encoger la sombra
+      const matrix = window.getComputedStyle(body).transform;
+      if (matrix && matrix !== "none") {
+        const values = matrix.split('(')[1].split(')')[0].split(',');
+        const translateY = parseFloat(values[5]) || 0;
+        if (translateY < 0) {
+          const ratio = Math.min(Math.abs(translateY) / 125, 1);
+          shadow.style.transform = `scale(${1 - ratio * 0.55})`;
+          shadow.style.opacity = 1 - ratio * 0.65;
+        }
+      }
+    }
+  }, 30);
+
+  // Rastro constante de huellitas tiernas mientras camina
+  setInterval(() => {
+    if (isJumping) return;
+    const particle = document.createElement("div"); particle.className = "trail-particle";
+    particle.innerText = Math.random() < 0.65 ? "🐾" : "✨";
+    const rect = container.getBoundingClientRect(); const gRect = garden.getBoundingClientRect();
+    particle.style.left = (rect.left - gRect.left + 25) + "px"; particle.style.bottom = "24px";
+    particle.style.setProperty("--x-drift", (Math.random() * 20 - 10) + "px");
+    garden.appendChild(particle); setTimeout(() => particle.remove(), 1000);
+  }, 250);
+}
+document.addEventListener("DOMContentLoaded", startPuppyPatrol);
 </script>
 
 </body>
