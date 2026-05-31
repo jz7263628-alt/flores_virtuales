@@ -13,8 +13,6 @@ body{margin:0;font-family:Segoe UI, sans-serif;background:linear-gradient(180deg
 input{padding:14px;border-radius:14px;border:none;text-align:center;font-size:16px;width:200px;color:#000}
 button{padding:12px 20px;border:none;border-radius:20px;background:linear-gradient(45deg,#ff4da6,#ff80bf);color:white;font-size:16px;margin-top:12px;cursor:pointer;transition:.25s}
 button:hover{transform:scale(1.08);box-shadow:0 0 12px #ff80bf}
-.loginRain{position:absolute;top:-20px;animation:loginFall linear forwards;opacity:.6;z-index:1}
-@keyframes loginFall{to{transform:translateY(110vh);opacity:.2}}
 #bgHearts { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 10000; pointer-events: none; overflow: hidden; }
 #bgHearts span { position: absolute; color: #ff4da6; animation: fall linear infinite; opacity: 0.6; }
 @keyframes fall { 0% { transform: translateY(-10vh); } 100% { transform: translateY(110vh); } }
@@ -33,26 +31,12 @@ button:hover{transform:scale(1.08);box-shadow:0 0 12px #ff80bf}
 .seal{font-size:42px;cursor:pointer;animation:pulse 1.5s infinite}
 @keyframes pulse{50%{transform:scale(1.15)}}
 .signature{font-family:cursive;font-size:22px;margin-top:15px;opacity:0}
-.tapPhrase{position:fixed;color:#ffd6eb;font-size:18px;animation:floatUp 2s forwards;pointer-events:none; z-index: 9999;}
-@keyframes floatUp{to{transform:translateY(-60px);opacity:0}}
-@keyframes pulseCounter{from{transform:scale(1)}to{transform:scale(1.05)}}
-.aquarium{position:relative;width:100%;height:240px;background:linear-gradient(180deg,#0a4a6a 0%,#063a55 25%,#032a40 60%,#021a2a 100%);border-radius:25px;overflow:hidden;border:6px solid #1a9abf;box-shadow:inset 0 0 100px rgba(0,140,200,0.6),0 0 50px rgba(0,180,240,0.4),inset 0 -30px 40px rgba(0,0,0,0.5);margin-top:15px}
-.aquarium::before{content:'';position:absolute;top:-50px;left:5%;width:90%;height:140%;background:linear-gradient(180deg,rgba(255,200,100,0.2) 0%,rgba(255,180,80,0.1) 30%,transparent 70%);pointer-events:none;animation:goldenRays 15s ease-in-out infinite}
-@keyframes goldenRays{0%,100%{opacity:0.1;transform:scale(1) translateX(0) rotate(0deg)}25%{opacity:0.25;transform:scale(1.15) translateX(20px) rotate(2deg)}50%{opacity:0.15;transform:scale(1.05) translateX(-10px) rotate(-1deg)}75%{opacity:0.3;transform:scale(1.2) translateX(15px) rotate(1deg)}}
-.aquarium::after{content:'';position:absolute;bottom:0;left:0;width:100%;height:60px;background:linear-gradient(180deg,transparent 0%,rgba(10,30,40,0.9) 100%);pointer-events:none;border-radius:0 0 18px 18px}
-.aquarium-sand{position:absolute;bottom:0;left:0;width:100%;height:40px;background:linear-gradient(180deg,#d4b080 0%,#c9a060 30%,#a88040 70%,#8b6940 100%);border-radius:0 0 20px 20px;box-shadow:0 -8px 20px rgba(0,0,0,0.4),inset 0 5px 15px rgba(255,255,255,0.1)}
-.seaweed{position:absolute;bottom:35px;font-size:44px;animation:sway 6s ease-in-out infinite;transform-origin:bottom center;filter:drop-shadow(0 0 10px rgba(60,200,120,0.5)) brightness(1.1)}
-@keyframes sway{0%,100%{transform:rotate(-1deg) scaleY(1) scaleX(1) skewX(0deg)}15%{transform:rotate(2deg) scaleY(1.04) scaleX(0.98) skewX(1deg)}35%{transform:rotate(-2deg) scaleY(0.98) scaleX(1.02) skewX(-1deg)}50%{transform:rotate(1deg) scaleY(1.02) scaleX(0.99)}65%{transform:rotate(-1deg) scaleY(1) scaleX(1.01)}85%{transform:rotate(2deg) scaleY(0.99) scaleX(1.02)}}
-.turtle-swim{position:absolute;font-size:52px;animation:swimAround 22s linear infinite;filter:drop-shadow(0 0 20px rgba(140,240,255,0.8)) drop-shadow(0 8px 15px rgba(0,0,0,0.4));z-index:20}
-@keyframes swimAround{0%{left:2%;top:15%;transform:rotate(10deg) scaleX(1) rotate(0deg)}8%{left:12%;top:8%;transform:rotate(28deg) scaleX(1) rotate(5deg)}18%{left:30%;top:5%;transform:rotate(45deg) scaleX(1) rotate(-5deg)}28%{left:50%;top:10%;transform:rotate(60deg) scaleX(1) rotate(5deg)}35%{left:65%;top:18%;transform:rotate(40deg) scaleX(1) rotate(-5deg)}42%{left:75%;top:28%;transform:rotate(10deg) scaleX(-1) rotate(0deg)}52%{left:72%;top:40%;transform:rotate(-20deg) scaleX(-1) rotate(5deg)}62%{left:55%;top:50%;transform:rotate(-40deg) scaleX(-1) rotate(-5deg)}72%{left:35%;top:45%;transform:rotate(-25deg) scaleX(-1) rotate(5deg)}82%{left:18%;top:35%;transform:rotate(0deg) scaleX(1) rotate(0deg)}92%{left:8%;top:25%;transform:rotate(15deg) scaleX(1) rotate(-5deg)}100%{left:2%;top:15%;transform:rotate(10deg) scaleX(1) rotate(0deg)}}
-.aquarium-surface{position:absolute;top:0;left:0;width:100%;height:30px;background:linear-gradient(180deg,rgba(200,240,255,0.7) 0%,rgba(150,220,255,0.5) 25%,rgba(100,180,240,0.3) 60%,transparent 100%);animation:waterWaves 6s ease-in-out infinite;z-index:25}
-@keyframes waterWaves{0%,100%{opacity:0.85;transform:translateY(0) scaleY(1) skewX(0deg)}20%{opacity:1;transform:translateY(-4px) scaleY(1.18) skewX(2deg)}40%{opacity:0.75;transform:translateY(3px) scaleY(0.92) skewX(-2deg)}60%{opacity:0.95;transform:translateY(-2px) scaleY(1.1) skewX(1deg)}80%{opacity:0.8;transform:translateY(2px) scaleY(0.95) skewX(-1deg)}}
-.small-fish{position:absolute;font-size:22px;animation:fishSwim 30s linear infinite;opacity:0.9;z-index:15;filter:drop-shadow(0 0 8px rgba(255,220,120,0.5)) brightness(1.15)}
-@keyframes fishSwim{0%{left:-18%;transform:scaleX(1) rotate(0deg) skewY(0deg)}50%{left:118%;transform:scaleX(-1) rotate(0deg) skewY(0deg)}100%{left:-18%;transform:scaleX(1) rotate(0deg) skewY(0deg)}}
-.starfish{position:absolute;bottom:12px;left:30%;font-size:30px;animation:starBounce 8s ease-in-out infinite;z-index:18}
-@keyframes starBounce{0%,100%{transform:translateY(0) rotate(0deg) scale(1)}50%{transform:translateY(-5px) rotate(10deg) scale(1.1)}}
-.crab{position:absolute;bottom:10px;left:70%;font-size:28px;animation:crabMove 12s ease-in-out infinite;z-index:18}
-@keyframes crabMove{0%,100%{transform:translateX(0) scaleX(1)}50%{transform:translateX(20px) scaleX(-1)}}
+.aquarium{position:relative;width:100%;height:240px;background:linear-gradient(180deg,#0a4a6a 0%,#063a55 25%,#032a40 60%,#021a2a 100%);border-radius:25px;overflow:hidden;border:6px solid #1a9abf;box-shadow:inset 0 0 100px rgba(0,140,200,0.6);margin-top:15px}
+.turtle-swim{position:absolute;font-size:52px;animation:swimAround 22s linear infinite;z-index:20}
+@keyframes swimAround{0%,100%{left:2%;top:15%}50%{left:70%;top:40%}}
+.aquarium-sand{position:absolute;bottom:0;left:0;width:100%;height:40px;background:#c9a060}
+.small-fish{position:absolute;font-size:22px;animation:fishSwim 30s linear infinite}
+@keyframes fishSwim{0%{left:-10%}100%{left:110%}}
 .garden-card{background:#fff;color:#4a0030;margin:25px auto;padding:22px;width:95%;max-width:560px;border-radius:24px;box-shadow:0 12px 40px rgba(0,0,0,.25);border:3px solid #ffd6eb;text-align:center; position: relative; z-index: 5;}
 .garden-premium { position: relative; height: 220px; background: linear-gradient(to bottom, #87CEEB 0%, #E0F7FA 60%, #98FB98 100%); border-radius: 15px; overflow: hidden; margin-top: 10px; border: 3px solid #81d4fa; }
 .sun-premium { position: absolute; top: 10px; right: 20px; width: 45px; height: 45px; background: #FFD700; border-radius: 50%; box-shadow: 0 0 30px #FFD700; }
@@ -70,11 +54,8 @@ button:hover{transform:scale(1.08);box-shadow:0 0 12px #ff80bf}
 @keyframes flop { from { transform: rotate(-15deg); } to { transform: rotate(15deg); } }
 .pup-eye { width: 6px; height: 9px; background: black; border-radius: 50%; position: absolute; top: 12px; }
 .pup-snout { width: 20px; height: 15px; background: #DEB887; border-radius: 10px; position: absolute; bottom: 5px; left: 12px; }
-.pup-leg { width: 12px; height: 20px; background: #8B4513; border-radius: 6px; position: absolute; bottom: -10px; }
 .pup-tail { width: 20px; height: 8px; background: #8B4513; border-radius: 4px; position: absolute; top: 5px; left: -15px; transform-origin: right center; animation: wag 0.2s infinite alternate; }
 @keyframes wag { from { transform: rotate(-20deg); } to { transform: rotate(20deg); } }
-.canelito-bark { position: absolute; top: -60px; left: 0; font-weight: bold; color: #ff4da6; font-size: 18px; animation: barkFade 0.6s forwards; }
-@keyframes barkFade { 0% { opacity: 1; } 100% { opacity: 0; transform: translateY(-30px); } }
 </style>
 </head>
 <body>
@@ -89,14 +70,13 @@ button:hover{transform:scale(1.08);box-shadow:0 0 12px #ff80bf}
 <div id="zoom" onclick="this.style.display='none'"><img id="zoomImg"></div>
 <audio id="bgMusic" loop preload="auto"><source src="https://files.catbox.moe/4nrc17.mp3" type="audio/mpeg"></audio>
 <audio id="ourSong" preload="auto"><source src="https://files.catbox.moe/egr68n.mp3" type="audio/mpeg"></audio>
-<audio id="writeSound" preload="auto"><source src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3" type="audio/mpeg"></audio>
 <div class="card"><h2>💞 Nuestro tiempo juntos 💞</h2><img class="circleImg" src="https://i.imgur.com/m2rqpiu.jpeg"><div id="counter"></div></div>
 <div class="card"><h2>🎵 Nuestra canción 🎵</h2><img class="musicCover" src="https://i.imgur.com/jbyIzFT.jpeg"><button id="btnPlay" onclick="toggleSong()">▶️ Reproducir</button></div>
 <div class="card"><h2>🎞️ Momentos especiales 🎞</h2><div class="carousel"><img src="https://i.imgur.com/tpH81jp.jpeg"><img src="https://i.imgur.com/mOQ2xhz.jpeg"></div></div>
 <div class="card"><h2>📸 Recuerdos 📸</h2><div class="grid" id="gallery"><img src="https://i.imgur.com/tpH81jp.jpeg"><img src="https://i.imgur.com/mOQ2xhz.jpeg"></div></div>
 <div class="card"><h2>📜 Poemas especiales 📜</h2><div id="poema" class="typewriter"></div></div>
 <div class="card"><h2>💌 Carta sellada 💌</h2><div class="seal" onclick="openLetter()">💗</div><div id="letter" class="secretLetter"></div><div id="sign" class="signature">Con amor — siempre tú 🤎</div></div>
-<div class="card"><h2>🐢 Faltó el Jerry..❤️🐢</h2><div class="aquarium" id="aquarium"><div class="turtle-swim">🐢</div><div class="small-fish">🐟</div><div class="jellyfish">🪼</div><div class="aquarium-sand"></div></div></div>
+<div class="card"><h2>🐢 Faltó el Jerry..❤️🐢</h2><div class="aquarium" id="aquarium"><div class="turtle-swim">🐢</div><div class="small-fish">🐟</div><div class="aquarium-sand"></div></div></div>
 <div class="garden-card">
   <h2>¡Toca a Canelito! 🐾❤️</h2>
   <div class="garden-premium" id="canelitoGarden">
@@ -114,14 +94,16 @@ button:hover{transform:scale(1.08);box-shadow:0 0 12px #ff80bf}
 </div>
 <script>
 let fI = false;
-const aB = document.getElementById("bgMusic"), aS = document.getElementById("ourSong"), aW = document.getElementById("writeSound");
+const aB = document.getElementById("bgMusic"), aS = document.getElementById("ourSong");
 function enter(){if(document.getElementById("pass").value.toLowerCase()==="jerry"){document.getElementById("login").style.display="none";fI=true;aB.play().catch(()=>{})}else{alert("Contraseña incorrecta")}}
 const hC = document.getElementById("bgHearts");
 for(let i=0;i<20;i++){const s=document.createElement("span");s.innerHTML="❤";s.style.left=Math.random()*100+"vw";s.style.animationDuration=(5+Math.random()*5)+"s";hC.appendChild(s)}
 function toggleSong(){if(aS.paused){aS.play();document.getElementById("btnPlay").innerHTML="⏸️ Pausar"}else{aS.pause();document.getElementById("btnPlay").innerHTML="▶️ Reproducir"}}
 function tT(t,el){el.textContent="";let i=0;function w(){if(i<t.length){el.textContent+=t[i++];setTimeout(w,30)}}w()}
-function openLetter(){aW.play();const l=document.getElementById("letter");l.style.display="block";tT("Te amo mi cebollín 🤎",l);document.getElementById("sign").style.opacity=1}
+function openLetter(){document.getElementById("letter").style.display="block";tT("Te amo mi cebollín 🤎",document.getElementById("letter"));document.getElementById("sign").style.opacity=1}
 function canelitoTrick(){const b=document.getElementById("pupBody");b.style.animation="none";setTimeout(()=>b.style.animation="trot 0.25s infinite alternate",100)}
+const st=new Date(2024,8,11);function uC(){const n=new Date(),d=n-st,da=Math.floor(d/(1000*60*60*24));document.getElementById("counter").innerHTML=`<h3 style="margin:0;font-size:28px;">${da} días 💗</h3>`}
+uC();setInterval(uC,1000);
 </script>
 </body>
 </html>
